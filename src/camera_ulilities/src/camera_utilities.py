@@ -4,7 +4,7 @@ from numpysocket import NumpySocket
 import cv2
 import yaml
 
-with open("config.yaml", "r") as f:
+with open("configs/main.yml", "r") as f:
     configs = yaml.load(f, Loader=yaml.FullLoader)
 
 cap = cv2.VideoCapture(configs["CAM"])
