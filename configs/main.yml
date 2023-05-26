@@ -1,0 +1,8 @@
+AUV: True
+ROV: False
+Cameras: True
+Movement: True
+Neural: True
+Orin: True
+Surface: False
+Vlan: True
