@@ -1,5 +1,7 @@
+# KSU AUV 2023 - 2024 Full Documentation
 ## Table of Contents:
 	Section 1: Overview of the modules
+		1.0 Flowchart and Networking
 		1.1 Camera Utilites
 		1.2 Movement Package
 		1.3 Neural Networks
@@ -39,3 +41,8 @@
 	Section 8: Orin Hardware
 		8.1 Control of Sensors / Motors over PWM
 		8.2 How to modify global variables
+
+## Section 1: Overview of the Modules
+___
+
+### Section 1.0: Flowchart and Networking
