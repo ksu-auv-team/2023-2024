@@ -88,7 +88,7 @@ class Main:
         # Middle layout (Title, camera feed, and quick settings) ( # TODO: Add quick settings)
         middle_layout = [
             [sg.Text('Surface Station', font=('Helvetica', 25), justification='center')],
-            [sg.Image(filename='imgs/placeholder.png', key='motor_data', size=(1280, 720))],
+            [sg.Image(filename='imgs/placeholder.png', key='camera_feed', size=(1280, 720))],
             [sg.HorizontalSeparator()],
             [sg.Text('Quick Settings', font=('Helvetica', 25))],
             [sg.HorizontalSeparator()],
@@ -123,40 +123,11 @@ class Main:
             ]
         ]
         
-        self.window('Surface Station', layout, size=(1920, 1080), element_justification='center')
-        
-        # Create the logger
-        self.logger = logging.basicConfig(filename='logs/surface_station.log', level=logging.DEBUG, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
-        
-        ch = logging.StreamHandler()
-        ch.setLevel(logging.DEBUG)
-        
-        formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
-        ch.setFormatter(formatter)
-        
-        self.logger.addHandler(ch)
-        
-        self.logger.info('Starting Surface Station...')
+        # Create the window
+        self.window = sg.Window('Surface Station', layout, size=(1920, 1080), element_justification='center')
         
         with open('configs/main.yml', 'r') as f:
             self.config = yaml.safe_load(f)
-            
-        self.logger.info('Loaded config file')
-        
-        if self.config['enable_motors']:
-            self.logger.info('Motors enabled')
-            self.window.Element('enable_motors').update(value=True)
-        elif self.config['enable_servos']:
-            self.logger.info('Servos enabled')
-            self.window.Element('enable_servos').update(value=True)
-        elif self.config['enable_sensors']:
-            self.logger.info('Sensors enabled')
-            self.window.Element('enable_sensors').update(value=True)
-        elif self.config['enable_camera']:
-            self.logger.info('Camera enabled')
-            self.window.Element('enable_camera').update(value=True)
-        else: 
-            self.logger.info('No devices enabled')
 
         
     # Create the update data function to update the data on the GUI (i.e. joystick data, sensor data, motor data, etc.)
@@ -179,7 +150,7 @@ class Main:
             nps.connect((self.config['robot_ip'], self.config['robot_port']))
             
             while True:
-                pass
+                pass 
     
     # Handles the parsing of the incoming data (contains the sensor and camera data)
     def parseIncomingData(self, data: np.ndarray) -> np.ndarray:
@@ -195,14 +166,25 @@ class Main:
     
     # Run the GUI and accept inputs
     def run(self):
+        event, values = self.window.read()
+        if self.config['enable_motors']:
+            self.window.Element('enable_motors').update(value=True)
+        if self.config['enable_servos']:
+            self.window.Element('enable_servos').update(value=True)
+        if self.config['enable_sensors']:
+            self.window.Element('enable_sensors').update(value=True)
+        if self.config['enable_camera']:
+            self.window.Element('enable_camera').update(value=True)
         while True:
-            event, values = self.Window.read()
-            
+            event, values = self.window.read()
             print(event, values)
-            
             if event == sg.WIN_CLOSED:
                 break
 
 # TODO: Create the necessary functions to both start and stop the code remotely
 # TODO: Create the necessary functions to handle event loops and callbacks
 # TODO: Create the necessary functions to handle the data (i.e. read and parse the joystick data)
+
+if __name__ == '__main__':
+    surface_station = Main()
+    surface_station.run()

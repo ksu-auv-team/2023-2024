@@ -6,3 +6,7 @@ Neural: True
 Orin: True
 Surface: False
 Vlan: True
+enable_motors: True
+enable_servos: True
+enable_sensors: True
+enable_camera: True
