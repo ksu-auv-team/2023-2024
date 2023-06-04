@@ -129,7 +129,11 @@ class Main:
         with open('configs/main.yml', 'r') as f:
             self.config = yaml.safe_load(f)
 
-        
+    # Create the start function to start each thread on the Orin
+    def start_sub(self):
+        pass
+    
+    
     # Create the update data function to update the data on the GUI (i.e. joystick data, sensor data, motor data, etc.)
     def update_data(self, data: np.ndarray):
         # Example data

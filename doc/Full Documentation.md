@@ -46,3 +46,6 @@
 ___
 
 ### Section 1.0: Flowchart and Networking
+
+![[AUV_Networking.png]]
+
