@@ -39,7 +39,7 @@
     - [ ] Camera Input
         - Listen to the port that the CP is streaming to (only if AUV is toggled '--AUV')
     - [ ] Object Detection
-        - Seperate the objects from the background
+        - Separate the objects from the background
         - Detect the objects
         - Classify the objects (calls the Object Classification function)
         - Return the objects in a dictionary '{classified_object: [x, y, z, width, height, depth, confidence]}'
