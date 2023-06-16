@@ -14,21 +14,8 @@
               "type": "empty",
               "state": {}
             }
-          },
-          {
-            "id": "9934f567d8c233ab",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Kennesaw State University - AUV Team - 2023 through 2024.md",
-                "mode": "source",
-                "source": false
-              }
-            }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
@@ -94,7 +81,6 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Kennesaw State University - AUV Team - 2023 through 2024.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -111,7 +97,6 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Kennesaw State University - AUV Team - 2023 through 2024.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -133,9 +118,7 @@
             "type": "leaf",
             "state": {
               "type": "outline",
-              "state": {
-                "file": "Kennesaw State University - AUV Team - 2023 through 2024.md"
-              }
+              "state": {}
             }
           }
         ]
@@ -155,10 +138,10 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "9934f567d8c233ab",
+  "active": "53c630a4ae6da605",
   "lastOpenFiles": [
-    "Kennesaw State University - AUV Team - 2023 through 2024.pdf",
     "Kennesaw State University - AUV Team - 2023 through 2024.md",
+    "Kennesaw State University - AUV Team - 2023 through 2024.pdf",
     "doc/AUV_Networking.png",
     "doc/AUV_0002-Networking-2.png",
     "doc/AUV_Networking.pdf",

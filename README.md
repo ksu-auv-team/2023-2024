@@ -9,6 +9,14 @@
     - [X] GUI Creation
     - [ ] Ping Function
         - Is a subsystem algorithm that pings the external subsystems to verify that they are still connected to the network
+    - [ ] Controller Input Function
+        - Is a subsystem algorithm that allows the user to control the AUV
+        - Multiple controller configuration files, all stored within the 'configs/controllers' folder
+        - Controller configuration files are in the format of 'controller_name.yml'
+            - The format of the controller configuration files are as follows:
+        - The user defines the controller configuration file that they want to use when they start the GCS
+            - The user can define the controller configuration file that they want to use when they start the GCS by using the '--controller' flag or the '--c' flag
+            - If the user does not define a controller configuration file, then the GCS will use the default controller configuration file
     - [ ] SSH Function
         - Is a subsystem algorithm that allows the user to SSH into the external subsystems to start and stop the subsystems
         - Calls the Ping Function to verify that the external subsystems are still connected to the network (runs before SSH into the external subsystems)
@@ -65,3 +73,8 @@
         - Define the transitions
         - Define the actions
     - [ ] State Machine Output
+
+
+## Helpful Links ##
+Python Documentation: https://docs.python.org/3/
+Python Tutorial: https://www.youtube.com/watch?v=eWRfhZUzrAc

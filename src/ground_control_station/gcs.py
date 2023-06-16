@@ -14,6 +14,7 @@ import numpy as np
 from numpysocket import NumpySocket
 import serial
 import yaml
+from inputs import get_gamepad, devices
 
 
 # Define the dataclass for the ground control station joystick data
@@ -83,131 +84,434 @@ class GCS:
         if self.serial.is_open:
             self.serial.write(b'1\n')
             
-        # Create the GUI
-        title_size = (25, 1)
-        label_size = (20, 1)
-        data_label_size = (17, 1)
+        # Create the GUI layout and supporting variables
+        title_size = (20, 1)
+        data_label_size = (15, 1)
         data_size = (10, 1)
-        font_size = 12
+        font_size = 20
+        font = ("Helvetica", font_size)
+        placeholder_image = 'images/placeholder.png'
+        camera_feed_size = (1280, 720)
+        progress_bar_size = (20, 10)
+        button_size = (20, 1)
         
-        # Define the layout of the GUI
-        layout = [
-                    [sg.Text('Surface Station', size=title_size,  font=("Helvetica", 25))],
-                    [sg.Column([
-                        [sg.Text('AUV Configuration', size=label_size,  font=("Helvetica", font_size))],
-                        [sg.Text('Mode', size=data_label_size,  font=("Helvetica", font_size)), sg.Text('0', key='mode', size=data_size,  font=("Helvetica", font_size))],
-                        [sg.Text('Serial', size=data_label_size,  font=("Helvetica", font_size)), sg.Text('0', key='serial', size=data_size,  font=("Helvetica", font_size))],
-                        [sg.Text('Motors', size=data_label_size,  font=("Helvetica", font_size)), sg.Text('0', key='motors', size=data_size,  font=("Helvetica", font_size))],
-                        [sg.Text('Camera', size=data_label_size,  font=("Helvetica", font_size)), sg.Text('0', key='camera', size=data_size,  font=("Helvetica", font_size))],
-                        [sg.Text('Servos', size=data_label_size,  font=("Helvetica", font_size)), sg.Text('0', key='servos', size=data_size,  font=("Helvetica", font_size))],
-                        [sg.Text('Sensors', size=data_label_size,  font=("Helvetica", font_size)), sg.Text('0', key='sensors', size=data_size,  font=("Helvetica", font_size))],
-                        [sg.HorizontalSeparator()],
-                        [sg.Text('Motor Configuration', size=label_size,  font=("Helvetica", font_size))],
-                        [sg.Text('Motor Speed Max: ', size=data_label_size,  font=("Helvetica", font_size)), sg.InputText(self.config['motor_speed_max'], size=data_size, key='motor_speed_max',  font=("Helvetica", font_size))],
-                        [sg.Text('Motor Speed Min: ', size=data_label_size,  font=("Helvetica", font_size)), sg.InputText(self.config['motor_speed_min'], size=data_size, key='motor_speed_min',  font=("Helvetica", font_size))],
-                        [sg.HorizontalSeparator()],
-                        [sg.Text('Camera Configuration', size=label_size,  font=("Helvetica", font_size))],
-                        [sg.Text('Camera 1 Res: ', size=data_label_size,  font=("Helvetica", font_size)), sg.InputText(self.config['camera_1_resolution'], size=data_size, key='camera_1_resolution',  font=("Helvetica", font_size))],
-                        [sg.Text('Camera 2 Res: ', size=data_label_size,  font=("Helvetica", font_size)), sg.InputText(self.config['camera_2_resolution'], size=data_size, key='camera_2_resolution',  font=("Helvetica", font_size))],
-                        [sg.Text('Camera 1 FPS: ', size=data_label_size,  font=("Helvetica", font_size)), sg.InputText(self.config['camera_1_fps'], size=data_size, key='camera_1_fps',  font=("Helvetica", font_size))],
-                        [sg.Text('Camera 2 FPS: ', size=data_label_size,  font=("Helvetica", font_size)), sg.InputText(self.config['camera_2_fps'], size=data_size, key='camera_2_fps',  font=("Helvetica", font_size))],
-                        [sg.HorizontalSeparator()],
-                        [sg.Text('Servo Configuration', size=label_size,  font=("Helvetica", font_size))],
-                        [sg.Text('Servo 1 Min: ', size=data_label_size,  font=("Helvetica", font_size)), sg.InputText(self.config['servo_1_min'], size=data_size, key='servo_1_min',  font=("Helvetica", font_size))],
-                        [sg.Text('Servo 1 Max: ', size=data_label_size,  font=("Helvetica", font_size)), sg.InputText(self.config['servo_1_max'], size=data_size, key='servo_1_max',  font=("Helvetica", font_size))],
-                        [sg.Text('Servo 2 Min: ', size=data_label_size,  font=("Helvetica", font_size)), sg.InputText(self.config['servo_2_min'], size=data_size, key='servo_2_min',  font=("Helvetica", font_size))],
-                        [sg.Text('Servo 2 Max: ', size=data_label_size,  font=("Helvetica", font_size)), sg.InputText(self.config['servo_2_max'], size=data_size, key='servo_2_max',  font=("Helvetica", font_size))],
-                        [sg.HorizontalSeparator()],
-                        [sg.Text('Sensor Configuration', size=label_size,  font=("Helvetica", font_size))],
-                        [sg.Text('Temperature Unit: ', size=data_label_size,  font=("Helvetica", font_size)), sg.Combo(['Celsius', 'Fahrenheit'], default_value=self.config['temperature_unit'], size=data_size, key='temperature_unit',  font=("Helvetica", font_size))],
-                        [sg.Text('Humidity Unit: ', size=data_label_size,  font=("Helvetica", font_size)), sg.Combo(['%', 'g/m3'], default_value=self.config['humidity_unit'], size=data_size, key='humidity_unit',  font=("Helvetica", font_size))],
-                        [sg.Text('Voltage Unit: ', size=data_label_size,  font=("Helvetica", font_size)), sg.Combo(['V', 'mV'], default_value=self.config['voltage_unit'], size=data_size, key='voltage_unit',  font=("Helvetica", font_size))],
-                        [sg.Text('Current Unit: ', size=data_label_size,  font=("Helvetica", font_size)), sg.Combo(['A', 'mA'], default_value=self.config['current_unit'], size=data_size, key='current_unit',  font=("Helvetica", font_size))],
-                        [sg.Text('IMU Axis Min: ', size=data_label_size,  font=("Helvetica", font_size)), sg.InputText(self.config['imu_axis_min'], size=data_size, key='imu_axis_min',  font=("Helvetica", font_size))],
-                        [sg.Text('IMU Axis Max: ', size=data_label_size,  font=("Helvetica", font_size)), sg.InputText(self.config['imu_axis_max'], size=data_size, key='imu_axis_max',  font=("Helvetica", font_size))],
-                        [sg.Text('Pressure Unit: ', size=data_label_size,  font=("Helvetica", font_size)), sg.Combo(['Pa', 'hPa', 'kPa', 'MPa'], default_value=self.config['pressure_unit'], size=data_size, key='pressure_unit',  font=("Helvetica", font_size))],
-                        [sg.HorizontalSeparator()],
-                    ], size=(320, 1080)),
+        config_button_column = sg.Column(
+            [
+                [sg.Button('', image_filename='images/icons/icons8-home-25.svg', image_size=(25, 25), border_width=0, key='home')],
+                [sg.HorizontalSeparator()],
+                [sg.Button('', image_filename='images/icons/icons8-camera-25.svg', image_size=(25, 25), border_width=0, key='camera')],
+                [sg.HorizontalSeparator()],
+                [sg.Button('', image_filename='images/icons/icons8-joystick-25.svg', image_size=(25, 25), border_width=0, key='joystick')],
+                [sg.HorizontalSeparator()],
+                [sg.Button('', image_filename='images/icons/icons8-robot-25.svg', image_size=(25, 25), border_width=0, key='settings')],
+                [sg.HorizontalSeparator()],
+                [sg.Button('', image_filename='images/icons/icons8-movement-25.svg', image_size=(25, 25), border_width=0, key='settings')],
+                [sg.HorizontalSeparator()],
+                [sg.Button('', image_filename='images/icons/icons8-sensor-25.svg', image_size=(25, 25), border_width=0, key='settings')],
+                [sg.HorizontalSeparator()],
+                [sg.Button('', image_filename='images/icons/icons8-state-25.svg', image_size=(25, 25), border_width=0, key='settings')],
+                [sg.HorizontalSeparator()]
+            ], size=(50, 1080), element_justification='center'
+        )
+        
+        home_config = sg.Column(
+            [
+                [sg.Text('Ground Station Config', size=title_size, font=font)],
+                [sg.HorizontalSeparator()],
+                [sg.Text('Arduino Config', size=title_size, font=font)],
+                [sg.Text('Serial Port', size=data_label_size, font=font), sg.InputText(self.config['serial']['serial_port'], size=data_size, key='serial_port'), sg.Button('Update', size=button_size, key='update_serial_port')],
+                [sg.Text('Serial Baudrate', size=data_label_size, font=font), sg.InputText(self.config['serial']['serial_baudrate'], size=data_size, key='serial_baudrate'), sg.Button('Update', size=button_size, key='update_serial_baudrate')],
+                [sg.Text('Serial Timeout', size=data_label_size, font=font), sg.InputText(self.config['serial']['serial_timeout'], size=data_size, key='serial_timeout'), sg.Button('Update', size=button_size, key='update_serial_timeout')],
+                [sg.HorizontalSeparator()]
+            ], size=(270, 1080), element_justification='center', visible=False
+        )
+        
+        camera_config = sg.Column(
+            [
+                [sg.Text('Camera Config', size=title_size, font=font)],
+                [sg.Text('Camera IP', size=data_label_size, font=font), sg.InputText(self.config['camera']['camera_ip'], size=data_size, key='camera_ip'), sg.Button('Update', size=button_size, key='update_camera_ip')],
+                [sg.Text('Camera Port', size=data_label_size, font=font), sg.InputText(self.config['camera']['camera_port'], size=data_size, key='camera_port'), sg.Button('Update', size=button_size, key='update_camera_port')],
+                [sg.Text('Camera Resolution', size=data_label_size, font=font), sg.InputText(self.config['camera']['camera_resolution'], size=data_size, key='camera_resolution'), sg.Button('Update', size=button_size, key='update_camera_resolution')],
+                [sg.Text('Camera FPS', size=data_label_size, font=font), sg.InputText(self.config['camera']['camera_fps'], size=data_size, key='camera_fps'), sg.Button('Update', size=button_size, key='update_camera_fps')],
+                [sg.HorizontalSeparator()]
+            ], size=(270, 1080), element_justification='center', key='camera_config', visible=False
+        )
+        
+        joystick_config = sg.Column(
+            [
+                [sg.Text('Joystick Config', size=title_size, font=font)],
+                [sg.HorizontalSeparator()],
+                [sg.Text('Select Controller: ', size=data_label_size, font=font), sg.Combo(self.joystick_list, size=data_size, key='joystick_list'), sg.Button('Update', size=button_size, key='update_joystick_list')],
+                [sg.HorizontalSeparator()],
+            ], size=(270, 1080), element_justification='center', key='joystick_config', visible=False
+        )
+        
+        robot_config = sg.Column(
+            [
+                [sg.Text('Robot Config', size=title_size, font=font)],
+            ], size=(270, 1080), element_justification='center', key='robot_config', visible=False
+        )
+        
+        movement_config = sg.Column(
+            [
+                [sg.Text('Movement Config', size=title_size, font=font)]
+            ], size=(270, 1080), element_justification='center', key='movement_config', visible=False
+        )
+        
+        sensor_config = sg.Column(
+            [
+                [sg.Text('Sensor Config', size=title_size, font=font)]
+            ], size=(270, 1080), element_justification='center', key='sensor_config', visible=False
+        )
+        
+        state_config = sg.Column(
+            [
+                [sg.Text('State Config', size=title_size, font=font)]
+            ], size=(270, 1080), element_justification='center', key='state_config', visible=False
+        )
+        
+        middle_column = sg.Column(
+            [
+                [sg.Image(imag=placeholder_image, size=camera_feed_size, key='camera_feed')],
+                [sg.HorizontalSeparator()],
+                [
                     sg.Column([
-                        [sg.Image('imgs/placeholder.png', key='camera_feed', size=(1280, 720))],
-                        [
-                            sg.Column([
-                                [sg.Text('Orin Status', size=label_size,  font=("Helvetica", font_size)), sg.Text('0', key='orin_status', size=data_size,  font=("Helvetica", font_size))],
-                                [sg.Text('Orin IP Address: ', size=label_size,  font=("Helvetica", font_size)), sg.InputText(self.config['orin_ip_address'], size=label_size, key='orin_ip_address',  font=("Helvetica", font_size))],
-                                [sg.Button('Ping Orin', size=data_size, key='ping_orin', font=("Helvetica", font_size)) , sg.Button('Connect', size=data_size, key='connect_orin', font=("Helvetica", font_size))],
-                            ], size=(640, 150)),
-                            sg.Column([
-                                [sg.Text('Arduino Configuration', size=label_size,  font=("Helvetica", font_size))],
-                                [sg.Text('Arduino Serial Port: ', size=label_size,  font=("Helvetica", font_size)), sg.InputText(self.config['arduino_serial_port'], size=label_size, key='arduino_serial_port',  font=("Helvetica", font_size))],
-                                [sg.Text('Arduino Baudrate: ', size=label_size,  font=("Helvetica", font_size)), sg.InputText(self.config['arduino_baudrate'], size=label_size, key='arduino_baudrate',  font=("Helvetica", font_size))],
-                                [sg.Text('Arduino Timeout: ', size=label_size,  font=("Helvetica", font_size)), sg.InputText(self.config['arduino_timeout'], size=label_size, key='arduino_timeout',  font=("Helvetica", font_size))],
-                                [sg.Button('Connect', size=data_size, key='connect_arduino', font=("Helvetica", font_size))],
-                            ], size=(640, 150)),
-                        ],
-                        [sg.HorizontalSeparator()],
-                        [sg.Text('Battery 1', size=label_size,  font=("Helvetica", font_size)), sg.Text('0', key='battery1', size=data_size,  font=("Helvetica", font_size)), sg.Text('V', size=data_size,  font=("Helvetica", font_size)), sg.Text('Battery 3', size=label_size,  font=("Helvetica", font_size)), sg.Text('0', key='battery3', size=data_size,  font=("Helvetica", font_size)), sg.Text('V', size=data_size,  font=("Helvetica", font_size))],
-                        [sg.Text('Battery 2', size=label_size,  font=("Helvetica", font_size)), sg.Text('0', key='battery2', size=data_size,  font=("Helvetica", font_size)), sg.Text('V', size=data_size,  font=("Helvetica", font_size)), sg.Text('Battery 4', size=label_size,  font=("Helvetica", font_size)), sg.Text('0', key='battery4', size=data_size,  font=("Helvetica", font_size)), sg.Text('V', size=data_size,  font=("Helvetica", font_size))],
-                    ], size=(1280, 1080)),
+                    [
+                        sg.Column([
+                            sg.Text('Batt 1 (V)', size=data_label_size, font=font),
+                            sg.ProgressBar(value=50, size=progress_bar_size, orientation='v', key='battery_1_voltage')
+                        ]),
+                        sg.Column([
+                            sg.Text('Batt 2 (V)', size=data_label_size, font=font),
+                            sg.ProgressBar(value=50, size=progress_bar_size, orientation='v', key='battery_2_voltage')
+                        ]),
+                        sg.Column([
+                            sg.Text('Batt 3 (V)', size=data_label_size, font=font),
+                            sg.ProgressBar(value=50, size=progress_bar_size, orientation='v', key='battery_3_voltage')
+                        ]),
+                        sg.Column([
+                            sg.Text('Batt 4 (V)', size=data_label_size, font=font),
+                            sg.ProgressBar(value=50, size=progress_bar_size, orientation='v', key='battery_4_voltage')
+                        ])
+                    ]]), 
                     sg.Column([
-                        [sg.Text('IMU Data', size=label_size,  font=("Helvetica", font_size))],
-                        [sg.Text('Roll: ', size=data_label_size,  font=("Helvetica", font_size)), sg.Text('0', key='imu_roll', size=data_size,  font=("Helvetica", font_size))],
-                        [sg.Text('Pitch: ', size=data_label_size,  font=("Helvetica", font_size)), sg.Text('0', key='imu_pitch', size=data_size,  font=("Helvetica", font_size))],
-                        [sg.Text('Yaw: ', size=data_label_size,  font=("Helvetica", font_size)), sg.Text('0', key='imu_yaw', size=data_size,  font=("Helvetica", font_size))],
-                        [sg.HorizontalSeparator()],
-                        [sg.Text('Depth Data', size=label_size,  font=("Helvetica", font_size))],
-                        [sg.Text('Depth: ', size=data_label_size,  font=("Helvetica", font_size)), sg.Text('0', key='depth', size=data_size,  font=("Helvetica", font_size))],
-                        [sg.HorizontalSeparator()],
-                        [sg.Text('Temperature Data', size=label_size,  font=("Helvetica", font_size))],
-                        [sg.Text('Temperature: ', size=data_label_size,  font=("Helvetica", font_size)), sg.Text('0', key='temperature', size=data_size,  font=("Helvetica", font_size))],
-                        [sg.HorizontalSeparator()],
-                        [sg.Text('Humidity Data', size=label_size,  font=("Helvetica", font_size))],
-                        [sg.Text('Humidity: ', size=data_label_size,  font=("Helvetica", font_size)), sg.Text('0', key='humidity', size=data_size,  font=("Helvetica", font_size))],
-                        [sg.HorizontalSeparator()],
-                        [sg.Text('Motor Data', size=label_size,  font=("Helvetica", font_size))],
-                        [sg.Text('Motor 1: ', size=data_label_size, font=("Helvetica", font_size)), sg.ProgressBar(100, orientation='h', size=(20, 20), key='motor1_progress')],
-                        [sg.Text('Motor 2: ', size=data_label_size, font=("Helvetica", font_size)), sg.ProgressBar(100, orientation='h', size=(20, 20), key='motor2_progress')],
-                        [sg.Text('Motor 3: ', size=data_label_size, font=("Helvetica", font_size)), sg.ProgressBar(100, orientation='h', size=(20, 20), key='motor3_progress')],
-                        [sg.Text('Motor 4: ', size=data_label_size, font=("Helvetica", font_size)), sg.ProgressBar(100, orientation='h', size=(20, 20), key='motor4_progress')],
-                        [sg.Text('Motor 5: ', size=data_label_size, font=("Helvetica", font_size)), sg.ProgressBar(100, orientation='h', size=(20, 20), key='motor5_progress')],
-                        [sg.Text('Motor 6: ', size=data_label_size, font=("Helvetica", font_size)), sg.ProgressBar(100, orientation='h', size=(20, 20), key='motor6_progress')],
-                        [sg.Text('Motor 7: ', size=data_label_size, font=("Helvetica", font_size)), sg.ProgressBar(100, orientation='h', size=(20, 20), key='motor7_progress')],
-                        [sg.Text('Motor 8: ', size=data_label_size, font=("Helvetica", font_size)), sg.ProgressBar(100, orientation='h', size=(20, 20), key='motor8_progress')],
-                        [sg.HorizontalSeparator()],
-                        [sg.Text('Servo Data', size=label_size,  font=("Helvetica", font_size))],
-                        [sg.Text('Servo 1: ', size=data_label_size, font=("Helvetica", font_size)), sg.ProgressBar(100, orientation='h', size=(20, 20), key='servo1_progress')],
-                        [sg.Text('Servo 2: ', size=data_label_size, font=("Helvetica", font_size)), sg.ProgressBar(100, orientation='h', size=(20, 20), key='servo2_progress')],
-                        [sg.Text('Servo 3: ', size=data_label_size, font=("Helvetica", font_size)), sg.ProgressBar(100, orientation='h', size=(20, 20), key='servo3_progress')],
-                        [sg.HorizontalSeparator()],
-                        [sg.Text('Acoustics Data', size=label_size,  font=("Helvetica", font_size))]
-                    ], size=(320, 1080)),
-                    ],  
+                    [
+                        sg.Column([
+                            sg.Text('Batt 1 (A)', size=data_label_size, font=font),
+                            sg.ProgressBar(value=50, size=progress_bar_size, orientation='v', key='battery_1_current')
+                        ]),
+                        sg.Column([
+                            sg.Text('Batt 2 (A)', size=data_label_size, font=font),
+                            sg.ProgressBar(value=50, size=progress_bar_size, orientation='v', key='battery_2_current')
+                        ]),
+                        sg.Column([
+                            sg.Text('Batt 3 (A)', size=data_label_size, font=font),
+                            sg.ProgressBar(value=50, size=progress_bar_size, orientation='v', key='battery_3_current')
+                        ]),
+                        sg.Column([
+                            sg.Text('Batt 4 (A)', size=data_label_size, font=font),
+                            sg.ProgressBar(value=50, size=progress_bar_size, orientation='v', key='battery_4_current')
+                        ])
+                    ]]),    
+                    sg.Column([
+                        [sg.Text('Orin IP: ', size=data_label_size, font=font), sg.InputText('', size=data_size, font=font, key='orin_ip')],
+                        [sg.Button('Start', size=button_size, font=font, key='start')],
+                        [sg.Button('Stop', size=button_size, font=font, key='stop')],
+                        [sg.Button('Reset', size=button_size, font=font, key='reset')],
+                        [sg.Button('Connect', size=button_size, font=font, key='connect')]
+                    ])
                 ]
+            ], size=(1550, 1080), element_justification='center'
+        )
+        
+        data_config = sg.Column(
+            [
+                [sg.Text('Data', size=title_size, font=font)],
+                [sg.HorizontalSeparator()],
+                [sg.Text('Controller Data', size=title_size, font=font)],
+                [
+                    # Axis X
+                    sg.Column(
+                        [
+                            [sg.Text('X', size=data_label_size, font=font)],
+                            [sg.ProgressBar(value=50, size=progress_bar_size, orientation='v', key='controller_x')],
+                        ]
+                    ),
+                    # Axis Y
+                    sg.Column(
+                        [
+                            [sg.Text('Y', size=data_label_size, font=font)],
+                            [sg.ProgressBar(value=50, size=progress_bar_size, orientation='v', key='controller_y')],
+                        ]
+                    ),
+                    # Axis Z
+                    sg.Column(
+                        [
+                            [sg.Text('Z', size=data_label_size, font=font)],
+                            [sg.ProgressBar(value=50, size=progress_bar_size, orientation='v', key='controller_z')],
+                        ]
+                    ),
+                    # Axis T (throttle)
+                    sg.Column(
+                        [
+                            [sg.Text('T', size=data_label_size, font=font)],
+                            [sg.ProgressBar(value=50, size=progress_bar_size, orientation='v', key='controller_t')],
+                        ]
+                    ),
+                    # Axis A (Acceleration)
+                    sg.Column(
+                        [
+                            [sg.Text('A', size=data_label_size, font=font)],
+                            [sg.ProgressBar(value=50, size=progress_bar_size, orientation='v', key='controller_a')],
+                        ]
+                    ),
+                ],
+                [
+                    # Button 1 Column
+                    sg.Column(
+                        [
+                            [sg.Text('B1', size=data_label_size, font=font)],
+                            [sg.ProgressBar(value=50, size=progress_bar_size, orientation='v', key='controller_b0')],
+                        ]
+                    ),
+                    # Button 2 Column
+                    sg.Column(
+                        [
+                            [sg.Text('B2', size=data_label_size, font=font)],
+                            [sg.ProgressBar(value=50, size=progress_bar_size, orientation='v', key='controller_b1')],
+                        ]
+                    ),
+                    # Button 3 Column
+                    sg.Column(
+                        [
+                            [sg.Text('B3', size=data_label_size, font=font)],
+                            [sg.ProgressBar(value=50, size=progress_bar_size, orientation='v', key='controller_b2')],
+                        ]
+                    ),
+                    # Button 4 Column
+                    sg.Column(
+                        [
+                            [sg.Text('B4', size=data_label_size, font=font)],
+                            [sg.ProgressBar(value=50, size=progress_bar_size, orientation='v', key='controller_b3')],
+                        ]
+                    ),
+                    # Button 5 Column
+                    sg.Column(
+                        [
+                            [sg.Text('B5', size=data_label_size, font=font)],
+                            [sg.ProgressBar(value=50, size=progress_bar_size, orientation='v', key='controller_b4')],
+                        ]
+                    ),
+                ],
+                [
+                    # Button 6 Column
+                    sg.Column(
+                        [
+                            [sg.Text('B6', size=data_label_size, font=font)],
+                            [sg.ProgressBar(value=50, size=progress_bar_size, orientation='v', key='controller_b5')],
+                        ]
+                    ),
+                    # Button 7 Column
+                    sg.Column(
+                        [
+                            [sg.Text('B7', size=data_label_size, font=font)],
+                            [sg.ProgressBar(value=50, size=progress_bar_size, orientation='v', key='controller_b6')],
+                        ]
+                    ),
+                    # Button 8 Column
+                    sg.Column(
+                        [
+                            [sg.Text('B8', size=data_label_size, font=font)],
+                            [sg.ProgressBar(value=50, size=progress_bar_size, orientation='v', key='controller_b7')],
+                        ]
+                    ),
+                    # Button 9 Column
+                    sg.Column(
+                        [
+                            [sg.Text('B9', size=data_label_size, font=font)],
+                            [sg.ProgressBar(value=50, size=progress_bar_size, orientation='v', key='controller_b8')],
+                        ]
+                    ),
+                    # Button 10 Column
+                    sg.Column(
+                        [
+                            [sg.Text('B10', size=data_label_size, font=font)],
+                            [sg.ProgressBar(value=50, size=progress_bar_size, orientation='v', key='controller_b9')],
+                        ]
+                    ),
+                ],
+                [sg.HorizontalSeparator()],
+                [sg.Text('Motor Data', size=title_size, font=font)],
+                [
+                    # Motor 1 Column
+                    sg.Column(
+                        [
+                            [sg.Text('M1', size=data_label_size, font=font)],
+                            [sg.ProgressBar(value=50, size=progress_bar_size, orientation='v', key='controller_m0')],
+                        ]
+                    ),
+                    # Motor 2 Column
+                    sg.Column(
+                        [
+                            [sg.Text('M2', size=data_label_size, font=font)],
+                            [sg.ProgressBar(value=50, size=progress_bar_size, orientation='v', key='controller_m1')],
+                        ]
+                    ),
+                    # Motor 3 Column
+                    sg.Column(
+                        [
+                            [sg.Text('M3', size=data_label_size, font=font)],
+                            [sg.ProgressBar(value=50, size=progress_bar_size, orientation='v', key='controller_m2')],
+                        ]
+                    ),
+                    # Motor 4 Column
+                    sg.Column(
+                        [
+                            [sg.Text('M4', size=data_label_size, font=font)],
+                            [sg.ProgressBar(value=50, size=progress_bar_size, orientation='v', key='controller_m3')],
+                        ]
+                    ),
+                    # Motor 5 Column
+                    sg.Column(
+                        [
+                            [sg.Text('M5', size=data_label_size, font=font)],
+                            [sg.ProgressBar(value=50, size=progress_bar_size, orientation='v', key='controller_m4')],
+                        ]
+                    ),
+                ],
+                [
+                    # Motor 6 Column
+                    sg.Column(
+                        [
+                            [sg.Text('M6', size=data_label_size, font=font)],
+                            [sg.ProgressBar(value=50, size=progress_bar_size, orientation='v', key='controller_m5')],
+                        ]
+                    ),
+                    # Motor 7 Column
+                    sg.Column(
+                        [
+                            [sg.Text('M7', size=data_label_size, font=font)],
+                            [sg.ProgressBar(value=50, size=progress_bar_size, orientation='v', key='controller_m6')],
+                        ]
+                    ),
+                    # Motor 8 Column
+                    sg.Column(
+                        [
+                            [sg.Text('M8', size=data_label_size, font=font)],
+                            [sg.ProgressBar(value=50, size=progress_bar_size, orientation='v', key='controller_m7')],
+                        ]
+                    ),
+                    # Motor 9 Column
+                    sg.Column(
+                        [
+                            [sg.Text('M9', size=data_label_size, font=font)],
+                            [sg.ProgressBar(value=50, size=progress_bar_size, orientation='v', key='controller_m8')],
+                        ]
+                    ),
+                    # Motor 10 Column
+                    sg.Column(
+                        [
+                            [sg.Text('M10', size=data_label_size, font=font)],
+                            [sg.ProgressBar(value=50, size=progress_bar_size, orientation='v', key='controller_m9')],
+                        ]
+                    ),
+                ],
+                [sg.HorizontalSeparator()],
+            ], size=(320, 1080), element_justification='center'
+        )
+        
+        layout = [
+            config_button_column,
+            [
+                home_config,
+                camera_config,
+                joystick_config,
+                robot_config,
+                movement_config,
+                sensor_config,
+                state_config
+            ],
+            middle_column,
+            data_config
+        ]
         
         self.window = sg.Window('KSU Control Panel', layout, size=(1920, 1080), finalize=True)
         self.window.Maximize()
-    def generate_text(self, text, key, mode="display"):
-        font = ("Helvetica", self.font_size)
-        if mode == "display":
-            return [sg.Text(text, size=self.data_label_size, font=font), sg.Text('0', key=key, size=self.data_size, font=font)]
-        elif mode == "input":
-            return [sg.Text(text, size=self.data_label_size, font=font), sg.InputText(self.config[key], size=self.data_size, key=key, font=font)]
-        elif mode == "combo":
-            return [sg.Text(text, size=self.data_label_size, font=font), sg.Combo(['Celsius', 'Fahrenheit'], default_value=self.config[key], size=self.data_size, key=key, font=font)]
-
-    def generate_section(self, section_title, keys, mode="display"):
-        section = [[sg.Text(section_title, size=self.label_size,  font=("Helvetica", self.font_size))]]
-        for key in keys:
-            section.append(self.generate_text(key + ": ", key, mode))
-        section.append([sg.HorizontalSeparator()])
-        return section
-
-    def generate_progress(self, section_title, keys):
-        section = [[sg.Text(section_title, size=self.label_size, font=("Helvetica", self.font_size))]]
-        for key in keys:
-            section.append([sg.Text(key + ": ", size=self.data_label_size, font=("Helvetica", self.font_size)), sg.ProgressBar(100, orientation='h', size=(20, 20), key=key + '_progress')])
-        section.append([sg.HorizontalSeparator()])
-        return section
     
+    def config_button_click(self, button):
+        if button == 'home':
+            self.window['home_config'].update(visible=True)
+            self.window['camera_config'].update(visible=False)
+            self.window['joystick_config'].update(visible=False)
+            self.window['robot_config'].update(visible=False)
+            self.window['movement_config'].update(visible=False)
+            self.window['sensor_config'].update(visible=False)
+            self.window['state_config'].update(visible=False)
+            self.window['middle_column'].update(size=(1280, 1080))
+        elif button == 'camera':
+            self.window['home_config'].update(visible=False)
+            self.window['camera_config'].update(visible=True)
+            self.window['joystick_config'].update(visible=False)
+            self.window['robot_config'].update(visible=False)
+            self.window['movement_config'].update(visible=False)
+            self.window['sensor_config'].update(visible=False)
+            self.window['state_config'].update(visible=False)
+            self.window['middle_column'].update(size=(1280, 1080))
+        elif button == 'joystick':
+            self.window['home_config'].update(visible=False)
+            self.window['camera_config'].update(visible=False)
+            self.window['joystick_config'].update(visible=True)
+            self.window['robot_config'].update(visible=False)
+            self.window['movement_config'].update(visible=False)
+            self.window['sensor_config'].update(visible=False)
+            self.window['state_config'].update(visible=False)
+            self.window['middle_column'].update(size=(1280, 1080))
+        elif button == 'robot':
+            self.window['home_config'].update(visible=False)
+            self.window['camera_config'].update(visible=False)
+            self.window['joystick_config'].update(visible=False)
+            self.window['robot_config'].update(visible=True)
+            self.window['movement_config'].update(visible=False)
+            self.window['sensor_config'].update(visible=False)
+            self.window['state_config'].update(visible=False)
+            self.window['middle_column'].update(size=(1280, 1080))
+        elif button == 'movement':
+            self.window['home_config'].update(visible=False)
+            self.window['camera_config'].update(visible=False)
+            self.window['joystick_config'].update(visible=False)
+            self.window['robot_config'].update(visible=False)
+            self.window['movement_config'].update(visible=True)
+            self.window['sensor_config'].update(visible=False)
+            self.window['state_config'].update(visible=False)
+            self.window['middle_column'].update(size=(1280, 1080))
+        elif button == 'sensor':
+            self.window['home_config'].update(visible=False)
+            self.window['camera_config'].update(visible=False)
+            self.window['joystick_config'].update(visible=False)
+            self.window['robot_config'].update(visible=False)
+            self.window['movement_config'].update(visible=False)
+            self.window['sensor_config'].update(visible=True)
+            self.window['state_config'].update(visible=False)
+            self.window['middle_column'].update(size=(1280, 1080))
+        elif button == 'state':
+            self.window['home_config'].update(visible=False)
+            self.window['camera_config'].update(visible=False)
+            self.window['joystick_config'].update(visible=False)
+            self.window['robot_config'].update(visible=False)
+            self.window['movement_config'].update(visible=False)
+            self.window['sensor_config'].update(visible=False)
+            self.window['state_config'].update(visible=True)
+            self.window['middle_column'].update(size=(1280, 1080))
+        else:
+            self.window['home_config'].update(visible=False)
+            self.window['camera_config'].update(visible=False)
+            self.window['joystick_config'].update(visible=False)
+            self.window['robot_config'].update(visible=False)
+            self.window['movement_config'].update(visible=False)
+            self.window['sensor_config'].update(visible=False)
+            self.window['state_config'].update(visible=False)
+            self.window['middle_column'].update(size=(1550, 1080))
+
     def ping_orin(self):
         pass
     
