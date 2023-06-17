@@ -56,19 +56,19 @@ class GCS:
         logging.getLogger('').addHandler(self.console)
         
         # Log the start of the program
-        self.console.info('Starting the ground control station')
+        logging.info('Starting the ground control station')
         
         # Load the configuration file
         with open('configs/gcs.yml', 'r') as file:
             self.config = yaml.load(file, Loader=yaml.FullLoader)
             
         # Log the configuration file
-        self.console.info(f'Configuration file: {self.config}')
+        logging.info(f'Configuration file: {self.config}')
         
         # if self.config['serial'] == True:
         if self.config['serial']['enabled']:
             # Log that the serial port is being opened
-            self.console.info('Opening the serial port')
+            logging.info('Opening the serial port')
             
             # Open the serial port
             self.serial = serial.Serial(
@@ -78,7 +78,7 @@ class GCS:
             )
             
             # Log that the serial port was opened
-            self.console.info('Serial port opened at ' + str(self.serial.name))
+            logging.info('Serial port opened at ' + str(self.serial.name))
             
         # Make sure the serial port is open and send the start bit
         if self.serial.is_open:
