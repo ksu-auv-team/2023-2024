@@ -519,4 +519,12 @@ class GCS:
         pass
     
     def run(self):
-        pass
+        while True:
+            event, values = self.window.read(timeout=100)
+            
+            if event == sg.WIN_CLOSED:
+                break
+
+if __name__ == '__main__':
+    gui = GCS()
+    gui.run()
