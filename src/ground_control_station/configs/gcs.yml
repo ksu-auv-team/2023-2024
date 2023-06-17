@@ -1,6 +1,6 @@
 AUV: True
 serial: 
   enabled: True
-  port: /dev/ttyUSB0
-  baudrate: 115200
-  timeout: 0.1
+  serial_port: /dev/ttyUSB0
+  serial_baudrate: 115200
+  serial_timeout: 0.1
