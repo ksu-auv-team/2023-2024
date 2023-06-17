@@ -9,3 +9,5 @@ camera:
   camera_port: 8080
   camera_fps: 30
   camera_resolution: (1280, 720)
+orin:
+  orin_ip: '192.168.1.148'
