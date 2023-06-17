@@ -91,11 +91,12 @@ class GCS:
         data_label_size = (15, 1)
         data_size = (10, 1)
         font_size = 20
-        font = ("Helvetica", font_size)
+        font = ("Arial", font_size)
         placeholder_image = 'images/placeholder.png'
         camera_feed_size = (1280, 720)
-        progress_bar_size = (10, 10)
+        progress_bar_size = (15, 5)
         button_size = (15, 1)
+        val = 100
         
         # Set the theme for the GUI
         sg.theme('DarkAmber')
@@ -177,33 +178,33 @@ class GCS:
                     sg.Column(
                         [
                             [sg.Text('Batt 1 (V)', size=data_label_size, font=font)],
-                            [sg.ProgressBar(max_value=100, size=progress_bar_size, orientation='v', key='battery_1_voltage')],
+                            [sg.ProgressBar(max_value=val, size=progress_bar_size, orientation='v', key='battery_1_voltage')],
                             [sg.Text('Batt 1 (A)', size=data_label_size, font=font)],
-                            [sg.ProgressBar(max_value=50, size=progress_bar_size, orientation='v', key='battery_1_current')]
+                            [sg.ProgressBar(max_value=val, size=progress_bar_size, orientation='v', key='battery_1_current')]
                         ], size=(1550/10, (1080-720)), element_justification='center'
                     ),
                     sg.Column(
                         [
                             [sg.Text('Batt 2 (V)', size=data_label_size, font=font)],
-                            [sg.ProgressBar(max_value=50, size=progress_bar_size, orientation='v', key='battery_2_voltage')],
+                            [sg.ProgressBar(max_value=val, size=progress_bar_size, orientation='v', key='battery_2_voltage')],
                             [sg.Text('Batt 2 (A)', size=data_label_size, font=font)],
-                            [sg.ProgressBar(max_value=50, size=progress_bar_size, orientation='v', key='battery_2_current')]
+                            [sg.ProgressBar(max_value=val, size=progress_bar_size, orientation='v', key='battery_2_current')]
                         ], size=(1550/10, (1080-720)), element_justification='center'
                     ),
                     sg.Column(
                         [
                             [sg.Text('Batt 3 (V)', size=data_label_size, font=font)],
-                            [sg.ProgressBar(max_value=50, size=progress_bar_size, orientation='v', key='battery_3_voltage')],
+                            [sg.ProgressBar(max_value=val, size=progress_bar_size, orientation='v', key='battery_3_voltage')],
                             [sg.Text('Batt 3 (A)', size=data_label_size, font=font)],
-                            [sg.ProgressBar(max_value=50, size=progress_bar_size, orientation='v', key='battery_3_current')]
+                            [sg.ProgressBar(max_value=val, size=progress_bar_size, orientation='v', key='battery_3_current')]
                         ], size=(1550/10, (1080-720)), element_justification='center'
                     ),
                     sg.Column(
                         [
                             [sg.Text('Batt 4 (V)', size=data_label_size, font=font)],
-                            [sg.ProgressBar(max_value=50, size=progress_bar_size, orientation='v', key='battery_4_voltage')],
+                            [sg.ProgressBar(max_value=val, size=progress_bar_size, orientation='v', key='battery_4_voltage')],
                             [sg.Text('Batt 4 (A)', size=data_label_size, font=font)],
-                            [sg.ProgressBar(max_value=50, size=progress_bar_size, orientation='v', key='battery_4_current')]
+                            [sg.ProgressBar(max_value=val, size=progress_bar_size, orientation='v', key='battery_4_current')]
                         ], size=(1550/10, (1080-720)), element_justification='center'
                     ),
                     sg.Column(
@@ -228,36 +229,36 @@ class GCS:
                     sg.Column(
                         [
                             [sg.Text('X', size=data_label_size, font=font)],
-                            [sg.ProgressBar(max_value=50, size=progress_bar_size, orientation='v', key='controller_x')],
-                        ]
+                            [sg.ProgressBar(max_value=val, size=progress_bar_size, orientation='v', key='controller_x')],
+                        ], size=(320/5, 150), element_justification='center'
                     ),
                     # Axis Y
                     sg.Column(
                         [
                             [sg.Text('Y', size=data_label_size, font=font)],
-                            [sg.ProgressBar(max_value=50, size=progress_bar_size, orientation='v', key='controller_y')],
-                        ]
+                            [sg.ProgressBar(max_value=val, size=progress_bar_size, orientation='v', key='controller_y')],
+                        ], size=(320/5, 150), element_justification='center'
                     ),
                     # Axis Z
                     sg.Column(
                         [
                             [sg.Text('Z', size=data_label_size, font=font)],
-                            [sg.ProgressBar(max_value=50, size=progress_bar_size, orientation='v', key='controller_z')],
-                        ]
+                            [sg.ProgressBar(max_value=val, size=progress_bar_size, orientation='v', key='controller_z')],
+                        ], size=(320/5, 150), element_justification='center'
                     ),
                     # Axis T (throttle)
                     sg.Column(
                         [
                             [sg.Text('T', size=data_label_size, font=font)],
-                            [sg.ProgressBar(max_value=50, size=progress_bar_size, orientation='v', key='controller_t')],
-                        ]
+                            [sg.ProgressBar(max_value=val, size=progress_bar_size, orientation='v', key='controller_t')],
+                        ], size=(320/5, 150), element_justification='center'
                     ),
                     # Axis A (Acceleration)
                     sg.Column(
                         [
                             [sg.Text('A', size=data_label_size, font=font)],
-                            [sg.ProgressBar(max_value=50, size=progress_bar_size, orientation='v', key='controller_a')],
-                        ]
+                            [sg.ProgressBar(max_value=val, size=progress_bar_size, orientation='v', key='controller_a')],
+                        ], size=(320/5, 150), element_justification='center'
                     ),
                 ],
                 [
@@ -265,36 +266,36 @@ class GCS:
                     sg.Column(
                         [
                             [sg.Text('B1', size=data_label_size, font=font)],
-                            [sg.ProgressBar(max_value=50, size=progress_bar_size, orientation='v', key='controller_b0')],
-                        ]
+                            [sg.ProgressBar(max_value=val, size=progress_bar_size, orientation='v', key='controller_b0')],
+                        ], size=(320/5, 150), element_justification='center'
                     ),
                     # Button 2 Column
                     sg.Column(
                         [
                             [sg.Text('B2', size=data_label_size, font=font)],
-                            [sg.ProgressBar(max_value=50, size=progress_bar_size, orientation='v', key='controller_b1')],
-                        ]
+                            [sg.ProgressBar(max_value=val, size=progress_bar_size, orientation='v', key='controller_b1')],
+                        ], size=(320/5, 150), element_justification='center'
                     ),
                     # Button 3 Column
                     sg.Column(
                         [
                             [sg.Text('B3', size=data_label_size, font=font)],
-                            [sg.ProgressBar(max_value=50, size=progress_bar_size, orientation='v', key='controller_b2')],
-                        ]
+                            [sg.ProgressBar(max_value=val, size=progress_bar_size, orientation='v', key='controller_b2')],
+                        ], size=(320/5, 150), element_justification='center'
                     ),
                     # Button 4 Column
                     sg.Column(
                         [
                             [sg.Text('B4', size=data_label_size, font=font)],
-                            [sg.ProgressBar(max_value=50, size=progress_bar_size, orientation='v', key='controller_b3')],
-                        ]
+                            [sg.ProgressBar(max_value=val, size=progress_bar_size, orientation='v', key='controller_b3')],
+                        ], size=(320/5, 150), element_justification='center'
                     ),
                     # Button 5 Column
                     sg.Column(
                         [
                             [sg.Text('B5', size=data_label_size, font=font)],
-                            [sg.ProgressBar(max_value=50, size=progress_bar_size, orientation='v', key='controller_b4')],
-                        ]
+                            [sg.ProgressBar(max_value=val, size=progress_bar_size, orientation='v', key='controller_b4')],
+                        ], size=(320/5, 150), element_justification='center'
                     ),
                 ],
                 [
@@ -302,36 +303,36 @@ class GCS:
                     sg.Column(
                         [
                             [sg.Text('B6', size=data_label_size, font=font)],
-                            [sg.ProgressBar(max_value=50, size=progress_bar_size, orientation='v', key='controller_b5')],
-                        ]
+                            [sg.ProgressBar(max_value=val, size=progress_bar_size, orientation='v', key='controller_b5')],
+                        ], size=(320/5, 150), element_justification='center'
                     ),
                     # Button 7 Column
                     sg.Column(
                         [
                             [sg.Text('B7', size=data_label_size, font=font)],
-                            [sg.ProgressBar(max_value=50, size=progress_bar_size, orientation='v', key='controller_b6')],
-                        ]
+                            [sg.ProgressBar(max_value=val, size=progress_bar_size, orientation='v', key='controller_b6')],
+                        ], size=(320/5, 150), element_justification='center'
                     ),
                     # Button 8 Column
                     sg.Column(
                         [
                             [sg.Text('B8', size=data_label_size, font=font)],
-                            [sg.ProgressBar(max_value=50, size=progress_bar_size, orientation='v', key='controller_b7')],
-                        ]
+                            [sg.ProgressBar(max_value=val, size=progress_bar_size, orientation='v', key='controller_b7')],
+                        ], size=(320/5, 150), element_justification='center'
                     ),
                     # Button 9 Column
                     sg.Column(
                         [
                             [sg.Text('B9', size=data_label_size, font=font)],
-                            [sg.ProgressBar(max_value=50, size=progress_bar_size, orientation='v', key='controller_b8')],
-                        ]
+                            [sg.ProgressBar(max_value=val, size=progress_bar_size, orientation='v', key='controller_b8')],
+                        ], size=(320/5, 150), element_justification='center'
                     ),
                     # Button 10 Column
                     sg.Column(
                         [
                             [sg.Text('B10', size=data_label_size, font=font)],
-                            [sg.ProgressBar(max_value=50, size=progress_bar_size, orientation='v', key='controller_b9')],
-                        ]
+                            [sg.ProgressBar(max_value=val, size=progress_bar_size, orientation='v', key='controller_b9')],
+                        ], size=(320/5, 150), element_justification='center'
                     ),
                 ],
                 [sg.HorizontalSeparator()],
@@ -341,36 +342,36 @@ class GCS:
                     sg.Column(
                         [
                             [sg.Text('M1', size=data_label_size, font=font)],
-                            [sg.ProgressBar(max_value=50, size=progress_bar_size, orientation='v', key='controller_m0')],
-                        ]
+                            [sg.ProgressBar(max_value=val, size=progress_bar_size, orientation='v', key='controller_m0')],
+                        ], size=(320/5, 150), element_justification='center'
                     ),
                     # Motor 2 Column
                     sg.Column(
                         [
                             [sg.Text('M2', size=data_label_size, font=font)],
-                            [sg.ProgressBar(max_value=50, size=progress_bar_size, orientation='v', key='controller_m1')],
-                        ]
+                            [sg.ProgressBar(max_value=val, size=progress_bar_size, orientation='v', key='controller_m1')],
+                        ], size=(320/5, 150), element_justification='center'
                     ),
                     # Motor 3 Column
                     sg.Column(
                         [
                             [sg.Text('M3', size=data_label_size, font=font)],
-                            [sg.ProgressBar(max_value=50, size=progress_bar_size, orientation='v', key='controller_m2')],
-                        ]
+                            [sg.ProgressBar(max_value=val, size=progress_bar_size, orientation='v', key='controller_m2')],
+                        ], size=(320/5, 150), element_justification='center'
                     ),
                     # Motor 4 Column
                     sg.Column(
                         [
                             [sg.Text('M4', size=data_label_size, font=font)],
-                            [sg.ProgressBar(max_value=50, size=progress_bar_size, orientation='v', key='controller_m3')],
-                        ]
+                            [sg.ProgressBar(max_value=val, size=progress_bar_size, orientation='v', key='controller_m3')],
+                        ], size=(320/5, 150), element_justification='center'
                     ),
                     # Motor 5 Column
                     sg.Column(
                         [
                             [sg.Text('M5', size=data_label_size, font=font)],
-                            [sg.ProgressBar(max_value=50, size=progress_bar_size, orientation='v', key='controller_m4')],
-                        ]
+                            [sg.ProgressBar(max_value=val, size=progress_bar_size, orientation='v', key='controller_m4')],
+                        ], size=(320/5, 150), element_justification='center'
                     ),
                 ],
                 [
@@ -378,36 +379,36 @@ class GCS:
                     sg.Column(
                         [
                             [sg.Text('M6', size=data_label_size, font=font)],
-                            [sg.ProgressBar(max_value=50, size=progress_bar_size, orientation='v', key='controller_m5')],
-                        ]
+                            [sg.ProgressBar(max_value=val, size=progress_bar_size, orientation='v', key='controller_m5')],
+                        ], size=(320/5, 150), element_justification='center'
                     ),
                     # Motor 7 Column
                     sg.Column(
                         [
                             [sg.Text('M7', size=data_label_size, font=font)],
-                            [sg.ProgressBar(max_value=50, size=progress_bar_size, orientation='v', key='controller_m6')],
-                        ]
+                            [sg.ProgressBar(max_value=val, size=progress_bar_size, orientation='v', key='controller_m6')],
+                        ], size=(320/5, 150), element_justification='center'
                     ),
                     # Motor 8 Column
                     sg.Column(
                         [
                             [sg.Text('M8', size=data_label_size, font=font)],
-                            [sg.ProgressBar(max_value=50, size=progress_bar_size, orientation='v', key='controller_m7')],
-                        ]
+                            [sg.ProgressBar(max_value=val, size=progress_bar_size, orientation='v', key='controller_m7')],
+                        ], size=(320/5, 150), element_justification='center'
                     ),
                     # Motor 9 Column
                     sg.Column(
                         [
                             [sg.Text('M9', size=data_label_size, font=font)],
-                            [sg.ProgressBar(max_value=50, size=progress_bar_size, orientation='v', key='controller_m8')],
-                        ]
+                            [sg.ProgressBar(max_value=val, size=progress_bar_size, orientation='v', key='controller_m8')],
+                        ], size=(320/5, 150), element_justification='center'
                     ),
                     # Motor 10 Column
                     sg.Column(
                         [
                             [sg.Text('M10', size=data_label_size, font=font)],
-                            [sg.ProgressBar(max_value=50, size=progress_bar_size, orientation='v', key='controller_m9')],
-                        ]
+                            [sg.ProgressBar(max_value=val, size=progress_bar_size, orientation='v', key='controller_m9')],
+                        ], size=(320/5, 150), element_justification='center'
                     ),
                 ],
                 [sg.HorizontalSeparator()],
