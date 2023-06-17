@@ -79,11 +79,13 @@ class GCS:
             
             # Log that the serial port was opened
             logging.info('Serial port opened at ' + str(self.serial.name))
-            
+        else:
+            self.serial = None
+        
         # Make sure the serial port is open and send the start bit
-        if self.serial.is_open:
+        if self.serial is not None:
             self.serial.write(b'1\n')
-            
+        
         # Create the GUI layout and supporting variables
         title_size = (20, 1)
         data_label_size = (15, 1)
