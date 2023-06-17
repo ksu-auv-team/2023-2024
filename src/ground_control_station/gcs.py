@@ -36,7 +36,7 @@ class Controller:
 class GCS:
     def __init__(self):
         # Create the log folder
-        date = datetime.datetime.now(format='%Y-%m-%d_%H-%M-%S')
+        date = datetime.datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
         os.mkdir(f'logs/{date}')
         
         # Create the logger which outputs a log file to the log folder that was just created
