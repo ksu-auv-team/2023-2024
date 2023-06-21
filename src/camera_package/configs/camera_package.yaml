@@ -1,0 +1,4 @@
+ip: ''
+port: 9999
+send_width: 320 
+fps: 30
