@@ -11,3 +11,4 @@ camera:
   camera_resolution: (1280, 720)
 orin:
   orin_ip: '192.168.1.148'
+  

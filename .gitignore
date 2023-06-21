@@ -2,3 +2,6 @@
 # These files allow me to run these scripts on a macbook pro
 Dockerfile
 *.sh
+
+# These files are api keys that I use to access training data (make your own)
+src/machine_vision/api_keys/roboflow.txt
