@@ -15,6 +15,8 @@ from numpysocket import NumpySocket
 import serial
 import yaml
 from inputs import get_gamepad, devices
+import cv2
+import threading
 
 
 # Define the dataclass for the ground control station joystick data
@@ -31,6 +33,38 @@ class Controller:
     right: Joystick
     buttons: dict
     
+# https://stackoverflow.com/questions/44650888/resize-an-image-without-distortion-opencv
+def image_resize(image, width = None, height = None, inter = cv2.INTER_AREA):
+    # initialize the dimensions of the image to be resized and
+    # grab the image size
+    dim = None
+    (h, w) = image.shape[:2]
+
+    # if both the width and height are None, then return the
+    # original image
+    if width is None and height is None:
+        return image
+
+    # check to see if the width is None
+    if width is None:
+        # calculate the ratio of the height and construct the
+        # dimensions
+        r = height / float(h)
+        dim = (int(w * r), height)
+
+    # otherwise, the height is None
+    else:
+        # calculate the ratio of the width and construct the
+        # dimensions
+        r = width / float(w)
+        dim = (width, int(h * r))
+
+    # resize the image
+    resized = cv2.resize(image, dim, interpolation = inter)
+
+    # return the resized image
+    return resized    
+
 # Create the GUI layout and supporting variables
 title_size = (20, 1)
 data_label_size = (15, 1)
@@ -102,6 +136,11 @@ class GCS:
         with open('src/ground_control_station/configs/gcs.yml', 'r') as file:
             self.config = yaml.load(file, Loader=yaml.FullLoader)
             
+        # Get the ip and port of the camera feed from the config file
+        self.ip = self.config['camera_feed']['ip']
+        self.port = self.config['camera_feed']['port']
+        self.width = self.config['camera_feed']['width']
+        
         # Log the configuration file
         logging.info(f'Configuration file: {self.config}')
         
@@ -293,6 +332,17 @@ class GCS:
         self.window = sg.Window('KSU Control Panel', window_layout, size=(1920, 1080), finalize=True)
         self.window.Maximize()
     
+    # Create a camera updater thread
+    def camera_thread(self):
+        with NumpySocket() as s:
+            s.connect((self.ip, self.port))
+            while (True):
+                frame = s.recv()
+                if len(frame) == 0:
+                    break
+                image = image_resize(frame, width=self.width)
+                self.window['camera_feed'].update(data=cv2.imencode('.png', image)[1].tobytes())
+    
     # Query and store the connected joystick devices
     def get_joystick_devices(self):
         pass
@@ -307,6 +357,8 @@ class GCS:
         pass
     
     def run(self):
+        event, values = self.window.read(timeout=100)
+        camera_th = threading.Thread(target=self.camera_thread)
         while True:
             event, values = self.window.read(timeout=100)
             
@@ -318,6 +370,7 @@ class GCS:
             
             if event == sg.WIN_CLOSED:
                 break
+        camera_th.join()
 
 if __name__ == '__main__':
     gui = GCS()

@@ -1,14 +1,13 @@
 AUV: True
 serial: 
   enabled: False
-  serial_port: /dev/ttyUSB0
-  serial_baudrate: 115200
-  serial_timeout: 0.1
+  port: /dev/ttyUSB0
+  baudrate: 115200
+  timeout: 0.1
 camera:
-  camera_ip: '192.168.1.148'
-  camera_port: 8080
-  camera_fps: 30
-  camera_resolution: (1280, 720)
+  ip: '172.17.0.1'
+  port: 9999
+  fps: 30
+  width: 1280
 orin:
-  orin_ip: '192.168.1.148'
-  
+  ip: '172.17.0.1'
