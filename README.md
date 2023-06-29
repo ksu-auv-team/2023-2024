@@ -6,7 +6,7 @@
 
 ## Tasks ##
 - [ ] GCS
-    - [X] GUI Creation
+    - [ ] GUI Creation
     - [ ] Ping Function
         - Is a subsystem algorithm that pings the external subsystems to verify that they are still connected to the network
     - [ ] Controller Input Function
