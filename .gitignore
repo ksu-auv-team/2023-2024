@@ -6,3 +6,7 @@ Dockerfile
 
 # These files are api keys that I use to access training data (make your own)
 src/machine_vision/api_keys/roboflow.txt
+
+.vscode
+__pycache__
+.pytest_cache

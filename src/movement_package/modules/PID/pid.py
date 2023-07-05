@@ -8,9 +8,26 @@ import numpy as np
 
 class PID:
     def __init__(self):
-        with open('../assets/configs/pid.yml') as f:
-            self.config = yaml.load(f, Loader=yaml.FullLoader)
-            
+        try:
+            with open('../assets/configs/pid.yml') as f:
+                self.config = yaml.load(f, Loader=yaml.FullLoader)
+        except:
+            self.config = {
+                'connect': False,
+                'ip': 'localhost',
+                'port': 9999,
+                'in_min': -0.4,
+                'in_max': 0.4,
+                'out_min': 1000,
+                'out_max': 2000,
+                'mew': 0.01,
+                'prop': 0.08,
+                'dh': 0.15,
+                'dv': 0.15,
+                'w': 0.3,
+                'l': 0.3,
+                'h': 0.25
+            }
         self.in_min = float(self.config['in_min'])
         self.in_max = float(self.config['in_max'])
         self.out_min = int(self.config['out_min'])
@@ -25,12 +42,11 @@ class PID:
         self.ah = math.atan(self.w / self.l)
         self.av = math.atan(self.h / (math.sqrt(self.w ** 2 + self.l ** 2)))
         
-        self.in_data = []
         self.motors = [1500, 1500, 1500, 1500, 1500, 1500, 1500, 1500]
         
         self.records = []
         
-        
+
     def controller(self,w:float, p: float, q: float, u:float, v:float, r:float):
         self.horizontal = (self.mew/self.prop) * np.array(
             [
@@ -57,11 +73,12 @@ class PID:
     def run(self):
         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         s.connect((self.config['ip'], self.config['port']))
-        # while True:
+
         data = s.recv(1024)
         self.in_data = self.parse(data)
         
         self.controller(float(self.in_data[0]), float(self.in_data[1]), float(self.in_data[2]), float(self.in_data[3]), float(self.in_data[4]), float(self.in_data[5]))
+        self.records.append([self.horizontal, self.vertical])
         
         for i in range(4):
             self.motors[i] = int(self.map(self.horizontal[i]))
@@ -72,9 +89,8 @@ class PID:
         # Debug
         print(self.horizontal)
         print(self.motors)
-            
-            
-                
+
+
 if __name__ == '__main__':
     pid = PID()
     pid.run()
