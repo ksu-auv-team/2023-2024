@@ -73,7 +73,11 @@
         - Define the transitions
         - Define the actions
     - [ ] State Machine Output
-
+    - [ ] 
+- [ ] HI
+    - [ ] Hardware Interface Creation
+    - [ ] Define the individual I2C addresses
+    - [ ] Send and receive data from modules
 
 ## Helpful Links ##
 Python Documentation: https://docs.python.org/3/

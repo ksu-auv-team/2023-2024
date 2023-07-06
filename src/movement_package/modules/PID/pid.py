@@ -28,6 +28,7 @@ class PID:
                 'l': 0.3,
                 'h': 0.25
             }
+
         self.in_min = float(self.config['in_min'])
         self.in_max = float(self.config['in_max'])
         self.out_min = int(self.config['out_min'])
