@@ -9,7 +9,7 @@ import numpy as np
 class PID:
     def __init__(self):
         try:
-            with open('../assets/configs/pid.yml') as f:
+            with open('configs/pid.yml') as f:
                 self.config = yaml.load(f, Loader=yaml.FullLoader)
         except:
             self.config = {
