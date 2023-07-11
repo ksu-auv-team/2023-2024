@@ -23,7 +23,7 @@
     - [ ] Start Subsystem Function
         - Is a subsystem algorithm that allows the user to start the external subsystems
         - Calls the SSH Function to SSH into the external subsystems
-        - Starts Individual threads for each external subsystems
+        - Starts Individual threads for each external subsystem
          - CP = Camera Processing
          - MV = Machine Vision
          - MP = Movement Package
@@ -34,6 +34,7 @@
     - [ ] Restart Subsystem Function
         - Loops through all of the external subsystems and restarts them and saves their log files
 - [ ] CP
+  - [ ] Regular Camera Package
     - [ ] ZED SDK Installation
         - The ZED SDK is only available for Ubuntu and Windows
     - [ ] ZED SDK Configuration
@@ -41,6 +42,7 @@
     - [ ] ZED Camera Stereo Vision
     - [ ] ZED Camera Depth Sensing
     - [ ] ZED Camera Streaming to Port
+  - [ ] ZED Camera Package
     - [ ] Bottom Camera Calibration
     - [ ] Bottom Camera Streaming to Port
 - [ ] MV
@@ -61,24 +63,12 @@
     - [ ] State Machine Input
     - [ ] Convert State Machine Input to PWM Output
     - [ ] PWM Output
-        - Write the PWM values to the corresponding microcontrollers
-- [ ] SP
-    - [ ] I2C Input
-        - Define the I2C addresses for each sensor
-        - Read the I2C values from the sensors (every 0.1 seconds)
-    - [ ] State Machine Output
-- [ ] SM
-    - [ ] State Machine Creation
-        - Define the states
-        - Define the transitions
-        - Define the actions
-    - [ ] State Machine Output
-    - [ ] 
+        - Write the PWM values to the Hardware Interface
 - [ ] HI
     - [ ] Hardware Interface Creation
     - [ ] Define the individual I2C addresses
     - [ ] Send and receive data from modules
-
 ## Helpful Links ##
 Python Documentation: https://docs.python.org/3/
 Python Tutorial: https://www.youtube.com/watch?v=eWRfhZUzrAc
+Python State Machine Library: https://python-statemachine.readthedocs.io/en/latest/
