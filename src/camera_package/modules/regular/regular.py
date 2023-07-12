@@ -35,17 +35,47 @@ def image_resize(image, width = None, height = None, inter = cv2.INTER_AREA):
     # return the resized image
     return resized
 
+
 class Regular:
+    """
+        The Regular class encapsulates the functionality of acquiring frames from a specified camera, 
+        resizing them and sending them to a client using a socket connection.
+
+        Attributes:
+            host (str): The host address where the socket server runs.
+            port (int): The port number where the socket server listens.
+            cam: An instance of cv2.VideoCapture to capture frames.
+            np_socket: A Networking socket instance to send data to the client.
+            client: The client socket instance once a client is connected.
+    """
     def __init__(self, host, port, camera_id):
+        """
+            Initialize an instance of the Regular class.
+            
+            Args:
+                host (str): The host address where the socket server runs.
+                port (int): The port number where the socket server listens.
+                camera_id (int): The ID of the camera to capture frames from.
+
+            Raises:
+                Exception: An error occurred accessing the camera.
+        """
         self.host = host
         self.port = port
         try:
             self.cam = cv2.VideoCapture(camera_id)  # Open the camera with specified camera_id
         except Exception as e:
             print("Error initializing camera: ", e)
-        self.connect()
+        self.bind()
+        print("Server started")
 
-    def connect(self):
+    def bind(self):
+        """
+            Start the socket server and wait for a client to connect.
+
+            Raises:
+                Exception: An error occurred creating the socket connection.
+        """
         try:
             # Create a networking socket
             self.np_socket = Networking()
@@ -60,6 +90,12 @@ class Regular:
             print("Error in connect: ", e)
 
     def send_frame(self):
+        """
+            Capture a frame from the camera, resize it, and send it to the client as a numpy array.
+
+            Raises:
+                Exception: An error occurred reading the frame or sending data.
+        """
         try:
             # Read a frame from the camera
             ret, frame = self.cam.read()
@@ -76,6 +112,12 @@ class Regular:
             print("Error in send_frame: ", e)
 
     def close(self):
+        """
+            Close the client connection, the server socket, and the camera.
+
+            Raises:
+                Exception: An error occurred closing the connection or releasing the camera.
+        """
         try:
             # Close the client connection
             self.client.close()
@@ -87,6 +129,10 @@ class Regular:
             print("Error in close: ", e)
 
     def run(self):
+        """
+            Enter a loop to continuously read frames from the camera and send them to the client, 
+            until a keyboard interrupt is detected. Then, gracefully close the resources.
+        """
         try:
             # Continuously read frames from the camera and send them to the client
             while True:
