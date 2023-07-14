@@ -147,7 +147,7 @@ class Regular:
 if __name__ == '__main__':
     try:
         # Create the Regular object and start sending frames
-        camera = Regular('192.168.1.246', 9999, 0)
+        camera = Regular('localhost', 9999, 0)
         camera.run()
     except Exception as e:
         print("Error in main: ", e)
