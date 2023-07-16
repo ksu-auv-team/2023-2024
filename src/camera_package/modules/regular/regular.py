@@ -107,7 +107,7 @@ class Regular:
             # Ensure the datatype
             frame = np.array(frame, dtype='uint8')
             # Send the frame to the client as a numpy array
-            self.client.send_numpy(frame)
+            self.client.send_numpy(frame) # type: ignore
         except Exception as e:
             print("Error in send_frame: ", e)
 

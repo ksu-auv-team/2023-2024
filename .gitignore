@@ -9,3 +9,4 @@ src/machine_vision/api_keys/roboflow.txt
 .vscode
 __pycache__
 .pytest_cache
+.obsidian

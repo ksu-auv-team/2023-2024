@@ -1,5 +1,5 @@
-from modules.regular.regular import Regular
-from modules.zed.zed import Zed
+from src.camera_package.modules.regular.regular import Regular
+from src.camera_package.modules.zed.zed import Zed
 from src.modules.networking.networking import Networking
 
 
