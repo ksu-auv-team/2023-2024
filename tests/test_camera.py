@@ -61,7 +61,13 @@ class cam:
     def run(self):
         while True:
             frame = self.get_image()
-            self.send_frame(frame)
+            if frame is not None:
+                self.send_frame(frame)
+            else:
+                print('No frame')
+        
+            if cv2.waitKey(1) & 0xFF == ord('q'):
+                break
 
 if __name__ == '__main__':
     cam = cam() # type: ignore

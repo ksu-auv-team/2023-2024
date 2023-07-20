@@ -57,10 +57,12 @@ class cam:
         return resize
 
     def run(self):
+        self.connect()
         while True:
             frame = self.get_image()
             cv2.imshow('frame', frame)
             if cv2.waitKey(1) & 0xFF == ord('q'):
+                self.so.close_connection()
                 break
 
 if __name__ == '__main__':
