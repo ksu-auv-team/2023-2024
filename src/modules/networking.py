@@ -33,14 +33,16 @@ class Networking(socket.socket):
         if not isinstance(array, np.ndarray):  # Check if the input is a numpy array
             raise TypeError("Input should be a numpy array")
         data = self._pack_numpy(array)  # Pack the numpy array
+        print(1)
         self.sendall(data)  # Send all the data
+        print(2)
         logging.debug("Array sent")  # Log the send
 
     # Receive a numpy array from the connected server
     def recv_numpy(self):
         data = self._recvall()  # Receive all the data
         # Load the numpy array from the data received
-        array = np.load(BytesIO(data), allow_pickle=True)['array']
+        array = np.load(BytesIO(data), allow_pickle=False)['array']
         logging.debug("Array received")  # Log the receive
         return array  # Return the array
 
