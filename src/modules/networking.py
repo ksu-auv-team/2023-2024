@@ -13,13 +13,20 @@ class Networking(socket.socket):
         self.buffer_size = 1024
 
     # Connect to a server at host and port
-    def connect(self, host, port):
+    def connect_server(self, host, port):
         super().connect((host, port))
-        logging.debug("Connected to {}:{}".format(host, port))  # Log connection
+        logging.debug(f"Connected to {host}:{port}")  # Log connection
 
-    def bind(self, host, port):
+    def start_server(self, host, port):
         super().bind((host, port))
-        logging.debug("Bound to {}:{}".format(host, port))
+        super().listen(1)
+        logging.debug(f"Server started at {host}:{port}")  # Log server start
+
+    # New function to accept a connection
+    def accept_connection(self):
+        client_socket, addr = super().accept()
+        logging.debug(f"Accepted connection from {addr}")  # Log connection
+        return client_socket
 
     # Send a numpy array to the connected server
     def send_numpy(self, array):
@@ -73,3 +80,4 @@ class Networking(socket.socket):
     # Close the socket connection
     def close_connection(self):
         self.close()  # Close the socket
+        logging.debug("Connection closed")  # Log closure
