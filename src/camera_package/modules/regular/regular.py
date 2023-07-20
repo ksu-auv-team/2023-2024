@@ -26,8 +26,14 @@ class Regular:
                 print("Failed to capture frame")
                 break
 
-            # Send the frame
-            self.np_socket.send_numpy(frame)  # Use self.np_socket to send the frame
+            # # Send the frame
+            # self.np_socket.send_numpy(frame)  # Use self.np_socket to send the frame
+
+            # In your send_frame function
+            serialized_array = self.np_socket._pack_numpy(frame)
+            print(f"Sending array of length {len(serialized_array)}")
+            print(f"Original array shape: {frame.shape}, dtype: {frame.dtype}")
+            self.np_socket.sendall(serialized_array)
 
         # Release the webcam and close the socket when done
         self.cam.release()

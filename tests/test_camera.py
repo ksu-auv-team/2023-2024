@@ -1,4 +1,6 @@
 import cv2
+import numpy as np
+from io import BytesIO
 from src.modules.networking import Networking
 
 class WebcamClient:
@@ -14,7 +16,10 @@ class WebcamClient:
 
         while True:
             # Receive a frame
-            frame = self.np_socket.recv_numpy()
+            # In your receive_frame function
+            data = self.np_socket._recvall()
+            print(f"Received data of length {len(data)}")
+            frame = np.load(BytesIO(data), allow_pickle=True)['array']
 
             # Display the frame
             cv2.imshow("Webcam", frame)
