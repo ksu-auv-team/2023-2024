@@ -1,3 +1,7 @@
+import sys
+
+sys.path.append('./src')
+
 import cv2
 from src.modules.networking.networking import Networking
 
