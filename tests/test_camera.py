@@ -1,6 +1,8 @@
+import os
 import sys
 
-sys.path.append('src')
+path = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+sys.path.append(path)
 
 import cv2
 from src.modules.networking.networking import Networking
@@ -38,37 +40,29 @@ def image_resize(image, width = None, height = None, inter = cv2.INTER_AREA):
     # return the resized image
     return resized
 
+
 class cam:
     def __init__(self):
         self.so = Networking()
         self.cam = cv2.VideoCapture(0)
 
-        self.bind()
+    def bind(self, host, port):
+        self.so.bind(host, port)
 
-    def bind(self):
-        self.so.bind('10.0.0.34', 9999)
-        self.so.listen(1)
-        self.client, _ = self.so.accept()
-
-    def send_frame(self, data):
-        self.so.send_numpy(data)
-
+    def send_frame(self, frame):
+        self.so.send_numpy(frame)
+    
     def get_image(self):
         image = self.cam.read()
         resize = image_resize(image, width=240)
         return resize
-
-    def run(self):
-        while True:
-            frame = self.get_image()
-            if frame is not None:
-                self.send_frame(frame)
-            else:
-                print('No frame')
-        
-            if cv2.waitKey(1) & 0xFF == ord('q'):
-                break
-
+    
 if __name__ == '__main__':
-    cam = cam() # type: ignore
-    cam.run() # type: ignore
+    c = cam()
+    c.bind('', 9999)
+    while True:
+        frame = c.get_image()
+        c.send_frame(frame)
+        cv2.imshow('frame', frame)
+        if cv2.waitKey(1) & 0xFF == ord('q'):
+            break
