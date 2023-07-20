@@ -20,6 +20,8 @@ class Networking(socket.socket):
     def bind(self, host, port):
         super().bind((host, port))
         logging.debug("Bound to {}:{}".format(host, port))
+        super().listen(1)
+        self.conn, _ = super().accept()
 
     # Send a numpy array to the connected server
     def send_numpy(self, array):
