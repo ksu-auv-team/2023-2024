@@ -46,7 +46,7 @@ class cam:
         self.bind()
 
     def bind(self):
-        self.so.bind('', 9999)
+        self.so.bind('10.0.0.34', 9999)
         self.so.listen(1)
         self.client, _ = self.so.accept()
 
