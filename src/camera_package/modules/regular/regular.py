@@ -7,16 +7,17 @@ class Regular:
         self.port = port
         self.camera_id = camera_id
         self.cam = cv2.VideoCapture(self.camera_id)
-        self.np_socket = Networking()
+        self.server_socket = Networking()
 
     def start(self):
         # Start the server
-        self.np_socket.start_server(self.host, self.port)
+        self.server_socket.bind((self.host, self.port))
+        self.server_socket.listen(1)
         print(f"Server started at {self.host}:{self.port}")
 
         print("Waiting for a connection...")
-        self.client_socket = self.np_socket.accept_connection()
-        print("Client connected")
+        self.client_socket, addr = self.server_socket.accept()
+        print(f"Client connected from {addr}")
 
         while True:
             # Capture a frame
@@ -29,10 +30,10 @@ class Regular:
             # Send the frame
             self.client_socket.send_numpy(frame)
 
-
         # Release the webcam and close the socket when done
         self.cam.release()
-        self.np_socket.close_connection()
+        self.client_socket.close()
+        self.server_socket.close()
 
 if __name__ == "__main__":
     HOST = '10.0.0.34'  # or your IP

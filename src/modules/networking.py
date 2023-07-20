@@ -1,74 +1,82 @@
-import socket  # Import socket module for networking
-import logging  # Import logging module for debugging and tracking
-import numpy as np  # Import numpy module for mathematical operations and handling arrays
-from io import BytesIO  # Import BytesIO for handling binary streams
-import os
+import socket
+import logging
+import numpy as np
+from io import BytesIO
 
-# Define a class Networking that extends the socket class
+
 class Networking(socket.socket):
-    # Initialize the class
-    def __init__(self, *args, **kwargs):
-        # Call to parent's constructor
-        super().__init__(*args, **kwargs)
-        # Set the default buffer size
-        self.buffer_size = 1024
+    def send_numpy(self, frame):
+        if not isinstance(frame, np.ndarray):
+            raise TypeError("Input frame is not a valid numpy array")
+        data = self.__pack_frame(frame)
+        super().sendall(data)
+        logging.debug("Frame sent")
 
-    # Connect to a server at host and port
-    def connect_server(self, host, port):
-        super().connect((host, port))
-        logging.debug(f"Connected to {host}:{port}")  # Log connection
+    def send_string(self, string):
+        if not isinstance(string, str):
+            raise TypeError("Input string is not a valid string")
+        string += '\n'  # add a newline character as the end marker of the string
+        data = string.encode()  # convert string to bytes
+        super().sendall(data)
+        logging.debug("String sent")
 
-    def start_server(self, host, port):
-        super().bind((host, port))
-        super().listen(1)
-        logging.debug(f"Server started at {host}:{port}")  # Log server start
-
-    # New function to accept a connection
-    def accept_connection(self):
-        client_socket, addr = super().accept()
-        new_fd = os.dup(client_socket.fileno())
-        client_socket = self.__class__(fileno=new_fd)
-        logging.debug(f"Accepted connection from {addr}")  # Log connection
-        return client_socket
-
-    # Send a numpy array to the connected server
-    def send_numpy(self, array):
-        if not isinstance(array, np.ndarray):  # Check if the input is a numpy array
-            raise TypeError("Input should be a numpy array")
-        data = self._pack_numpy(array)  # Pack the numpy array
-        print(f"Sending array of length {len(data)}")
-        print(f"Original array shape: {array.shape}, dtype: {array.dtype}")
-        self.sendall(data)  # Send all the data
-        logging.debug("Array sent")  # Log the send
-
-    # Receive a numpy array from the connected server
-    def recv_numpy(self):
-        data = self._recvall()  # Receive all the data
-        print(f"Received data of length {len(data)}")
-        # Load the numpy array from the data received
-        array = np.load(BytesIO(data), allow_pickle=True)['array']
-        logging.debug("Array received")  # Log the receive
-        return array  # Return the array
-
-    # Receive all the data until 'END\n' is found
-    def _recvall(self):
-        data = bytearray()  # Initialize a bytearray to store data
-        while len(data) < 4 or data[-4:] != b'END\n':  # While loop to receive data until 'END\n' is found
-            packet = self.recv(self.buffer_size)  # Receive data in packets of buffer_size
-            if not packet:  # If no packet is received, break the loop
+    def recv_numpy(self, bufsize=1024):
+        length = None
+        frameBuffer = bytearray()
+        while True:
+            data = super().recv(bufsize)
+            if len(data) == 0:
+                return np.array([])
+            frameBuffer += data
+            if len(frameBuffer) == length:
                 break
-            data.extend(packet)  # Add the packet data to the total data
-        return data[:-4]  # Return all the data except the last 4 bytes 'END\n'
+            while True:
+                if length is None:
+                    if b':' not in frameBuffer:
+                        break
+                    # remove the length bytes from the front of frameBuffer
+                    # leave any remaining bytes in the frameBuffer!
+                    length_str, ignored, frameBuffer = frameBuffer.partition(b':')
+                    length = int(length_str)
+                if len(frameBuffer) < length:
+                    break
+                # split off the full message from the remaining bytes
+                # leave any remaining bytes in the frameBuffer!
+                frameBuffer = frameBuffer[length:]
+                length = None
+                break
 
-    # Pack the numpy array into binary format
+        frame = np.load(BytesIO(frameBuffer), allow_pickle=True)['frame']
+        logging.debug("Frame received")
+        return frame
+
+    def recv_string(self, bufsize=1024):
+        data = super().recv(bufsize)
+        string = data.decode()  # decode bytes to string
+        string = string.rstrip('\n')  # remove the newline character at the end of the string
+        logging.debug("String received")
+        return string
+
+    def accept(self):
+        fd, addr = super()._accept()
+        sock = Networking(super().family, super().type, super().proto, fileno=fd)
+
+        if socket.getdefaulttimeout() is None and super().gettimeout():
+            sock.setblocking(True)
+        return sock, addr
+
     @staticmethod
-    def _pack_numpy(array):
-        f = BytesIO()  # Initialize a BytesIO stream
-        np.savez(f, array=array)  # Save the numpy array into the stream
-        data = f.getvalue() + b'END\n'  # Get the binary data from the stream and append 'END\n' 
-        return data  # Return the data
+    def __pack_frame(frame):
+        f = BytesIO()
+        np.savez(f, frame=frame)
 
-    # Close the socket connection
-    def close_connection(self):
-        self.close()  # Close the socket
-        logging.debug("Connection closed")  # Log closure
+        packet_size = len(f.getvalue())
+        header = '{0}:'.format(packet_size)
+        header = bytes(header.encode())  # prepend length of array
+
+        out = bytearray()
+        out += header
+
+        f.seek(0)
+        out += f.read()
+        return out

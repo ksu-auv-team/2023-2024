@@ -6,25 +6,25 @@ class WebcamClient:
     def __init__(self, host, port):
         self.host = host
         self.port = port
-        self.np_socket = Networking()
+        self.client_socket = Networking()
 
     def start(self):
         # Connect to the server
-        self.np_socket.connect_server(self.host, self.port)
+        self.client_socket.connect((self.host, self.port))
         print(f"Connected to the server at {self.host}:{self.port}")
 
         while True:
             # Receive a frame
-            frame = self.np_socket.recv_numpy()
+            frame = self.client_socket.recv_numpy()
 
             # Display the frame
             cv2.imshow("Webcam", frame)
             if cv2.waitKey(1) & 0xFF == ord('q'):
                 break
 
-        # Close the window when done
+        # Close the window and the socket when done
         cv2.destroyAllWindows()
-        self.np_socket.close_connection()
+        self.client_socket.close()
 
 if __name__ == "__main__":
     HOST = '10.0.0.34'  # or the server IP
