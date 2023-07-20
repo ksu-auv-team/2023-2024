@@ -10,7 +10,7 @@ class WebcamClient:
 
     def start(self):
         # Connect to the server
-        self.np_socket.connect((self.host, self.port))
+        self.np_socket.connect_server(self.host, self.port)
         print(f"Connected to the server at {self.host}:{self.port}")
 
         while True:
@@ -24,7 +24,7 @@ class WebcamClient:
 
         # Close the window when done
         cv2.destroyAllWindows()
-        self.np_socket.close()
+        self.np_socket.close_connection()
 
 if __name__ == "__main__":
     HOST = '10.0.0.34'  # or the server IP

@@ -11,12 +11,11 @@ class Regular:
 
     def start(self):
         # Start the server
-        self.np_socket.bind(self.host, self.port)
-        self.np_socket.listen(1)
+        self.np_socket.start_server(self.host, self.port)
         print(f"Server started at {self.host}:{self.port}")
 
         print("Waiting for a connection...")
-        self.client_socket, _ = self.np_socket.accept()
+        self.client_socket = self.np_socket.accept_connection()
         print("Client connected")
 
         while True:
@@ -27,12 +26,12 @@ class Regular:
                 print("Failed to capture frame")
                 break
 
-            # # Send the frame
-            self.client_socket.send_numpy(frame)  # Use self.np_socket to send the frame
+            # Send the frame
+            self.client_socket.send_numpy(frame)
 
         # Release the webcam and close the socket when done
         self.cam.release()
-        self.np_socket.close()
+        self.np_socket.close_connection()
 
 if __name__ == "__main__":
     HOST = '10.0.0.34'  # or your IP
