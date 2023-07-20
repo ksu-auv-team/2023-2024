@@ -2,6 +2,7 @@ import socket  # Import socket module for networking
 import logging  # Import logging module for debugging and tracking
 import numpy as np  # Import numpy module for mathematical operations and handling arrays
 from io import BytesIO  # Import BytesIO for handling binary streams
+import os
 
 # Define a class Networking that extends the socket class
 class Networking(socket.socket):
@@ -25,7 +26,8 @@ class Networking(socket.socket):
     # New function to accept a connection
     def accept_connection(self):
         client_socket, addr = super().accept()
-        client_socket = self.__class__(fileno=client_socket.fileno())
+        new_fd = os.dup(client_socket.fileno())
+        client_socket = self.__class__(fileno=new_fd)
         logging.debug(f"Accepted connection from {addr}")  # Log connection
         return client_socket
 
