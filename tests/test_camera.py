@@ -41,34 +41,17 @@ def image_resize(image, width = None, height = None, inter = cv2.INTER_AREA):
     return resized
 
 
-class cam:
-    def __init__(self):
-        self.so = Networking()
-        self.cam = cv2.VideoCapture(0)
+so = Networking()
+cam = cv2.VideoCapture(0)
 
-    def bind(self, host, port):
-        self.so.bind(host, port)
+so.bind('', 9999)
+so.listen(1)
+client, _ = so.accept()
 
-    def send_frame(self, frame):
-        self.so.send_numpy(frame)
-    
-    def get_image(self):
-        image = self.cam.read()
-        resize = image_resize(image, width=240)
-        return resize
-    
-    def close(self):
-        self.so.close_connection()
-        self.cam.release()
-        cv2.destroyAllWindows()
-    
-if __name__ == '__main__':
-    c = cam()
-    c.bind('', 9999)
-    while True:
-        frame = c.get_image()
-        c.send_frame(frame)
-        cv2.imshow('frame', frame)
-        if cv2.waitKey(1) & 0xFF == ord('q'):
-            break
-    c.close()
+while True:
+    image = cam.read()[1]
+    resize = image_resize(image, width=240)
+    client.send_numpy(resize)
+    print('sent')
+    # cv2.imshow('image', resize)
+    # cv2.waitKey(1)
