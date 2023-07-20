@@ -1,5 +1,6 @@
 import cv2
 import numpy as np
+import socket
 
 from src.modules.networking.networking import Networking
 
@@ -77,14 +78,19 @@ class Regular:
         """
         try:
             # Create a networking socket
-            self.np_socket = Networking(socket.AF_INET, socket.SOCK_STREAM)
+            self.np_socket = Networking()
             # Bind the socket to host and port
             self.np_socket.bind(self.host, self.port)
             # Start listening for incoming connections
             self.np_socket.listen(1)
             print('Server started and waiting for client')
+        except socket.error as e:
+            print(f"Error binding socket: {e}")
+            self.np_socket.close_connection()
+            self.np_socket = None
         except Exception as e:
             print("Error in connect: ", e)
+            self.np_socket = None
 
     def send_frame(self):
         """
