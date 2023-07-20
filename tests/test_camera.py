@@ -1,6 +1,5 @@
 import cv2
 import numpy as np
-from io import BytesIO
 from src.modules.networking import Networking
 
 class WebcamClient:
@@ -11,15 +10,12 @@ class WebcamClient:
 
     def start(self):
         # Connect to the server
-        self.np_socket.connect_server(self.host, self.port)
+        self.np_socket.connect((self.host, self.port))
         print(f"Connected to the server at {self.host}:{self.port}")
 
         while True:
             # Receive a frame
-            # In your receive_frame function
-            data = self.np_socket._recvall()
-            print(f"Received data of length {len(data)}")
-            frame = np.load(BytesIO(data), allow_pickle=True)['array']
+            frame = self.np_socket.recv_numpy()
 
             # Display the frame
             cv2.imshow("Webcam", frame)
@@ -28,7 +24,7 @@ class WebcamClient:
 
         # Close the window when done
         cv2.destroyAllWindows()
-        self.np_socket.close_connection()
+        self.np_socket.close()
 
 if __name__ == "__main__":
     HOST = '10.0.0.34'  # or the server IP

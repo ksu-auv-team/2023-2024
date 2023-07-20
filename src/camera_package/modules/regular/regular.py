@@ -11,11 +11,12 @@ class Regular:
 
     def start(self):
         # Start the server
-        self.np_socket.start_server(self.host, self.port)
+        self.np_socket.bind(self.host, self.port)
+        self.np_socket.listen(1)
         print(f"Server started at {self.host}:{self.port}")
-        
+
         print("Waiting for a connection...")
-        self.client_socket = self.np_socket.accept_connection()
+        self.client_socket, _ = self.np_socket.accept()
         print("Client connected")
 
         while True:
@@ -27,17 +28,11 @@ class Regular:
                 break
 
             # # Send the frame
-            # self.np_socket.send_numpy(frame)  # Use self.np_socket to send the frame
-
-            # In your send_frame function
-            serialized_array = self.np_socket._pack_numpy(frame)
-            print(f"Sending array of length {len(serialized_array)}")
-            print(f"Original array shape: {frame.shape}, dtype: {frame.dtype}")
-            self.np_socket.sendall(serialized_array)
+            self.client_socket.send_numpy(frame)  # Use self.np_socket to send the frame
 
         # Release the webcam and close the socket when done
         self.cam.release()
-        self.np_socket.close_connection()
+        self.np_socket.close()
 
 if __name__ == "__main__":
     HOST = '10.0.0.34'  # or your IP
