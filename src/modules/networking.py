@@ -33,33 +33,19 @@ class Networking(socket.socket):
         if not isinstance(array, np.ndarray):  # Check if the input is a numpy array
             raise TypeError("Input should be a numpy array")
         data = self._pack_numpy(array)  # Pack the numpy array
-        print(1)
+        print(f"Sending array of length {len(data)}")
+        print(f"Original array shape: {array.shape}, dtype: {array.dtype}")
         self.sendall(data)  # Send all the data
-        print(2)
         logging.debug("Array sent")  # Log the send
 
     # Receive a numpy array from the connected server
     def recv_numpy(self):
         data = self._recvall()  # Receive all the data
+        print(f"Received data of length {len(data)}")
         # Load the numpy array from the data received
-        array = np.load(BytesIO(data), allow_pickle=False)['array']
+        array = np.load(BytesIO(data), allow_pickle=True)['array']
         logging.debug("Array received")  # Log the receive
         return array  # Return the array
-
-    # Send a string to the connected server
-    def send_string(self, string):
-        if not isinstance(string, str):  # Check if the input is a string
-            raise TypeError("Input should be a string")
-        data = string.encode()  # Encode the string to binary
-        self.sendall(data)  # Send all the data
-        logging.debug("String sent")  # Log the send
-
-    # Receive a string from the connected server
-    def recv_string(self):
-        data = self._recvall()  # Receive all the data
-        string = data.decode()  # Decode the data to string
-        logging.debug("String received")  # Log the receive
-        return string  # Return the string
 
     # Receive all the data until 'END\n' is found
     def _recvall(self):
