@@ -46,7 +46,6 @@ class Regular:
             port (int): The port number where the socket server listens.
             cam: An instance of cv2.VideoCapture to capture frames.
             np_socket: A Networking socket instance to send data to the client.
-            client: The client socket instance once a client is connected.
     """
     def __init__(self, host, port, camera_id):
         """
@@ -78,14 +77,12 @@ class Regular:
         """
         try:
             # Create a networking socket
-            self.np_socket = Networking()
+            self.np_socket = Networking(socket.AF_INET, socket.SOCK_STREAM)
             # Bind the socket to host and port
             self.np_socket.bind(self.host, self.port)
             # Start listening for incoming connections
             self.np_socket.listen(1)
-            # Accept the client connection
-            self.client, _ = self.np_socket.accept()
-            print('Client connected')
+            print('Server started and waiting for client')
         except Exception as e:
             print("Error in connect: ", e)
 
@@ -119,10 +116,8 @@ class Regular:
                 Exception: An error occurred closing the connection or releasing the camera.
         """
         try:
-            # Close the client connection
-            self.client.close()
             # Close the server socket
-            self.np_socket.close()
+            self.np_socket.close_connection()
             # Release the camera
             self.cam.release()
         except Exception as e:
@@ -143,11 +138,17 @@ class Regular:
             # Gracefully close the resources when done
             self.close()
 
+
 # Run the camera as a standalone application for debugging purposes
 if __name__ == '__main__':
+    # Set host, port, and camera_id as per your configuration
+    HOST = '10.0.0.34'
+    PORT = 9999
+    CAMERA_ID = 0
+
     try:
         # Create the Regular object and start sending frames
-        camera = Regular('10.0.0.34', 9999, 0)
+        camera = Regular(HOST, PORT, CAMERA_ID)
         camera.run()
     except Exception as e:
-        print("Error in main: ", e)
+        print("Error in main: ", str(e))
