@@ -44,9 +44,9 @@
     - [ ] ZED Camera Stereo Vision
     - [ ] ZED Camera Depth Sensing
     - [ ] ZED Camera Streaming to Port
-  - [ ] Regular Camera Package
+  - [X] Regular Camera Package
     - [ ] Bottom Camera Calibration
-    - [ ] Bottom Camera Streaming to Port
+    - [X] Bottom Camera Streaming to Port
 - [ ] MV
   - [ ] Camera Input
       - Listen to the port that the CP is streaming to (only if AUV is toggled '--AUV')
