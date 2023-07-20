@@ -29,6 +29,7 @@ class Regular:
             # Send the frame
             self.client_socket.send_numpy(frame)
 
+
         # Release the webcam and close the socket when done
         self.cam.release()
         self.np_socket.close_connection()

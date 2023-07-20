@@ -25,6 +25,7 @@ class Networking(socket.socket):
     # New function to accept a connection
     def accept_connection(self):
         client_socket, addr = super().accept()
+        client_socket = self.__class__(fileno=client_socket.fileno())
         logging.debug(f"Accepted connection from {addr}")  # Log connection
         return client_socket
 
