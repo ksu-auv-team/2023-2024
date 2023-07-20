@@ -54,7 +54,7 @@ class Regular:
         while True:
             # Capture a frame
             ret, frame = self.cam.read()
-            frame = image_resize(frame, width=480)
+            frame = image_resize(frame, width=360)
 
             if not ret:
                 print("Failed to capture frame")
