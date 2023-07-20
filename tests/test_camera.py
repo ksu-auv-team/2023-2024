@@ -26,7 +26,7 @@ class WebcamClient:
         self.np_socket.close_connection()
 
 if __name__ == "__main__":
-    HOST = 'localhost'  # or the server IP
+    HOST = '10.0.0.34'  # or the server IP
     PORT = 9999  # or the server port
 
     client = WebcamClient(HOST, PORT)

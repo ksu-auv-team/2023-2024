@@ -34,7 +34,7 @@ class Regular:
         self.np_socket.close_connection()
 
 if __name__ == "__main__":
-    HOST = 'localhost'  # or your IP
+    HOST = '10.0.0.34'  # or your IP
     PORT = 9999  # or your port
     CAMERA_ID = 0  # or your camera id
 
