@@ -1,6 +1,6 @@
-import sys
+# import sys
 
-sys.path.append('src')
+# sys.path.append('src')
 
 import cv2
 from src.modules.networking.networking import Networking
@@ -43,25 +43,25 @@ class cam:
         self.so = Networking()
         self.cam = cv2.VideoCapture(0)
 
-        self.bind()
+        self.connect()
 
-    def bind(self):
-        self.so.bind('localhost', 9999)
-        self.so.listen(1)
-        self.client, _ = self.so.accept()
+    def connect(self):
+        self.so.connect('10.0.0.34', 9999)
 
-    def send_frame(self, data):
-        self.so.send_numpy(data)
+    def recv_frame(self):
+        return self.so.recv_numpy()
 
     def get_image(self):
-        image = self.cam.read()
-        resize = image_resize(image, width=240)
+        image = self.recv_frame()
+        resize = image_resize(image, width=1920)
         return resize
 
     def run(self):
         while True:
             frame = self.get_image()
-            self.send_frame(frame)
+            cv2.imshow('frame', frame)
+            if cv2.waitKey(1) & 0xFF == ord('q'):
+                break
 
 if __name__ == '__main__':
     cam = cam() # type: ignore

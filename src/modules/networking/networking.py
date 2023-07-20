@@ -17,6 +17,10 @@ class Networking(socket.socket):
         super().connect((host, port))
         logging.debug("Connected to {}:{}".format(host, port))  # Log connection
 
+    def bind(self, host, port):
+        super().bind((host, port))
+        logging.debug("Bound to {}:{}".format(host, port))
+
     # Send a numpy array to the connected server
     def send_numpy(self, array):
         if not isinstance(array, np.ndarray):  # Check if the input is a numpy array
