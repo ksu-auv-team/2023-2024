@@ -80,7 +80,7 @@ class Regular:
             # Create a networking socket
             self.np_socket = Networking()
             # Bind the socket to host and port
-            self.np_socket.bind((self.host, self.port))
+            self.np_socket.bind(self.host, self.port)
             # Start listening for incoming connections
             self.np_socket.listen(1)
             # Accept the client connection
@@ -147,7 +147,7 @@ class Regular:
 if __name__ == '__main__':
     try:
         # Create the Regular object and start sending frames
-        camera = Regular('localhost', 9999, 0)
+        camera = Regular('10.0.0.34', 9999, 0)
         camera.run()
     except Exception as e:
         print("Error in main: ", e)
