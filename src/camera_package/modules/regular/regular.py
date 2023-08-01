@@ -51,22 +51,25 @@ class Regular:
         self.client_socket, addr = self.server_socket.accept()
         print(f"Client connected from {addr}")
 
-        while True:
-            # Capture a frame
-            ret, frame = self.cam.read()
-            frame = image_resize(frame, width=360)
+        try:
+            while True:
+                # Capture a frame
+                ret, frame = self.cam.read()
+                frame = image_resize(frame, width=360)
 
-            if not ret:
-                print("Failed to capture frame")
-                break
+                if not ret:
+                    print("Failed to capture frame")
+                    break
 
-            # Send the frame
-            self.client_socket.send_numpy(frame)
+                # Send the frame
+                self.client_socket.send_numpy(frame)
+        except Exception as e:
+            print(e)
 
-        # Release the webcam and close the socket when done
-        self.cam.release()
-        self.client_socket.close()
-        self.server_socket.close()
+            # Release the webcam and close the socket when done
+            self.cam.release()
+            self.client_socket.close()
+            self.server_socket.close()
 
 if __name__ == "__main__":
     HOST = '10.0.0.34'  # or your IP

@@ -65,6 +65,8 @@
   - [ ] Still in planning phase
 - [ ] SM
   - [ ] Still in planning phase
+- [X] Networking Module
+  - [X] Custom socket library to handle sending string and numpy data
 
 ## Helpful Links ##
 Python Documentation: https://docs.python.org/3/

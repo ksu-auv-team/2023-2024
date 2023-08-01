@@ -23,5 +23,5 @@ class Zed:
     def get_objects(self):
         pass
 
-    def run(self):
+    def start(self):
         pass
