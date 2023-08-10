@@ -1,6 +1,0 @@
-inputs==0.5
-numpy==1.24.3
-numpysocket==1.0.1
-pyserial==3.5
-PySimpleGUI==4.60.5
-PyYAML==6.0
