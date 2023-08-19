@@ -1,0 +1,191 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #000000;
+    font-family: 'Montserrat';
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.title {
+    background-color: #FFC629;
+    height: 50px;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+
+.title h1 {
+    font-size: 40px;
+    color: #000000;
+    line-height: 1px;
+    text-align: center;
+}
+
+.content {
+    margin-top: 50px;
+    padding: 5px;
+    display: grid;
+    grid-gap: 5px;
+    grid-template-columns: 300px 1280px 300px;
+    justify-content: center;
+    width: 100%;
+}
+
+.content .data-view {
+    background-color: #C1C1C1;
+    height: 1010px;
+    width: 300px;
+    border-radius: 5px;
+    padding: 5px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.content .data-view h2 {
+    font-size: 20px;
+    color: #000000;
+    text-align: center;
+    text-decoration: underline;
+}
+
+.content .data-view .str-data {
+    background-color: #C1C1C1;
+    height: 50%;
+    width: 100%;
+    border-radius: 5px;
+    padding: 5px;
+    box-sizing: border-box;
+    overflow-y: scroll;
+}
+
+.content .data-view .str-data .data-row {
+    background-color: #C1C1C1;
+    height: 30px;
+    width: 100%;
+    border-radius: 5px;
+    padding: 5px;
+    box-sizing: border-box;
+    margin-bottom: 5px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.content .data-view .str-data .data-row .data-element {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 40%;
+}
+
+.content .data-view .str-data .data-row .data-element .data-label {
+    font-size: 15px;
+    color: #000000;
+    text-align: left;
+}
+
+.content .data-view .str-data .data-row .data-element .data-value {
+    font-size: 15px;
+    color: #000000;
+    text-align: right;
+}
+
+.content .data-view .str-data .data-row .data-element .data-unit {
+    color: #000000;
+}
+
+.content .data-view .sonar-grid {
+    background-color: #C1C1C1;
+    height: 50%;
+    width: 100%;
+    border-radius: 5px;
+    padding: 5px;
+    box-sizing: border-box;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 5px;
+}
+
+.content .middle {
+    background-color: #C1C1C1;
+    height: 1010px;
+    width: 1280px;
+    border-radius: 5px;
+    padding: 5px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.content .middle .button-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 5px;
+    align-items: center;
+    justify-items: center;
+    padding: 2px;
+}
+.content .middle .button-grid button {
+    padding: 2px;
+    border: #878787 5px solid;
+    border-radius: 5px;
+    background-color: #3D3D3D;
+    color: #ffffff;
+    cursor: pointer;
+    width: 140px;
+    height: 140px;
+    font-size: 20px;
+
+}
+
+.content .settings {
+    background-color: #C1C1C1;
+    height: 1010px;
+    width: 300px;
+    border-radius: 5px;
+    padding: 5px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.content .settings .tabs {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.content .settings .tabs input[type="radio"] {
+  display: none;
+}
+
+.content .settings .tabs .tab-label {
+  display: inline-block;
+  padding: 10px;
+  background: #FFC629;
+  cursor: pointer;
+  color: #ffffff;
+}
+
+.content .settings .tabs .tab-content {
+  display: none;
+  position: absolute;
+  top: 40px;
+  left: 0;
+  padding: 20px;
+  background: #C1C1C1;
+}
+
+.content .settings .tabs #tab1:checked ~ #content1,
+.content .settings .tabs #tab2:checked ~ #content2,
+.content .settings .tabs #tab3:checked ~ #content3 {
+  display: block;
+}
