@@ -47,7 +47,6 @@ def create_logger(filename="logfile"):
     logger_.addHandler(file_handler)
     return logger_
 
-
 # Create a logger object
 logger = create_logger()
 logger.info("Logger created")
@@ -67,6 +66,13 @@ logger.info(f"Python executable: {sys.executable}")
 
 # _________________________________________________________________________ #
 
+### Controller / PID Algorithm ###
+# _________________________________________________________________________ #
+
+
+
+# _________________________________________________________________________ #
+
 ### Regular Camera ### 
 # _________________________________________________________________________ #
 import cv2
@@ -79,7 +85,6 @@ while True:
     cv2.imshow('frame', frame)
     if cv2.waitKey(1) == ord('q'):
         break
-
 
 # _________________________________________________________________________ #
 
