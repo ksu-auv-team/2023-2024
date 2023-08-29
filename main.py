@@ -32,6 +32,8 @@ with open(config_file_path, mode="r", encoding="utf-8") as config_file:
 # Configure log file path
 def create_logger(filename="logfile"):
     """
+    Uses the external logging library found here: https://docs.python.org/3/library/logging.html
+
     Creates and returns a logging object that writes log messages to a file.
     The filename includes a timestamp in the format "logfile_YYYY-MM-DD_HH-MM-SS.log".
 
