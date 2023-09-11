@@ -10,3 +10,4 @@ src/machine_vision/api_keys/roboflow.txt
 __pycache__
 .pytest_cache
 .obsidian
+chats
