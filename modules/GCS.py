@@ -21,9 +21,7 @@ import fabric
 
 
 # ================= CONFIG =================
-PARENT_PATH = __file__.split("GCS.py")[0]
-
-f = open(PARENT_PATH+'config.json')
+f = open(__file__.split("GCS")[0]+'configs\\config.json')
 config = json.load(f)
 
 BATTERY_COUNT = config["ROBOT"]["BATTERY_COUNT"] or 4
