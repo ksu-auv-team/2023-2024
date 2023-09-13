@@ -1,23 +1,23 @@
 
-# ================= CAN DO SOLO =================
+# ================= TODO =================
 
-#TODO: Make the component values (pwm, voltage, amp) actually update when changed
-#TODO: Add SSH Connectability
+#TODO: Fix battery data not showing
+#TODO: Add SSH Connectivity
 #TODO: Add basic depth, humidity, temp, ect statistics
-#TODO: Add program icon
 #TODO: Make program look nicer
 
 
-# ================= OTHER MODULES REQUIRED =================
+# ======= OTHER MODULES / PEOPLE REQUIRED =======
 
+#TODO: Add program icon (waiting on Juan)
 #TODO: Properly handle camera (currently taking live feed when it will really just be getting a numpy array)
 #TODO: Add / Handle Depth Camera
 #TODO: Add / Handle Sonar
 #TODO: Add / Handle Controller
 #TODO: Add / Handle Buttons
-#TODO: Add working power buttons (currently just shells)
+#TODO: Move power function over to Sate Machine
 #TODO: Add working program start / stop buttons  (currently just shells)
-#TODO: Get variable settings to actually do something (currently i have no idea what they are going to look like)
+#TODO: Get the "variable settings" section to actually do something (currently i have no idea what that is going to look like)
 
 
 # ================= IMPORTS =================
@@ -223,25 +223,39 @@ class GCSApp:
         self.servos = []
 
         for i in range(BATTERY_COUNT):
-            self.batteries.append(self.Battery(label_object=tk.Label(self.data_display_frame, text="Battery "+str(i)+":"), value_object=tk.Label(self.data_display_frame, text="0")))
+            self.batteries.append(self.Battery(tk.Label(self.data_display_frame), tk.Label(self.data_display_frame)))
+            
+            self.batteries[i].label_object["text"] = "Battery "+str(i)+":"
+            
+            self.batteries[i].value_object["text"] = "0 / 0"
+            self.batteries[i].value_object["textvariable"] = self.batteries[i].display
+            
             self.batteries[i].label_object.grid(row = i-(i%2), column=1+(i%2*2), sticky = "nsew", rowspan = 1, columnspan = 1, padx = 5, pady = 5, ipadx = 3, ipady = 3)
             self.batteries[i].value_object.grid(row = i-(i%2), column=2+(i%2*2), sticky = "nsew", rowspan = 1, columnspan = 1, padx = 5, pady = 5, ipadx = 3, ipady = 3)
-            #self.batteries[i].update_value()
 
         for i in range(BATTERY_COUNT, BATTERY_COUNT+MOTOR_COUNT):
             count = i-BATTERY_COUNT
-            self.motors.append(self.Motor(label_object=tk.Label(self.data_display_frame, text="Motor "+str(count)+":"), value_object=tk.Label(self.data_display_frame, text="0")))
+            self.motors.append(self.Motor(tk.Label(self.data_display_frame), tk.Label(self.data_display_frame)))
+            
+            self.motors[count].label_object["text"] = "Motor "+str(count)+":"
+            
+            self.motors[count].value_object["text"] = 0
+            self.motors[count].value_object["textvariable"] = self.motors[count].pwm
+            
             self.motors[count].label_object.grid(row = i-(i%2), column=1+(i%2*2), sticky = "nsew", rowspan = 1, columnspan = 1, padx = 5, pady = 5, ipadx = 3, ipady = 3)
             self.motors[count].value_object.grid(row = i-(i%2), column=2+(i%2*2), sticky = "nsew", rowspan = 1, columnspan = 1, padx = 5, pady = 5, ipadx = 3, ipady = 3)
-            #self.motors[i].update_value()
             
-        print(3*"=")
         for i in range(BATTERY_COUNT+MOTOR_COUNT, BATTERY_COUNT+MOTOR_COUNT+SERVO_COUNT):
             count = i-(BATTERY_COUNT+MOTOR_COUNT)
-            self.servos.append(self.Servo(label_object=tk.Label(self.data_display_frame, text="Servo "+str(count)+":"), value_object=tk.Label(self.data_display_frame, text="0")))
-            self.servos[count].label_object.grid(row = i-(i%2), column=1+(i%2*2), sticky = "nsew", rowspan = 1, columnspan = 1, padx = 5, pady = 5, ipadx = 3, ipady = 3)
-            self.servos[count].value_object.grid(row = i-(i%2), column=2+(i%2*2), sticky = "nsew", rowspan = 1, columnspan = 1, padx = 5, pady = 5, ipadx = 3, ipady = 3)
-            #self.servos[i].update_value()
+            self.servos.append(self.Servo(tk.Label(self.data_display_frame), tk.Label(self.data_display_frame)))
+            
+            self.servos[count].label_object["text"] = "Servo "+str(count)+":"
+            
+            self.servos[count].value_object["text"] = 0
+            self.servos[count].value_object["textvariable"] = self.servos[count].pwm
+            
+            self.servos[count].label_object.grid(row = i-(i%2), column=1+(i%2*2), sticky = "nsew", rowspan = 1, columnspan = 1, padx = 5, pady = 5)
+            self.servos[count].value_object.grid(row = i-(i%2), column=2+(i%2*2), sticky = "nsew", rowspan = 1, columnspan = 1, padx = 5, pady = 5)
             
         # BUTTON FRAME
         self.power_sub_on_button = tk.Button(self.button_frame)
@@ -291,12 +305,14 @@ class GCSApp:
         def __init__(self, label_object, value_object):
             self.label_object = label_object 
             self.value_object = value_object
-            self.voltage = tk.IntVar()
-            self.amps = tk.IntVar()
+            self.voltage = 0
+            self.amps = 0
+            self.display = tk.StringVar()
         
-        def update_value(self):
-            self.value_object.text = str(self.voltage)+" / "+str(self.amps)
-        
+        def update_value(self, voltage, amps):
+            self.voltage = voltage
+            self.amps = amps
+            self.display.set(str(self.voltage)+" / "+str(self.amps))
 
     class Motor:
         def __init__(self, label_object, value_object):
@@ -304,9 +320,8 @@ class GCSApp:
             self.value_object = value_object # object that displays the pwm of the motor
             self.pwm = tk.IntVar()
         
-        def update_value(self):
-            self.pwm.set(3)
-            self.value_object.text = "3"
+        def update_value(self, pwm):
+            self.pwm.set(pwm)
 
     class Servo:
         def __init__(self, label_object, value_object):
@@ -314,8 +329,8 @@ class GCSApp:
             self.value_object = value_object
             self.pwm = tk.IntVar()
         
-        def update_value(self):
-            self.value_object.text = self.pwm
+        def update_value(self, pwm):
+            self.pwm.set(pwm)
     
     # ================= FUNCTIONS =================
     
