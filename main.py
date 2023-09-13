@@ -7,7 +7,7 @@ import sys
 import logging
 import datetime
 import platform
-import yaml
+import json  # Updated here: Replaced yaml with json
 
 # Detect OS platform
 system_os = platform.system()
@@ -24,9 +24,9 @@ else:
     sys.exit()
 
 # Configure config file path
-config_file_path = os.path.join(os.path.dirname(__file__), "configs/main.yml")
+config_file_path = os.path.join(os.path.dirname(__file__), "configs/main.json")  # Updated here: Changed .yml to .json
 with open(config_file_path, mode="r", encoding="utf-8") as config_file:
-    config = yaml.load(config_file, Loader=yaml.FullLoader)
+    config = json.load(config_file)  # Updated here: Changed yaml.load to json.load
 
 
 # Configure log file path
@@ -56,6 +56,7 @@ logger.info(f'Date: {datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")}')
 logger.info(f"OS: {os_type}")
 logger.info(f"Python version: {sys.version}")
 logger.info(f"Python executable: {sys.executable}")
+
 
 # _________________________________________________________________________ #
 
