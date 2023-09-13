@@ -1,0 +1,10 @@
+{
+    "ROBOT": {
+        "BATTERY_COUNT": 4,
+        "MOTOR_COUNT": 8,
+        "SERVO_COUNT": 2
+    },
+    "GCS": {
+        "ICON_PATH": ""
+    }
+}
