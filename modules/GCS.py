@@ -1,7 +1,24 @@
 
-#TODO: Make the motor pwm actually update when changed, LINE 182
+# ================= CAN DO SOLO =================
 
-#TODO: create both the modular servo creation and battery creation
+#TODO: Make the component values (pwm, voltage, amp) actually update when changed
+#TODO: Add SSH Connectability
+#TODO: Add basic depth, humidity, temp, ect statistics
+#TODO: Add program icon
+#Make program look nicer
+
+
+# ================= OTHER MODULES REQUIRED =================
+
+#TODO: Properly handle camera (currently taking live feed when it will really just be getting a numpy array)
+#TODO: Add / Handle Depth Camera
+#TODO: Add / Handle Sonar
+#TODO: Add / Handle Controller
+#TODO: Add / Handle Buttons
+#TODO: Add working power buttons (currently just shells)
+#TODO: Add working program start / stop buttons  (currently just shells)
+#TODO: Get variable settings to actually do something (currently i have no idea what they are going to look like)
+
 
 # ================= IMPORTS =================
 
@@ -108,26 +125,26 @@ class Servo():
 
 # ================= SUB COMMANDS =================
 
-def power_sub(power_bool):
+def power_sub(power_bool: bool):
     if power_bool:
         batteries_on = True
     else:
         batteries_on = False
 
 #motors start with no power, this will allow power to connect to them
-def power_motors(power_bool):
+def power_motors(power_bool: bool):
     if power_bool:
         motors_on = True
     else:
         motors_on = False     
 
-def power_servos(power_bool):
+def power_servos(power_bool: bool):
     if power_bool:
         servos_on = True
     else:
         servos_on = False
 
-def connect_orin(connection_bool, recursive_bool):
+def connect_orin(connection_bool: bool, recursive_bool: bool = False):
     if connection_bool:
         # if its already connected and it isn't trying to connect to the exact same ip and port
         if orin_connected and orin_ip != connected_ip and orin_port != connected_port:
@@ -156,10 +173,10 @@ def stop_sub_program():
 WINDOW.title("Ground Control Station")
 #WINDOW.iconphoto(True, tk.PhotoImage(file=ICON_PATH))
 
-WINDOW.columnconfigure(1, weight=1, minsize=250)
-WINDOW.rowconfigure(0, weight=1, minsize=100)
-WINDOW.rowconfigure(1, weight=1, minsize=100)
-WINDOW.rowconfigure(2, weight=1, minsize=100)
+#WINDOW.columnconfigure(1, weight=1, minsize=250)
+#WINDOW.rowconfigure(0, weight=1, minsize=100)
+#WINDOW.rowconfigure(1, weight=1, minsize=100)
+#WINDOW.rowconfigure(2, weight=1, minsize=100)
 
 # MAIN FRAME CREATION
 orin_frame = tk.Frame(master=WINDOW, relief=tk.RAISED, bg="red")
@@ -208,7 +225,7 @@ video_display.grid(sticky = "nsew", rowspan = 1, columnspan = 2)
 # RADAR FRAME WIDGETS
 radar_display = tk.Label(radar_frame)
 radar_display.grid(sticky = "nsew", rowspan = 1, columnspan = 1)
-radar_display.config(width=50, height=21, bg="yellow")
+#radar_display.config(width=50, height=21, bg="yellow")
 
 
 # DATA DISPLAY
@@ -238,9 +255,23 @@ for i in range(BATTERY_COUNT+MOTOR_COUNT, BATTERY_COUNT+MOTOR_COUNT+SERVO_COUNT)
     #servos[i].update_value()
     
 # BUTTON FRAME
-button_frame = tk.Label(button_frame)
+power_sub_on_button = tk.Button(button_frame, text="Power Sub On", command=power_sub(True))
+power_sub_off_button = tk.Button(button_frame, text="Power Sub Off", command=power_sub(False))
+start_program_button = tk.Button(button_frame, text="Start Sub Program", command=start_sub_program())
+stop_program_button = tk.Button(button_frame, text="Stop Sub Program", command=stop_sub_program())
+power_motors_on_button = tk.Button(button_frame, text="Power Motors On", command=power_motors(True))
+power_motors_off_button = tk.Button(button_frame, text="Power Motors Off", command=power_motors(False))
+power_servos_on_button = tk.Button(button_frame, text="Power Servos On", command=power_servos(True))
+power_servos_off_button = tk.Button(button_frame, text="Power Servos On", command=power_servos(False))
 
-button_frame.grid(sticky = "nsew", rowspan = 1, columnspan = 1, padx = 5, pady = 5, ipadx = 3, ipady = 3)
+power_sub_on_button.grid(row = 0, column = 0, sticky = "nsew", rowspan = 1, columnspan = 1, padx = 2, pady = 2)
+power_sub_off_button.grid(row = 1, column = 0, sticky = "nsew", rowspan = 1, columnspan = 1, padx = 2, pady = 2)
+start_program_button.grid(row = 0, column = 1, sticky = "nsew", rowspan = 1, columnspan = 1, padx = 2, pady = 2)
+stop_program_button.grid(row = 1, column = 1, sticky = "nsew", rowspan = 1, columnspan = 1, padx = 2, pady = 2)
+power_motors_on_button.grid(row = 0, column = 2, sticky = "nsew", rowspan = 1, columnspan = 1, padx = 2, pady = 2)
+power_motors_off_button.grid(row = 1, column = 2, sticky = "nsew", rowspan = 1, columnspan = 1, padx = 2, pady = 2)
+power_servos_on_button.grid(row = 0, column = 3, sticky = "nsew", rowspan = 1, columnspan = 1, padx = 2, pady = 2)
+power_servos_off_button.grid(row = 1, column = 3, sticky = "nsew", rowspan = 1, columnspan = 1, padx = 2, pady = 2)
 
 #  ===== POST CREATION FUNCTIONS / VARS / CONST ======
 
