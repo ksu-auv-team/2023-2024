@@ -1,9 +1,6 @@
 
 # ================= TODO =================
 
-#TODO: Fix battery data not showing
-#TODO: Add SSH Connectivity
-#TODO: Add basic depth, humidity, temp, ect statistics
 #TODO: Make program look nicer
 
 
@@ -62,6 +59,9 @@ button_input = ...
 controller_input = ...
 sonar_input = ...
 
+#SSH
+ssh_connection = ...
+
 
 #! ==================== TO BE REMOVED ====================
 #! TO BE REMOVED AND PUT INTO THE STATE MACHINE
@@ -113,13 +113,13 @@ class GCSApp:
         self.orin_temp: int = tk.IntVar()
 
         # ORIN
-        self.orin_ip: str = tk.StringVar() or 'rasberrypi.local'
-        self.orin_port: int = tk.IntVar() or 22
-        self.orin_user: str = tk.StringVar() or 'user'
-        self.orin_pass: str = tk.StringVar() or 'pass'
+        self.orin_host: str = tk.StringVar(value="rasberrypi.local")
+        self.orin_port: int = tk.IntVar(value=22)
+        self.orin_user: str = tk.StringVar(value="user")
+        self.orin_pass: str = tk.StringVar(value="pass")
         
         # ORIN CURRENTLY CONNECTED TO
-        self.connected_ip = 0
+        self.connected_host = 0
         self.connected_port = 0
 
         # TOGGLES
@@ -142,7 +142,7 @@ class GCSApp:
         
         self.orin_frame = tk.Frame(WINDOW)
         self.orin_frame["bg"] = "red"
-        self.orin_frame.grid(row = 0, column = 2, rowspan = 2, sticky = "nsew", padx=2, pady=2)
+        self.orin_frame.grid(row = 1, column = 2, rowspan = 2, sticky = "nsew", padx=2, pady=2)
         
         self.video_frame = tk.Frame(WINDOW)
         self.video_frame["bg"] = "limegreen"
@@ -150,11 +150,11 @@ class GCSApp:
         
         self.radar_frame = tk.Frame(WINDOW)
         self.radar_frame["bg"] = "yellow"
-        self.radar_frame.grid(row = 0, column = 0, sticky="nsew", padx=2, pady=2)
+        self.radar_frame.grid(row = 0, column = 2, sticky="nsew", padx=2, pady=2)
         
         self.data_display_frame = tk.Frame(WINDOW)
         self.data_display_frame["bg"] = "dodgerblue"
-        self.data_display_frame.grid(row = 1, column = 0, rowspan = 2, sticky = "nsew", padx=2, pady=2)
+        self.data_display_frame.grid(row = 0, column = 0, rowspan = 3, sticky = "nsew", padx=2, pady=2)
         
         self.button_frame = tk.Frame(WINDOW)
         self.button_frame["bg"] = "orange"
@@ -165,50 +165,54 @@ class GCSApp:
         # ORIN FRAME WIDGETS
         self.orin_label = tk.Label(self.orin_frame)
         self.orin_label["text"] = "ORIN CONNECTION"
+        self.orin_label.grid(row = 0, column=0, sticky = "nsew", rowspan = 1, columnspan = 2, padx = 5, pady = 5, ipadx = 3, ipady = 3)
         
         self.orin_user_label = tk.Label(self.orin_frame)
         self.orin_user_label["text"] = "User:"
+        self.orin_user_label.grid(row = 1, column=0, sticky = "e", rowspan = 1, columnspan = 1, padx = 5, pady = 5, ipadx = 3, ipady = 3)
         
         self.orin_user_input = tk.Entry(self.orin_frame)
         self.orin_user_input["textvariable"] = self.orin_user
+        self.orin_user_input.grid(row = 1, column=1, sticky = "nsew", rowspan = 1, columnspan = 1, padx = 5, pady = 5, ipadx = 3, ipady = 3)
         
         self.orin_pass_label = tk.Label(self.orin_frame)
         self.orin_pass_label["text"] = "Pass:"
+        self.orin_pass_label.grid(row = 2, column=0, sticky = "e", rowspan = 1, columnspan = 1, padx = 5, pady = 5, ipadx = 3, ipady = 3)
         
         self.orin_pass_input = tk.Entry(self.orin_frame)
-        self.orin_pass_input["width"] = 30
+        #self.orin_pass_input["width"] = 30
         self.orin_pass_input["show"] = "*"
         self.orin_pass_input["textvariable"] = self.orin_pass
+        self.orin_pass_input.grid(row = 2, column=1, sticky = "nsew", rowspan = 1, columnspan = 1, padx = 5, pady = 5, ipadx = 3, ipady = 3)
         
-        self.orin_ip_label = tk.Label(self.orin_frame)
-        self.orin_ip_label["text"] = "IP:"
+        self.orin_host_label = tk.Label(self.orin_frame)
+        self.orin_host_label["text"] = "Host:"
+        self.orin_host_label.grid(row = 3, column=0, sticky = "e", rowspan = 1, columnspan = 1, padx = 5, pady = 5, ipadx = 3, ipady = 3)
         
-        self.orin_ip_input = tk.Entry(self.orin_frame)
-        self.orin_ip_input["width"] = 30
-        self.orin_ip_input["textvariable"] = self.orin_ip
+        self.orin_host_input = tk.Entry(self.orin_frame)
+        #self.orin_host_input["width"] = 30
+        self.orin_host_input["textvariable"] = self.orin_host
+        self.orin_host_input.grid(row = 3, column=1, sticky = "nsew", rowspan = 1, columnspan = 1, padx = 5, pady = 5, ipadx = 3, ipady = 3)
         
         self.orin_port_label = tk.Label(self.orin_frame)
         self.orin_port_label["text"] = "Port:"
+        self.orin_port_label.grid(row = 4, column=0, sticky = "e", rowspan = 1, columnspan = 1, padx = 5, pady = 5, ipadx = 3, ipady = 3)
         
         self.orin_port_input = tk.Entry(self.orin_frame)
-        self.orin_port_input["width"] = 30
+        #self.orin_port_input["width"] = 30
         self.orin_port_input["textvariable"] = self.orin_port
-        
-        self.connect_button = tk.Button(self.orin_frame)
-        self.connect_button["text"] = "Connect"
-        self.connect_button["command"] = self.connect_orin(True)
-
-        self.orin_label.grid(row = 0, column=0, sticky = "nsew", rowspan = 1, columnspan = 2, padx = 5, pady = 5, ipadx = 3, ipady = 3)
-        self.orin_user_label.grid(row = 1, column=0, sticky = "e", rowspan = 1, columnspan = 1, padx = 5, pady = 5, ipadx = 3, ipady = 3)
-        self.orin_user_input.grid(row = 1, column=1, sticky = "nsew", rowspan = 1, columnspan = 1, padx = 5, pady = 5, ipadx = 3, ipady = 3)
-        self.orin_pass_label.grid(row = 2, column=0, sticky = "e", rowspan = 1, columnspan = 1, padx = 5, pady = 5, ipadx = 3, ipady = 3)
-        self.orin_pass_input.grid(row = 2, column=1, sticky = "nsew", rowspan = 1, columnspan = 1, padx = 5, pady = 5, ipadx = 3, ipady = 3)
-        self.orin_ip_label.grid(row = 3, column=0, sticky = "e", rowspan = 1, columnspan = 1, padx = 5, pady = 5, ipadx = 3, ipady = 3)
-        self.orin_ip_input.grid(row = 3, column=1, sticky = "nsew", rowspan = 1, columnspan = 1, padx = 5, pady = 5, ipadx = 3, ipady = 3)
-        self.orin_port_label.grid(row = 4, column=0, sticky = "e", rowspan = 1, columnspan = 1, padx = 5, pady = 5, ipadx = 3, ipady = 3)
         self.orin_port_input.grid(row = 4, column=1, sticky = "nsew", rowspan = 1, columnspan = 1, padx = 5, pady = 5, ipadx = 3, ipady = 3)
-        self.connect_button.grid(row = 5, column=0, sticky = "nsew", rowspan = 1, columnspan = 2, padx = 5, pady = 5, ipadx = 3, ipady = 3)
-
+        
+        self.orin_connect_button = tk.Button(self.orin_frame)
+        self.orin_connect_button["text"] = "Connect"
+        self.orin_connect_button["command"] = self.connect_orin
+        self.orin_connect_button.grid(row = 5, column=0, sticky = "nsew", padx = 5, pady = 5, ipadx = 3, ipady = 3)
+        
+        self.orin_disconnect_button = tk.Button(self.orin_frame)
+        self.orin_disconnect_button["text"] = "Disconnect"
+        self.orin_disconnect_button["command"] = self.disconnect_orin
+        self.orin_disconnect_button.grid(row = 5, column=1, sticky = "nsew", padx = 5, pady = 5, ipadx = 3, ipady = 3)
+        
         # VIDEO FRAME WIDGETS
         self.video_display = tk.Label(self.video_frame)
         self.video_display.grid(sticky = "nsew", rowspan = 1, columnspan = 2)
@@ -218,44 +222,77 @@ class GCSApp:
         self.radar_display.grid(sticky = "nsew", rowspan = 1, columnspan = 1)
 
         # DATA DISPLAY
+        self.depth_label = tk.Label(self.data_display_frame)
+        self.depth_label["text"] = "Depth"
+        self.depth_label.grid(row = 0, column = 0, columnspan = 2, sticky = "nsew", padx = 5, pady = 5)
+        
+        self.depth_value = tk.Label(self.data_display_frame)
+        self.depth_value["text"] = 0
+        #self.depth_value["text"] = self.update_depth()
+        self.depth_value.grid(row = 0, column = 2, columnspan = 2, sticky = "nsew", padx = 5, pady = 5)
+        
+        self.humidity_label = tk.Label(self.data_display_frame)
+        self.humidity_label["text"] = "Humidity"
+        self.humidity_label.grid(row = 1, column = 0, columnspan = 2, sticky = "nsew", padx = 5, pady = 5)
+        
+        self.humidity_value = tk.Label(self.data_display_frame)
+        self.humidity_value["text"] = 0
+        #self.humidity_value["text"] = self.update_humidity()
+        self.humidity_value.grid(row = 1, column = 2, columnspan = 2, sticky = "nsew", padx = 5, pady = 5)
+        
+        self.tube_temp_label = tk.Label(self.data_display_frame)
+        self.tube_temp_label["text"] = "Tube Temp"
+        self.tube_temp_label.grid(row = 2, column = 0, columnspan = 2, sticky = "nsew", padx = 5, pady = 5)
+        
+        self.tube_temp_value = tk.Label(self.data_display_frame)
+        self.tube_temp_value["text"] = 0
+        #self.tube_temp_value["text"] = self.update_tube_temp()
+        self.tube_temp_value.grid(row = 2, column = 2, columnspan = 2, sticky = "nsew", padx = 5, pady = 5)
+        
+        self.orin_temp_label = tk.Label(self.data_display_frame)
+        self.orin_temp_label["text"] = "Orin Temp"
+        self.orin_temp_label.grid(row = 3, column = 0, columnspan = 2, sticky = "nsew", padx = 5, pady = 5)
+        
+        self.orin_temp_value = tk.Label(self.data_display_frame)
+        self.orin_temp_value["text"] = 0
+        #self.orin_temp_value["text"] = self.update_orin_temp()
+        self.orin_temp_value.grid(row = 3, column = 2, columnspan = 2, sticky = "nsew", padx = 5, pady = 5)
+        
+        
+        
         self.batteries = []
         self.motors = []
         self.servos = []
 
-        for i in range(BATTERY_COUNT):
+        for i in range(BATTERY_COUNT, BATTERY_COUNT+4):
+            count = i-4
             self.batteries.append(self.Battery(tk.Label(self.data_display_frame), tk.Label(self.data_display_frame)))
             
-            self.batteries[i].label_object["text"] = "Battery "+str(i)+":"
+            self.batteries[count].label_object["text"] = "Battery "+str(count)+":"
+            self.batteries[count].label_object.grid(row = i-(i%2), column=0+(i%2*2), sticky = "nsew", rowspan = 1, columnspan = 1, padx = 5, pady = 5, ipadx = 3, ipady = 3)
             
-            self.batteries[i].value_object["text"] = "0 / 0"
-            self.batteries[i].value_object["textvariable"] = self.batteries[i].display
-            
-            self.batteries[i].label_object.grid(row = i-(i%2), column=1+(i%2*2), sticky = "nsew", rowspan = 1, columnspan = 1, padx = 5, pady = 5, ipadx = 3, ipady = 3)
-            self.batteries[i].value_object.grid(row = i-(i%2), column=2+(i%2*2), sticky = "nsew", rowspan = 1, columnspan = 1, padx = 5, pady = 5, ipadx = 3, ipady = 3)
+            self.batteries[count].value_object["textvariable"] = self.batteries[count].display
+            self.batteries[count].value_object.grid(row = i-(i%2), column=1+(i%2*2), sticky = "nsew", rowspan = 1, columnspan = 1, padx = 5, pady = 5, ipadx = 3, ipady = 3)
 
-        for i in range(BATTERY_COUNT, BATTERY_COUNT+MOTOR_COUNT):
-            count = i-BATTERY_COUNT
+        for i in range(BATTERY_COUNT+4, BATTERY_COUNT+MOTOR_COUNT):
+            count = i-(BATTERY_COUNT+4)
             self.motors.append(self.Motor(tk.Label(self.data_display_frame), tk.Label(self.data_display_frame)))
             
             self.motors[count].label_object["text"] = "Motor "+str(count)+":"
+            self.motors[count].label_object.grid(row = i-(i%2), column=0+(i%2*2), sticky = "nsew", rowspan = 1, columnspan = 1, padx = 5, pady = 5, ipadx = 3, ipady = 3)
             
-            self.motors[count].value_object["text"] = 0
             self.motors[count].value_object["textvariable"] = self.motors[count].pwm
+            self.motors[count].value_object.grid(row = i-(i%2), column=1+(i%2*2), sticky = "nsew", rowspan = 1, columnspan = 1, padx = 5, pady = 5, ipadx = 3, ipady = 3)
             
-            self.motors[count].label_object.grid(row = i-(i%2), column=1+(i%2*2), sticky = "nsew", rowspan = 1, columnspan = 1, padx = 5, pady = 5, ipadx = 3, ipady = 3)
-            self.motors[count].value_object.grid(row = i-(i%2), column=2+(i%2*2), sticky = "nsew", rowspan = 1, columnspan = 1, padx = 5, pady = 5, ipadx = 3, ipady = 3)
-            
-        for i in range(BATTERY_COUNT+MOTOR_COUNT, BATTERY_COUNT+MOTOR_COUNT+SERVO_COUNT):
-            count = i-(BATTERY_COUNT+MOTOR_COUNT)
+        for i in range(BATTERY_COUNT+MOTOR_COUNT+4, BATTERY_COUNT+MOTOR_COUNT+SERVO_COUNT+4):
+            count = i-(BATTERY_COUNT+MOTOR_COUNT+4)
             self.servos.append(self.Servo(tk.Label(self.data_display_frame), tk.Label(self.data_display_frame)))
             
             self.servos[count].label_object["text"] = "Servo "+str(count)+":"
+            self.servos[count].label_object.grid(row = i-(i%2), column=0+(i%2*2), sticky = "nsew", rowspan = 1, columnspan = 1, padx = 5, pady = 5)
             
-            self.servos[count].value_object["text"] = 0
             self.servos[count].value_object["textvariable"] = self.servos[count].pwm
-            
-            self.servos[count].label_object.grid(row = i-(i%2), column=1+(i%2*2), sticky = "nsew", rowspan = 1, columnspan = 1, padx = 5, pady = 5)
-            self.servos[count].value_object.grid(row = i-(i%2), column=2+(i%2*2), sticky = "nsew", rowspan = 1, columnspan = 1, padx = 5, pady = 5)
+            self.servos[count].value_object.grid(row = i-(i%2), column=1+(i%2*2), sticky = "nsew", rowspan = 1, columnspan = 1, padx = 5, pady = 5)
             
         # BUTTON FRAME
         self.power_sub_on_button = tk.Button(self.button_frame)
@@ -307,8 +344,8 @@ class GCSApp:
             self.value_object = value_object
             self.voltage = 0
             self.amps = 0
-            self.display = tk.StringVar()
-        
+            self.display = tk.StringVar(value = str(self.voltage)+" / "+str(self.amps))
+
         def update_value(self, voltage, amps):
             self.voltage = voltage
             self.amps = amps
@@ -318,7 +355,7 @@ class GCSApp:
         def __init__(self, label_object, value_object):
             self.label_object = label_object # object that displays the name of the motor, ex "Motor 1"
             self.value_object = value_object # object that displays the pwm of the motor
-            self.pwm = tk.IntVar()
+            self.pwm = tk.IntVar(value = 1)
         
         def update_value(self, pwm):
             self.pwm.set(pwm)
@@ -327,26 +364,30 @@ class GCSApp:
         def __init__(self, label_object, value_object):
             self.label_object = label_object 
             self.value_object = value_object
-            self.pwm = tk.IntVar()
+            self.pwm = tk.IntVar(value = 1)
         
         def update_value(self, pwm):
             self.pwm.set(pwm)
     
     # ================= FUNCTIONS =================
     
-    def connect_orin(self, connection_bool: bool, recursive_bool: bool = False):
-        if connection_bool:
-            # if its already connected and it isn't trying to connect to the exact same ip and port
-            if self.orin_connected and self.orin_ip != self.connected_ip and self.orin_port != self.connected_port:
-                orin_connected = False
-                self.connect_orin(False, True)
-            else:
-                self.orin_connected = True
-        elif not connection_bool:
-            if recursive_bool:
-                self.orin_connected = True
-            else:
-                self.orin_connected = False
+    def connect_orin(self):
+        # if its already connected and it isn't trying to connect to the exact same host and port
+        if self.orin_connected and self.orin_host.get() != self.connected_host and self.orin_port.get() != self.connected_port:
+            self.disconnect_orin()
+            
+            with fabric.Connection(host=self.orin_host.get(), user=self.orin_user.get(), port=self.orin_port.get()) as ssh_connection:
+                return
+        else:
+            with fabric.Connection(host=self.orin_host.get(), user=self.orin_user.get(), port=self.orin_port.get()) as ssh_connection:
+                #ssh_connection.run('')
+                return
+            
+            self.orin_connected = True
+                
+    def disconnect_orin(self):
+        ssh_connection.close()
+        self.orin_connected = False
     
     def stream_video(self):
         #read the data and seperate it into its index, and frame (we don't need the index so its just an _)
@@ -365,7 +406,10 @@ class GCSApp:
         
     def close_application(self):
         VIDEO_THREAD.join() # close the started thread
-        self.connect_orin(False)
+        
+        if self.orin_connected:
+            self.disconnect_orin()
+            
         WINDOW.destroy() # destroy the window, since we are overriding the origional functionality
 
 # ================= RUN =================
