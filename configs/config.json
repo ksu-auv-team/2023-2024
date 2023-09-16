@@ -5,6 +5,12 @@
         "SERVO_COUNT": 2
     },
     "GCS": {
+        "training_sim": false,
+        "training_real_world": false,
+        "manual_control": false,
+        "autonomous_control": false,
+        "auto_navigate_error": false,
+
         "ICON_PATH": ""
     }
 }
