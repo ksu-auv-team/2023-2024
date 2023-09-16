@@ -1,15 +1,14 @@
 
 # ================= TODO =================
 
-#TODO: Add console
 #TODO: Make buttons for the top right corder
-#TODO: Keybind Spacebar to "power sub off"
 #TODO: Create the "variable settings" section bottom right purple area
-#TODO: Make program look nicer
 
 
 # ======= OTHER MODULES / PEOPLE REQUIRED =======
 
+#TODO: Keybind Spacebar to "power sub off"
+#TODO: Connect the terminal to actual warnings
 #TODO: Add program icon (waiting on Juan)
 #TODO: Properly handle camera (currently taking live feed when it will really just be getting a numpy array)
 #TODO: Add / Handle Depth Camera
@@ -36,6 +35,8 @@ from PIL import ImageTk, Image
 import json
 # imported for the orin ssh connection
 import fabric
+# imported for time stamps
+import datetime
 
 
 # ================= CONFIG =================
@@ -64,6 +65,11 @@ sonar_input = ...
 
 #SSH
 ssh_connection = ...
+robot_active = False
+
+#CONSTANTS
+#SONAR_IMAGE = __file__.split("GCS")[0]+'GCS\\sonar_image.jpg'
+#GRAPH_IMAGE = __file__.split("GCS")[0]+'GCS\\graph_image.png'
 
 
 #! ==================== TO BE REMOVED ====================
@@ -132,161 +138,113 @@ class GCSApp:
         
         WINDOW.title()
         WINDOW.title("Ground Control Station")
+        WINDOW.state('zoomed')
         #WINDOW.iconphoto(True, tk.PhotoImage(file=ICON_PATH))
         
         #Setting sizes
-        WINDOW.columnconfigure([0, 1], weight=1, minsize=100)
         WINDOW.columnconfigure(2, weight=2, minsize=200)
-        WINDOW.columnconfigure(3, weight=1, minsize=100)
+        WINDOW.rowconfigure(1, weight=1, minsize=100, uniform = 'row')
+        WINDOW.rowconfigure([0,3], weight=1, minsize=100, uniform = 'row')
         
         # ================= FRAME CREATION =================
         
         self.video_frame = tk.Frame(WINDOW)
-        self.video_frame["bg"] = "red"
+        self.video_frame["bg"] = "black"
         self.video_frame.grid(
             row = 0, 
             column = 1, 
             rowspan=3, 
             columnspan=2, 
             sticky = "nsew", 
-            padx=2, 
-            pady=2
+            padx=1, 
+            pady=1
         )
         
         self.data_display_frame = tk.Frame(WINDOW)
-        self.data_display_frame["bg"] = "orange"
+        self.data_display_frame["bg"] = "black"
         self.data_display_frame.columnconfigure([0, 1], weight=1)
         self.data_display_frame.grid(
             row = 0, 
             column = 0, 
             rowspan = 4, 
             sticky = "nsew", 
-            padx=2, 
-            pady=2
+            ipadx=15, 
+            # pady=1
         )
         
         self.sonar_frame = tk.Frame(WINDOW)
-        self.sonar_frame["bg"] = "yellow"
+        self.sonar_frame["bg"] = "black"
+        #self.sonar_frame.columnconfigure(0, weight=1, uniform="right_col")
         self.sonar_frame.grid(
             row = 0, 
             column = 3, 
             sticky="nsew", 
-            padx=2, 
-            pady=2
+            # padx=1, 
+            # pady=1
         )
         
         self.graph_frame = tk.Frame(WINDOW)
-        self.graph_frame["bg"] = "limegreen"
+        self.graph_frame["bg"] = "black"
+        #self.graph_frame.columnconfigure(0, weight=1, uniform="right_col")
         self.graph_frame.grid(
             row = 1, 
             column = 3, 
             sticky="nsew", 
-            padx=2, 
-            pady=2
+            # padx=2, 
+            pady=1
         )
         
         self.orin_frame = tk.Frame(WINDOW)
-        self.orin_frame["bg"] = "dodgerblue"
-        self.orin_frame.columnconfigure([0, 1], weight=1)
+        self.orin_frame["bg"] = "black"
+        self.orin_frame.columnconfigure([0, 1], weight=1, minsize=50, uniform="right_col")
         self.orin_frame.grid(
             row = 2, 
             column = 3, 
             sticky = "nsew", 
-            padx=2, 
-            pady=2
+            # padx=2, 
+            # pady=2
         )
         
         self.mode_selection_frame = tk.Frame(WINDOW)
-        self.mode_selection_frame["bg"] = "purple"
+        self.mode_selection_frame["bg"] = "black"
         self.mode_selection_frame.grid(
             row = 3, 
             column = 3, 
             rowspan = 2, 
             sticky = "nsew", 
-            padx=2, 
-            pady=2
+            # padx=2, 
+            # pady=2
         )
         
         self.indicator_frame = tk.Frame(WINDOW)
         self.indicator_frame["bg"] = "black"
-        self.indicator_frame.columnconfigure([0, 1], weight=1)
+        self.indicator_frame.columnconfigure([0, 1], weight=1, minsize=20, uniform="col")
         self.indicator_frame.grid(
             row = 3, 
             column = 1, 
             sticky="nsew", 
-            padx=2, 
-            pady=2
+            padx=1, 
+            # pady=2
         )
         
         self.console_frame = tk.Frame(WINDOW)
-        self.console_frame["bg"] = "black"
+        self.console_frame["bg"] = "coral"
         self.console_frame.grid(
             row = 3, 
             column = 2, 
             sticky="nsew", 
-            padx=2, 
-            pady=2
+            ipadx = 10
+            # padx=1, 
+            # pady=2
         )
+        self.console_frame.columnconfigure(0, weight=1)
+        self.console_frame.rowconfigure(0, weight=1)
         
         # ================= WEIDGET CREATION =================
         
-        # ORIN FRAME WIDGETS
-        self.orin_label = tk.Label(self.orin_frame)
-        self.orin_label["text"] = "ORIN CONNECTION"
-        self.orin_label.grid(row = 0, column=0, sticky = "nsew", rowspan = 1, columnspan = 2, padx = 5, pady = 5, ipadx = 3, ipady = 3)
-        
-        self.orin_user_label = tk.Label(self.orin_frame)
-        self.orin_user_label["text"] = "User:"
-        self.orin_user_label.grid(row = 1, column=0, sticky = "nsew", rowspan = 1, columnspan = 1, padx = 5, pady = 5, ipadx = 3, ipady = 3)
-        
-        self.orin_user_input = tk.Entry(self.orin_frame)
-        self.orin_user_input["textvariable"] = self.orin_user
-        self.orin_user_input.grid(row = 1, column=1, sticky = "nsew", rowspan = 1, columnspan = 1, padx = 5, pady = 5, ipadx = 3, ipady = 3)
-        
-        self.orin_pass_label = tk.Label(self.orin_frame)
-        self.orin_pass_label["text"] = "Pass:"
-        self.orin_pass_label.grid(row = 2, column=0, sticky = "nsew", rowspan = 1, columnspan = 1, padx = 5, pady = 5, ipadx = 3, ipady = 3)
-        
-        self.orin_pass_input = tk.Entry(self.orin_frame)
-        self.orin_pass_input["show"] = "*"
-        self.orin_pass_input["textvariable"] = self.orin_pass
-        self.orin_pass_input.grid(row = 2, column=1, sticky = "nsew", rowspan = 1, columnspan = 1, padx = 5, pady = 5, ipadx = 3, ipady = 3)
-        
-        self.orin_host_label = tk.Label(self.orin_frame)
-        self.orin_host_label["text"] = "Host:"
-        self.orin_host_label.grid(row = 3, column=0, sticky = "nsew", rowspan = 1, columnspan = 1, padx = 5, pady = 5, ipadx = 3, ipady = 3)
-        
-        self.orin_host_input = tk.Entry(self.orin_frame)
-        self.orin_host_input["textvariable"] = self.orin_host
-        self.orin_host_input.grid(row = 3, column=1, sticky = "nsew", rowspan = 1, columnspan = 1, padx = 5, pady = 5, ipadx = 3, ipady = 3)
-        
-        self.orin_port_label = tk.Label(self.orin_frame)
-        self.orin_port_label["text"] = "Port:"
-        self.orin_port_label.grid(row = 4, column=0, sticky = "nsew", rowspan = 1, columnspan = 1, padx = 5, pady = 5, ipadx = 3, ipady = 3)
-        
-        self.orin_port_input = tk.Entry(self.orin_frame)
-        self.orin_port_input["textvariable"] = self.orin_port
-        self.orin_port_input.grid(row = 4, column=1, sticky = "nsew", rowspan = 1, columnspan = 1, padx = 5, pady = 5, ipadx = 3, ipady = 3)
-        
-        self.orin_connect_button = tk.Button(self.orin_frame)
-        self.orin_connect_button["text"] = "Connect"
-        self.orin_connect_button["bg"] = "limegreen"
-        self.orin_connect_button["command"] = self.connect_orin
-        self.orin_connect_button.grid(row = 5, column=0, sticky = "nsew", padx = 5, pady = 5, ipadx = 3, ipady = 3)
-        
-        self.orin_disconnect_button = tk.Button(self.orin_frame)
-        self.orin_disconnect_button["text"] = "Disconnect"
-        self.orin_disconnect_button["bg"] = "red"
-        self.orin_disconnect_button["command"] = self.disconnect_orin
-        self.orin_disconnect_button.grid(row = 5, column=1, sticky = "nsew", padx = 5, pady = 5, ipadx = 3, ipady = 3)
-        
         # VIDEO FRAME WIDGETS
         self.video_display = tk.Label(self.video_frame)
-        self.video_display.grid(sticky = "nsew", rowspan = 1, columnspan = 2)
-
-        # RADAR FRAME WIDGETS
-        self.radar_display = tk.Label(self.sonar_frame)
-        self.radar_display.grid(sticky = "nsew", rowspan = 1, columnspan = 1)
+        self.video_display.grid(sticky = "nsew", rowspan = 3, columnspan = 2)
 
         # DATA DISPLAY
         self.data_combobox = ttk.Combobox(self.data_display_frame)
@@ -296,53 +254,14 @@ class GCSApp:
             column = 0,
             columnspan= 2,
             stick = "nsew",
-            padx = 2,
-            pady = 2
+            padx = 5,
+            pady = 5
         )
+        self.data_combobox.bind('<<ComboboxSelected>>', self.combobox_update) #bind combobox changed event
         
-        #?bind combobox changed event
-        self.data_combobox.bind('<<ComboboxSelected>>', self.combobox_update)
-        
-        self.voltage_label = tk.Label(self.indicator_frame)
-        self.voltage_label["text"] = "Voltage"
-        self.voltage_label["bg"] = "limegreen"
-        self.voltage_label.grid(row = 0, column = 0, columnspan = 2, sticky = "nsew", padx = 5, pady = 5)
-        
-        self.voltage_value = tk.Label(self.indicator_frame)
-        self.voltage_value["text"] = 0
-        self.voltage_value.grid(row = 0, column = 2, columnspan = 2, sticky = "nsew", padx = 5, pady = 5)
-        
-        self.humidity_label = tk.Label(self.indicator_frame)
-        self.humidity_label["text"] = "Humidity"
-        self.humidity_label["bg"] = "limegreen"
-        self.humidity_label.grid(row = 1, column = 0, columnspan = 2, sticky = "nsew", padx = 5, pady = 5)
-        
-        self.humidity_value = tk.Label(self.indicator_frame)
-        self.humidity_value["text"] = 0
-        self.humidity_value.grid(row = 1, column = 2, columnspan = 2, sticky = "nsew", padx = 5, pady = 5)
-        
-        self.tube_temp_label = tk.Label(self.indicator_frame)
-        self.tube_temp_label["text"] = "Tube Temp"
-        self.tube_temp_label["bg"] = "limegreen"
-        self.tube_temp_label.grid(row = 2, column = 0, columnspan = 2, sticky = "nsew", padx = 5, pady = 5)
-        
-        self.tube_temp_value = tk.Label(self.indicator_frame)
-        self.tube_temp_value["text"] = 0
-        self.tube_temp_value.grid(row = 2, column = 2, columnspan = 2, sticky = "nsew", padx = 5, pady = 5)
-        
-        self.orin_temp_label = tk.Label(self.indicator_frame)
-        self.orin_temp_label["text"] = "Orin Temp"
-        self.orin_temp_label["bg"] = "limegreen"
-        self.orin_temp_label.grid(row = 3, column = 0, columnspan = 2, sticky = "nsew", padx = 5, pady = 5)
-        
-        self.orin_temp_value = tk.Label(self.indicator_frame)
-        self.orin_temp_value["text"] = 0
-        self.orin_temp_value.grid(row = 3, column = 2, columnspan = 2, sticky = "nsew", padx = 5, pady = 5)
-        
-        
-        self.components = {}
+        self.components = {} #create a dictionary list of all components, so it can be easily accessed after being created dynamically
 
-        for i, k in enumerate(COMPONENTS):
+        for k, dictionary in COMPONENTS.items():
             #since the values of the combobox were not default set, tkinter sets the values paramater as a string instead of a tuple like it's supposed to be (wtf tkinter)
             #so we have to account for it being a string instead of just concating a tuple
             if type(self.data_combobox["values"]) == str:
@@ -350,7 +269,6 @@ class GCSApp:
             else:
                 self.data_combobox["values"] += (k,)
             
-            dictionary = COMPONENTS[k]
             count = dictionary["COUNT"]
             
             #set the list of components for this subsystem as blank since it will give us an error if it doesn't exist
@@ -364,14 +282,16 @@ class GCSApp:
                 self.components[k].append(
                     self.Component(name=k,
                         label_object=tk.Label(self.data_display_frame), 
-                        recording=dictionary["RECORDING"]
                     )
-                )                
+                )         
                 
                 #assign the just created component to a variable so we can edit it
                 component = self.components[k][-1]
                 
                 component.label_object["text"] = dictionary["NAME"]+" "+str(n+1)+":"
+                component.label_object["font"] = "Helvetica 10 bold"
+                component.label_object["bg"] = "black"
+                component.label_object["fg"] = "limegreen"
                 component.label_object.grid(
                     row = rowcount, 
                     column=0, 
@@ -386,13 +306,24 @@ class GCSApp:
                 #increase the row count because the component name label was just created
                 rowcount += 1
                 
-                for stat in dictionary["RECORDING"]:
+                for stat, stat_type in dictionary["RECORDING"].items():
+                    #properly create the recording dictionary that can use either IntVar, DoubleVar, or StringVar
+                    if stat_type == "int":
+                        component.recording[stat] = tk.IntVar(value = 1)
+                    elif stat_type == "float":
+                        component.recording[stat] = tk.DoubleVar(value = 1.23)
+                    else:
+                        #if some idiot ever forgets to put a stat type, then raise an exception to tell them
+                        raise TypeError("TypeError: missing subsytem recorded value type")
+                    
                     #create a label and value holder for each stat that is to be recorded for the component
                     component.value_objects[stat] = [tk.Label(self.data_display_frame), tk.Label(self.data_display_frame)]
                     label = component.value_objects[stat][0]
                     value = component.value_objects[stat][1]
                     
                     label["text"] = stat
+                    label["bg"] = "black"
+                    label["fg"] = "white"
                     label.grid(
                         row = rowcount, 
                         column=0, 
@@ -402,7 +333,9 @@ class GCSApp:
                     )
                     label.grid_remove()
                     
-                    value["text"] = 0
+                    value["textvariable"] = component.recording[stat]
+                    value["bg"] = "black"
+                    value["fg"] = "white"
                     value.grid(
                         row = rowcount, 
                         column=1, 
@@ -412,9 +345,166 @@ class GCSApp:
                     )
                     value.grid_remove()
                     
-                    rowcount += 1
-                    
+                    rowcount += 2
+        
+        #? SONAR WIDGETS
+        self.sonar_display = tk.Label(self.sonar_frame)
+        #python will clear the image data right after its opened so we have to use a variable to store that data so we can display it
+        #!self.sonar_image = ImageTk.PhotoImage(Image.open(SONAR_IMAGE))
+        #!self.sonar_display["image"] = self.sonar_image
+        self.sonar_display["bd"] = 0
+        self.sonar_display.grid(
+            sticky = "nsew",
+            padx = 5,
+            pady = 2
+        )
+        
+        #? GRAPH WIDGETS
+        self.graph_display = tk.Label(self.graph_frame)
+        #!self.graph_image = ImageTk.PhotoImage(Image.open(GRAPH_IMAGE))
+        #!self.graph_display["image"] = self.graph_image
+        self.graph_display["bd"] = 0
+        self.graph_display.grid(
+            sticky = "nsew"
+        )
+        
+        #? ORIN FRAME WIDGETS
+        self.orin_label = tk.Label(self.orin_frame)
+        self.orin_label["text"] = "ORIN CONNECTION"
+        self.orin_label["font"] = "Helvetica 12 bold"
+        self.orin_label["bg"] = "black"
+        self.orin_label["fg"] = "white"
+        self.orin_label.grid(
+            row = 0, 
+            column=0, 
+            columnspan=4,
+            sticky = "nsew", 
+            padx = 5, 
+            pady = 5, 
+        )
+        
+        self.orin_user_label = tk.Label(self.orin_frame)
+        self.orin_user_label["text"] = "Username"
+        self.orin_user_label["bg"] = "black"
+        self.orin_user_label["fg"] = "white"
+        self.orin_user_label.grid(
+            row = 1, 
+            column=0, 
+            sticky = "e", 
+            padx = 5, 
+            pady = 5, 
+        )
+        
+        self.orin_user_input = tk.Entry(self.orin_frame)
+        self.orin_user_input["textvariable"] = self.orin_user
+        self.orin_user_input.grid(
+            row = 1, 
+            column=1, 
+            columnspan=3,
+            sticky = "nsew", 
+            padx = 5, 
+            pady = 5, 
+        )
+        
+        self.orin_pass_label = tk.Label(self.orin_frame)
+        self.orin_pass_label["text"] = "Password"
+        self.orin_pass_label["bg"] = "black"
+        self.orin_pass_label["fg"] = "white"
+        self.orin_pass_label.grid(
+            row = 2, 
+            column=0, 
+            sticky = "e", 
+            padx = 5, 
+            pady = 5, 
+        )
+        
+        self.orin_pass_input = tk.Entry(self.orin_frame)
+        self.orin_pass_input["show"] = "*"
+        self.orin_pass_input["textvariable"] = self.orin_pass
+        self.orin_pass_input.grid(
+            row = 2, 
+            column=1, 
+            columnspan=3,
+            sticky = "nsew", 
+            padx = 5, 
+            pady = 5, 
+        )
+        
+        self.orin_host_label = tk.Label(self.orin_frame)
+        self.orin_host_label["text"] = "Host"
+        self.orin_host_label["bg"] = "black"
+        self.orin_host_label["fg"] = "white"
+        self.orin_host_label.grid(
+            row = 3, 
+            column=0, 
+            sticky = "e", 
+            padx = 5, 
+            pady = 5, 
+        )
+        
+        self.orin_host_input = tk.Entry(self.orin_frame)
+        self.orin_host_input["textvariable"] = self.orin_host
+        self.orin_host_input.grid(
+            row = 3, 
+            column=1, 
+            columnspan=3,
+            sticky = "nsew", 
+            padx = 5, 
+            pady = 5, 
+        )
+        
+        self.orin_port_label = tk.Label(self.orin_frame)
+        self.orin_port_label["text"] = "Port"
+        self.orin_port_label["bg"] = "black"
+        self.orin_port_label["fg"] = "white"
+        self.orin_port_label.grid(
+            row = 4, 
+            column=0, 
+            sticky = "e", 
+            padx = 5, 
+            pady = 5, 
+        )
+        
+        self.orin_port_input = tk.Entry(self.orin_frame)
+        self.orin_port_input["textvariable"] = self.orin_port
+        self.orin_port_input.grid(
+            row = 4, 
+            column=1, 
+            columnspan=3,
+            sticky = "nsew", 
+            padx = 5, 
+            pady = 5, 
+        )
+        
+        self.orin_connect_button = tk.Button(self.orin_frame)
+        self.orin_connect_button["text"] = "Connect"
+        self.orin_connect_button["bg"] = "#27f963"
+        self.orin_connect_button["command"] = self.connect_orin
+        self.orin_connect_button.grid(
+            row = 5, 
+            column=0, 
+            columnspan=2,
+            sticky = "nsew", 
+            padx = 5, 
+            pady = 5
+        )
+        
+        self.orin_disconnect_button = tk.Button(self.orin_frame)
+        self.orin_disconnect_button["text"] = "Disconnect"
+        self.orin_disconnect_button["bg"] = "#f93527"
+        self.orin_disconnect_button["command"] = self.disconnect_orin
+        self.orin_disconnect_button.grid(
+            row = 5, 
+            column=2, 
+            columnspan=2,
+            sticky = "nsew", 
+            padx = 5, 
+            pady = 5
+        )
 
+        #? MODE SELECTION WIDGETS (Variable Settings)
+        
+        
         #? I plan on putting these top right tab like size, maybe 10 pixels tall, with an info hover
         # self.power_sub_on_button = tk.Button(self.indicator_frame)
         # self.power_sub_on_button["text"] = "Power Sub On"
@@ -458,51 +548,174 @@ class GCSApp:
         # self.power_servos_on_button.grid(row = 0, column = 3, sticky = "nsew", rowspan = 1, columnspan = 1, padx = 2, pady = 2)
         # self.power_servos_off_button.grid(row = 1, column = 3, sticky = "nsew", rowspan = 1, columnspan = 1, padx = 2, pady = 2)
 
+        #?INDICATOR WIDGETS
+        self.voltage_label = tk.Label(self.indicator_frame)
+        self.voltage_label["text"] = "Voltage"
+        self.voltage_label["bg"] = "#50fa7b"
+        self.voltage_label.grid(
+            row = 0, 
+            column = 0, 
+            sticky = "nsew", 
+            padx = 5, 
+            pady = 5
+        )
+        
+        self.voltage_value = tk.Label(self.indicator_frame)
+        self.voltage_value["text"] = 0
+        self.voltage_value["font"] = "Helvetica 12 bold"
+        self.voltage_value["bg"] = "black"
+        self.voltage_value["fg"] = "white"
+        self.voltage_value.grid(
+            row = 0, 
+            column = 1, 
+            sticky = "nsew", 
+            padx = 5, 
+            pady = 5
+        )
+        
+        self.humidity_label = tk.Label(self.indicator_frame)
+        self.humidity_label["text"] = "Humidity"
+        self.humidity_label["bg"] = "#50fa7b"
+        self.humidity_label.grid(
+            row = 1, 
+            column = 0, 
+            sticky = "nsew", 
+            padx = 5, 
+            pady = 5
+        )
+        
+        self.humidity_value = tk.Label(self.indicator_frame)
+        self.humidity_value["text"] = 0
+        self.humidity_value["font"] = "Helvetica 12 bold"
+        self.humidity_value["bg"] = "black"
+        self.humidity_value["fg"] = "white"
+        self.humidity_value.grid(
+            row = 1, 
+            column = 1, 
+            sticky = "nsew", 
+            padx = 5, 
+            pady = 5
+        )
+        
+        self.tube_temp_label = tk.Label(self.indicator_frame)
+        self.tube_temp_label["text"] = "Tube Temp"
+        self.tube_temp_label["bg"] = "#50fa7b"
+        self.tube_temp_label.grid(
+            row = 2, 
+            column = 0, 
+            sticky = "nsew", 
+            padx = 5, 
+            pady = 5
+        )
+        
+        self.tube_temp_value = tk.Label(self.indicator_frame)
+        self.tube_temp_value["text"] = 0
+        self.tube_temp_value["font"] = "Helvetica 12 bold"
+        self.tube_temp_value["bg"] = "black"
+        self.tube_temp_value["fg"] = "white"
+        self.tube_temp_value.grid(
+            row = 2, 
+            column = 1, 
+            sticky = "nsew", 
+            padx = 5, 
+            pady = 5
+        )
+        
+        self.orin_temp_label = tk.Label(self.indicator_frame)
+        self.orin_temp_label["text"] = "Orin Temp"
+        self.orin_temp_label["bg"] = "#50fa7b"
+        #self.orin_temp_label["fg"] = "#3C3E4A"
+        self.orin_temp_label.grid(
+            row = 3, 
+            column = 0, 
+            sticky = "nsew", 
+            padx = 5, 
+            pady = 5
+        )
+        
+        self.orin_temp_value = tk.Label(self.indicator_frame)
+        self.orin_temp_value["text"] = 0
+        self.orin_temp_value["font"] = "Helvetica 12 bold"
+        self.orin_temp_value["bg"] = "black"
+        self.orin_temp_value["fg"] = "white"
+        self.orin_temp_value.grid(
+            row = 3, 
+            column = 1, 
+            sticky = "nsew", 
+            padx = 5, 
+            pady = 5
+        )
     
+        #? CONSOLE WIDGETS
+        # if theres time, maybe turn this into an ssh terminal as well?
+        # https://stackoverflow.com/questions/63597533/how-to-add-a-console-to-a-tkinter-window
+        self.console_display = tk.Listbox(self.console_frame)
+        self.listitems = [" ["+str(datetime.datetime.now())+"] TEST"]
+        self.console_display.insert("end", *self.listitems)
+        self.console_display["selectmode"] = tk.SINGLE
+        self.console_display["activestyle"] = "none"
+        self.console_display["selectbackground"] = "#3C3E4A"
+        self.console_display["bg"] = "black"
+        self.console_display["fg"] = "#f93527"
+        self.console_display["font"] = "Helvetica 10 bold"
+        self.console_display["bd"] = 0
+        self.console_display.grid(
+            row=0, 
+            column=0,
+            sticky = "nsew"
+        )
+        
+        
     # ================= SUB PART CLASSES =================
 
     class Component:
-        def __init__(self, name: str, label_object, recording:list = []):
+        def __init__(self, name: str, label_object, recording:list = {}):
             self.label_object = label_object 
             self.value_objects = {}
             self.name = tk.StringVar(value = name)
-            self.recording = {}
+            self.recording = recording
             self.display_string = ""
             
-            for i, v in enumerate(recording):
-                # use a / to differentiate between different values
-                if i > 1:
-                    self.display_string += " / "
+            # for i, v in enumerate(recording):
+            #     # use a / to differentiate between different values
+            #     # if i > 1:
+            #     #     self.display_string += " / "
                 
-                self.recording[v] = 0
+            #     self.recording[v] = 0
             
             #cut off excess /
-            if len(self.display_string) > 3:
-                if self.display_string[-2] == "/":
-                    self.display_string = self.display_string[:-3]
+        #     if len(self.display_string) > 3:
+        #         if self.display_string[-2] == "/":
+        #             self.display_string = self.display_string[:-3]
                 
-            self.display = tk.StringVar(value = self.display_string)
-
-        def update_values(self):
-            self.display_string = ""
-            for i, v in enumerate(self.recording):
-                # use a / to differentiate between different values
-                if i > 1:
-                    self.display_string += " / "
-                
-                self.display_string += str(v)
+        #     self.display = tk.StringVar(value = self.display_string)
             
-            self.display.set(self.display_string)
+        def update_values(self):
+            for k, v in self.recording.items():
+                return
+                
+            # self.display_string = ""
+            # for i, v in enumerate(self.recording):
+            #     # use a / to differentiate between different values
+            #     if i > 1:
+            #         self.display_string += " / "
+                
+            #     self.display_string += str(v)
+            
+            # self.display.set(self.display_string)
             
     def combobox_update(self, event):
         current_subsystem = self.data_combobox.get()
         
         #hide any currently shown subsystem components
         for i, subsystem in enumerate(self.components):
+            #make sure they didn't just select the same subsystem, that would cause for useless computation if we hide and show that same subsystem
             if subsystem != current_subsystem:
+                #hide the labels
                 for component in self.components[subsystem]:
                     component.label_object.grid_remove()
                     
+                    #hide the values and those values' labels
                     for stat in component.value_objects:
                         component.value_objects[stat][0].grid_remove()
                         component.value_objects[stat][1].grid_remove()
@@ -534,6 +747,14 @@ class GCSApp:
     def disconnect_orin(self):
         ssh_connection.close()
         self.orin_connected = False
+        
+    def robot_activated():
+        #variable_setting.grid_remove()
+        return
+    
+    def robot_deactivated():
+        #variable_setting.grid()
+        return
     
     def stream_video(self):
         #read the data and seperate it into its index, and frame (we don't need the index so its just an _)
@@ -551,7 +772,9 @@ class GCSApp:
         #still need to test if this will effect the workability of the program
         
     def close_application(self):
-        VIDEO_THREAD.join() # close the started thread
+        #make sure the thread is running before we try and close it
+        if VIDEO_THREAD.is_alive():
+            VIDEO_THREAD.join() # close the started thread
         
         #if its ssh connected, the disconnect that ssh
         if self.orin_connected:
