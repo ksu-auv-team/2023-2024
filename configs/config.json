@@ -1,8 +1,27 @@
 {
     "ROBOT": {
-        "BATTERY_COUNT": 4,
-        "MOTOR_COUNT": 8,
-        "SERVO_COUNT": 2
+        "BATTERIES":{
+            "NAME": "Battery",
+            "COUNT": 4,
+            "RECORDING": [
+                "voltage",
+                "amps"
+            ]
+        },
+        "MOTORS":{
+            "NAME": "Motor",
+            "COUNT": 8,
+            "RECORDING": [
+                "pwm"
+            ]
+        },
+        "SERVOS":{
+            "NAME": "Servo",
+            "COUNT": 2,
+            "RECORDING": [
+                "pwm"
+            ]
+        }
     },
     "GCS": {
         "training_sim": false,
