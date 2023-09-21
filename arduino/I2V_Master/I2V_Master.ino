@@ -4,53 +4,82 @@
 
 #define BAUD 115200
 
-#define PWM_CNT         6
-#define SUBSYSTEM_CNT   4
+#define PWM_CNT         8
+#define ESC_BYTE_IN     PWM_CNT / 2 * 2
 
 #define MASTER_ADDRESS  4
-#define PWM_ADDRESS     8
-#define SENSOR_ADDRESS  16
+#define ESC_1_ADDRESS   8
+#define ESC_2_ADDRESS   16
 
-#define KILL_SWITCH     0b10000000
-#define PWM_ENABLE      0b00000001
-#define SENSOR_ENABLE   0b00000010
-#define SENSOR_FETCH    0b00100000
+#define CONTROL_BUFF    4
+#define SERIAL_BUFF     PWM_CNT * 32 * 2
+
+#define CTRL_BYTE_SIZE  0
+#define CTRL_ROBO_STATE 1
+#define CTRL_SENSORS    2
+#define CTRL_PWM_ENABLE 3
 
 // Range from 0-255 (can add more if needed)
-byte PWM_DATA[6] = {0, 16, 32, 64, 128, 255};
-const byte CONTROL_FLAGS = PWM_ENABLE | SENSOR_ENABLE;
+byte CONTROL_FLAGS[CONTROL_BUFF];
+int CONTROL_BUFF_PTR = 0; // TODO: Use an actual pointer?
+byte PWM_DATA[SERIAL_BUFF];
+int PWM_BUFF_PTR = 0; // TODO: Use an actual pointer?
+bool SEND = false;
 
 void setup() {
   Wire.begin(MASTER_ADDRESS); // Join line
-  Wire.onRequest(onRequest);  // Link handlers
   Wire.onReceive(onReceive);
   Serial.begin(BAUD);         // Set serial BAUD
 }
 
 void loop() {
   
-  // TODO: Serial interface
-  // TODO: Handle sensor fetch request
   // TODO: Error handling, send info through serial (i.e. unable to connect, invalid format, failed request, timeout)
 
-  // int in_cnt = Serial.available(); 
-	// x = Serial.readString().toInt(); 
-	// Serial.print(x + 1);
+  // TODO: Ugly
+  while(!SEND && Serial.available()) {
+    // Parse serial input as control flags until control buffer is full
+    if(CONTROL_BUFF_PTR < CONTROL_BUFF)
+    {
+      CONTROL_FLAGS[CONTROL_BUFF_PTR] = Serial.read();
+      Serial.write(CONTROL_FLAGS[CONTROL_BUFF_PTR]); // TEST
+      CONTROL_BUFF_PTR++;
+    }
+    // First control flag parsed is the byte count of the following transmission
+    // Until max size is achieved, all bytes are accumilated in the PWM buffer
+    else if(PWM_BUFF_PTR < CONTROL_FLAGS[0] - CONTROL_BUFF && PWM_BUFF_PTR < ESC_BYTE_IN * 2)
+    {
+      PWM_DATA[PWM_BUFF_PTR] = Serial.read();
+      Serial.write(PWM_DATA[PWM_BUFF_PTR]); // TEST
+      PWM_BUFF_PTR++;
 
-  Serial.write("MASTER: BEGIN PWM TRANSMISSION\n");
-  Wire.beginTransmission(PWM_ADDRESS);    // Open PWM channel
-  Wire.write(PWM_DATA, PWM_CNT);          // Send PWM data
-  Wire.write(CONTROL_FLAGS & PWM_ENABLE); // Send control flag
-  Wire.endTransmission();
-  Serial.write("MASTER: END PWM TRANSMISSION\n");
+      // Once the transmission is considered over, reset pointers and raise send flag
+      if(PWM_BUFF_PTR >= CONTROL_FLAGS[0] - CONTROL_BUFF) {
+        PWM_BUFF_PTR = 0;
+        CONTROL_BUFF_PTR = 0;
+        SEND = true;
+      }
+    }
+  }
 
-  delay(5000);
+  // Send data we read
+  if(SEND) {
+
+    Wire.beginTransmission(ESC_1_ADDRESS);    // Open PWM channel
+    Wire.write(CONTROL_FLAGS[3] & 0x0F);    // Send first half of the PWM control flag
+    for(; PWM_BUFF_PTR < ESC_BYTE_IN; CONTROL_BUFF_PTR++) {
+      Wire.write(PWM_DATA[PWM_BUFF_PTR]);   // Send PWM data
+    }
+    Wire.endTransmission();
+
+    if(CONTROL_FLAGS[2]) {
+      // TODO: Get I2C charts for the sensors
+    }
+
+    SEND = false;
+  }
 }
 
 void onReceive(int bytes) {
-  
-}
-
-void onRequest() {
-
+  // TODO: Revceive I2C sensor data here
 }
