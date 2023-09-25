@@ -1,11 +1,9 @@
 #include <Wire.h>
 
-// BAUD RANGE: 9600 - 115200
-
 #define BAUD 115200
 
 #define PWM_CNT         8
-#define ESC_BYTE_IN     PWM_CNT / 2 * 2
+#define ESC_BYTE_IN     PWM_CNT / 2
 
 #define MASTER_ADDRESS  4
 #define ESC_1_ADDRESS   8
@@ -19,17 +17,20 @@
 #define CTRL_SENSORS    2
 #define CTRL_PWM_ENABLE 3
 
-// Range from 0-255 (can add more if needed)
+// Serial input buffers
 byte CONTROL_FLAGS[CONTROL_BUFF];
-int CONTROL_BUFF_PTR = 0; // TODO: Use an actual pointer?
 byte PWM_DATA[SERIAL_BUFF];
-int PWM_BUFF_PTR = 0; // TODO: Use an actual pointer?
+// Indexing variables (stored for reuse)
+int CONTROL_BUFF_PTR = 0;
+int PWM_BUFF_PTR = 0;
+// Send flag once all serial input is stored
 bool SEND = false;
 
 void setup() {
-  Wire.begin(MASTER_ADDRESS); // Join line
+  // Settup serial and I2C
+  Wire.begin(MASTER_ADDRESS);
   Wire.onReceive(onReceive);
-  Serial.begin(BAUD);         // Set serial BAUD
+  Serial.begin(BAUD);
 }
 
 void loop() {
@@ -42,7 +43,7 @@ void loop() {
     if(CONTROL_BUFF_PTR < CONTROL_BUFF)
     {
       CONTROL_FLAGS[CONTROL_BUFF_PTR] = Serial.read();
-      Serial.write(CONTROL_FLAGS[CONTROL_BUFF_PTR]); // TEST
+      //Serial.write(CONTROL_FLAGS[CONTROL_BUFF_PTR]); // TEST
       CONTROL_BUFF_PTR++;
     }
     // First control flag parsed is the byte count of the following transmission
@@ -50,7 +51,7 @@ void loop() {
     else if(PWM_BUFF_PTR < CONTROL_FLAGS[0] - CONTROL_BUFF && PWM_BUFF_PTR < ESC_BYTE_IN * 2)
     {
       PWM_DATA[PWM_BUFF_PTR] = Serial.read();
-      Serial.write(PWM_DATA[PWM_BUFF_PTR]); // TEST
+      //Serial.write(PWM_DATA[PWM_BUFF_PTR]); // TEST
       PWM_BUFF_PTR++;
 
       // Once the transmission is considered over, reset pointers and raise send flag
@@ -64,14 +65,16 @@ void loop() {
 
   // Send data we read
   if(SEND) {
-
+    // Temporary test code
     Wire.beginTransmission(ESC_1_ADDRESS);    // Open PWM channel
     Wire.write(CONTROL_FLAGS[3] & 0x0F);    // Send first half of the PWM control flag
-    for(; PWM_BUFF_PTR < ESC_BYTE_IN; CONTROL_BUFF_PTR++) {
+    for(; PWM_BUFF_PTR < ESC_BYTE_IN; PWM_BUFF_PTR++) {
       Wire.write(PWM_DATA[PWM_BUFF_PTR]);   // Send PWM data
     }
     Wire.endTransmission();
 
+    PWM_BUFF_PTR = 0;
+    
     if(CONTROL_FLAGS[2]) {
       // TODO: Get I2C charts for the sensors
     }
