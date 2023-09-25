@@ -41,25 +41,25 @@ def get_pwm():
 def send_pwm():
     byte_data = bytearray()
     
-    byte_data.append(0x0C)
-    byte_data.append(0x00)
-    byte_data.append(0x00)
-    byte_data.append(0xFF)
+    byte_data.append(0x0C) # Standard transfer - 4 byte control flag - 8 byte PWM data
+    byte_data.append(0x00) # Normal robot state
+    byte_data.append(0x00) # No sensor query
+    byte_data.append(0xFF) # All motor enable
     
     for _ in range(8):
         for i in get_pwm():
             byte_data.append(i)
 
 
-    arduino.write(byte_data)
+    arduino.write(byte_data) # Send over serial
 
-    print(list(byte_data))
+    print(list(byte_data)) # Debug
 
-    time.sleep(1)
+    time.sleep(0.1)
 
-    sensor_data = arduino.read_all() # arduino.read_until(SENSOR_DATA_END)
+    sensor_data = arduino.read_all() # TODO: End codes & start codes
     
-    print(list(sensor_data))
+    print(list(sensor_data)) # Debug
 
     return
 
