@@ -102,24 +102,13 @@ class M6Controller:
         self.thruster_matrix = self.create_Thruster_Matrix()
 
     def create_Thruster_Matrix(self):
-        # thruster_configurations = [
-        #     {'position': [-1 * self.d, self.d, 0], 'orientation': [-1 * np.cos(self.theta), 1 * np.sin(self.theta), 0]},
-        #     {'position': [self.d, self.d, 0], 'orientation': [np.cos(self.theta), np.sin(self.theta), 0]},
-        #     {'position': [self.d, -1 * self.d, 0], 'orientation': [np.cos(self.theta), -1 * np.sin(self.theta), 0]},
-        #     {'position': [-1 * self.d, -1 * self.d, 0], 'orientation': -1 * [np.cos(self.theta), -1 * np.sin(self.theta), 0]},
-        #     {'position': [-1 * self.d, 0, self.d], 'orientation': [0, 0, 1]},
-        #     {'position': [0, self.d, self.d], 'orientation': [0, 0, 1]},
-        #     {'position': [self.d, 0, self.d], 'orientation': [0, 0, 1]},
-        #     {'position': [0, -1 * self.d, self.d], 'orientation': [0, 0, 1]}
-        # ]
-
         thruster_configurations = [
-            {},
-            {},
-            {},
-            {},
-            {},
-            {}
+            {'position': [-1 * self.d, self.d, 0], 'orientation': [np.cos(np.radians(30)), np.sin(np.radians(30)), 0]},  # Thruster 1 (top left, facing towards center at a 30° angle)
+            {'position': [self.d, self.d, 0], 'orientation': [-np.cos(np.radians(30)), np.sin(np.radians(30)), 0]}, # Thruster 2 (top right, facing towards center at a 30° angle)
+            {'position': [-1 * self.d, 0, 0.1], 'orientation': [0, 0, -1]},  # Thruster 3 (middle left, vertical facing downwards)
+            {'position': [self.d, 0, 0.1], 'orientation': [0, 0, -1]},  # Thruster 4 (middle right, vertical facing downwards)
+            {'position': [-1 * self.d, -1 * self.d, 0], 'orientation': [np.cos(np.radians(30)), -np.sin(np.radians(30)), 0]}, # Thruster 5 (bottom left, facing towards center at a 30° angle)
+            {'position': [self.d, -1 * self.d, 0], 'orientation': [-np.cos(np.radians(30)), -np.sin(np.radians(30)), 0]} # Thruster 6 (bottom right, facing towards center at a 30° angle)
         ]
 
         mixing_matrix = np.zeros((6, 5))
@@ -132,6 +121,20 @@ class M6Controller:
             mixing_matrix[i, 3:] = np.cross(r, d)
 
         return mixing_matrix
+    
+    def update_desired(self):
+        self.desired = self.input.get_joystick_input()
+
+    def update_actual(self, actual):
+        self.actual = actual
+
+    def update(self):
+        self.update_desired()
+        self.update_actual(self.actual)
+
+        for i in range(6):
+            self.PIDs[i].setpoint = self.desired[i]
+            self.PIDs[i].compute(self.actual[i])
 
 class M8Controller:
     def __init__(self):
@@ -160,7 +163,7 @@ class M8Controller:
             {'position': [-1 * self.d, self.d, 0], 'orientation': [-1 * np.cos(self.theta), 1 * np.sin(self.theta), 0]},
             {'position': [self.d, self.d, 0], 'orientation': [np.cos(self.theta), np.sin(self.theta), 0]},
             {'position': [self.d, -1 * self.d, 0], 'orientation': [np.cos(self.theta), -1 * np.sin(self.theta), 0]},
-            {'position': [-1 * self.d, -1 * self.d, 0], 'orientation': -1 * [np.cos(self.theta), -1 * np.sin(self.theta), 0]},
+            {'position': [-1 * self.d, -1 * self.d, 0], 'orientation': [-1 * np.cos(self.theta), np.sin(self.theta), 0]},
             {'position': [-1 * self.d, 0, self.d], 'orientation': [0, 0, 1]},
             {'position': [0, self.d, self.d], 'orientation': [0, 0, 1]},
             {'position': [self.d, 0, self.d], 'orientation': [0, 0, 1]},
@@ -191,3 +194,8 @@ class M8Controller:
         for i in range(6):
             self.PIDs[i].setpoint = self.desired[i]
             self.PIDs[i].compute(self.actual[i])
+
+if __name__ == '__main__':
+    m8 = M8Controller()
+
+    print(m8.thruster_matrix)
