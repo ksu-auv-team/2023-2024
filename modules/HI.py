@@ -21,12 +21,6 @@ else:
     print("Unsupported OS")
     sys.exit()
 
-# Configure config file path
-config_file_path = os.path.join(os.path.dirname(__file__), "configs/main.json")  # Updated here: Changed .yml to .json
-with open(config_file_path, mode="r", encoding="utf-8") as config_file:
-    config = json.load(config_file)  # Updated here: Changed yaml.load to json.load
-
-
 # Configure log file path
 def create_logger(filename="logfile"):
     """
