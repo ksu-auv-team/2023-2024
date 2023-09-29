@@ -1,8 +1,10 @@
 
 # ================= TODO =================
 
-#TODO: Make buttons for the top right corder
-#TODO: Create the "variable settings" section bottom right purple area
+#TODO: Make buttons for the top right corner
+#TODO: Create the "variable settings" section bottom right
+#TODO: Finish Commenting
+#TODO: Implement specific component identifiers
 
 
 # ======= OTHER MODULES / PEOPLE REQUIRED =======
@@ -40,7 +42,7 @@ import datetime
 
 
 # ================= CONFIG =================
-f = open(__file__.split("GCS")[0]+'configs\\config.json')
+f = open(__file__.split("modules")[0]+'configs\\config.json')
 config = json.load(f)
 
 COMPONENTS = config["ROBOT"]
@@ -673,36 +675,13 @@ class GCSApp:
             self.label_object = label_object 
             self.value_objects = {}
             self.name = tk.StringVar(value = name)
+            self.id = ...
             self.recording = recording
             self.display_string = ""
-            
-            # for i, v in enumerate(recording):
-            #     # use a / to differentiate between different values
-            #     # if i > 1:
-            #     #     self.display_string += " / "
-                
-            #     self.recording[v] = 0
-            
-            #cut off excess /
-        #     if len(self.display_string) > 3:
-        #         if self.display_string[-2] == "/":
-        #             self.display_string = self.display_string[:-3]
-                
-        #     self.display = tk.StringVar(value = self.display_string)
             
         def update_values(self):
             for k, v in self.recording.items():
                 return
-                
-            # self.display_string = ""
-            # for i, v in enumerate(self.recording):
-            #     # use a / to differentiate between different values
-            #     if i > 1:
-            #         self.display_string += " / "
-                
-            #     self.display_string += str(v)
-            
-            # self.display.set(self.display_string)
             
     def combobox_update(self, event):
         current_subsystem = self.data_combobox.get()
