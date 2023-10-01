@@ -3,24 +3,24 @@
         "BATTERIES":{
             "NAME": "Battery",
             "COUNT": 4,
-            "RECORDING": [
-                "voltage",
-                "amps"
-            ]
+            "RECORDING": {
+                "voltage": "float",
+                "amps": "int"
+            }
         },
         "MOTORS":{
             "NAME": "Motor",
             "COUNT": 8,
-            "RECORDING": [
-                "pwm"
-            ]
+            "RECORDING": {
+                "pwm": "int"
+            }
         },
         "SERVOS":{
             "NAME": "Servo",
             "COUNT": 2,
-            "RECORDING": [
-                "pwm"
-            ]
+            "RECORDING": {
+                "pwm": "int"
+            }
         }
     },
     "GCS": {
