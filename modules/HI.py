@@ -51,10 +51,12 @@ logger.info(f"Python executable: {sys.executable}")
 
 # Define a class for serial communication
 class comm:
-    def __init__(self, port="COM3", baud=115200, timeout=1, motor_count=8):
+    def __init__(self, port="COM3", baud=115200, timeout=1, motor_count=8, logger:logging.Logger=logger):
         self.port = port
         self.baud = baud
         self.timeout = timeout
+
+        self.logger = logger
 
         self.serial = serial.Serial(port=self.port, baudrate=self.baud, timeout=self.timeout)
         self.serial.flush()
@@ -94,8 +96,8 @@ class comm:
     def get_data(self, data):
         self.in_data = data
         
-        for i in self.in_data:
-            self.byte_data.append(i.to_bytes(1,"little"))
+        for i in range(4, len(self.in_data)):
+            self.byte_data[i] = i.to_bytes(1,"little")
 
     def send(self):
         self.serial.write(self.byte_data)
@@ -106,7 +108,6 @@ class comm:
         self.logger.info(f"Received: {self.data}")
 
         return self.data
-        
 
 # Define a class for PID control
 class PID:
@@ -131,7 +132,7 @@ class PID:
         return output  # Return the PID output
 
 class MP:
-    def __init__(self, logger, motor_count=8, theta=45, d=0.2, PID_vals:list=[[1.0, 0, 0], [1.0, 0, 0], [1.0, 0, 0], [1.0, 0, 0], [1.0, 0, 0], [1.0, 0, 0]]):
+    def __init__(self, logger, motor_count=8, theta=45, d=0.2, PID_vals:list=[[1.0, 0, 0], [1.0, 0, 0], [1.0, 0, 0], [1.0, 0, 0], [1.0, 0, 0], [1.0, 0, 0]], out_min=1100, out_max=1900):
         if motor_count == 8:
             self.mixing_matrix = self.create_8MThruster_Matrix()
             self.actual = np.zeros((6, 1))
@@ -163,14 +164,17 @@ class MP:
         self.theta = np.radians(theta)
         self.motor_count = motor_count
 
-        # Initialize the serial module
-
-
         # Initialize the logging setup
         self.logger = logger
 
         self.logger.info(f"MP initialized with {motor_count} motors")
         self.logger.info(f"MP initialized with PID values: {PID_vals}")
+
+        # Initialize the serial module
+        self.serial = comm(motor_count=self.motor_count, logger=self.logger)
+
+        self.out_min = out_min
+        self.out_max = out_max
 
     def create_8MThruster_Matrix(self):
         # Define thruster configurations
@@ -195,6 +199,9 @@ class MP:
             mixing_matrix[i, :3] = d
             mixing_matrix[i, 3:] = np.cross(r, d)
 
+        # Log mixing matrix
+        self.logger.info(f"Mixing matrix: {mixing_matrix}")
+
         return mixing_matrix
 
     def create_6MThruster_Matrix(self):
@@ -217,11 +224,15 @@ class MP:
             d = np.array(config['orientation'])
             mixing_matrix[i, :3] = d
             mixing_matrix[i, 3:] = np.cross(r, d)
+            
+        # Log mixing matrix
+        self.logger.info(f"Mixing matrix: {mixing_matrix}")
 
         return mixing_matrix
 
+    # TODO: Receive actual data from serial module
     # Function to update actual state
-    def update_actual(self, actual):
+    def update_actual(self):
         """
         if motor_count == 8:
             actual = [x, y, z, yaw, roll, pitch]
@@ -229,10 +240,11 @@ class MP:
             actual = [x, y, z, yaw, roll]
         received from serial module
         """
-        self.actual = actual
+        self.actual = None
 
+    # TODO: Receive desired data from state machine module
     # Function to update desired state from joystick input
-    def update_desired(self, desired):
+    def update_desired(self):
         """
         if motor_count == 8:
             desired = [x, y, z, yaw, roll, pitch]
@@ -240,8 +252,11 @@ class MP:
             desired = [x, y, z, yaw, roll]
         received from state machine module
         """
-        self.desired = desired
+        self.desired = None
 
+    # TODO: Test this function
+    # TODO: Ensure data is in correct format
+    # TODO: Ensure data is in correct range
     # Main update function
     def update(self):
         """
@@ -251,17 +266,24 @@ class MP:
         4. Don't know if we need to map PWM output to 1100-1900 yet, will find out later
         5. PWMs to serial module
         """
-        pass
+        for i in range(len(self.PIDs)):
+            self.update_actual()
+            self.update_desired()
+            self.PIDs[i].setpoint = self.desired[i]
+            self.PIDs[i].compute(self.actual[i])
+        self.data = np.dot(self.mixing_matrix, self.PIDs)
+        self.serial.get_data(self.data)
+        self.serial.send()
 
     # Function to map PID Output to PWM
     def map(self, x):
         in_min = -1.0
         in_max = 1.0
-        out_min = 1100
-        out_max = 1900
+        out_min = self.out_min
+        out_max = self.out_max
 
         return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min
 
     # Function to run the MP
-    def main(self):
+    def run(self):
         pass

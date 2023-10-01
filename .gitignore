@@ -11,3 +11,5 @@ __pycache__
 .pytest_cache
 .obsidian
 chats
+
+.python-version
