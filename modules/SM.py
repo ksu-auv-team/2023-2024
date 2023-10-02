@@ -108,7 +108,7 @@ class Submarine(StateMachine):
         self.previous_state = ... # record out previous state
         self.current_position = {"x":0, "y":0, "z":0, "alpha":0, "beta":0, "gama":0} #? https://en.wikipedia.org/wiki/Euler_angles
         self.target_position_difference = {"x":0, "y":0, "z":0, "alpha":0, "beta":0, "gama":0}
-        self.target_position_list = list(self.target_position_dict.values())
+        self.target_position_list = list(self.target_position_difference.values())
         super().__init__(*args, **kwargs)
         
     # before we switch to manual mode, record out last state so we can go back to it using "return_manual_control"
@@ -117,10 +117,6 @@ class Submarine(StateMachine):
     
     def on_enter_state(self, target, event):
         print(f"{self.name} enter: {target.id} from {event}")
-    
-    # def on_enter_autonomous(self):
-    #     self.asm = Submarine.AutonomousMode(self)
-    #     return self.asm
     
     # TRANSITIONS
     # the transition funtions MUST return a boolean
@@ -163,20 +159,3 @@ class Submarine(StateMachine):
         if self.previous_state == "real_training":
             return True
         return False
-    
-    # class AutonomousMode(StateMachine):
-    #     search_for_target = State(initial=True) # search for the target
-    #     target_found = State() # calculate the distance, angle, elevation, and other stats to get to the target
-    #     position_towards_target = State() # position itself towards the target
-    #     move_to_target = State() # move to the target
-    #     execute_task = State() # has gotten the target
-        
-    #     mission_cycle = (
-    #         search_for_target.to(target_found)
-    #         | target_found.to(position_towards_target)
-    #         | position_towards_target.to(move_to_target)
-    #         | move_to_target.to(execute_task)
-    #         | execute_task.to(search_for_target)
-    #     )
-        
-    #     def __init__(self, submarine_instance):
