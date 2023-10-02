@@ -5,6 +5,7 @@ import logging
 import platform
 import sys
 import os
+import json
 
 # Create a logger object for the module
 # Detect OS platform
@@ -49,9 +50,15 @@ logger.info(f"OS: {os_type}")
 logger.info(f"Python version: {sys.version}")
 logger.info(f"Python executable: {sys.executable}")
 
+# get config file
+f = open(__file__.split("modules")[0]+'configs\\config.json')
+config = json.load(f)
+robot_config = config["ROBOT"]
+f.close()
+
 # Define a class for serial communication
 class comm:
-    def __init__(self, port="COM3", baud=115200, timeout=1, motor_count=8, logger:logging.Logger=logger):
+    def __init__(self, port="COM3", baud=115200, timeout=1, motor_count=robot_config["MOTORS"]["COUNT"], logger:logging.Logger=logger): #Actually use the config file
         self.port = port
         self.baud = baud
         self.timeout = timeout
@@ -80,18 +87,18 @@ class comm:
         self.byte_data.append(0xFF) # All motor enable
 
         self.motor_count = motor_count
+        self.in_data = [0, 0, 0, 0, 0, 0, 0, 0]
 
-        if self.motor_count==8:
-            self.in_data = [0, 0, 0, 0, 0, 0, 0, 0]
-            for _ in range(8):
-                self.byte_data.append(0)
-        elif self.motor_count==6:
-            self.in_data = [0, 0, 0, 0, 0, 0]
-            for _ in range(6):
-                self.byte_data.append(0)
-        else:
+        #no need to check if the motor count is 8 as we can just make that the default
+        if self.motor_count !=8 or self.motor_count != 6:
             print("Invalid motor count")
             sys.exit()
+        elif self.motor_count==6:
+            #just cut off the last 2 values since thats what was happening already
+            self.in_data = self.in_data[:-2]
+            
+        for _ in range(len(self.in_data)):
+                self.byte_data.append(0)
 
     def get_data(self, data):
         self.in_data = data
@@ -127,18 +134,22 @@ class PID:
         error = self.setpoint - current_value  # Calculate the error
         self.integral += error  # Update the integral term
         derivative = error - self.prev_error  # Calculate the derivative term
-        output = self.kp * error + self.ki * self.integral + self.kd * derivative  # Calculate the PID output
+        output = (self.kp * error) + (self.ki * self.integral) + (self.kd * derivative)  # Calculate the PID output
         self.prev_error = error  # Update the previous error
         return output  # Return the PID output
 
 class MP:
-    def __init__(self, logger, motor_count=8, theta=45, d=0.2, PID_vals:list=[[1.0, 0, 0], [1.0, 0, 0], [1.0, 0, 0], [1.0, 0, 0], [1.0, 0, 0], [1.0, 0, 0]], out_min=1100, out_max=1900):
-        if motor_count == 8:
-            self.mixing_matrix = self.create_8MThruster_Matrix()
-            self.actual = np.zeros((6, 1))
-            self.desired = np.zeros((6, 1))
-
-            self.PIDs = [
+    def __init__(self, logger, motor_count=robot_config["MOTORS"]["COUNT"], theta=45, d=0.2, PID_vals:list=[[1.0, 0, 0]]*6, out_min=1100, out_max=1900):
+        # set our paramaters as recorded values
+        self.motor_count = motor_count
+        self.theta = np.radians(theta)
+        self.d = d
+        self.logger = logger # Initialize the logging setup
+        self.out_min = out_min
+        self.out_max = out_max
+        
+        # set this as the PID default and just remove / add values as needed
+        self.PIDs = [
                 PID(PID_vals[0][0], PID_vals[0][1], PID_vals[0][2]),
                 PID(PID_vals[1][0], PID_vals[1][1], PID_vals[1][2]),
                 PID(PID_vals[2][0], PID_vals[2][1], PID_vals[2][2]),
@@ -146,77 +157,54 @@ class MP:
                 PID(PID_vals[4][0], PID_vals[4][1], PID_vals[4][2]),
                 PID(PID_vals[5][0], PID_vals[5][1], PID_vals[5][2]),
             ]
+        
+        # move outside the if statement since its already decided in the function
+        self.mixing_matrix = self.create_thruster_matrix()
+        if motor_count == 8:
+            self.actual = np.zeros((6, 1))
+            self.desired = np.zeros((6, 1))
 
         elif motor_count == 6:
-            self.mixing_matrix = self.create_6MThruster_Matrix()
             self.actual = np.zeros((5, 1))
             self.desired = np.zeros((5, 1))
-
-            self.PIDs = [
-                PID(PID_vals[0][0], PID_vals[0][1], PID_vals[0][2]),
-                PID(PID_vals[1][0], PID_vals[1][1], PID_vals[1][2]),
-                PID(PID_vals[2][0], PID_vals[2][1], PID_vals[2][2]),
-                PID(PID_vals[3][0], PID_vals[3][1], PID_vals[3][2]),
-                PID(PID_vals[4][0], PID_vals[4][1], PID_vals[4][2]),
-            ]
+            self.PIDs = self.PIDS[:-1] # remove the last value so it is correct
         
-        self.d = d
-        self.theta = np.radians(theta)
-        self.motor_count = motor_count
-
-        # Initialize the logging setup
-        self.logger = logger
-
+        # Finish initializing logger
         self.logger.info(f"MP initialized with {motor_count} motors")
         self.logger.info(f"MP initialized with PID values: {PID_vals}")
 
         # Initialize the serial module
         self.serial = comm(motor_count=self.motor_count, logger=self.logger)
 
-        self.out_min = out_min
-        self.out_max = out_max
-
-    def create_8MThruster_Matrix(self):
-        # Define thruster configurations
-        thruster_configurations = [
-            {'position': [-1 * self.d, self.d, 0], 'orientation': [-1 * np.cos(self.theta), 1 * np.sin(self.theta), 0]},
+        #declaring up here so we can have just one function instead of 2
+        self.eight_thruster_config = [
+            {'position': [-1 * self.d, self.d, 0], 'orientation': [-np.cos(self.theta), np.sin(self.theta), 0]}, #! idk why it was multiplied by 1 ???
             {'position': [self.d, self.d, 0], 'orientation': [np.cos(self.theta), np.sin(self.theta), 0]},
-            {'position': [self.d, -1 * self.d, 0], 'orientation': [np.cos(self.theta), -1 * np.sin(self.theta), 0]},
-            {'position': [-1 * self.d, -1 * self.d, 0], 'orientation': [-1 * np.cos(self.theta), np.sin(self.theta), 0]},
+            {'position': [self.d, -1 * self.d, 0], 'orientation': [np.cos(self.theta), -np.sin(self.theta), 0]},
+            {'position': [-1 * self.d, -1 * self.d, 0], 'orientation': [-np.cos(self.theta), np.sin(self.theta), 0]},
             {'position': [-1 * self.d, 0, self.d], 'orientation': [0, 0, 1]},
             {'position': [0, self.d, self.d], 'orientation': [0, 0, 1]},
             {'position': [self.d, 0, self.d], 'orientation': [0, 0, 1]},
             {'position': [0, -1 * self.d, self.d], 'orientation': [0, 0, 1]}
         ]
-
-        # Initialize mixing matrix
-        mixing_matrix = np.zeros((8, 6))
-
-        # Populate mixing matrix based on thruster configurations
-        for i, config in enumerate(thruster_configurations):
-            r = np.array(config['position'])
-            d = np.array(config['orientation'])
-            mixing_matrix[i, :3] = d
-            mixing_matrix[i, 3:] = np.cross(r, d)
-
-        # Log mixing matrix
-        self.logger.info(f"Mixing matrix: {mixing_matrix}")
-
-        return mixing_matrix
-
-    def create_6MThruster_Matrix(self):
-        # Define thruster configurations
-        thruster_configurations = [
-            {'position': [-1 * self.d, self.d, 0], 'orientation': [np.cos(np.radians(30)), np.sin(np.radians(30)), 0]},
-            {'position': [self.d, self.d, 0], 'orientation': [-np.cos(np.radians(30)), np.sin(np.radians(30)), 0]},
+        self.six_thruster_config = [
+            {'position': [-1 * self.d, self.d, 0], 'orientation': [np.cos(self.theta), np.sin(self.theta), 0]}, #! why is this hard codded to 30 degrees???
+            {'position': [self.d, self.d, 0], 'orientation': [-np.cos(self.theta), np.sin(self.theta), 0]},     #! why not just use self.theta instead of np.radians(30)?
             {'position': [-1 * self.d, 0, 0.1], 'orientation': [0, 0, -1]},
             {'position': [self.d, 0, 0.1], 'orientation': [0, 0, -1]},
-            {'position': [-1 * self.d, -1 * self.d, 0], 'orientation': [np.cos(np.radians(30)), -np.sin(np.radians(30)), 0]},
-            {'position': [self.d, -1 * self.d, 0], 'orientation': [-np.cos(np.radians(30)), -np.sin(np.radians(30)), 0]}
+            {'position': [-1 * self.d, -1 * self.d, 0], 'orientation': [np.cos(self.theta), -np.sin(self.theta), 0]},
+            {'position': [self.d, -1 * self.d, 0], 'orientation': [-np.cos(self.theta), -np.sin(self.theta), 0]}
         ]
 
-        # Initialize mixing matrix
-        mixing_matrix = np.zeros((6, 5))
+    def create_thruster_matrix(self): #fix function naming into correct casing
+        if self.motor_count == 8:
+            thruster_configurations = self.eight_thruster_config
+            # Initialize mixing matrix
+            mixing_matrix = np.zeros((8, 6))
+            
+        elif self.motor_count == 6:
+            thruster_configurations = self.six_thruster_config
+            mixing_matrix = np.zeros((6, 5))
 
         # Populate mixing matrix based on thruster configurations
         for i, config in enumerate(thruster_configurations):
@@ -224,7 +212,7 @@ class MP:
             d = np.array(config['orientation'])
             mixing_matrix[i, :3] = d
             mixing_matrix[i, 3:] = np.cross(r, d)
-            
+
         # Log mixing matrix
         self.logger.info(f"Mixing matrix: {mixing_matrix}")
 
@@ -282,7 +270,7 @@ class MP:
         out_min = self.out_min
         out_max = self.out_max
 
-        return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min
+        return ( ( (x - in_min) * (out_max - out_min) ) / (in_max - in_min) ) + out_min
 
     # Function to run the MP
     def run(self):
