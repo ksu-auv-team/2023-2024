@@ -1,25 +1,15 @@
 
 # ================= TODO =================
 
-#TODO: Make buttons for the top right corner
-#TODO: Create the "variable settings" section bottom right
-#TODO: Finish Commenting
-#TODO: Implement specific component identifiers
+#TODO: Correct the style of the variable settings widgets
+#TODO: Make buttons for the top right corder
 
-
-# ======= OTHER MODULES / PEOPLE REQUIRED =======
-
-#TODO: Keybind Spacebar to "power sub off"
 #TODO: Connect the terminal to actual warnings
-#TODO: Add program icon (waiting on Juan)
 #TODO: Properly handle camera (currently taking live feed when it will really just be getting a numpy array)
 #TODO: Add / Handle Depth Camera
 #TODO: Add / Handle Sonar
 #TODO: Add / Handle Controller
 #TODO: Add / Handle Buttons
-#TODO: Move power function over to Sate Machine
-#TODO: Add working program start / stop buttons  (currently just shells)
-#TODO: Get the "variable settings" to actually do something (currently i have no idea what that is going to look like)
 
 
 # ================= IMPORTS =================
@@ -38,20 +28,21 @@ import json
 # imported for the orin ssh connection
 import fabric
 # imported for time stamps
-import datetime
+from datetime import datetime
+# imported for improved startup times
+import asyncio
+# added for the spacebar shutdown hotkey
+import keyboard
 
 
 # ================= CONFIG =================
-f = open(__file__.split("modules")[0]+'configs\\config.json')
+config_file = __file__.split("modules")[0]+'configs\\config.json'
+f = open(config_file, 'r')
 config = json.load(f)
 
 COMPONENTS = config["ROBOT"]
-
-ICON_PATH = config["GCS"]["ICON_PATH"]
-training_sim = config["GCS"]["training_sim"]
-training_real_world = config["GCS"]["training_real_world"]
-manual_control = config["GCS"]["manual_control"]
-autonomous_control = config["GCS"]["autonomous_control"]
+ICO_PATH = __file__.split("modules")[0]+config["GCS"]["ICO_PATH"]
+PNG_PATH = __file__.split("modules")[0]+config["GCS"]["PNG_PATH"]
 auto_navigate_error = config["GCS"]["auto_navigate_error"]
 
 f.close()
@@ -69,48 +60,42 @@ sonar_input = ...
 ssh_connection = ...
 robot_active = False
 
-#CONSTANTS
-#SONAR_IMAGE = __file__.split("GCS")[0]+'GCS\\sonar_image.jpg'
-#GRAPH_IMAGE = __file__.split("GCS")[0]+'GCS\\graph_image.png'
-
-
 #! ==================== TO BE REMOVED ====================
-#! TO BE REMOVED AND PUT INTO THE STATE MACHINE
 
-batteries_on: bool = False
-motors_on: bool = False
-servos_on: bool = False
+#? only needed if we dont compile the gcs
+import ctypes
+myappid = 'ksu.clubs.auv.gcs' # arbitrary string that just defines pythonw.exe as a host
+ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID(myappid)
 
-def power_sub(power_bool: bool):
-    if power_bool:
-        batteries_on = True
-    else:
-        batteries_on = False
+#? imported to access the sub during testing, will have to do it through ssh some how later
+import SM
 
-#motors start with no power, this will allow power to connect to them
-def power_motors(power_bool: bool):
-    if power_bool:
-        motors_on = True
-    else:
-        motors_on = False     
-
-def power_servos(power_bool: bool):
-    if power_bool:
-        servos_on = True
-    else:
-        servos_on = False
+#? imported for time benchmarks
+import time
         
         
 # ============ CRITICAL FUNCTIONS ============
 
-#?Leaving this out of the app so it can be easily exported and used **IF** ever needed
-def start_sub_program():
-    #open main.py
+#Leaving this out of the app so it can be easily exported and used **IF** ever needed
+def initialize_submarine():
+    statemachine = SM.Submarine()
+    return statemachine
+
+def start_sub_program(statemachine):
+    statemachine.send("start_submarine")
+
+def stop_sub_program(statemachine):
+    statemachine.send("power_off")
     return
 
-def stop_sub_program():
-    #call the quit() function in main.py
-    return
+
+# ============ OTHER FUNCTIONS ============
+
+def get_fps(recorded_times):
+    fps = 0
+    for t in recorded_times:
+        fps += t
+    return 1/(fps/len(recorded_times))
             
 
 # ================= WINDOW =================
@@ -136,17 +121,50 @@ class GCSApp:
         # TOGGLES
         self.orin_connected: bool = False
         
+        #VARIABLE SETTINGS
+        self.variable_settings = {}
+        
+        #DEV STATS
+        self.statemachine = initialize_submarine()
+        self.time_last = time.time()
+        self.recorded_times = []
+        
         # ================= WINDOW SETTINGS =================
         
         WINDOW.title()
         WINDOW.title("Ground Control Station")
         WINDOW.state('zoomed')
-        #WINDOW.iconphoto(True, tk.PhotoImage(file=ICON_PATH))
+        #WINDOW.wm_iconbitmap(ICO_PATH) #Top left icon picture
+        WINDOW.iconphoto(True, tk.PhotoImage(file=PNG_PATH))
         
         #Setting sizes
-        WINDOW.columnconfigure(2, weight=2, minsize=200)
-        WINDOW.rowconfigure(1, weight=1, minsize=100, uniform = 'row')
-        WINDOW.rowconfigure([0,3], weight=1, minsize=100, uniform = 'row')
+        WINDOW.columnconfigure(
+            2, 
+            weight=2, 
+            minsize=200
+        )
+        WINDOW.rowconfigure(
+            1, 
+            weight=1, 
+            minsize=100, 
+            uniform = 
+            'row'
+        )
+        WINDOW.rowconfigure(
+            [0,3], 
+            weight=1, 
+            minsize=100, 
+            uniform = 'row'
+        )
+        
+        
+        # ================= HOTKEY SETTINGS =================
+        
+        keyboard.add_hotkey(
+            hotkey="space", 
+            callback=stop_sub_program, 
+            args=[self.statemachine]
+        )
         
         # ================= FRAME CREATION =================
         
@@ -209,6 +227,7 @@ class GCSApp:
         
         self.mode_selection_frame = tk.Frame(WINDOW)
         self.mode_selection_frame["bg"] = "black"
+        self.mode_selection_frame.columnconfigure([0, 1], weight=1)
         self.mode_selection_frame.grid(
             row = 3, 
             column = 3, 
@@ -505,7 +524,26 @@ class GCSApp:
         )
 
         #? MODE SELECTION WIDGETS (Variable Settings)
-        
+        #go through the keys
+        gcs_config_keys = config["GCS"]["ROBOT_SETTINGS"].keys()
+        for key in gcs_config_keys:
+            #dynamically create the robot settings
+            self.variable_settings[key] = tk.Checkbutton(
+                self.mode_selection_frame, 
+                text=key.replace("_", " "), 
+                onvalue=True, 
+                offvalue=False,
+                command=self.toggle_config
+            )
+            #since its dynamic, we have to store everything in a dictionary
+            self.variable_settings[key+"_variable"] = tk.BooleanVar(value=config["GCS"]["ROBOT_SETTINGS"][key]) #here we just set the key_variable to what the checkbox is suposed to be (true/false)
+            self.variable_settings[key]["variable"] = self.variable_settings[key+"_variable"]
+            self.variable_settings[key].grid(
+                sticky = "nsw"
+            )
+            #? don't forget to match these with the background and figure out why the checkmark is bugging out
+            #! self.variable_settings[key]["bg"] = "black"
+            #! self.variable_settings[key]["fg"] = "white"
         
         #? I plan on putting these top right tab like size, maybe 10 pixels tall, with an info hover
         # self.power_sub_on_button = tk.Button(self.indicator_frame)
@@ -515,7 +553,6 @@ class GCSApp:
         # self.power_sub_off_button = tk.Button(self.indicator_frame)
         # self.power_sub_off_button["text"] = "Power Sub On"
         # self.power_sub_off_button["command"] = power_sub(False)
-        #! ADD SPACEBAR AS A HOT KEY FOR TURNING THE SUB OFF
         
         # self.start_program_button = tk.Button(self.indicator_frame)
         # self.start_program_button["text"] = "Power Sub On"
@@ -652,8 +689,6 @@ class GCSApp:
         # if theres time, maybe turn this into an ssh terminal as well?
         # https://stackoverflow.com/questions/63597533/how-to-add-a-console-to-a-tkinter-window
         self.console_display = tk.Listbox(self.console_frame)
-        self.listitems = [" ["+str(datetime.datetime.now())+"] TEST"]
-        self.console_display.insert("end", *self.listitems)
         self.console_display["selectmode"] = tk.SINGLE
         self.console_display["activestyle"] = "none"
         self.console_display["selectbackground"] = "#3C3E4A"
@@ -675,13 +710,13 @@ class GCSApp:
             self.label_object = label_object 
             self.value_objects = {}
             self.name = tk.StringVar(value = name)
-            self.id = ...
             self.recording = recording
             self.display_string = ""
             
         def update_values(self):
             for k, v in self.recording.items():
                 return
+            
             
     def combobox_update(self, event):
         current_subsystem = self.data_combobox.get()
@@ -707,9 +742,22 @@ class GCSApp:
                 component.value_objects[stat][0].grid()
                 component.value_objects[stat][1].grid()
             
+            
     # ================= FUNCTIONS =================
     
-    def connect_orin(self):
+    def toggle_config(self):
+        #record the keys for the robot settings
+        gcs_config_keys = config["GCS"]["ROBOT_SETTINGS"].keys()
+        for key in gcs_config_keys:
+            #make sure that the variables are different before trying to change them
+            if config["GCS"]["ROBOT_SETTINGS"][key] != self.variable_settings[key+"_variable"].get():
+                config["GCS"]["ROBOT_SETTINGS"][key] = self.variable_settings[key+"_variable"].get() #change it
+                g = open(config_file, 'w')
+                json.dump(config, g, indent=4, sort_keys=False) #write the changed values to the config
+                g.close()
+    
+    
+    def connect_orin(self): #! something feels wrong about the connection setting, i should probably test this :)
         # if its already connected and it isn't trying to connect to the exact same host and port
         if self.orin_connected and self.orin_host.get() != self.connected_host and self.orin_port.get() != self.connected_port:
             self.disconnect_orin()
@@ -723,37 +771,39 @@ class GCSApp:
             
             self.orin_connected = True
                 
+                
     def disconnect_orin(self):
         ssh_connection.close()
         self.orin_connected = False
         
-    def robot_activated():
-        #variable_setting.grid_remove()
-        return
-    
-    def robot_deactivated():
-        #variable_setting.grid()
-        return
     
     def stream_video(self):
-        #read the data and seperate it into its index, and frame (we don't need the index so its just an _)
-        _, frame = web_camera_input.read()
-        cv2image = cv2.cvtColor(frame, cv2.COLOR_BGR2RGBA)
-        #turn it into an image :O
-        img = Image.fromarray(cv2image)
-        #make the image compatible with TK and allow it to achieve live feed
-        imgtk = ImageTk.PhotoImage(image=img)
+        time_a = time.time()
+        # async get the image data so startup is faster, 0.15 second difference over initial 10 second AVERAGE
+        imgtk = asyncio.run(get_video_data())
         #Display the image
         self.video_display.imgtk = imgtk
         self.video_display.configure(image=imgtk)
         #after displaying the image, run the function again, to achieve a live video effect
-        self.video_display.after(1, self.stream_video) 
-        #still need to test if this will effect the workability of the program
+        self.video_display.after(1, self.stream_video)
+        #record how long it took to load the frame
+        self.recorded_times.append(time.time()-time_a)
+        
+        #display fps updates every 30 seconds to the console
+        if time.time() - self.time_last > 30:
+            self.time_last = time.time()
+            self.console_display.insert("end", " ["+str(datetime.now())+"] Camera FPS: " + str(get_fps(self.recorded_times)))
+            self.recorded_times = []
+        
         
     def close_application(self):
-        #make sure the thread is running before we try and close it
-        if VIDEO_THREAD.is_alive():
-            VIDEO_THREAD.join() # close the started thread
+        #incase the video_thread is not defined (testing or future changes)
+        try:
+            #make sure the thread is running before we try and close it
+            if VIDEO_THREAD.is_alive():
+                VIDEO_THREAD.join() # close the started thread
+        except:
+            pass
         
         #if its ssh connected, the disconnect that ssh
         if self.orin_connected:
@@ -763,6 +813,16 @@ class GCSApp:
         #? This is because during comp we will connect the program, start the sub on autonomous mode, and then disconnect
             
         WINDOW.destroy() # destroy the window, since we are overriding the origional functionality
+        
+async def get_video_data():
+    #read the data and seperate it into its index, and frame (we don't need the index so its just an _)
+    _, frame = web_camera_input.read()
+    cv2image = cv2.cvtColor(frame, cv2.COLOR_BGR2RGBA)
+    #turn it into an image :O
+    img = Image.fromarray(cv2image)
+    #make the image compatible with TK and allow it to achieve live feed
+    imgtk = ImageTk.PhotoImage(image=img)
+    return imgtk
 
 # ================= RUN =================
 
