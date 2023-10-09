@@ -1,6 +1,6 @@
 {
     "ROBOT": {
-        "BATTERIES":{
+        "BATTERIES": {
             "NAME": "Battery",
             "COUNT": 4,
             "RECORDING": {
@@ -8,14 +8,14 @@
                 "amps": "int"
             }
         },
-        "MOTORS":{
+        "MOTORS": {
             "NAME": "Motor",
             "COUNT": 8,
             "RECORDING": {
                 "pwm": "int"
             }
         },
-        "SERVOS":{
+        "SERVOS": {
             "NAME": "Servo",
             "COUNT": 2,
             "RECORDING": {
@@ -24,12 +24,14 @@
         }
     },
     "GCS": {
-        "training_sim": false,
-        "training_real_world": false,
-        "manual_control": false,
-        "autonomous_control": false,
+        "ROBOT_SETTINGS": {
+            "training_sim": false,
+            "training_real_world": false,
+            "manual_control": false,
+            "autonomous_control": true
+        },
         "auto_navigate_error": false,
-
-        "ICON_PATH": ""
+        "ICO_PATH": "assets\\Ground_Station_Logo_px256.ico",
+        "PNG_PATH": "assets\\Ground_Station_Logo_px256.png"
     }
 }
