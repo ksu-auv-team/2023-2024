@@ -1,10 +1,9 @@
 
 # ================= TODO =================
 
-#TODO: Correct the style of the variable settings widgets
-#TODO: Make buttons for the top right corder
+#TODO: Correct the position of the variable settings widgets
 
-#TODO: Connect the terminal to actual warnings
+#TODO: Connect the terminal to actual eletrical warnings
 #TODO: Properly handle camera (currently taking live feed when it will really just be getting a numpy array)
 #TODO: Add / Handle Depth Camera
 #TODO: Add / Handle Sonar
@@ -33,6 +32,8 @@ from datetime import datetime
 import asyncio
 # added for the spacebar shutdown hotkey
 import keyboard
+#imported for camera
+import numpy as np
 
 
 # ================= CONFIG =================
@@ -60,6 +61,7 @@ sonar_input = ...
 ssh_connection = ...
 robot_active = False
 
+
 #! ==================== TO BE REMOVED ====================
 
 #? only needed if we dont compile the gcs
@@ -72,21 +74,6 @@ import SM
 
 #? imported for time benchmarks
 import time
-        
-        
-# ============ CRITICAL FUNCTIONS ============
-
-#Leaving this out of the app so it can be easily exported and used **IF** ever needed
-def initialize_submarine():
-    statemachine = SM.Submarine()
-    return statemachine
-
-def start_sub_program(statemachine):
-    statemachine.send("start_submarine")
-
-def stop_sub_program(statemachine):
-    statemachine.send("power_off")
-    return
 
 
 # ============ OTHER FUNCTIONS ============
@@ -125,7 +112,6 @@ class GCSApp:
         self.variable_settings = {}
         
         #DEV STATS
-        self.statemachine = initialize_submarine()
         self.time_last = time.time()
         self.recorded_times = []
         
@@ -134,13 +120,13 @@ class GCSApp:
         WINDOW.title()
         WINDOW.title("Ground Control Station")
         WINDOW.state('zoomed')
-        #WINDOW.wm_iconbitmap(ICO_PATH) #Top left icon picture
-        WINDOW.iconphoto(True, tk.PhotoImage(file=PNG_PATH))
+        WINDOW.wm_iconbitmap(ICO_PATH) #Top left icon picture
+        #WINDOW.iconphoto(True, tk.PhotoImage(file=PNG_PATH))
         
         #Setting sizes
         WINDOW.columnconfigure(
             2, 
-            weight=2, 
+            weight=1, 
             minsize=200
         )
         WINDOW.rowconfigure(
@@ -162,8 +148,7 @@ class GCSApp:
         
         keyboard.add_hotkey(
             hotkey="space", 
-            callback=stop_sub_program, 
-            args=[self.statemachine]
+            callback=self.stop_sub_program
         )
         
         # ================= FRAME CREATION =================
@@ -174,7 +159,7 @@ class GCSApp:
             row = 0, 
             column = 1, 
             rowspan=3, 
-            columnspan=2, 
+            columnspan=3, 
             sticky = "nsew", 
             padx=1, 
             pady=1
@@ -188,8 +173,7 @@ class GCSApp:
             column = 0, 
             rowspan = 4, 
             sticky = "nsew", 
-            ipadx=15, 
-            # pady=1
+            ipadx=15
         )
         
         self.sonar_frame = tk.Frame(WINDOW)
@@ -197,10 +181,8 @@ class GCSApp:
         #self.sonar_frame.columnconfigure(0, weight=1, uniform="right_col")
         self.sonar_frame.grid(
             row = 0, 
-            column = 3, 
-            sticky="nsew", 
-            # padx=1, 
-            # pady=1
+            column = 4, 
+            sticky="nsew"
         )
         
         self.graph_frame = tk.Frame(WINDOW)
@@ -208,9 +190,8 @@ class GCSApp:
         #self.graph_frame.columnconfigure(0, weight=1, uniform="right_col")
         self.graph_frame.grid(
             row = 1, 
-            column = 3, 
+            column = 4, 
             sticky="nsew", 
-            # padx=2, 
             pady=1
         )
         
@@ -219,10 +200,8 @@ class GCSApp:
         self.orin_frame.columnconfigure([0, 1], weight=1, minsize=50, uniform="right_col")
         self.orin_frame.grid(
             row = 2, 
-            column = 3, 
-            sticky = "nsew", 
-            # padx=2, 
-            # pady=2
+            column = 4, 
+            sticky = "nsew"
         )
         
         self.mode_selection_frame = tk.Frame(WINDOW)
@@ -230,11 +209,9 @@ class GCSApp:
         self.mode_selection_frame.columnconfigure([0, 1], weight=1)
         self.mode_selection_frame.grid(
             row = 3, 
-            column = 3, 
-            rowspan = 2, 
-            sticky = "nsew", 
-            # padx=2, 
-            # pady=2
+            column = 4, 
+            rowspan = 1, 
+            sticky = "nsew"
         )
         
         self.indicator_frame = tk.Frame(WINDOW)
@@ -244,22 +221,30 @@ class GCSApp:
             row = 3, 
             column = 1, 
             sticky="nsew", 
-            padx=1, 
-            # pady=2
+            padx=1
         )
         
         self.console_frame = tk.Frame(WINDOW)
-        self.console_frame["bg"] = "coral"
+        self.console_frame["bg"] = "black"
         self.console_frame.grid(
             row = 3, 
             column = 2, 
-            sticky="nsew", 
-            ipadx = 10
-            # padx=1, 
-            # pady=2
+            columnspan=1,
+            sticky="nsew"
         )
         self.console_frame.columnconfigure(0, weight=1)
         self.console_frame.rowconfigure(0, weight=1)
+        
+        self.button_frame = tk.Frame(WINDOW)
+        self.button_frame["bg"] = "black"
+        self.button_frame.grid(
+            row = 3, 
+            column = 3, 
+            rowspan=1, 
+            columnspan=1, 
+            sticky = "nsew", 
+            padx=1
+        )
         
         # ================= WEIDGET CREATION =================
         
@@ -542,50 +527,50 @@ class GCSApp:
                 sticky = "nsw"
             )
             #? don't forget to match these with the background and figure out why the checkmark is bugging out
-            #! self.variable_settings[key]["bg"] = "black"
-            #! self.variable_settings[key]["fg"] = "white"
+            self.variable_settings[key]["bg"] = "black"
+            self.variable_settings[key]["activebackground"] = "skyblue"
+            self.variable_settings[key]["activeforeground"] = "white"
+            self.variable_settings[key]["selectcolor"] = "gray"
+            
+            #change color depending on whether the setting is activated or not
+            if self.variable_settings[key+"_variable"].get():
+                self.variable_settings[key]["fg"] = "#50fa7b"
+            else:
+                self.variable_settings[key]["fg"] = "white"
         
-        #? I plan on putting these top right tab like size, maybe 10 pixels tall, with an info hover
-        # self.power_sub_on_button = tk.Button(self.indicator_frame)
-        # self.power_sub_on_button["text"] = "Power Sub On"
-        # self.power_sub_on_button["command"] = power_sub(True)
+        #? SUB CONTROL BUTTONS
+        self.init_sub_button = tk.Button(
+            self.button_frame,
+            command=self.initialize_submarine,
+            fg="black",
+            bg="gold",
+            padx = 2, 
+            pady = 2
+        )
+        self.init_sub_button["text"] = "Initialize Sub"
+        self.init_sub_button.grid()
         
-        # self.power_sub_off_button = tk.Button(self.indicator_frame)
-        # self.power_sub_off_button["text"] = "Power Sub On"
-        # self.power_sub_off_button["command"] = power_sub(False)
+        self.start_sub_button = tk.Button(
+            self.button_frame,
+            command=self.start_sub_program,
+            fg="black",
+            bg="#50fa7b",
+            padx = 2, 
+            pady = 2
+        )
+        self.start_sub_button["text"] = "Start Sub"
+        self.start_sub_button.grid()
         
-        # self.start_program_button = tk.Button(self.indicator_frame)
-        # self.start_program_button["text"] = "Power Sub On"
-        # self.start_program_button["command"] = start_sub_program
-        
-        # self.stop_program_button = tk.Button(self.indicator_frame)
-        # self.stop_program_button["text"] = "Power Sub On"
-        # self.stop_program_button["command"] = stop_sub_program
-        
-        # self.power_motors_on_button = tk.Button(self.indicator_frame)
-        # self.power_motors_on_button["text"] = "Power Sub On"
-        # self.power_motors_on_button["command"] = power_motors(True)
-        
-        # self.power_motors_off_button = tk.Button(self.indicator_frame)
-        # self.power_motors_off_button["text"] = "Power Sub On"
-        # self.power_motors_off_button["command"] = power_motors(False)
-        
-        # self.power_servos_on_button = tk.Button(self.indicator_frame)
-        # self.power_servos_on_button["text"] = "Power Sub On"
-        # self.power_servos_on_button["command"] = power_servos(True)
-        
-        # self.power_servos_off_button = tk.Button(self.indicator_frame)
-        # self.power_servos_off_button["text"] = "Power Sub On"
-        # self.power_servos_off_button["command"] = power_servos(False)
-
-        # self.power_sub_on_button.grid(row = 0, column = 0, sticky = "nsew", rowspan = 1, columnspan = 1, padx = 2, pady = 2)
-        # self.power_sub_off_button.grid(row = 1, column = 0, sticky = "nsew", rowspan = 1, columnspan = 1, padx = 2, pady = 2)
-        # self.start_program_button.grid(row = 0, column = 1, sticky = "nsew", rowspan = 1, columnspan = 1, padx = 2, pady = 2)
-        # self.stop_program_button.grid(row = 1, column = 1, sticky = "nsew", rowspan = 1, columnspan = 1, padx = 2, pady = 2)
-        # self.power_motors_on_button.grid(row = 0, column = 2, sticky = "nsew", rowspan = 1, columnspan = 1, padx = 2, pady = 2)
-        # self.power_motors_off_button.grid(row = 1, column = 2, sticky = "nsew", rowspan = 1, columnspan = 1, padx = 2, pady = 2)
-        # self.power_servos_on_button.grid(row = 0, column = 3, sticky = "nsew", rowspan = 1, columnspan = 1, padx = 2, pady = 2)
-        # self.power_servos_off_button.grid(row = 1, column = 3, sticky = "nsew", rowspan = 1, columnspan = 1, padx = 2, pady = 2)
+        self.stop_sub_button = tk.Button(
+            self.button_frame,
+            command=self.stop_sub_program,
+            fg="black",
+            bg="#f93527",
+            padx = 2, 
+            pady = 2
+        )
+        self.stop_sub_button["text"] = "Stop Sub"
+        self.stop_sub_button.grid()
 
         #?INDICATOR WIDGETS
         self.voltage_label = tk.Label(self.indicator_frame)
@@ -755,6 +740,12 @@ class GCSApp:
                 g = open(config_file, 'w')
                 json.dump(config, g, indent=4, sort_keys=False) #write the changed values to the config
                 g.close()
+                
+                #change color depending on whether the setting is activated or not
+                if self.variable_settings[key+"_variable"].get():
+                    self.variable_settings[key]["fg"] = "#50fa7b"
+                else:
+                    self.variable_settings[key]["fg"] = "white"
     
     
     def connect_orin(self): #! something feels wrong about the connection setting, i should probably test this :)
@@ -776,16 +767,39 @@ class GCSApp:
         ssh_connection.close()
         self.orin_connected = False
         
+    def initialize_submarine(self):
+        self.statemachine = SM.Submarine()
+
+    def start_sub_program(self):
+        try:
+            self.statemachine.send("start_submarine")
+        except:
+            self.console_display.insert("end", " ["+str(datetime.now())+"] Can't Start Submarine, Submarine is not Initialized.")
+
+    def stop_sub_program(self):
+        try:
+            self.statemachine.send("power_off")
+        except AttributeError:
+            self.console_display.insert("end", " ["+str(datetime.now())+"] Can't Stop Submarine, Submarine is not Initialized.")
+        
     
     def stream_video(self):
         time_a = time.time()
-        # async get the image data so startup is faster, 0.15 second difference over initial 10 second AVERAGE
-        imgtk = asyncio.run(get_video_data())
+        #read the data and seperate it into its index, and frame (we don't need the index so its just an _)
+        _, frame = web_camera_input.read()
+        if type(frame) != np.ndarray:
+            self.console_display.insert("end", " ["+str(datetime.now())+"] No Camera Found, Please Restart To Try Again.")
+            return
+            
+        cv2image = cv2.cvtColor(frame, cv2.COLOR_BGR2RGBA)
+        #turn it into an image :O
+        img = Image.fromarray(cv2image)
+        #make the image compatible with TK and allow it to achieve live feed
+        imgtk = ImageTk.PhotoImage(image=img)
         #Display the image
         self.video_display.imgtk = imgtk
         self.video_display.configure(image=imgtk)
-        #after displaying the image, run the function again, to achieve a live video effect
-        self.video_display.after(1, self.stream_video)
+        
         #record how long it took to load the frame
         self.recorded_times.append(time.time()-time_a)
         
@@ -794,6 +808,9 @@ class GCSApp:
             self.time_last = time.time()
             self.console_display.insert("end", " ["+str(datetime.now())+"] Camera FPS: " + str(get_fps(self.recorded_times)))
             self.recorded_times = []
+        
+        #after displaying the image, run the function again, to achieve a live video effect
+        self.video_display.after(1, self.stream_video)
         
         
     def close_application(self):
@@ -815,14 +832,17 @@ class GCSApp:
         WINDOW.destroy() # destroy the window, since we are overriding the origional functionality
         
 async def get_video_data():
-    #read the data and seperate it into its index, and frame (we don't need the index so its just an _)
-    _, frame = web_camera_input.read()
-    cv2image = cv2.cvtColor(frame, cv2.COLOR_BGR2RGBA)
-    #turn it into an image :O
-    img = Image.fromarray(cv2image)
-    #make the image compatible with TK and allow it to achieve live feed
-    imgtk = ImageTk.PhotoImage(image=img)
-    return imgtk
+    try:
+        #read the data and seperate it into its index, and frame (we don't need the index so its just an _)
+        _, frame = web_camera_input.read()
+        cv2image = cv2.cvtColor(frame, cv2.COLOR_BGR2RGBA)
+        #turn it into an image :O
+        img = Image.fromarray(cv2image)
+        #make the image compatible with TK and allow it to achieve live feed
+        imgtk = ImageTk.PhotoImage(image=img)
+        return imgtk
+    except Exception as e:
+        camera_restart_required = False
 
 # ================= RUN =================
 
