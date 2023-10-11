@@ -31,7 +31,7 @@
             "autonomous_control": true
         },
         "auto_navigate_error": false,
-        "ICO_PATH": "assets\\Ground_Station_Logo_px256.ico",
+        "ICO_PATH": "assets\\Ground_Station_Logo_px32.ico",
         "PNG_PATH": "assets\\Ground_Station_Logo_px256.png"
     }
 }
