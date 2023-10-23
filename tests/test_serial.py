@@ -8,17 +8,45 @@ arduino = serial.Serial(port = 'COM4', baudrate = 115200, timeout = 0.1)
 
 arduino.flush()
 
-FULL_ACTIVE = 0xFF
-CONTROL_ONLY = 0x04
-CONTROLLED_SHUTDOWN = 0x0F
-EMERGENCY_SHUTDOWN = 0xFF
+FULL_ACTIVE = 0x00
+CONTROL_ONLY = 0x01
+CONTROLLED_SHUTDOWN = 0x02
 
-KILL_SWITCH = 0b10000000
-PWM_ENABLE = 0b00000001
-SENSOR_ENABLE = 0b00000010
-SENSOR_FETCH = 0b00100000
+SENSOR_DATA_END = bytearray(0xFF)
 
-SENSOR_DATA_END = bytearray(0xFFFFFFFF)
+# FLAGS (first byte):
+# - [0x01] PWM SEND
+# - [0x02] Sensor Query
+# - [0x04] State Change
+# - [0x08] PWM Enable
+
+# SENSOR_QUERY
+# - [0x01] VITALS (check on hardware, send for debug)
+# - [0x02] POSITION (gyro & acceleromiter [as fast as possible])
+# - [0x04] HYDROPHONE (only at the end and much slower)
+# - [0x08] CAMERA (30fps)
+
+# R_STATE
+# - [0x00] FULL ACTIVE
+# - [0x01] CONTROL ONLY
+# - [0x02] CONTROLLED SHUTDOWN
+
+# SEND ORDER (IF APPLICABLE)
+# - FLAGS
+# - SENSOR_QUERY
+# - R_STATE
+# - PWM_ENABLE
+# - PWM VALUES
+
+# QUERY_RETURN (WIP)
+# - [0x00] EMPTY (for when no sensor query is made)
+# - [0x01-0x04] INT (not sure if we need multiple sizes or if/how python converts unsigned ints)
+# - [0x08-0x0F] FLOAT/DOUBLE (same question as before)
+# - [0x10] BOOL (for sending control flags)
+# - [0x11] CHAR (for labling data, e.g. 't' = temp, 'd' = distance, etc.)
+# - [0x12] CSTR (a string of chars ending with a null [0x00] byte)
+# - [0xF8] ERR_CODE (an error code)
+# - [0xFF] END (replace the 4 byte return code, these are all of a fixed length)
 
 # BASIC SERIAL DATA TRANSFER:
 # - Create bytearray() object
@@ -26,13 +54,6 @@ SENSOR_DATA_END = bytearray(0xFFFFFFFF)
 #  > Convert numerical values to bytearray(num.to_bytes(size, "little")) and use .append(arr)
 #  > Directly use .append(num) when integer value is less than 256
 # - Send using .write(populated_byte_arr)
-
-# CONTROL FLAG FORMAT:
-# BYTE  NAME            STATES
-# 0     BYTE_COUNT      0x04 = FLAG ONLY | 0x0C = FLAG + 8 MOTORS
-# 1     R_STATE         0x00 = FULL ACTIVE | 0x04 = CONTROL ONLY | 0xF = CONTROLLED SHUTDOWN | 0xFF = EMERGENCY SHUTDOWN
-# 2     SENSOR_QUERY    0x00 = NO QUERY | 0x04 = QUERY CAMERA | 0xF = QUERY VITALS | 0xF8 = QUERY POSITION | 0xFF = QUERY HYDROPHONE
-# 3     PWM_ENABLE      BITS ACT AS FLAGS FOR MOTORS 0-7 | 0x00 = ALL INACTIVE | 0xFF = ALL ACTIVE
 
 # Resolution of PWM for Arduino is only 256, cap to 250 for easy conversion (0 = 1000, 250 = 2000), reduces data transfer by ~40%
 def get_pwm():
@@ -50,7 +71,6 @@ def send_pwm():
         for i in get_pwm():
             byte_data.append(i)
 
-
     arduino.write(byte_data) # Send over serial
 
     print(list(byte_data)) # Debug
@@ -66,4 +86,3 @@ def send_pwm():
 while True: 
     send_pwm()
     time.sleep(5)
-
