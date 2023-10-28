@@ -1,5 +1,4 @@
 from statemachine import StateMachine, State
-from statemachine.contrib.diagram import DotGraphMachine
 # imported to handle the config file
 import json
 # used for the .sleep function for testing
@@ -110,10 +109,124 @@ class Submarine(StateMachine):
         self.target_position_difference = {"x":0, "y":0, "z":0, "alpha":0, "beta":0, "gama":0}
         self.target_position_list = list(self.target_position_difference.values())
         super().__init__(*args, **kwargs)
-        
+   
+    
+    
+    
     # before we switch to manual mode, record out last state so we can go back to it using "return_manual_control"
     def before_manual_control(self, event: str, source: State, target: State):
-        self.previous_state = self.current_state.value
+        print("checking for controller")
+        controller = True
+        
+        if controller:
+            print("controller found")
+            self.previous_state = self.current_state.value
+        else:
+            print("controller not found")
+            print("block state switch (using guards)")
+      
+    def on_enter_manual_control(self):
+        print("connects controller")
+        print("event listeners for controller input")
+        return         
+    
+    # record last state before switching
+    def before_enter_autonomous_sequence(self):
+        print("checking for camera")
+        camera = True
+        
+        if camera:
+            print("Camera found, entering autonomous mode")
+            self.previous_state = self.current_state.value
+        else:
+            print("camera not found")
+            print("block state switch (using guards)")
+        return
+    
+    def on_enter_autonomous_sequence(self):
+        print("feed zed camera image into AI")
+        print("AI searches database of images")
+        print("AI uses diagnostics and then controls the movement of the sub")
+        return 
+    
+    def on_enter_idle(self):
+        print("check diagnostics, right the sub, and return to the surface")
+        return
+    
+    # record last state before switching 
+    def before_enter_simulation_training(self):
+        print("checking for simulation environment")
+        inSimulationEnvironment = True
+        
+        if inSimulationEnvironment:
+            print("correct environment for simulation training")
+            print("commencing simulation")
+            self.previous_state = self.current_state.value
+        else:
+            print("incorrect environment")
+            print("block state switch (using guards)")
+        return
+    
+    def on_enter_simulation_training(self):
+        print("run unity simulation in tandem with GCS and diagnostics")
+        print("allow for manual control input")
+        print("pass diagnostic info to unity sim")
+        print("pass relevent unity sim training feedback to GCS and SM")
+        print("record info from sim training")
+        return
+    
+    def before_enter_simulation_training_sequence(self):
+        print("sts transition is only available if currently in st")
+        return
+    
+    def on_enter_simulation_training_sequence(self):
+        print("perform sequence")
+        print("pass in-simulation info to AI for learning")
+        print("record camera data")
+                
+        print("when the sequence finishes, return to simulation training")
+        return
+    
+    def before_enter_real_training(self):
+        print("Ask user whether real training will be commenced with manual or autonomous control")
+        print("buttons for both in GCS")
+        controlType = input("Commence with Manual or Autonomous control?")
+        
+        if controlType == "Manual":
+            print("run 'before_enter_manual_control'")
+            
+            if self.current_state.value == 'Manual':
+                print("run manual real training program")
+                
+        elif controlType == "Autonomous":
+            print("run 'before_enter_autonomous_control'")
+            
+            if self.current_state.value == 'Autonomous':
+                print("run autonomous real training program")
+        return
+    
+    def on_enter_autonomous_real_training(self):
+        # unsure of what this looks like
+        return
+    
+    def on_enter_manual_real_training(self):
+        # unsure of what this looks like
+        return
+    
+    def before_enter_real_training_sequence(self):
+        print("rts transition is only available if currently in autonomous rt")
+        return
+    
+    def on_enter_real_training_sequence(self):
+        print("perform sequence")
+        print("pass in-simulation info to AI for learning")
+        print("record camera data")
+                
+        print("when the sequence finishes, return to simulation training")
+        return
+    
+    
+    
     
     def on_enter_state(self, target, event):
         print(f"{self.name} enter: {target.id} from {event}")
