@@ -26,7 +26,7 @@ class CM:
     - `data`: A numpy array that stores joystick data.
     """
     
-    def __init__(self, num_of_axis: int = 5):
+    def __init__(self, num_of_axis: int = 6):
         """
         Initialize the CM object and call the method to initialize the joystick.
         
@@ -78,9 +78,10 @@ class CM:
         # Axis 3 = Right Joystick Y
         if joy_data[8][0]:
             self.data[3] = joy_data[2]
+            self.data[5] = joy_data[3]
         else:
             self.data[1] = joy_data[2]
-        self.data[0] = joy_data[3]
+            self.data[0] = joy_data[3]
         self.data[2] = joy_data[1]
         self.data[4] = joy_data[0]
 
@@ -90,7 +91,7 @@ class CM:
         """
         Print the current state of the `data` array.
         """
-        print(f'X: {self.data[0]} | Y: {self.data[1]} | Z: {self.data[2]} | Roll: {self.data[3]} | Yaw: {self.data[4]}')
+        print(f'X: {self.data[0]} | Y: {self.data[1]} | Z: {self.data[2]} | Roll: {self.data[3]} | Yaw: {self.data[4]} | Pitch: {self.data[5]}')
 
 if __name__ == "__main__":
     cm = CM()
