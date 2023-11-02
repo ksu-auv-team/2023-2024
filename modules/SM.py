@@ -4,12 +4,26 @@ import json
 # used for the .sleep function for testing
 import time
 
-# st = sim_training
-# rt = real_training
 # mc = manual control
 # as = autonomous_sequence
-# sts = sim_training_sequence
-# rts = real_training_sequence
+
+symboles = {
+    "Abydos": "",
+    
+    "Taurus": "Abydos",
+    "Serpens Caput": "Abydos",
+    "Capricornus": "",
+    "Monoceros": "",
+    "Sagittarius": "",
+    "Orion": "",
+    
+    "Aguria": "Earth",
+    "Cetus": "Earth",
+    "Centaurus": "",
+    "Cancer": "",
+    "Scutum": "",
+    "Eridanus": "",
+}
 
 def get_control_bools() -> dict:
     f = open(__file__.split("modules")[0]+'configs\\config.json')
