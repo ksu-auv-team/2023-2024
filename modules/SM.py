@@ -1,4 +1,5 @@
 from statemachine import StateMachine, State
+#from statemachine.contrib.diagram import DotGraphMachine
 # imported to handle the config file
 import json
 # used for the .sleep function for testing
@@ -28,7 +29,7 @@ symboles = {
 def get_control_bools() -> dict:
     f = open(__file__.split("modules")[0]+'configs\\config.json')
     config = json.load(f)
-    gcs_config = config["GCS"]
+    gcs_config = config["GCS"]["ROBOT_SETTINGS"]
     f.close()
     # returning only the control bools so we can do some programming magic for advanced if statements
     return {"manual_control": gcs_config["manual_control"], 
@@ -41,6 +42,7 @@ class Submarine(StateMachine):
     idle = State(initial=True) #Hover in place
     autonomous = State() #
     manual = State()
+    surface = State()
     shutdown = State(final=True)
     
     find_gate = State() #find the gate we want to go through
@@ -70,13 +72,14 @@ class Submarine(StateMachine):
     #?Repeat states from task 2
     
     start_submarine = (
-        idle.to(autonomous, cond="as_enabled")
-        | idle.to(manual, cond="mc_enabled")
+        idle.to(autonomous, cond="default_enabled")
+        | idle.to(manual, cond="default_enabled")
     )
     
     manual_control = manual.from_(
         autonomous, 
         idle, 
+        surface,
         follow_marker,
         position_towards_target,
         move_to_target,
@@ -93,20 +96,7 @@ class Submarine(StateMachine):
     )
     
     return_manual_control = (
-        manual.to(autonomous, cond="as_from_mc")
-    )
-    
-    gate_cycle(
-        autonomous.to(follow_marker)
-        | follow_marker.from_(
-            touch_marker,
-            drop_marker,
-            fire_torpedo,
-        )
-        | follow_marker.to(t1_cycle, cond="")
-        | follow_marker.to(t2_cycle, cond="")
-        | follow_marker.to(t3_cycle, cond="")
-        | follow_marker.to(t4_cycle, cond="")
+        manual.to(autonomous, cond="return_control")
     )
     
     t1_cycle = (
@@ -134,14 +124,30 @@ class Submarine(StateMachine):
     t4_cycle = (
         find_bin.to(find_marker)
         | position_towards_target.to(move_to_target)
-        | move_to_target.to(open_bin, cond="self.bin") #only start moving to open_bin we are on that step (will have to hammer out a more solid detection system later)
+        | move_to_target.to(open_bin, cond="found_bin") #only start moving to open_bin we are on that step (will have to hammer out a more solid detection system later)
         | open_bin.to(find_marker)
         
         | find_marker.to(position_towards_target)
-        | move_to_target.to(pickup_marker, cond="self.marker") #only start moving to pickup_marker we are on that step (will have to hammer out a more solid detection system later)
+        | move_to_target.to(pickup_marker, cond="found_marker") #only start moving to pickup_marker we are on that step (will have to hammer out a more solid detection system later)
         | pickup_marker.to(drop_marker)
-        | drop_marker.to(find_bin)
-        # | check_bounds.to() #! we need to always make sure we are in the octagon
+        | drop_marker.to(check_bounds)
+        | check_bounds.to(find_bin) #! we need to always make sure we are in the octagon
+    )
+    
+    gate_cycle = (
+        autonomous.to(find_gate)
+        | find_gate.to(enter_gate)
+        | enter_gate.to(follow_marker)
+        
+        | follow_marker.from_(
+            touch_marker,
+            drop_marker,
+            fire_torpedo,
+        )
+        | follow_marker.to(find_bouy, before="set_t1")
+        | follow_marker.to(find_bin, before="set_t2")
+        | follow_marker.to(find_stargate, before="set_t3")
+        | follow_marker.to(find_bin, before="set_t4")
     )
     
     set_idle = idle.from_(
@@ -162,10 +168,13 @@ class Submarine(StateMachine):
         drop_marker,
     )
     
+    idle.to(surface)
+    
     power_off = shutdown.from_(
         idle,
         autonomous, 
         manual, 
+        surface,
         follow_marker,
         position_towards_target,
         move_to_target,
@@ -185,6 +194,7 @@ class Submarine(StateMachine):
         self.previous_state: str = "" # records the previous state
         self.time_start: float = 0.0 #records the time that the sub was turned on
         self.auto_time_start: float = 0.0 #records the time when the sub first entered autonomous mode
+        self.task: int = 0 #what task number we are doing, corresponds to the task cycle, Ex self.task = 1 so we are on t1_cycle
         
         #? the robots targets (they might become strings instead of objects later)
         self.gate: object = ... #this will hold what gate we want to go through #when we enter the gate, we want to set this to nothing or ...
@@ -328,38 +338,56 @@ class Submarine(StateMachine):
     # TRANSITIONS
     # the transition funtions MUST return a boolean
     
-    def as_enabled(self) -> bool:
-        if dict(get_control_bools())["autonomous_control"]:
-            return True
-        return False    
-    
-    def mc_enabled(self, target, event) -> bool:
-        # made a varibale here just so we dont open and close the file multiple times
+    def default_enabled(self, source, target) -> bool:
         control_bools = get_control_bools()
-        # what `any(list(control_bools.values()))` does is it checks all the control settings and checks if ANY of them are true, 
-        # if at least one is true then it will return true, otherwise false. We do this so the robot will default manual mode if no mode is selected
-        if dict(control_bools)["manual_control"] or not any(list(control_bools.values())):
-            return True
-        return False
-    
-    def sts_enabled(self) -> bool:
-        if dict(get_control_bools())["sim_training"]:
-            return True
-        return False
-    
-    def rts_enabled(self) -> bool:
-        if dict(get_control_bools())["real_training"]:
-            return True
-        return False
+        start_modes = {
+            "autonomous": dict(control_bools)["autonomous_control"],
+            "manual": dict(control_bools)["manual_control"]
+        }
         
-    def return_control(self):
+        return start_modes[target.id] if start_modes[target.id] and not start_modes["autonomous"] else True
+        
+    def return_control(self, target):
         #get the currently requestion state transition (as to mc, idle to mc, etc. as tell whether its most previous state was that)
         #the idea is that if the previous state was move_to_target, then if the transition that is being requested is that, then approve.
         #so we don't have 50 billion functions all doing the same thing slightly differently
-        
-        return False
+        return True if target.id == self.previous_state else False
     
-    def as_from_mc(self):
-        if self.previous_state == "autonomous":
-            return True
-        return False
+    def found_bin(self):
+        return True if self.bin else False
+    
+    def found_marker(self):
+        return True if self.marker else False
+    
+    #? compress these 4 functions into 1 if possible
+    def set_t1(self):
+        self.task = 1
+        
+    def set_t2(self):
+        self.task = 2
+        
+    def set_t3(self):
+        self.task = 3
+        
+    def set_t4(self):
+        self.task = 4
+    
+    
+#sm = Submarine()
+
+#graph = DotGraphMachine(sm)  # also accepts instances
+#dot = graph()
+#dot.to_string() 
+
+#img_path = "C:\\Users\\Jack\\Pictures\\ALLD.png"
+#dot.write_png(img_path)
+
+
+
+#sm.start_submarine()
+# time.sleep(1)
+# sm.start_submarine()
+# time.sleep(1)
+# sm.return_manual_control()
+# time.sleep(1)
+# sm.power_off()
