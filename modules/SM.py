@@ -5,8 +5,10 @@ import json
 # used for the .sleep function for testing
 import time
 
-# mc = manual control
-# as = autonomous_sequence
+'''
+NOTE mc = manual control
+NOTE as = autonomous_sequence
+'''
 
 symboles = {
     "Abydos": "",
@@ -34,16 +36,20 @@ def get_control_bools() -> dict:
     # returning only the control bools so we can do some programming magic for advanced if statements
     return {"manual_control": gcs_config["manual_control"], 
             "autonomous_control":gcs_config["autonomous_control"], 
-            "sim_training":gcs_config["training_sim"], 
-            "real_training":gcs_config["training_real_world"]
             }
+    
+control_bools = get_control_bools()
+
+def update_control_bools():
+    control_bools = get_control_bools()
 
 class Submarine(StateMachine):
+    #Supreme States (can be access anywhere anytime no matter what)
     idle = State(initial=True) #Hover in place
-    autonomous = State() #
-    manual = State()
-    surface = State()
-    shutdown = State(final=True)
+    autonomous = State() #Broad name for the standard auto state switching, might remove this state in the future
+    manual = State() #Manual controller control
+    surface = State() #Check gyroscope and orient itself correctly then surface
+    shutdown = State(final=True) #Turn off sub (this does not surface the sub)
     
     find_gate = State() #find the gate we want to go through
     enter_gate = State() #go through the gate we previously targeted
@@ -71,9 +77,10 @@ class Submarine(StateMachine):
     check_bounds = State() #checks if it is within bound of the course (set octagon for task 4) #! State may be subject to removal
     #?Repeat states from task 2
     
-    start_submarine = (
-        idle.to(autonomous, cond="default_enabled")
-        | idle.to(manual, cond="default_enabled")
+    start_submarine = idle.to(
+        autonomous,
+        manual,
+        cond="default_enabled"
     )
     
     manual_control = manual.from_(
@@ -95,8 +102,24 @@ class Submarine(StateMachine):
         drop_marker,
     )
     
-    return_manual_control = (
-        manual.to(autonomous, cond="return_control")
+    return_manual_control = manual.to(
+        autonomous, 
+        idle, 
+        surface,
+        follow_marker,
+        position_towards_target,
+        move_to_target,
+        find_bouy,
+        touch_marker,
+        find_marker,
+        pickup_marker,
+        check_bounds,
+        find_stargate,
+        fire_torpedo,
+        find_bin,
+        open_bin,
+        drop_marker,
+        cond="return_control"
     )
     
     t1_cycle = (
@@ -153,6 +176,7 @@ class Submarine(StateMachine):
     set_idle = idle.from_(
         autonomous, 
         manual, 
+        surface,
         follow_marker,
         position_towards_target,
         move_to_target,
@@ -168,7 +192,24 @@ class Submarine(StateMachine):
         drop_marker,
     )
     
-    idle.to(surface)
+    to_surface = surface.from_(
+        idle,
+        autonomous, 
+        manual, 
+        follow_marker,
+        position_towards_target,
+        move_to_target,
+        find_bouy,
+        touch_marker,
+        find_marker,
+        pickup_marker,
+        check_bounds,
+        find_stargate,
+        fire_torpedo,
+        find_bin,
+        open_bin,
+        drop_marker,
+    )
     
     power_off = shutdown.from_(
         idle,
@@ -196,11 +237,11 @@ class Submarine(StateMachine):
         self.auto_time_start: float = 0.0 #records the time when the sub first entered autonomous mode
         self.task: int = 0 #what task number we are doing, corresponds to the task cycle, Ex self.task = 1 so we are on t1_cycle
         
-        #? the robots targets (they might become strings instead of objects later)
-        self.gate: object = ... #this will hold what gate we want to go through #when we enter the gate, we want to set this to nothing or ...
-        self.marker: object = ... #the marker that we have targeted 
+        #? the targets of the robot
+        self.gate: str = ... #this will hold what gate we want to go through #when we enter the gate, we want to set this to nothing or ...
+        self.marker: str = ... #the marker that we have targeted 
         self.bin: object = ... #the bin we have targeted
-        self.stargate: object = ... #the stargate that we have targeted
+        self.stargate: str = ... #the stargate that we have targeted
         
         #? does the robot have it?
         self.bin_opened: bool = False #whether the "self.bin_set" bin has been opened
@@ -216,7 +257,7 @@ class Submarine(StateMachine):
         self.t3_interation: int = 0
         self.t4_interation: int = 0
         
-        self.in_bounds: bool = False #whether we were in bounds last time we checked
+        self.in_bounds: bool = True #whether we were in bounds last time we checked
         
         super().__init__(*args, **kwargs)
    
@@ -237,109 +278,20 @@ class Submarine(StateMachine):
         print("event listeners for controller input")
         return         
     
-    # record last state before switching
-    def before_enter_autonomous_sequence(self):
-        print("checking for camera")
-        camera = True
-        
-        if camera:
-            print("Camera found, entering autonomous mode")
-            self.previous_state = self.current_state.value
-        else:
-            print("camera not found")
-            print("block state switch (using guards)")
-        return
-    
-    def on_enter_autonomous_sequence(self):
-        print("feed zed camera image into AI")
-        print("AI searches database of images")
-        print("AI uses diagnostics and then controls the movement of the sub")
-        return 
-    
     def on_enter_idle(self):
         print("check diagnostics, right the sub, and return to the surface")
         return
     
-    # record last state before switching 
-    def before_enter_simulation_training(self):
-        print("checking for simulation environment")
-        inSimulationEnvironment = True
-        
-        if inSimulationEnvironment:
-            print("correct environment for simulation training")
-            print("commencing simulation")
-            self.previous_state = self.current_state.value
-        else:
-            print("incorrect environment")
-            print("block state switch (using guards)")
-        return
-    
-    def on_enter_simulation_training(self):
-        print("run unity simulation in tandem with GCS and diagnostics")
-        print("allow for manual control input")
-        print("pass diagnostic info to unity sim")
-        print("pass relevent unity sim training feedback to GCS and SM")
-        print("record info from sim training")
-        return
-    
-    def before_enter_simulation_training_sequence(self):
-        print("sts transition is only available if currently in st")
-        return
-    
-    def on_enter_simulation_training_sequence(self):
-        print("perform sequence")
-        print("pass in-simulation info to AI for learning")
-        print("record camera data")
-                
-        print("when the sequence finishes, return to simulation training")
-        return
-    
-    def before_enter_real_training(self):
-        print("Ask user whether real training will be commenced with manual or autonomous control")
-        print("buttons for both in GCS")
-        controlType = input("Commence with Manual or Autonomous control?")
-        
-        if controlType == "Manual":
-            print("run 'before_enter_manual_control'")
-            
-            if self.current_state.value == 'Manual':
-                print("run manual real training program")
-                
-        elif controlType == "Autonomous":
-            print("run 'before_enter_autonomous_control'")
-            
-            if self.current_state.value == 'Autonomous':
-                print("run autonomous real training program")
-        return
-    
-    def on_enter_autonomous_real_training(self):
-        # unsure of what this looks like
-        return
-    
-    def on_enter_manual_real_training(self):
-        # unsure of what this looks like
-        return
-    
-    def before_enter_real_training_sequence(self):
-        print("rts transition is only available if currently in autonomous rt")
-        return
-    
-    def on_enter_real_training_sequence(self):
-        print("perform sequence")
-        print("pass in-simulation info to AI for learning")
-        print("record camera data")
-                
-        print("when the sequence finishes, return to simulation training")
-        return
-    
-    def on_enter_state(self, target, event):
-        print(f"{self.name} enter: {target.id} from {event}")
+    def on_enter_state(self, target, event, source):
+        if not source:
+            print(f"{event} enter: {target.value} from void")
+            return
+        print(f"{event} enter: {target.value} from {source.value}")
     
     # TRANSITIONS
     # the transition funtions MUST return a boolean
     
     def default_enabled(self, source, target) -> bool:
-        control_bools = get_control_bools()
         start_modes = {
             "autonomous": dict(control_bools)["autonomous_control"],
             "manual": dict(control_bools)["manual_control"]
@@ -373,18 +325,15 @@ class Submarine(StateMachine):
         self.task = 4
     
     
-#sm = Submarine()
+sm = Submarine()
 
-#graph = DotGraphMachine(sm)  # also accepts instances
-#dot = graph()
-#dot.to_string() 
+# graph = DotGraphMachine(sm)  # also accepts instances
+# dot = graph()
+# dot.to_string() 
+# img_path = "C:\\Users\\Jack\\Pictures\\ALLD.png"
+# dot.write_png(img_path)
 
-#img_path = "C:\\Users\\Jack\\Pictures\\ALLD.png"
-#dot.write_png(img_path)
-
-
-
-#sm.start_submarine()
+sm.start_submarine()
 # time.sleep(1)
 # sm.start_submarine()
 # time.sleep(1)
