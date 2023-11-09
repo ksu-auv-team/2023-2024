@@ -29,13 +29,10 @@ import json
 import fabric
 # imported for time stamps
 from datetime import datetime
-# imported for improved startup times
-import asyncio
 # added for the spacebar shutdown hotkey
 import keyboard
 #imported for camera
 import numpy as np
-
 
 # ================= CONFIG =================
 config_file = __file__.split("2024")[0]+'2024\\configs\\'
