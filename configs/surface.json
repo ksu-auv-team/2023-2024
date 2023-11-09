@@ -1,0 +1,33 @@
+{
+    "ROBOT": {
+        "BATTERIES": {
+            "NAME": "Battery",
+            "COUNT": 4,
+            "RECORDING": {
+                "voltage": "float",
+                "amps": "int"
+            }
+        },
+        "MOTORS": {
+            "NAME": "Motor",
+            "COUNT": 8,
+            "RECORDING": {
+                "pwm": "int"
+            }
+        },
+        "SERVOS": {
+            "NAME": "Servo",
+            "COUNT": 2,
+            "RECORDING": {
+                "pwm": "int"
+            }
+        }
+    },
+    "ASSETS": {
+        "ICO_PATH": "assets\\Ground_Station_Logo_px32.ico",
+        "PNG_PATH": "assets\\Ground_Station_Logo_px256.png"
+    },
+    "ERRORS": {
+        "auto_navigate": false
+    }
+}

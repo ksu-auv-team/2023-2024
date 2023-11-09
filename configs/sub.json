@@ -1,0 +1,22 @@
+{
+    "SYMBOLS": {
+        "Abydos": "",
+        
+        "Taurus": "Abydos",
+        "Serpens Caput": "Abydos",
+        "Capricornus": "",
+        "Monoceros": "",
+        "Sagittarius": "",
+        "Orion": "",
+        
+        "Aguria": "Earth",
+        "Cetus": "Earth",
+        "Centaurus": "",
+        "Cancer": "",
+        "Scutum": "",
+        "Eridanus": ""
+    },
+    "CONTROL_MODE": {
+        "manual_control": false
+    }
+}
