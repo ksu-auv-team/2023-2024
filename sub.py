@@ -107,8 +107,8 @@ class Submarine(StateMachine):
     t2_cycle = (
         find_bin.to(position_towards_target) #find our target bin
         | position_towards_target.to(move_to_target) #position ourselves towards the targeted bin
-        | move_to_target.to(open_bin) #move towards our targeted bin
-        | open_bin.to(open_bin) #open the targeted bin
+        | move_to_target.to(open_bin, cond="found_bin") #move towards our targeted bin
+        | open_bin.to(drop_marker) #open the targeted bin
         | drop_marker.to(find_bin) #drop the marker into the bin, if we have another iteration, then go back to finding the next bin
     )
     
@@ -242,6 +242,10 @@ class Submarine(StateMachine):
         super().__init__(*args, **kwargs)
         
     def on_enter_state(self, target, event, source):
+        non_auto = ["manual_control", "idle", "hover", "shutdown", "surface"]
+        if target.id not in non_auto and not self.auto_time_start:
+            self.auto_time_start = time.time()
+        
         #at the beginning we move from __init__ state to the hover state in which source is null and will error us, 
         # so we just check and say its void if we cant find a source
         if not source:
@@ -256,20 +260,27 @@ class Submarine(StateMachine):
         else:
             #! send error to GCS (surface.py) console (if its hooked up) & log it
             pass
+        
+    def on_enter_autonomous(self):
+        self.auto_time_start = time.time()
     
     def on_enter_manual_control(self):
-        f'X: {self.data[0]} | Y: {self.data[1]} | Z: {self.data[2]} | Roll: {self.data[3]} | Yaw: {self.data[4]} | Pitch: {self.data[5]}'
-        return
+        self.auto_time_start = 0 #set the auto_time_start to False (0)
+        #f'X: {self.data[0]} | Y: {self.data[1]} | Z: {self.data[2]} | Roll: {self.data[3]} | Yaw: {self.data[4]} | Pitch: {self.data[5]}'
+        x, y, z, r, y, p = self.controller.get_data() #assign the data values ^^^
     
     def on_enter_hover(self):
         #proceed to hover the submarine (and orient it correctly if needed)
         #! this shouldn't need an AI to do
-        return
+        pass
     
     def on_enter_surface(self):
         #proceed to surface the submarine (and orient it correctly if needed)
         #! this might need AI for object avoidence if we choose to do so
-        return
+        pass
+    
+    def on_drop_marker(self):
+        self.marker.drop()
     
     def after_touch_marker(self):
         self.t1_interation += 1
@@ -311,7 +322,6 @@ class Submarine(StateMachine):
         if target.id == "manual" and self.controller and mc_enabled():
             return True
         elif target.id == "hover":
-            self.auto_time_start = time.time()
             return True
         return False
         
