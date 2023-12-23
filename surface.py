@@ -3,6 +3,7 @@
 
 #TODO: Correct the position of the variable settings widgets
 #TODO: Add pwm graph
+#TODO: Finish optimizing the combobox_update function
 
 #TODO: Connect the terminal to actual eletrical warnings
 #TODO: Properly handle camera (currently taking live feed when it will really just be getting a numpy array)
@@ -34,19 +35,24 @@ import keyboard
 #imported for camera
 import numpy as np
 
-# ================= CONFIG =================
-config_file = __file__.split("2024")[0]+'2024\\configs\\'
-f = open(config_file+"surface.json", 'r')
-surface_config = json.load(f)
+# ================= SETTINGS =================
+# These settings are a bandaid for efficiency problems :)
+#MAX_SHOW = 10 #will load a maximum of 10 sets of items at a time on the left panel (set 0 to disable)
 
+# ================= CONFIG HANDLINE =================
+root_path = __file__.split("2024")[0]+"2024\\"
+config_folder = root_path+'configs\\'
+f = open(config_folder+"surface.json", 'r')
+
+surface_config = json.load(f)
 COMPONENTS = surface_config["ROBOT"]
-ICO_PATH = __file__.split("2024")[0]+"2024\\"+surface_config["ASSETS"]["ICO_PATH"]
-PNG_PATH = __file__.split("2024")[0]+"2024\\"+surface_config["ASSETS"]["PNG_PATH"]
+ICO_PATH = root_path+surface_config["ASSETS"]["ICO_PATH"]
+PNG_PATH = root_path+surface_config["ASSETS"]["PNG_PATH"]
 auto_navigate_error = surface_config["ERRORS"]["auto_navigate"]
 
 f.close()
 
-f = open(config_file+"sub.json", 'r')
+f = open(config_folder+"sub.json", 'r')
 sub_config = json.load(f)
 f.close()
 
@@ -74,6 +80,7 @@ ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID(myappid)
 #? imported for time benchmarks
 import time
 
+#! also i should remove all the FPS benchmarking code in the stream_video function once the lag is fixed
 
 # ============ OTHER FUNCTIONS ============
 
@@ -82,9 +89,27 @@ def get_fps(recorded_times):
     for t in recorded_times:
         fps += t
     return 1/(fps/len(recorded_times))
-            
 
-# ================= WINDOW =================
+class Component:
+    def __init__(self, name: str):
+        self.label_object = {} 
+        self.value_display_objects = {}
+        self.name = tk.StringVar(value = name)
+        self.values = {}
+        
+    def update_values(self, new_values):
+        for k, v in self.values.items():
+            v.set(new_values[k])
+            
+    def get_values(self): #can be optimized?
+        temp_dict = {}
+        for k in self.values.keys():
+            temp_dict[k] = self.values[k].get()
+            
+        return temp_dict
+    
+    def get_value(self, value):
+        return self.values[value].get()
 
 class GCSApp:
     def __init__(self, WINDOW):
@@ -266,91 +291,15 @@ class GCSApp:
         
         self.components = {} #create a dictionary list of all components, so it can be easily accessed after being created dynamically
 
-        for k, dictionary in COMPONENTS.items():
+        for name, info in COMPONENTS.items():
             #since the values of the combobox were not default set, tkinter sets the values paramater as a string instead of a tuple like it's supposed to be (wtf tkinter)
             #so we have to account for it being a string instead of just concating a tuple
             if type(self.data_combobox["values"]) == str:
-                self.data_combobox["values"] = (k,)
+                self.data_combobox["values"] = (name,)
             else:
-                self.data_combobox["values"] += (k,)
+                self.data_combobox["values"] += (name,)
             
-            count = dictionary["COUNT"]
-            
-            #set the list of components for this subsystem as blank since it will give us an error if it doesn't exist
-            self.components[k] = []
-            
-            #the row number that the current tk object should be created on
-            rowcount = 1 #default to 1 because the combo box is row 0
-            
-            for n in range(count):
-                #the reason we dont set the value_objects here is because they must be dynamically created, so it is created below...
-                self.components[k].append(
-                    self.Component(name=k,
-                        label_object=tk.Label(self.data_display_frame), 
-                    )
-                )         
-                
-                #assign the just created component to a variable so we can edit it
-                component = self.components[k][-1]
-                
-                component.label_object["text"] = dictionary["NAME"]+" "+str(n+1)+":"
-                component.label_object["font"] = "Helvetica 10 bold"
-                component.label_object["bg"] = "black"
-                component.label_object["fg"] = "limegreen"
-                component.label_object.grid(
-                    row = rowcount, 
-                    column=0, 
-                    columnspan = 2,
-                    sticky = "nsew", 
-                    padx = 5, 
-                    pady = 5
-                )
-                #this will turn the label_object invisible while still having tkinter remember its position
-                component.label_object.grid_remove()
-                
-                #increase the row count because the component name label was just created
-                rowcount += 1
-                
-                for stat, stat_type in dictionary["RECORDING"].items():
-                    #properly create the recording dictionary that can use either IntVar, DoubleVar, or StringVar
-                    if stat_type == "int":
-                        component.recording[stat] = tk.IntVar(value = 1)
-                    elif stat_type == "float":
-                        component.recording[stat] = tk.DoubleVar(value = 1.23)
-                    else:
-                        #if some idiot ever forgets to put a stat type, then raise an exception to tell them
-                        raise TypeError("TypeError: missing subsytem recorded value type")
-                    
-                    #create a label and value holder for each stat that is to be recorded for the component
-                    component.value_objects[stat] = [tk.Label(self.data_display_frame), tk.Label(self.data_display_frame)]
-                    label = component.value_objects[stat][0]
-                    value = component.value_objects[stat][1]
-                    
-                    label["text"] = stat
-                    label["bg"] = "black"
-                    label["fg"] = "white"
-                    label.grid(
-                        row = rowcount, 
-                        column=0, 
-                        sticky = "e", 
-                        padx = 5, 
-                        pady = 5
-                    )
-                    label.grid_remove()
-                    
-                    value["textvariable"] = component.recording[stat]
-                    value["bg"] = "black"
-                    value["fg"] = "white"
-                    value.grid(
-                        row = rowcount, 
-                        column=1, 
-                        sticky = "w", 
-                        padx = 5, 
-                        pady = 5
-                    )
-                    value.grid_remove()
-                    
-                    rowcount += 2
+            self.init_component_dict(name, info)
         
         #? SONAR WIDGETS
         self.sonar_display = tk.Label(self.sonar_frame)
@@ -508,9 +457,7 @@ class GCSApp:
         )
 
         #? MODE SELECTION WIDGETS (Variable Settings)
-        #go through the keys
-        gcs_config_keys = sub_config["CONTROL_MODE"].keys()
-        for key in gcs_config_keys:
+        for key, active in sub_config["CONTROL_MODE"].items():
             #dynamically create the robot settings
             self.variable_settings[key] = tk.Checkbutton(
                 self.mode_selection_frame, 
@@ -520,7 +467,7 @@ class GCSApp:
                 command=self.toggle_config
             )
             #since its dynamic, we have to store everything in a dictionary
-            self.variable_settings[key+"_variable"] = tk.BooleanVar(value=sub_config["CONTROL_MODE"][key]) #here we just set the key_variable to what the checkbox is suposed to be (true/false)
+            self.variable_settings[key+"_variable"] = tk.BooleanVar(value=active) #here we just set the key_variable to what the checkbox is suposed to be (true/false)
             self.variable_settings[key]["variable"] = self.variable_settings[key+"_variable"]
             self.variable_settings[key].grid(
                 sticky = "nsw"
@@ -685,67 +632,154 @@ class GCSApp:
             column=0,
             sticky = "nsew"
         )
-        
-        
-    # ================= SUB PART CLASSES =================
-
-    class Component:
-        def __init__(self, name: str, label_object, recording:list = {}):
-            self.label_object = label_object 
-            self.value_objects = {}
-            self.name = tk.StringVar(value = name)
-            self.recording = recording
-            self.display_string = ""
+           
+    # ================= FUNCTIONS =================
             
-        def update_values(self):
-            for k, v in self.recording.items():
-                return
+    def combobox_update(self, event):#, start: int = 0):
+        # ^^^ we got 3 loops nested in each other which is REALLY bad, i was starting on some max display changes to try and eleviate any possible disasters, 
+            # but i need to change to ordered dictionaries for self.components, so i commented my code and am saving this change for later
             
-            
-    def combobox_update(self, event):
         current_subsystem = self.data_combobox.get()
+        # max_show = MAX_SHOW+start
+        
+        # if len(self.components) < start:
+        #     return
+        
+        # if len(self.components) < max_show:
+        #     max_show = len(self.components)
+            
+        dictionary = self.components#[start:max_show] 
+        # ^^^ pretty sure we need to use the itertools lib to slice a ordered dictionary :(
+            #? https://stackoverflow.com/questions/30975339/slicing-a-python-ordereddict 
         
         #hide any currently shown subsystem components
-        for i, subsystem in enumerate(self.components):
-            #make sure they didn't just select the same subsystem, that would cause for useless computation if we hide and show that same subsystem
-            if subsystem != current_subsystem:
-                #hide the labels
-                for component in self.components[subsystem]:
-                    component.label_object.grid_remove()
+        for subsystem in dictionary:
+            # c = 0
+            
+            # if subsystem == current_subsystem:
+            # ^^^ make sure they didn't just select the same subsystem
+            #     pass
+            
+            # if c > max_show and max_show-start != 0: #efficiency bandaid :)
+            #     pass
+            
+            # if len(self.components) < start+c:
+            #     return
+        
+            #hide the labels
+            for component in self.components[subsystem]:
+                component.label_object.grid_remove()
+                
+                #hide the values and those values' labels
+                for stat in component.value_display_objects:
+                    component.value_display_objects[stat][0].grid_remove()
+                    component.value_display_objects[stat][1].grid_remove()
                     
-                    #hide the values and those values' labels
-                    for stat in component.value_objects:
-                        component.value_objects[stat][0].grid_remove()
-                        component.value_objects[stat][1].grid_remove()
+                # c += 1
         
         #show the specified subsystem components
         for component in self.components[current_subsystem]:
             component.label_object.grid()
             
-            for stat in component.value_objects:
-                component.value_objects[stat][0].grid()
-                component.value_objects[stat][1].grid()
+            for stat in component.value_display_objects:
+                component.value_display_objects[stat][0].grid()
+                component.value_display_objects[stat][1].grid()
+    
+    def init_component_dict(self, name: str, info: dict):
+        #set the list of components for this subsystem as blank since it will give us an error if it doesn't exist
+        self.components[name] = []
+        
+        #the row number that the current tk object should be created on
+        rowcount = 1 #default to 1 because the combo box is row 0
+        
+        for n in range(info["COUNT"]):
+            #the reason we dont set the value_display_objects here is because they must be dynamically created, so it is created below...
+            self.components[name].append(Component(name=name))         
             
+            #assign the just created component to a variable so we can edit it
+            component_object = self.components[name][-1]
             
-    # ================= FUNCTIONS =================
+            component_object.label_object=tk.Label(self.data_display_frame)
+            component_object.label_object["text"] = info["NAME"]+" "+str(n+1)+":"
+            component_object.label_object["font"] = "Helvetica 10 bold"
+            component_object.label_object["bg"] = "black"
+            component_object.label_object["fg"] = "limegreen"
+            component_object.label_object.grid(
+                row = rowcount, 
+                column=0, 
+                columnspan = 2,
+                sticky = "nsew", 
+                padx = 5, 
+                pady = 5
+            )
+            #this will turn the label_object invisible while still having tkinter remember its position
+            component_object.label_object.grid_remove()
+            
+            #increase the row count because the component name label was just created
+            rowcount += 1
+            
+            for stat, stat_type in info["RECORDING"].items():
+                #properly create the values dictionary that can use either IntVar, DoubleVar, or StringVar
+                if stat_type.lower() == "int":
+                    component_object.values[stat] = tk.IntVar(value = 1)
+                elif stat_type.lower() == "float":
+                    component_object.values[stat] = tk.DoubleVar(value = 1.23)
+                elif stat_type.lower() == "string":
+                    component_object.values[stat] = tk.StringVar(value = "abc")
+                else:
+                    #if someone ever forgets to put a stat type, then raise an exception to tell them
+                    raise TypeError("TypeError: missing subsytem recorded value type of \"int\", \"float\", or \"string\"")
+                
+                #create a label and value holder for each stat that is to be recorded for the component
+                component_object.value_display_objects[stat] = [
+                    tk.Label(self.data_display_frame), 
+                    tk.Label(self.data_display_frame)
+                ]
+                label_text_object = component_object.value_display_objects[stat][0]
+                value_text_object = component_object.value_display_objects[stat][1]
+                
+                label_text_object["text"] = stat
+                label_text_object["bg"] = "black"
+                label_text_object["fg"] = "white"
+                label_text_object.grid(
+                    row = rowcount, 
+                    column=0, 
+                    sticky = "e", 
+                    padx = 5, 
+                    pady = 5
+                )
+                label_text_object.grid_remove()
+                
+                value_text_object["textvariable"] = component_object.values[stat]
+                value_text_object["bg"] = "black"
+                value_text_object["fg"] = "white"
+                value_text_object.grid(
+                    row = rowcount, 
+                    column=1, 
+                    sticky = "w", 
+                    padx = 5, 
+                    pady = 5
+                )
+                value_text_object.grid_remove()
+                
+                rowcount += 2
     
     def toggle_config(self):
-        #record the keys for the robot settings
-        gcs_config_keys = sub_config["CONTROL_MODE"].keys()
-        for key in gcs_config_keys:
+        for key in sub_config["CONTROL_MODE"].keys():
             #make sure that the variables are different before trying to change them
-            if sub_config["CONTROL_MODE"][key] != self.variable_settings[key+"_variable"].get():
-                sub_config["CONTROL_MODE"][key] = self.variable_settings[key+"_variable"].get() #change it
-                g = open(config_file, 'w')
-                json.dump(sub_config, g, indent=4, sort_keys=False) #write the changed values to the sub config
-                g.close()
-                
-                #change color depending on whether the setting is activated or not
-                if self.variable_settings[key+"_variable"].get():
-                    self.variable_settings[key]["fg"] = "#50fa7b"
-                else:
-                    self.variable_settings[key]["fg"] = "white"
-    
+            if sub_config["CONTROL_MODE"][key] == self.variable_settings[key+"_variable"].get():
+                pass
+            
+            sub_config["CONTROL_MODE"][key] = self.variable_settings[key+"_variable"].get() #change it
+            g = open(config_file, 'w')
+            json.dump(sub_config, g, indent=4, sort_keys=False) #write the changed values to the sub config
+            g.close()
+            
+            #change color depending on whether the setting is activated or not
+            if self.variable_settings[key+"_variable"].get():
+                self.variable_settings[key]["fg"] = "#50fa7b"
+            else:
+                self.variable_settings[key]["fg"] = "white"
     
     def connect_orin(self): #! something feels wrong about the connection setting, i should probably test this :)
         # if its already connected and it isn't trying to connect to the exact same host and port
@@ -760,8 +794,7 @@ class GCSApp:
                 return
             
             self.orin_connected = True
-                
-                
+                            
     def disconnect_orin(self):
         ssh_connection.close()
         self.orin_connected = False
@@ -781,11 +814,15 @@ class GCSApp:
         except AttributeError:
             self.console_display.insert("end", " ["+str(datetime.now())+"] Can't Stop Submarine, Submarine is not Initialized.")
         
-    
     def stream_video(self):
         time_a = time.time()
         #read the data and seperate it into its index, and frame (we don't need the index so its just an _)
-        _, frame = web_camera_input.read()
+        try:
+            _, frame = web_camera_input.read()
+        except AttributeError:
+            self.console_display.insert("end", " ["+str(datetime.now())+"] No Camera Found, Please Restart To Try Again.")
+            return
+        
         if type(frame) != np.ndarray:
             self.console_display.insert("end", " ["+str(datetime.now())+"] No Camera Found, Please Restart To Try Again.")
             return
@@ -811,7 +848,6 @@ class GCSApp:
         #after displaying the image, run the function again, to achieve a live video effect
         self.video_display.after(1, self.stream_video)
         
-        
     def close_application(self):
         #incase the video_thread is not defined (testing or future changes)
         try:
@@ -829,6 +865,7 @@ class GCSApp:
         #? This is because during comp we will connect the program, start the sub on autonomous mode, and then disconnect
             
         WINDOW.destroy() # destroy the window, since we are overriding the origional functionality
+    
         
 async def get_video_data():
     try:
@@ -842,8 +879,6 @@ async def get_video_data():
         return imgtk
     except Exception as e:
         camera_restart_required = False
-
-# ================= RUN =================
 
 if __name__ == "__main__":
     WINDOW = tk.Tk()
