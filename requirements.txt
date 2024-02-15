@@ -1,4 +1,12 @@
-opencv-python
-fabric
-pillow
-keyboard
+blinker
+click
+Flask
+Flask-SQLAlchemy
+greenlet
+itsdangerous
+Jinja2
+MarkupSafe
+numpy
+SQLAlchemy
+typing_extensions
+Werkzeug
