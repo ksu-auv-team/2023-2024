@@ -63,23 +63,27 @@ def zed_camera_capture_thread(camera_frames, camera_locks):
     @param camera_frames Dictionary to store the captured frames.
     @param camera_locks Dictionary of locks for thread-safe frame updates.
     """
-    init_params = sl.InitParameters()
-    cap = sl.Camera()
-    if cap.open(init_params) != sl.ERROR_CODE.SUCCESS:
-        print("Failed to open ZED camera")
-        return
+    init_params = sl.InitParameters(depth_mode=sl.DEPTH_MODE.ULTRA,
+                                 coordinate_units=sl.UNIT.METER,
+                                 coordinate_system=sl.COORDINATE_SYSTEM.RIGHT_HANDED_Y_UP)
+    init_params.camera_resolution = sl.RESOLUTION.VGA
+    zed = sl.Camera()
+    status = zed.open(init_params)
+    if status != sl.ERROR_CODE.SUCCESS:
+        print(repr(status))
+        exit()
     
     image = sl.Mat()
     runtime_parameters = sl.RuntimeParameters()
     
-    while cap.is_opened():
-        if cap.grab(runtime_parameters) == sl.ERROR_CODE.SUCCESS:
-            cap.retrieve_image(image, sl.VIEW.LEFT)
+    while zed.is_opened():
+        if zed.grab(runtime_parameters) == sl.ERROR_CODE.SUCCESS:
+            zed.retrieve_image(image, sl.VIEW.LEFT)
             frame = image.get_data()
             with camera_locks["zed"]:
                 _, buffer = cv2.imencode('.jpg', frame)
                 camera_frames["zed"] = buffer.tobytes()
-    cap.close()
+    zed.close()
 
 def generate_frames(camera_key):
     """
