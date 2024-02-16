@@ -8,51 +8,61 @@
     <script src="../static/js/index.js"></script>
 </head>
 
+<header></header>
+
 <body>
-
-</body>
-    <div id="mySidebar" class="sidebar">
-        <a href="javascript:void(0)" class="closebtn" onclick="toggleNav()">×</a>
-        <a href="#" onclick="openTab('Camera')">Camera</a>
-        <a href="#" onclick="openTab('Data')">Data</a>
-        <a href="#" onclick="openTab('Settings')">Settings</a>
-    </div>
-
     <main>
-        <button class="tab-button" onclick="toggleNav()">☰ Open Sidebar</button>
+        <section id="camera_streams">
+            <h1 class="section_title">Camera Feeds (VGA)</h1>
+            <div id="stream">
+                <div class="video_stream">
+                    <div class="stream_header">
+                        <h2 class="camera_title">Camera 1</h2>
+                        <button onclick="test_webcam(1)">
+                            <img src="/static/imgs/camera_svg.svg" alt="Toggle Camera">
+                        </button>
+                    </div>
+                    <hr>
+                    <video id="camera_feed_1" src="" autoplay></video>
+                </div>
+                <div class="video_stream">
+                    <div class="stream_header">
+                        <h2 class="camera_title">Camera 2</h2>
+                        <button onclick="test_webcam(2)">
+                            <img src="/static/imgs/camera_svg.svg" alt="Toggle Camera">
+                        </button>
+                    </div>
+                    <hr>
+                    <video id="camera_feed_2" src="" autoplay></video>
+                </div>
+            </div>
+        </section>
 
-        <h2 onclick="test_webcam()">Camera Feeds</h2>
-        <div id="stream">
-            <div class="video_stream">
-                <h3>Camera 0</h3>
-                <video id="camera_feed_1" src="" autoplay></video>
-            </div>
-            <div class="video_stream">
-                <h3>Camera 1</h3>
-                <video id="camera_feed_2" src="" autoplay></video>
-            </div>
-        </div>
+        <hr>
 
-        <div id="Data" class="tab-content">
-            <h2>Data Monitoring</h2>
-            <div>
-                <h3>Voltage & Current Monitoring</h3>
-                <p>Content...</p>
+        <section id="data_monitoring">
+            <div id="Data" class="tab-content">
+                <h1>Data Monitoring</h1>
+                <div>
+                    <h2>Voltage & Current Monitoring</h2>
+                    <p>Content...</p>
+                </div>
+                <div>
+                    <h2>Orientation</h2>
+                    <p>Content...</p>
+                </div>
+                <div>
+                    <h2>Motor View</h2>
+                    <p>Content...</p>
+                </div>
+                <div>
+                    <h2>Temperature Monitoring</h2>
+                    <p>Content...</p>
+                </div>
             </div>
-            <div>
-                <h3>Orientation</h3>
-                <p>Content...</p>
-            </div>
-            <div>
-                <h3>Motor View</h3>
-                <p>Content...</p>
-            </div>
-            <div>
-                <h3>Temperature Monitoring</h3>
-                <p>Content...</p>
-            </div>
-        </div>
+        </section>
 
 
     </main>
+</body>
 </html>
