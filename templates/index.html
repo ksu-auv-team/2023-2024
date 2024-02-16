@@ -4,154 +4,55 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AUV Control Panel</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            background-color: #121212;
-            color: #D1D1D1;
-        }
-        .sidebar {
-            height: 100%;
-            width: 250px; /* Default width */
-            position: fixed;
-            z-index: 1;
-            top: 0;
-            left: 0;
-            background-color: #111;
-            overflow-x: hidden;
-            transition: 0.5s;
-            padding-top: 60px;
-            transform: translateX(-250px); /* Start off-screen */
-        }
-        .sidebar.active {
-            transform: translateX(0); /* Slide in */
-        }
-        .sidebar a {
-            padding: 10px 15px;
-            text-decoration: none;
-            font-size: 18px;
-            color: #D1D1D1;
-            display: block;
-            transition: 0.3s;
-        }
-        .sidebar a:hover {
-            color: #f1f1f1;
-        }
-        .sidebar .closebtn {
-            position: absolute;
-            top: 0;
-            right: 25px;
-            font-size: 36px;
-            margin-left: 50px;
-        }
-        .tab-content {
-            display: none;
-            padding: 20px;
-            margin-left: 250px; /* Adjusted for sidebar */
-        }
-        .active-tab {
-            display: block;
-        }
-        .tab-button {
-            cursor: pointer;
-            display: none; /* Hide by default */
-        }
-        .image-container {
-            display: inline-block;
-            width: 100%; /* Full width on mobile */
-            margin: 10px 0;
-            background-color: #343434;
-            border-radius: 5px;
-            padding: 10px;
-        }
-        .image-container img {
-            width: 100%;
-            border-radius: 5px;
-        }
-        @media screen and (min-width: 768px) {
-            .image-container {
-                width: 45%; /* Adjust based on your preference for larger screens */
-                margin: 10px;
-            }
-            .tab-button {
-                display: block; /* Show the sidebar toggle button on larger screens */
-            }
-            .tab-content {
-                margin-left: 0; /* No sidebar margin on smaller screens */
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="../static/css/style.css">
+    <script src="../static/js/index.js"></script>
 </head>
+
 <body>
 
-<div id="mySidebar" class="sidebar">
-    <a href="javascript:void(0)" class="closebtn" onclick="toggleNav()">×</a>
-    <a href="#" onclick="openTab('Camera')">Camera</a>
-    <a href="#" onclick="openTab('Data')">Data</a>
-    <a href="#" onclick="openTab('Settings')">Settings</a>
-</div>
-
-<div id="main">
-    <button class="tab-button" onclick="toggleNav()">☰ Open Sidebar</button>
-
-    <div id="Camera" class="tab-content active-tab">
-        <h2>Camera Feeds</h2>
-        <div class="image-container">
-            <h3>Camera 0</h3>
-            <img src="/video_feed/usb" alt="Camera 0 Feed">
-        </div>
-        <div class="image-container">
-            <h3>Camera 1</h3>
-            <img src="/video_feed/zed" alt="Camera 1 Feed">
-        </div>
-    </div>
-
-    <div id="Data" class="tab-content">
-        <h2>Data Monitoring</h2>
-        <div>
-            <h3>Voltage & Current Monitoring</h3>
-            <p>Content...</p>
-        </div>
-        <div>
-            <h3>Orientation</h3>
-            <p>Content...</p>
-        </div>
-        <div>
-            <h3>Motor View</h3>
-            <p>Content...</p>
-        </div>
-        <div>
-            <h3>Temperature Monitoring</h3>
-            <p>Content...</p>
-        </div>
-    </div>
-
-    <div id="Settings" class="tab-content">
-        <h2>Settings</h2>
-        <p>Settings content...</p>
-    </div>
-</div>
-
-<script>
-    function toggleNav() {
-        var sidebar = document.getElementById("mySidebar");
-        if (sidebar.classList.contains("active")) {
-            sidebar.classList.remove("active");
-        } else {
-            sidebar.classList.add("active");
-        }
-    }
-
-    function openTab(tabName) {
-        var i, x = document.getElementsByClassName("tab-content");
-        for (i = 0; i < x.length; i++) {
-            x[i].style.display = "none";  
-        }
-        document.getElementById(tabName).style.display = "block";  
-    }
-</script>
-
 </body>
+    <div id="mySidebar" class="sidebar">
+        <a href="javascript:void(0)" class="closebtn" onclick="toggleNav()">×</a>
+        <a href="#" onclick="openTab('Camera')">Camera</a>
+        <a href="#" onclick="openTab('Data')">Data</a>
+        <a href="#" onclick="openTab('Settings')">Settings</a>
+    </div>
+
+    <main>
+        <button class="tab-button" onclick="toggleNav()">☰ Open Sidebar</button>
+
+        <h2 onclick="test_webcam()">Camera Feeds</h2>
+        <div id="stream">
+            <div class="video_stream">
+                <h3>Camera 0</h3>
+                <video id="camera_feed_1" src="" autoplay></video>
+            </div>
+            <div class="video_stream">
+                <h3>Camera 1</h3>
+                <video id="camera_feed_2" src="" autoplay></video>
+            </div>
+        </div>
+
+        <div id="Data" class="tab-content">
+            <h2>Data Monitoring</h2>
+            <div>
+                <h3>Voltage & Current Monitoring</h3>
+                <p>Content...</p>
+            </div>
+            <div>
+                <h3>Orientation</h3>
+                <p>Content...</p>
+            </div>
+            <div>
+                <h3>Motor View</h3>
+                <p>Content...</p>
+            </div>
+            <div>
+                <h3>Temperature Monitoring</h3>
+                <p>Content...</p>
+            </div>
+        </div>
+
+
+    </main>
 </html>
