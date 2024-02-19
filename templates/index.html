@@ -15,6 +15,7 @@
         <section id="camera_streams">
             <h1 class="section_title">Camera Feeds (VGA)</h1>
             <div id="stream">
+
                 <div class="video_stream">
                     <div class="stream_header">
                         <h2 class="camera_title">Camera 1</h2>
@@ -23,8 +24,14 @@
                         </button>
                     </div>
                     <hr>
-                    <img id="camera_feed_1" src="" autoplay></img>
+                    <video id="camera_feed_1" src="" autoplay></video>
                 </div>
+
+                <div id="message_center">
+                    <h2>Message Center</h2>
+                    <hr>
+                </div>
+
                 <div class="video_stream">
                     <div class="stream_header">
                         <h2 class="camera_title">Camera 2</h2>
@@ -33,33 +40,22 @@
                         </button>
                     </div>
                     <hr>
-                    <img id="camera_feed_2" src="" autoplay></img>
+                    <video id="camera_feed_2" src="" autoplay></video>
                 </div>
+
             </div>
         </section>
 
         <hr>
 
+        <h1>Data Monitoring</h1>
         <section id="data_monitoring">
-            <div id="Data" class="tab-content">
-                <h1>Data Monitoring</h1>
-                <div>
-                    <h2>Voltage & Current Monitoring</h2>
-                    <p>Content...</p>
-                </div>
-                <div>
-                    <h2>Orientation</h2>
-                    <p>Content...</p>
-                </div>
-                <div>
-                    <h2>Motor View</h2>
-                    <p>Content...</p>
-                </div>
-                <div>
-                    <h2>Temperature Monitoring</h2>
-                    <p>Content...</p>
-                </div>
-            </div>
+<!--            4 batteries(voltage:float | amps: int)  |  8 Motors(pwm: int)  |  2 Servos(pwm: int)     -->
+            <div class="data_container" id="battery_data"></div>
+
+            <div class="data_container" id="motor_data"></div>
+
+            <div class="data_container" id="servo_data"></div>
         </section>
 
 
