@@ -4,6 +4,18 @@ document.addEventListener("DOMContentLoaded", function() {
     createMotorElements();
     createServoElements();
     startDataDemo();
+
+    /*
+    const limit = 5
+    let timeout = 0
+
+    for (let i =0; i < limit; i++) {
+        setTimeout(() => {
+            newMessage(1, "Battery", "Battery voltage is low. and the yes ok but the no ")
+        }, timeout)
+        timeout += 1000
+    }
+*/
 })
 
 
@@ -41,19 +53,58 @@ function test_webcam(camera_identifier) {
 
 //     -------------------------------------------- END TESTING WEBCAM  |  START MESSAGE CENTER  --------------------------------------------
 
-const message = {
-    severity: 0,
-    source: "source",
-    message: "message"
+function Message(severity, source, message) {
+    this.severity =  severity;
+    this.source= source;
+    this.message  = message;
+    this.toString = function () {
+        return `Severity: ${this.severity}  |  Source: ${this.source}  |  Message: ${this.message}\n`
+    }
 }
 
-let messages = [];
-let displayMessages = [];
+let message_log = [];
 
 function newMessage(severity, source, message) {
-    let new_message = new message(severity, source, message);
-    message.append(new_message);
-    displayMessages.append(new_message);
+    let new_message = new Message(severity, source, message);
+    message_log.push(new_message);
+    displayMessage(new_message);
+    message_timeout();
+}
+
+function message_timeout() {
+    const message_center = document.getElementById('messages');
+
+    setTimeout(() => {
+        if (message_center.firstChild) {
+            message_center.firstElementChild.classList.add('single_message_clear');
+        }
+    }, 3000)
+
+    setTimeout(() => {
+        if (message_center.firstChild) {
+            message_center.firstChild.remove();
+        }
+    }, 4000)
+}
+
+function displayMessage(message_data) {
+    const message_container = document.createElement('div');
+    message_container.classList.add('single_message');
+
+    if(message_data.severity === 1) { message_container.classList.add('warning') }
+    if(message_data.severity >= 2) { message_container.classList.add('alert') }
+
+    const title = document.createElement("h3");
+    title.innerText = message_data.source;
+
+    const message_message = document.createElement("p");
+    message_message.innerText = message_data.message;
+
+    message_container.appendChild(title);
+    message_container.appendChild(message_message)
+
+    const message_center = document.getElementById('messages');
+    message_center.appendChild(message_container);
 }
 
 

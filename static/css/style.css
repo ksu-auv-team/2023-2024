@@ -108,9 +108,34 @@ h1 {
     padding: 0 1rem;
     border-radius: 1rem;
     align-self: center;
+    max-height: 100%;
 }
 
+#messages {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0 1rem;
+    gap: 1rem;
+}
 
+.single_message {
+    width: 100%;
+    border: solid 2px var(--text);
+    border-radius: .5rem;
+    transition: 800ms;
+}
+
+.single_message_clear {
+    opacity: 0;
+}
+
+.single_message h3, .single_message p {
+    padding: 0 .5rem;
+}
+
+.warning { border: solid 2px darkgoldenrod; }
+.alert { border: solid 2px darkred }
 
 /*-------------------------------------------- DATA SECTION --------------------------------------------*/
 
