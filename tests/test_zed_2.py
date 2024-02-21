@@ -46,7 +46,6 @@ def grab_image():
                 # Convert the image to a numpy array
                 left_image_np = left_image.get_data()
                 point_cloud_np = point_cloud.get_data()
-                combinded_data = np.array([left_image_np, point_cloud_np])
 
                 # Send the data to the server
                 s.sendall(left_image_np)
