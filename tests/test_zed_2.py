@@ -40,18 +40,15 @@ def grab_image():
             if zed.grab(runtime) == sl.ERROR_CODE.SUCCESS:
                 # A new image is available if grab() returns SUCCESS
                 zed.retrieve_image(left_image, sl.VIEW.LEFT)
-                zed.retrieve_image(right_image, sl.VIEW.RIGHT)
                 zed.retrieve_measure(point_cloud, sl.MEASURE.XYZRGBA, sl.MEM.CPU, res)
 
                 # Convert the image to a numpy array
                 left_image_np = left_image.get_data()
-                right_image_np = right_image.get_data()
                 point_cloud_np = point_cloud.get_data()
-                combinded_data = [left_image_np, right_image_np, point_cloud_np]
+                combinded_data = [left_image_np, point_cloud_np]
 
                 # Send the data to the server
-                for data in combinded_data:
-                    s.sendall(data)
+                s.sendall(combinded_data)
 
 if __name__ == '__main__':
     grab_image()
