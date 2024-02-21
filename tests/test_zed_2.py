@@ -1,6 +1,7 @@
 import pyzed.sl as sl
 from numpysocket import NumpySocket
 import cv2
+import numpy as np
 
 def grab_image():
     with NumpySocket() as s:
@@ -45,7 +46,7 @@ def grab_image():
                 # Convert the image to a numpy array
                 left_image_np = left_image.get_data()
                 point_cloud_np = point_cloud.get_data()
-                combinded_data = [left_image_np, point_cloud_np]
+                combinded_data = np.array([left_image_np, point_cloud_np])
 
                 # Send the data to the server
                 s.sendall(combinded_data)
