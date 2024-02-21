@@ -49,7 +49,7 @@ def grab_image():
                 combinded_data = np.array([left_image_np, point_cloud_np])
 
                 # Send the data to the server
-                s.sendall(combinded_data)
+                s.sendall(left_image_np)
 
 if __name__ == '__main__':
     grab_image()
