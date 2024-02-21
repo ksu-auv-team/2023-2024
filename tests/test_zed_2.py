@@ -26,8 +26,6 @@ def grab_image():
         
         # Create a runtime parameters object and set the image flip option to false
         runtime = sl.RuntimeParameters()
-        runtime.sensing_mode = sl.SENSING_MODE.FILL  # Use STANDARD sensing mode
-        runtime.measure3D_reference_frame = sl.REFERENCE_FRAME.WORLD  # Use the WORLD reference frame
 
         # Enable point cloud retrieval
         res = sl.Resolution()

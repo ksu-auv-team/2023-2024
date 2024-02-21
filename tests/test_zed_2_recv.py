@@ -2,7 +2,7 @@ from numpysocket import NumpySocket
 import cv2
 
 with NumpySocket() as s:
-    s.bind(("", 9999))
+    s.bind(("", 5555))
 
     while True:
         try:
