@@ -5,7 +5,7 @@ import cv2
 def grab_image():
     with NumpySocket() as s:
         # Create the client connection
-        s.connect('192.168.0.105', 5555)
+        s.connect(('192.168.0.105', 5555))
 
         # Create the camera object
         zed = sl.Camera()
