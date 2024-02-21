@@ -54,3 +54,7 @@ def grab_image():
                 # Send the data to the server
                 for data in combinded_data:
                     s.sendall(data)
+
+if __name__ == '__main__':
+    grab_image()
+    print('Done!')
