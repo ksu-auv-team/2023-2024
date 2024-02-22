@@ -169,8 +169,8 @@ def main():
             sender.sendall(depth_np)
 
             # Display image and depth (optional, can be removed if not needed)
-            cv2.imshow("ZED", image_np)
-            cv2.imshow("Depth", depth_np)
+            # cv2.imshow("ZED", image_np)
+            # cv2.imshow("Depth", depth_np)
             cv2.waitKey(5)
 
     # Cleanup
