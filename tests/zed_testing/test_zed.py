@@ -63,58 +63,120 @@
 import pyzed.sl as sl
 import numpy as np
 import cv2
+from io import BytesIO
+import logging
+import socket
+from typing import Any
 
+import numpy as np
+
+
+class NumpySocket(socket.socket):
+    def sendall(self, frame: np.ndarray) -> None:  # type: ignore[override]
+        out = self.__pack_frame(frame)
+        super().sendall(out)
+        logging.debug("frame sent")
+
+    def recv(self, bufsize: int = 1024) -> np.ndarray:  # type: ignore[override]
+        length = None
+        frame_buffer = bytearray()
+        while True:
+            data = super().recv(bufsize)
+            if len(data) == 0:
+                return np.array([])
+            frame_buffer += data
+            if len(frame_buffer) == length:
+                break
+            while True:
+                if length is None:
+                    if b":" not in frame_buffer:
+                        break
+                    length_str, ignored, frame_buffer = frame_buffer.partition(b":")
+                    length = int(length_str)
+                if len(frame_buffer) < length:
+                    break
+
+                frame_buffer = frame_buffer[length:]
+                length = None
+                break
+
+        frame = np.load(BytesIO(frame_buffer), allow_pickle=True)["frame"]
+        logging.debug("frame received")
+        return frame
+
+    def accept(self) -> tuple["NumpySocket", tuple[str, int] | tuple[Any, ...]]:
+        fd, addr = super()._accept()  # type: ignore
+        sock = NumpySocket(super().family, super().type, super().proto, fileno=fd)
+
+        if socket.getdefaulttimeout() is None and super().gettimeout():
+            sock.setblocking(True)
+        return sock, addr
+
+    @staticmethod
+    def __pack_frame(frame: np.ndarray) -> bytearray:
+        f = BytesIO()
+        np.savez(f, frame=frame)
+
+        packet_size = len(f.getvalue())
+        header = "{0}:".format(packet_size)
+        header_bytes = bytes(header.encode())  # prepend length of array
+
+        out = bytearray()
+        out += header_bytes
+
+        f.seek(0)
+        out += f.read()
+        return out
+
+# Main function
 def main():
+    # Initialize logging
+    logging.basicConfig(level=logging.INFO)
+    
     # Create a Camera object
     zed = sl.Camera()
 
-    # Create a InitParameters object and set configuration parameters
+    # Camera configuration
     init_params = sl.InitParameters()
-    init_params.camera_resolution = sl.RESOLUTION.HD720  # Use HD720 video mode
-    init_params.camera_fps = 30  # Set fps at 30
+    init_params.camera_resolution = sl.RESOLUTION.HD720
+    init_params.camera_fps = 30
 
     # Open the camera
-    err = zed.open(init_params)
-    if err != sl.ERROR_CODE.SUCCESS:
-        print(repr(err))
-        exit()
+    if zed.open(init_params) != sl.ERROR_CODE.SUCCESS:
+        logging.error("Camera Open Failed")
+        exit(1)
 
-    # Create a RuntimeParameters object and set configuration parameters
+    # Runtime parameters
     runtime_parameters = sl.RuntimeParameters()
 
-    # Capture 50 frames and stop
-    i = 0
+    # Initialize NumpySocket
+    sender = NumpySocket()
+    sender.connect(('RECEIVER_IP', PORT))  # Replace 'RECEIVER_IP' and 'PORT' with the receiver's IP address and port
+
+    # Capture and send 50 frames
     image = sl.Mat()
     depth = sl.Mat()
-    point_cloud = sl.Mat()
-    while i < 50:
-        # A new image is available if grab() returns SUCCESS
+    for i in range(50):
         if zed.grab(runtime_parameters) == sl.ERROR_CODE.SUCCESS:
-            # Retrieve left image
             zed.retrieve_image(image, sl.VIEW.LEFT)
-            # Retrieve depth map. Depth is aligned on the left image
             zed.retrieve_measure(depth, sl.MEASURE.DEPTH)
-            # Retrieve colored point cloud. Point cloud is aligned on the left image.
-            zed.retrieve_measure(point_cloud, sl.MEASURE.XYZRGBA)
 
-            # Get and print distance value in mm at the center of the image
-            # We measure the distance camera - object using Euclidean distance
-            x = image.get_width() // 2
-            y = image.get_height() // 2
-            err, point_cloud_value = point_cloud.get_value(x, y)
-            distance = np.sqrt(point_cloud_value[0] * point_cloud_value[0] +
-                               point_cloud_value[1] * point_cloud_value[1] +
-                               point_cloud_value[2] * point_cloud_value[2])
-            print("Distance to Camera at ({0}, {1}): {2} mm\n".format(x, y, distance))
+            # Convert SL Mat to numpy array for both image and depth
+            image_np = image.get_data()
+            depth_np = depth.get_data()
 
-            # Display image and depth using OpenCV
-            cv2.imshow("ZED", image.get_data())
-            cv2.imshow("Depth", depth.get_data())
-            key = cv2.waitKey(5)
-            i = i + 1
+            # Send image and depth map
+            sender.sendall(image_np)
+            sender.sendall(depth_np)
 
-    # Close the camera
+            # Display image and depth (optional, can be removed if not needed)
+            cv2.imshow("ZED", image_np)
+            cv2.imshow("Depth", depth_np)
+            cv2.waitKey(5)
+
+    # Cleanup
     zed.close()
+    sender.close()
 
 if __name__ == "__main__":
     main()
