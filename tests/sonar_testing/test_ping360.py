@@ -1,28 +1,36 @@
 from brping import Ping360
-from brping import PingParser
 
 def test_ping360():
     p = Ping360()
     p.connect_serial("/dev/ttyUSB0", 115200)
 
-    print(p.initialize())
-    print(p.set_transmit_frequency(800))
-    print(p.set_sample_period(80))
-    print(p.set_number_of_samples(200))
+    if not p.initialize():
+        print("Initialization failed.")
+        return
 
-    # Get data
-    while True:
-        try:
-            for x in range(360):
-                d = p.transmitAngle(x)
-                data = d['data']
-                print(type(data))
+    print("Initialization successful.")
+    print("Setting transmit frequency to 800:", p.set_transmit_frequency(800))
+    print("Setting sample period to 80:", p.set_sample_period(80))
+    print("Setting number of samples to 200:", p.set_number_of_samples(200))
 
-        except KeyboardInterrupt:
-            break    
+    # Attempt to get data
+    try:
+        for x in range(360):
+            p.transmitAngle(x)
+            # Use get_device_data method to access the most recent sonar data
+            device_data = p.get_device_data()
+            if device_data is not None:
+                data = device_data['data']  # Access the 'data' field
+                print("Received Data at angle {}: {}".format(x, data))
+            else:
+                print("No data received for angle {}".format(x))
+
+    except KeyboardInterrupt:
+        print("Interrupted by user")
 
 if __name__ == "__main__":
     test_ping360()
+
 
 # --------------------------------------------------
 # ID: 2300 - device_data
