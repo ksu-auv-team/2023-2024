@@ -81,7 +81,6 @@ def main():
 
     # Create a RuntimeParameters object and set configuration parameters
     runtime_parameters = sl.RuntimeParameters()
-    runtime_parameters.sensing_mode = sl.SENSING_MODE.STANDARD  # Use STANDARD sensing mode
 
     # Capture 50 frames and stop
     i = 0
