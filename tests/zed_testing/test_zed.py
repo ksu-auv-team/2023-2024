@@ -66,18 +66,17 @@ import cv2
 from io import BytesIO
 import logging
 import socket
-from typing import Any
-
+from typing import Any, Tuple, Union
 import numpy as np
 
 
 class NumpySocket(socket.socket):
-    def sendall(self, frame: np.ndarray) -> None:  # type: ignore[override]
+    def sendall(self, frame: np.ndarray) -> None:
         out = self.__pack_frame(frame)
         super().sendall(out)
         logging.debug("frame sent")
 
-    def recv(self, bufsize: int = 1024) -> np.ndarray:  # type: ignore[override]
+    def recv(self, bufsize: int = 1024) -> np.ndarray:
         length = None
         frame_buffer = bytearray()
         while True:
@@ -104,8 +103,8 @@ class NumpySocket(socket.socket):
         logging.debug("frame received")
         return frame
 
-    def accept(self) -> tuple["NumpySocket", tuple[str, int] | tuple[Any, ...]]:
-        fd, addr = super()._accept()  # type: ignore
+    def accept(self) -> Tuple['NumpySocket', Union[Tuple[str, int], Tuple[Any, ...]]]:
+        fd, addr = super()._accept()
         sock = NumpySocket(super().family, super().type, super().proto, fileno=fd)
 
         if socket.getdefaulttimeout() is None and super().gettimeout():
