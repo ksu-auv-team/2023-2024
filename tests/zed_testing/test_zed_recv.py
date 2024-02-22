@@ -1,7 +1,7 @@
 # Import necessary libraries
 import cv2
 import logging
-from NumpySocket import NumpySocket  # Ensure NumpySocket class is accessible
+from numpysocket import NumpySocket  # Ensure NumpySocket class is accessible
 
 def main():
     # Initialize logging
