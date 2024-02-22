@@ -1,5 +1,4 @@
 from brping import Ping360
-from brping import definitions
 
 def test_ping360():
     p = Ping360()
@@ -16,9 +15,8 @@ def test_ping360():
             data = []
             temp_data = []
             for x in range(360):
-                temp_data.append(p.wait_message([definitions.PING360_DEVICE_DATA]))
-            data.append(temp_data)
-            print(temp_data)
+                temp_data.append(p.transmitAngle(x))
+                print(temp_data[x])
         except KeyboardInterrupt:
             break    
     print(data)
