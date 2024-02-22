@@ -10,7 +10,7 @@ def test_ping360():
             data = []
             temp_data = []
             for x in range(360):
-                temp_data.append(p.transmit_angle(x))
+                temp_data.append(p.transmitAngle(x))
             data.append(temp_data)
         except KeyboardInterrupt:
             break    
