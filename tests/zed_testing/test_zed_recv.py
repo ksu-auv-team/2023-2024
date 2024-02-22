@@ -2,7 +2,7 @@ import cv2
 import numpy as np
 from multiprocessing import Process, Queue
 import logging
-from numpysocket import NumpySocket  # Ensure NumpySocket class is accessible
+from NumpySocket import NumpySocket  # Ensure NumpySocket class is accessible
 
 def receive_images(queue):
     """
@@ -18,10 +18,10 @@ def receive_images(queue):
         logging.info(f"Connection established with {addr}")
 
         while True:
-            image_np = conn.recv()
-            if image_np.size == 0:
+            combined_np = conn.recv()
+            if combined_np.size == 0:
                 break  # Break if an empty array is received, indicating end of transmission
-            queue.put(image_np)
+            queue.put(combined_np)
     finally:
         receiver.close()
 
@@ -29,11 +29,23 @@ def display_images(queue):
     """
     Function to display images from the queue.
     """
+    cv2.namedWindow("Image", cv2.WINDOW_NORMAL)
+    cv2.namedWindow("Depth", cv2.WINDOW_NORMAL)
     while True:
-        image_np = queue.get()
-        if image_np is None:  # Check for the sentinel value to end the display process
+        combined_np = queue.get()
+        if combined_np is None:  # Check for the sentinel value to end the display process
             break
-        cv2.imshow("Received Image", image_np)
+
+        # Separate the combined array back into the image and depth map
+        image_np, depth_np = combined_np
+
+        # Optionally resize images back to original resolution if needed
+        # image_np = cv2.resize(image_np, (1280, 720), interpolation=cv2.INTER_LINEAR)
+        # depth_np = cv2.resize(depth_np, (1280, 720), interpolation=cv2.INTER_LINEAR)
+
+        # Display the image and depth map
+        cv2.imshow("Image", image_np)
+        cv2.imshow("Depth", depth_np)
         if cv2.waitKey(1) & 0xFF == ord('q'):
             break
 
@@ -60,4 +72,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-

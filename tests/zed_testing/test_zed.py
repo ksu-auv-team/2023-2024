@@ -82,6 +82,37 @@ def send_images(queue):
     finally:
         sender.close()
 
+def image_resize(image, width = None, height = None, inter = cv2.INTER_AREA):
+    # initialize the dimensions of the image to be resized and
+    # grab the image size
+    dim = None
+    (h, w) = image.shape[:2]
+
+    # if both the width and height are None, then return the
+    # original image
+    if width is None and height is None:
+        return image
+
+    # check to see if the width is None
+    if width is None:
+        # calculate the ratio of the height and construct the
+        # dimensions
+        r = height / float(h)
+        dim = (int(w * r), height)
+
+    # otherwise, the height is None
+    else:
+        # calculate the ratio of the width and construct the
+        # dimensions
+        r = width / float(w)
+        dim = (width, int(h * r))
+
+    # resize the image
+    resized = cv2.resize(image, dim, interpolation = inter)
+
+    # return the resized image
+    return resized
+
 def main():
     logging.basicConfig(level=logging.INFO)
 
@@ -116,10 +147,16 @@ def main():
                 image_np = image.get_data()
                 depth_np = depth.get_data()
 
+                # Resize the image to a smaller size for faster transmission
+                image_np = image_resize(image_np, width=360)
+                depth_np = image_resize(depth_np, width=360)
+
+                # Combine the image and depth map into a single numpy array
+                combined_np = np.stack((image_np, depth_np))
+
                 # Send image and depth map through the queue
                 if not queue.full():
-                    queue.put(image_np.copy())  # Use .copy() to ensure correct memory handling
-                    queue.put(depth_np.copy())
+                    queue.put(combined_np.copy())  # Use .copy() to ensure correct memory handling
                 else:
                     logging.warning("Queue is full, dropping frame.")
 
