@@ -11,7 +11,7 @@ def receive_images(queue):
     logging.basicConfig(level=logging.INFO)
     receiver = NumpySocket()
     try:
-        receiver.bind(('0.0.0.0', PORT))  # Bind to all interfaces on the specified PORT
+        receiver.bind(('0.0.0.0', 9999))  # Bind to all interfaces on the specified PORT
         receiver.listen(1)
         logging.info("Waiting for connection...")
         conn, addr = receiver.accept()
