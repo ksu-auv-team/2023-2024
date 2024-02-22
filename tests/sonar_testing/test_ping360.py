@@ -16,7 +16,7 @@ def test_ping360():
             data = []
             temp_data = []
             for x in range(360):
-                p.wait_message([definitions.PING360_DEVICE_DATA])
+                temp_data.append(p.wait_message([definitions.PING360_DEVICE_DATA]))
             data.append(temp_data)
             print(temp_data)
         except KeyboardInterrupt:
