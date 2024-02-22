@@ -116,12 +116,6 @@ def main():
                 image_np = image.get_data()
                 depth_np = depth.get_data()
 
-                # Display image and depth (optional)
-                cv2.imshow("ZED", image_np)
-                cv2.imshow("Depth", depth_np)
-                if cv2.waitKey(5) & 0xFF == ord('q'):
-                    break
-
                 # Send image and depth map through the queue
                 if not queue.full():
                     queue.put(image_np.copy())  # Use .copy() to ensure correct memory handling
