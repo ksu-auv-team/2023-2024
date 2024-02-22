@@ -14,6 +14,7 @@ def test_ping360():
         try:
             for x in range(360):
                 data = p.transmitAngle(x)
+                data = data.unpack_msg_data()
                 print(type(data))
 
         except KeyboardInterrupt:
