@@ -14,7 +14,7 @@ def test_ping360():
         try:
             for x in range(360):
                 d = p.transmitAngle(x)
-                d = d.get_
+                d = d.get_DeviveData()
                 data = d['data']
                 print(type(data))
 
