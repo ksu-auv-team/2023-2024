@@ -123,7 +123,7 @@ def main():
     init_params = sl.InitParameters()
     init_params.camera_resolution = sl.RESOLUTION.HD720
     init_params.depth_mode = sl.DEPTH_MODE.PERFORMANCE
-    init_params.camera_fps = 30
+    init_params.camera_fps = 15
 
     # Open the camera
     if zed.open(init_params) != sl.ERROR_CODE.SUCCESS:
