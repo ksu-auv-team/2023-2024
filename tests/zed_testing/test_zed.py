@@ -156,8 +156,8 @@ def main():
                 depth_np = depth.get_data()
 
                 # Resize the image to a smaller size for faster transmission
-                image_np = image_resize(image_np, width=1280/8, height=720/8)
-                depth_np = image_resize(depth_np, width=1280/8, height=720/8)
+                image_np = image_resize(image_np, width=160, height=90)
+                depth_np = image_resize(depth_np, width=160, height=90)
 
                 if not queue_image.full():
                     queue_image.put(image_np.copy())
