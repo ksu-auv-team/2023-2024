@@ -1,65 +1,3 @@
-# import pyzed.sl as sl
-# import sys
-
-# init = sl.InitParameters(depth_mode=sl.DEPTH_MODE.ULTRA,
-#                                  coordinate_units=sl.UNIT.METER,
-#                                  coordinate_system=sl.COORDINATE_SYSTEM.RIGHT_HANDED_Y_UP)
-
-# zed = sl.Camera()
-# status = zed.open(init)
-# if status != sl.ERROR_CODE.SUCCESS:
-#     print(repr(status))
-#     exit()
-
-# res = sl.Resolution()
-# res.width = 720
-# res.height = 404
-
-# point_cloud = sl.Mat(res.width, res.height, sl.MAT_TYPE.F32_C4, sl.MEM.CPU)
-
-# while True:
-#     if zed.grab() == sl.ERROR_CODE.SUCCESS:
-#             zed.retrieve_measure(point_cloud, sl.MEASURE.XYZRGBA,sl.MEM.CPU, res)
-#             print(point_cloud.get_data())
-
-# import pyzed.sl as sl
-
-# def main():
-#     # Create a Camera object
-#     zed = sl.Camera()
-
-#     # Create a InitParameters object and set configuration parameters
-#     init_params = sl.InitParameters()
-#     init_params.camera_resolution = sl.RESOLUTION.AUTO # Use HD720 opr HD1200 video mode, depending on camera type.
-#     init_params.camera_fps = 30  # Set fps at 30
-
-#     # Open the camera
-#     err = zed.open(init_params)
-#     if err != sl.ERROR_CODE.SUCCESS:
-#         print("Camera Open : "+repr(err)+". Exit program.")
-#         exit()
-
-
-#     # Capture 50 frames and stop
-#     i = 0
-#     image = sl.Mat()
-#     runtime_parameters = sl.RuntimeParameters()
-#     while i < 50:
-#         # Grab an image, a RuntimeParameters object must be given to grab()
-#         if zed.grab(runtime_parameters) == sl.ERROR_CODE.SUCCESS:
-#             # A new image is available if grab() returns SUCCESS
-#             zed.retrieve_image(image, sl.VIEW.LEFT)
-#             timestamp = zed.get_timestamp(sl.TIME_REFERENCE.CURRENT)  # Get the timestamp at the time the image was captured
-#             print("Image resolution: {0} x {1} || Image timestamp: {2}\n".format(image.get_width(), image.get_height(),
-#                   timestamp.get_milliseconds()))
-#             i = i + 1
-
-#     # Close the camera
-#     zed.close()
-
-# if __name__ == "__main__":
-#     main()
-
 import pyzed.sl as sl
 import numpy as np
 import cv2
@@ -68,6 +6,7 @@ import logging
 import socket
 from typing import Any, Tuple, Union
 import numpy as np
+from multiprocessing import Process, Queue
 
 
 class NumpySocket(socket.socket):
@@ -127,11 +66,25 @@ class NumpySocket(socket.socket):
         out += f.read()
         return out
 
-# Main function
-def main():
-    # Initialize logging
+def send_images(queue):
+    """
+    Function to run in a separate process for sending images.
+    """
     logging.basicConfig(level=logging.INFO)
-    
+    sender = NumpySocket()
+    try:
+        sender.connect(('RECEIVER_IP', PORT))  # Replace with the receiver's IP and port
+        while True:
+            image_np = queue.get()  # Wait for an image from the queue
+            if image_np is None:
+                break  # None is sent as a signal to stop
+            sender.sendall(image_np)
+    finally:
+        sender.close()
+
+def main():
+    logging.basicConfig(level=logging.INFO)
+
     # Create a Camera object
     zed = sl.Camera()
 
@@ -145,35 +98,42 @@ def main():
         logging.error("Camera Open Failed")
         exit(1)
 
-    # Runtime parameters
-    runtime_parameters = sl.RuntimeParameters()
-
-    # Initialize NumpySocket
-    sender = NumpySocket()
-    sender.connect(('192.168.0.109', 9999))  # Replace 'RECEIVER_IP' and 'PORT' with the receiver's IP address and port
-
-    # Capture and send frames indefinitely
     image = sl.Mat()
     depth = sl.Mat()
-    while True:  # Changed from a fixed number of iterations to an infinite loop
-        if zed.grab(runtime_parameters) == sl.ERROR_CODE.SUCCESS:
-            zed.retrieve_image(image, sl.VIEW.LEFT)
-            zed.retrieve_measure(depth, sl.MEASURE.DEPTH)
 
-            # Convert SL Mat to numpy array for both image and depth
-            image_np = image.get_data()
-            depth_np = depth.get_data()
+    # Create a multiprocessing Queue and start the sender process
+    queue = Queue(maxsize=5)  # Limit the queue size to prevent memory issues
+    sender_process = Process(target=send_images, args=(queue,))
+    sender_process.start()
 
-            # Send image and depth map
-            sender.sendall(image_np)
-            sender.sendall(depth_np)
+    try:
+        while True:
+            if zed.grab() == sl.ERROR_CODE.SUCCESS:
+                zed.retrieve_image(image, sl.VIEW.LEFT)
+                zed.retrieve_measure(depth, sl.MEASURE.DEPTH)
 
-            if cv2.waitKey(1) & 0xFF == ord('q'):
-                break
+                # Convert SL Mat to numpy array for both image and depth
+                image_np = image.get_data()
+                depth_np = depth.get_data()
 
-    # Cleanup
-    zed.close()
-    sender.close()
+                # Display image and depth (optional)
+                cv2.imshow("ZED", image_np)
+                cv2.imshow("Depth", depth_np)
+                if cv2.waitKey(5) & 0xFF == ord('q'):
+                    break
+
+                # Send image and depth map through the queue
+                if not queue.full():
+                    queue.put(image_np.copy())  # Use .copy() to ensure correct memory handling
+                    queue.put(depth_np.copy())
+                else:
+                    logging.warning("Queue is full, dropping frame.")
+
+    finally:
+        # Cleanup
+        zed.close()
+        queue.put(None)  # Signal the sender process to stop
+        sender_process.join()
 
 if __name__ == "__main__":
     main()
