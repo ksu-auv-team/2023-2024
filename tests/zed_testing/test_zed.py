@@ -150,7 +150,7 @@ def main():
 
     # Initialize NumpySocket
     sender = NumpySocket()
-    sender.connect(('RECEIVER_IP', PORT))  # Replace 'RECEIVER_IP' and 'PORT' with the receiver's IP address and port
+    sender.connect(('192.168.0.109', 9999))  # Replace 'RECEIVER_IP' and 'PORT' with the receiver's IP address and port
 
     # Capture and send frames indefinitely
     image = sl.Mat()
