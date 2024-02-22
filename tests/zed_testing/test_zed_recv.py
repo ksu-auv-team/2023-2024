@@ -63,7 +63,7 @@ def display_image(queue_image):
     cv2.namedWindow("Image", cv2.WINDOW_NORMAL)
     while True:
         image_np = queue_image.get()
-        image_np = image_resize(image_np, width=1280, height=720)
+        image_np = image_resize(image_np, width=640, height=360)
         if image_np is None:  # Check for the sentinel value to end the display process
             break
         cv2.imshow("Image", image_np)
@@ -78,7 +78,7 @@ def display_depth(queue_depth):
     cv2.namedWindow("Depth", cv2.WINDOW_NORMAL)
     while True:
         depth_np = queue_depth.get()
-        depth_np = image_resize(depth_np, width=1280, height=720)
+        depth_np = image_resize(depth_np, width=640, height=360)
         if depth_np is None:  # Check for the sentinel value to end the display process
             break
         # Convert depth to a visible format if necessary

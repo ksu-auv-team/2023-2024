@@ -161,13 +161,9 @@ def main():
 
                 if not queue_image.full():
                     queue_image.put(image_np.copy())
-                else:
-                    logging.warning("Image queue is full, dropping frame.")
 
                 if not queue_depth.full():
                     queue_depth.put(depth_np.copy())
-                else:
-                    logging.warning("Depth queue is full, dropping frame.")
     finally:
         # Cleanup
         queue_image.put(None)
