@@ -12,14 +12,12 @@ def test_ping360():
     # Get data
     while True:
         try:
-            data = []
-            temp_data = []
             for x in range(360):
                 print(p.transmitAngle(x))
+                print(p.read())
                 
         except KeyboardInterrupt:
             break    
-    print(data)
 
 if __name__ == "__main__":
     test_ping360()
