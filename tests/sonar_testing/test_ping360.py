@@ -15,3 +15,6 @@ def test_ping360():
         except KeyboardInterrupt:
             break    
     print(data)
+
+if __name__ == "__main__":
+    test_ping360()
