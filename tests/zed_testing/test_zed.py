@@ -26,13 +26,31 @@ def zed_stream():
 # Create a route to stream a regular camera stream
 @app.route('/cam_stream')
 def cam_stream():
-    cap = cv2.VideoCapture(0)
-    while True:
-        ret, frame = cap.read()
-        ret, jpeg = cv2.imencode('.jpg', frame)
-        frame = jpeg.tobytes()
-        yield (b'--frame\r\n'
-               b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n\r\n')
+    """
+    Route to stream video from a regular webcam.
+    Captures video from the default camera (usually the first webcam found on the system).
+    Streams the captured video as a JPEG image.
+    """
+    cap = cv2.VideoCapture(0)  # Make sure the device index is correct for your setup
+    if not cap.isOpened():
+        print("Error: Could not open video device. Please check the device index and permissions.")
+        return Response("Error: Could not open video device.", status=500)
+    try:
+        while True:
+            ret, frame = cap.read()
+            if not ret:
+                print("Warning: Empty frame read from camera. Skipping.")
+                continue  # Skip this iteration and try reading the next frame
+            ret, jpeg = cv2.imencode('.jpg', frame)
+            if not ret:
+                print("Error: Frame could not be encoded. Skipping.")
+                continue
+            frame = jpeg.tobytes()
+            yield (b'--frame\r\n'
+                   b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n\r\n')
+    finally:
+        cap.release()  # Make sure to release the camera
+
 
 @app.route('/')
 def index():
