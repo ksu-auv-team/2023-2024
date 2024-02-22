@@ -15,8 +15,8 @@ def test_ping360():
             data = []
             temp_data = []
             for x in range(360):
-                temp_data.append(p.transmitAngle(x))
-                print(temp_data[x].data.decode('utf-8'))
+                print(p.transmitAngle(x))
+                
         except KeyboardInterrupt:
             break    
     print(data)
