@@ -152,7 +152,7 @@ def main():
                 depth_np = image_resize(depth_np, width=360)
 
                 # Combine the image and depth map into a single numpy array
-                combined_np = np.array([image_np, depth_np])
+                combined_np = np.concatenate((image_np, depth_np), axis=1)
 
                 # Send image and depth map through the queue
                 if not queue.full():

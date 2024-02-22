@@ -4,6 +4,37 @@ from multiprocessing import Process, Queue
 import logging
 from numpysocket import NumpySocket  # Ensure NumpySocket class is accessible
 
+def image_resize(image, width = None, height = None, inter = cv2.INTER_AREA):
+    # initialize the dimensions of the image to be resized and
+    # grab the image size
+    dim = None
+    (h, w) = image.shape[:2]
+
+    # if both the width and height are None, then return the
+    # original image
+    if width is None and height is None:
+        return image
+
+    # check to see if the width is None
+    if width is None:
+        # calculate the ratio of the height and construct the
+        # dimensions
+        r = height / float(h)
+        dim = (int(w * r), height)
+
+    # otherwise, the height is None
+    else:
+        # calculate the ratio of the width and construct the
+        # dimensions
+        r = width / float(w)
+        dim = (width, int(h * r))
+
+    # resize the image
+    resized = cv2.resize(image, dim, interpolation = inter)
+
+    # return the resized image
+    return resized
+
 def receive_images(queue):
     """
     Function to run in a separate process for receiving images.
@@ -37,11 +68,13 @@ def display_images(queue):
             break
 
         # Separate the combined array back into the image and depth map
-        image_np, depth_np = combined_np
+        mid_point = combined_np.shape[1] // 2
+        image_np = combined_np[:, :mid_point]
+        depth_np = combined_np[:, mid_point:]
 
         # Optionally resize images back to original resolution if needed
-        # image_np = cv2.resize(image_np, (1280, 720), interpolation=cv2.INTER_LINEAR)
-        # depth_np = cv2.resize(depth_np, (1280, 720), interpolation=cv2.INTER_LINEAR)
+        image_np = image_resize(image_np, width=1280, height=720)
+        depth_np = image_resize(depth_np, width=1280, height=720)
 
         # Display the image and depth map
         cv2.imshow("Image", image_np)
