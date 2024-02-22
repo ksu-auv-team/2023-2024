@@ -1,4 +1,5 @@
 from brping import Ping360
+from brping import PingParser
 
 def test_ping360():
     p = Ping360()
@@ -13,8 +14,8 @@ def test_ping360():
     while True:
         try:
             for x in range(360):
-                data = p.transmitAngle(x)
-                data = data.unpack_msg_data(data)
+                d = p.transmitAngle(x)
+                data = d['data']
                 print(type(data))
 
         except KeyboardInterrupt:
