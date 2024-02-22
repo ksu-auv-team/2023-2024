@@ -14,8 +14,7 @@ def test_ping360():
         try:
             for x in range(360):
                 print(p.transmitAngle(x))
-                print(p.read())
-                
+                print(p.getData())                
         except KeyboardInterrupt:
             break    
 
