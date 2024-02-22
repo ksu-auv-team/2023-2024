@@ -14,9 +14,9 @@ def test_ping360():
         try:
             for x in range(360):
                 d = p.transmitAngle(x)
-                d = d.get_DeviceData()
+                # d = d.get_device_data()
                 data = d['data']
-                print(type(data))
+                print(f'{type(data)} | {len(data)} | {data[:10]}...{data[-10:]}')
 
         except KeyboardInterrupt:
             break    
