@@ -2,7 +2,7 @@ import cv2
 import numpy as np
 from multiprocessing import Process, Queue
 import logging
-from NumpySocket import NumpySocket  # Ensure NumpySocket class is accessible
+from numpysocket import NumpySocket  # Ensure NumpySocket class is accessible
 
 def receive_images(queue):
     """
