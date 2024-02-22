@@ -31,7 +31,7 @@ def cam_stream():
     Captures video from the default camera (usually the first webcam found on the system).
     Streams the captured video as a JPEG image.
     """
-    cap = cv2.VideoCapture(0)  # Make sure the device index is correct for your setup
+    cap = cv2.VideoCapture(2)  # Make sure the device index is correct for your setup
     if not cap.isOpened():
         print("Error: Could not open video device. Please check the device index and permissions.")
         return Response("Error: Could not open video device.", status=500)
