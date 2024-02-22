@@ -73,7 +73,7 @@ def send_images(queue):
     logging.basicConfig(level=logging.INFO)
     sender = NumpySocket()
     try:
-        sender.connect(('192.168.0.106', 9999))  # Replace with the receiver's IP and port
+        sender.connect(('192.168.0.109', 9999))  # Replace with the receiver's IP and port
         while True:
             image_np = queue.get()  # Wait for an image from the queue
             if image_np is None:
