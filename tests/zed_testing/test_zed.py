@@ -150,12 +150,12 @@ def main():
 
     # Initialize NumpySocket
     sender = NumpySocket()
-    sender.connect(('192.168.0.109', 9999))  # Replace 'RECEIVER_IP' and 'PORT' with the receiver's IP address and port
+    sender.connect(('RECEIVER_IP', PORT))  # Replace 'RECEIVER_IP' and 'PORT' with the receiver's IP address and port
 
-    # Capture and send 50 frames
+    # Capture and send frames indefinitely
     image = sl.Mat()
     depth = sl.Mat()
-    for i in range(50):
+    while True:  # Changed from a fixed number of iterations to an infinite loop
         if zed.grab(runtime_parameters) == sl.ERROR_CODE.SUCCESS:
             zed.retrieve_image(image, sl.VIEW.LEFT)
             zed.retrieve_measure(depth, sl.MEASURE.DEPTH)
@@ -168,10 +168,8 @@ def main():
             sender.sendall(image_np)
             sender.sendall(depth_np)
 
-            # Display image and depth (optional, can be removed if not needed)
-            # cv2.imshow("ZED", image_np)
-            # cv2.imshow("Depth", depth_np)
-            cv2.waitKey(5)
+            if cv2.waitKey(1) & 0xFF == ord('q'):
+                break
 
     # Cleanup
     zed.close()
