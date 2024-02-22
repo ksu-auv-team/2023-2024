@@ -4,6 +4,7 @@ def test_ping360():
     p = Ping360()
     p.connect_serial("/dev/ttyUSB0", 115200)
 
+    print(p.initialize())
     print(p.set_transmit_frequency(800))
     print(p.set_sample_period(80))
     print(p.set_number_of_samples(200))
