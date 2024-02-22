@@ -66,22 +66,6 @@ class NumpySocket(socket.socket):
         out += f.read()
         return out
 
-def send_images(queue):
-    """
-    Function to run in a separate process for sending images.
-    """
-    logging.basicConfig(level=logging.INFO)
-    sender = NumpySocket()
-    try:
-        sender.connect(('192.168.0.109', 9999))  # Replace with the receiver's IP and port
-        while True:
-            image_np = queue.get()  # Wait for an image from the queue
-            if image_np is None:
-                break  # None is sent as a signal to stop
-            sender.sendall(image_np)
-    finally:
-        sender.close()
-
 def image_resize(image, width = None, height = None, inter = cv2.INTER_AREA):
     # initialize the dimensions of the image to be resized and
     # grab the image size
@@ -113,6 +97,22 @@ def image_resize(image, width = None, height = None, inter = cv2.INTER_AREA):
     # return the resized image
     return resized
 
+def send_data(queue, ip, port):
+    """
+    Function to run in a separate process for sending images or depth maps.
+    """
+    logging.basicConfig(level=logging.INFO)
+    sender = NumpySocket()
+    try:
+        sender.connect((ip, port))
+        while True:
+            data_np = queue.get()
+            if data_np is None:
+                break
+            sender.sendall(data_np)
+    finally:
+        sender.close()
+
 def main():
     logging.basicConfig(level=logging.INFO)
 
@@ -132,10 +132,18 @@ def main():
     image = sl.Mat()
     depth = sl.Mat()
 
-    # Create a multiprocessing Queue and start the sender process
-    queue = Queue(maxsize=5)  # Limit the queue size to prevent memory issues
-    sender_process = Process(target=send_images, args=(queue,))
-    sender_process.start()
+    # Queues for images and depth maps
+    queue_image = Queue(maxsize=5)
+    queue_depth = Queue(maxsize=5)
+
+    # Start sender processes for images and depth maps
+    ip_address = '192.168.0.109'
+    image_port = 9998
+    depth_port = 9999
+    sender_process_image = Process(target=send_data, args=(queue_image, ip_address, image_port))
+    sender_process_depth = Process(target=send_data, args=(queue_depth, ip_address, depth_port))
+    sender_process_image.start()
+    sender_process_depth.start()
 
     try:
         while True:
@@ -151,20 +159,21 @@ def main():
                 image_np = image_resize(image_np, width=360)
                 depth_np = image_resize(depth_np, width=360)
 
-                # Combine the image and depth map into a single numpy array
-                combined_np = np.concatenate((image_np, depth_np), axis=1)
-
-                # Send image and depth map through the queue
-                if not queue.full():
-                    queue.put(combined_np.copy())  # Use .copy() to ensure correct memory handling
+                if not queue_image.full():
+                    queue_image.put(image_np.copy())
                 else:
-                    logging.warning("Queue is full, dropping frame.")
+                    logging.warning("Image queue is full, dropping frame.")
 
+                if not queue_depth.full():
+                    queue_depth.put(depth_np.copy())
+                else:
+                    logging.warning("Depth queue is full, dropping frame.")
     finally:
         # Cleanup
-        zed.close()
-        queue.put(None)  # Signal the sender process to stop
-        sender_process.join()
+        queue_image.put(None)
+        queue_depth.put(None)
+        sender_process_image.join()
+        sender_process_depth.join()
 
 if __name__ == "__main__":
     main()
