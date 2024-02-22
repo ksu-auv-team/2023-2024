@@ -9,7 +9,7 @@ def main():
 
     # Initialize NumpySocket for receiving
     receiver = NumpySocket()
-    receiver.bind(('0.0.0.0', PORT))  # Bind to all interfaces on the PORT
+    receiver.bind(('0.0.0.0', 9999))  # Bind to all interfaces on the PORT
     receiver.listen(1)
     logging.info("Waiting for connection...")
     conn, addr = receiver.accept()
