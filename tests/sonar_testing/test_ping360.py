@@ -14,6 +14,13 @@ def test_ping360():
     print(p.set_transmit_frequency(800))
     print(p.set_sample_period(80))
     print(p.set_number_of_samples(200))
+    print(p.set_gain_setting(399))
+    print(p.set_mode(0))
+    print(p.set_transmit_duration(32))
+    print(p.set_start_angle(0))
+    print(p.set_stop_angle(359))
+    print(p.set_number_of_steps(360))
+    print(p.set_delay(0))
 
     # Get data
     while True:
@@ -26,6 +33,7 @@ def test_ping360():
             #     logging.info(f"Angle: {x}, Data: {d}")
 
             # turn on auto-scan with 1 grad steps
+            # mode, gain_setting, transmit_duration, sample_period, transmit_frequency, number_of_samples, start_angle, stop_angle, num_steps, delay
             p.control_auto_transmit(0,399,1,0)
 
             # wait for 400 device_data messages to arrive
