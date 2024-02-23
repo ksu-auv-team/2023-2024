@@ -8,7 +8,7 @@ logging.basicConfig(filename='ping360_data.log', level=logging.INFO, format='%(a
 
 def test_ping360():
     p = Ping360()
-    p.connect_serial("/dev/ttyUSB0", 115200)
+    p.connect_serial("/dev/ttyUSB1", 115200)
 
     print(p.initialize())
     print(p.set_transmit_frequency(800))
