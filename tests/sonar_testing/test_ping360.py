@@ -1,5 +1,7 @@
 from brping import Ping360
+from brping import definitions
 import logging
+import time
 
 # Configure logging
 logging.basicConfig(filename='ping360_data.log', level=logging.INFO, format='%(asctime)s:%(levelname)s:%(message)s')
@@ -17,12 +19,19 @@ def test_ping360():
     while True:
         try:
             data = []
-            for x in range(360):
-                d = p.transmitAngle(x)
-                data.append(d)
-                # Log the data to a file after each for loop run
-                logging.info(f"Angle: {x}, Data: {d}")
-            
+            # for x in range(360):
+            #     d = p.transmitAngle(x)
+            #     data.append(d)
+            #     # Log the data to a file after each for loop run
+            #     logging.info(f"Angle: {x}, Data: {d}")
+
+            # turn on auto-scan with 1 grad steps
+            p.control_auto_transmit(0,399,1,0)
+
+            # wait for 400 device_data messages to arrive
+            for x in range(400):
+                data.append(p.wait_message([definitions.PING360_DEVICE_DATA]))
+            logging.debug(f"Data: {data}")
 
         except KeyboardInterrupt:
             break    
