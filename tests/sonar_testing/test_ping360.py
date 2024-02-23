@@ -1,4 +1,8 @@
 from brping import Ping360
+import logging
+
+# Configure logging
+logging.basicConfig(filename='ping360_data.log', level=logging.INFO, format='%(asctime)s:%(levelname)s:%(message)s')
 
 def test_ping360():
     p = Ping360()
@@ -12,17 +16,20 @@ def test_ping360():
     # Get data
     while True:
         try:
+            data = []
             for x in range(360):
                 d = p.transmitAngle(x)
-                d = d.get_device_data()
-                data = d['data']
-                print(f'{type(data)} | {len(data)} | {data[:10]}...{data[-10:]}')
+                data.append(d)
+                # Log the data to a file after each for loop run
+                logging.info(f"Angle: {x}, Data: {d}")
+            
 
         except KeyboardInterrupt:
             break    
 
 if __name__ == "__main__":
     test_ping360()
+
 
 # --------------------------------------------------
 # ID: 2300 - device_data
