@@ -25,21 +25,10 @@ def test_ping360():
     # Get data
     while True:
         try:
-            data = []
-            # for x in range(360):
-            #     d = p.transmitAngle(x)
-            #     data.append(d)
-            #     # Log the data to a file after each for loop run
-            #     logging.info(f"Angle: {x}, Data: {d}")
-
-            # turn on auto-scan with 1 grad steps
-            # mode, gain_setting, transmit_duration, sample_period, transmit_frequency, number_of_samples, start_angle, stop_angle, num_steps, delay
-            p.control_auto_transmit(0,399,1,0)
-
-            # wait for 400 device_data messages to arrive
-            for x in range(400):
-                data.append(p.wait_message([definitions.PING360_DEVICE_DATA]))
-            logging.debug(f"Data: {data}")
+            for x in range(360):
+                d = p.transmitAngle(x)
+                # Log the data to a file after each for loop run
+                logging.info(f"Angle: {x}, Data: {d}")
 
         except KeyboardInterrupt:
             break    

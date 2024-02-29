@@ -29,7 +29,7 @@ class CM:
     - `data`: A numpy array that stores joystick data.
     """
     
-    def __init__(self, num_of_axis: int = 6):
+    def __init__(self):
         """
         Initialize the CM object and call the method to initialize the joystick.
         
@@ -144,17 +144,18 @@ class CM:
         while True:
             self.get_data()
             self.map_data()
-            response = self.send_data(self.out_data)
+            # response = self.send_data(self.out_data)
             if debug == 1:
                 self.print_in()
-                print("Server response:", response.text)
+                # print("Server response:", response.text)
             elif debug == 2:
                 self.print_out()
-                print("Server response:", response.text)
+                # print("Server response:", response.text)
             else:
-                print("Server response:", response.text)
+                # print("Server response:", response.text)
+                pass
 
 
 if __name__ == "__main__":
     cm = CM()
-    cm.run(debug=1)    
+    cm.run(debug=2)    
