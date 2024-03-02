@@ -1,5 +1,5 @@
 import socket
-
+import numpy
 import pygame
 
 
@@ -130,6 +130,45 @@ class CM:
         return round((x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min)
 
 
+class MovementPackage:
+    def __init__(self):
+        d1 = (numpy.sqrt((0.5 ** 2) + (0.3 ** 2))) * numpy.sin(45)
+        d2 = (numpy.sqrt((0.25 ** 2) + (0.3 ** 2)))
+        self.motors1_4 = [[d1,  d1, -d1, -d1],   # X 
+                        [d1, -d1, -d1,  d1],   # Y
+                        [d1,  d1,  d1,  d1]]   # Yaw
+        self.motors5_8 = [[d2,  d2,  d2, d2],   # Z 
+                          [-d2, -d2,  d2, d2],   # Pitch 
+                          [d2, -d2, -d2, d2]]   # Roll 
+    
+    def compute_movement(self, data : dict) -> list:
+        """
+        @brief Compute the movement of the drone based on the input data.
+        """
+        values = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+        if data['X'] != 0.0 or data['Y'] != 0.0 or data['Yaw'] != 0.0:
+            if data['X'] >= 0.1 or data['X'] <= -0.1:
+                for i in range(4):
+                    values[i] = data['X'] * self.motors1_4[0][i]
+            elif data['Y'] >= 0.1 or data['Y'] <= -0.1:
+                for i in range(4):
+                    values[i] = data['Y'] * self.motors1_4[1][i]
+            elif data['Yaw'] >= 0.1 or data['Yaw'] <= -0.1:
+                for i in range(4):
+                    values[i] = data['Yaw'] * self.motors1_4[2][i]
+        if data['Z'] != 0.0 or data['Pitch'] != 0.0 or data['Roll'] != 0.0:
+            if data['Z'] >= 0.1 or data['Z'] <= -0.1:
+                for i in range(4):
+                    values[i + 4] = data['Z'] * self.motors5_8[0][i]
+            elif data['Pitch'] >= 0.1 or data['Pitch'] <= -0.1:
+                for i in range(4):
+                    values[i + 4] = data['Pitch'] * self.motors5_8[1][i]
+            elif data['Roll'] >= 0.1 or data['Roll'] <= -0.1:
+                for i in range(4):
+                    values[i + 4] = data['Roll'] * self.motors5_8[2][i]
+        return values
+
+
 class Unity:
     def __init__(self, host : str = '127.0.0.1', port : int = 5005):
         self.host = host
@@ -152,6 +191,13 @@ class Unity:
         """
         s = f'{data["X"]},{data["Y"]},{data["Z"]},{data["Pitch"]},{data["Roll"]},{data["Yaw"]}R'
         self.sock.sendall(s.encode('utf-8'))
+
+    def send_data_8_values(self, data : list):
+        """
+        @brief Send the data to the Unity simulation only works for 8 values. 
+        """
+        s = f'{data[0]},{data[1]},{data[2]},{data[3]},{data[4]},{data[5]},{data[6]},{data[7]}R'
+        self.sock.sendall(s.encode('utf-8'))
     
     def run(self):
         """
@@ -162,7 +208,7 @@ class Unity:
                 data = self.get_data()
                 # self.controller.print_in()
                 self.controller.print_out()
-                self.send_data_6_values(data)
+                self.send_data_8_values(data)
                 pygame.time.wait(10)
             except KeyboardInterrupt:
                 pygame.quit()
