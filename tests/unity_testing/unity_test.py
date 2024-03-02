@@ -166,6 +166,9 @@ class MovementPackage:
             elif data['Roll'] >= 0.1 or data['Roll'] <= -0.1:
                 for i in range(4):
                     values[i + 4] = round(data['Roll'] * self.motors5_8[2][i], 2)
+        # Map the values to the correct range
+        for i in range(len(values)):
+            values[i] = self.map(values[i], -0.5, 0.5, -1, 1)
         return values
 
 
