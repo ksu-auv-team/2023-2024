@@ -145,7 +145,7 @@ class MovementPackage:
         """
         @brief Map a value from one range to another.
         """
-        return round((x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min)
+        return round((x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min, 2)
     
     def compute_movement(self, data : dict) -> list:
         """
