@@ -140,6 +140,12 @@ class MovementPackage:
         self.motors5_8 = [[d2,  d2,  d2, d2],   # Z 
                           [-d2, -d2,  d2, d2],   # Pitch 
                           [d2, -d2, -d2, d2]]   # Roll 
+        
+    def map(self, x : float, in_min : float, in_max : float, out_min : int, out_max : int) -> int:
+        """
+        @brief Map a value from one range to another.
+        """
+        return round((x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min)
     
     def compute_movement(self, data : dict) -> list:
         """
