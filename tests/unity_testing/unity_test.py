@@ -177,6 +177,7 @@ class Unity:
         self.sock.connect((self.host, self.port))
 
         self.controller = CM()
+        self.mapper = MovementPackage()
     
     def get_data(self) -> dict:
         """
@@ -208,6 +209,7 @@ class Unity:
                 data = self.get_data()
                 # self.controller.print_in()
                 self.controller.print_out()
+                data = self.mapper.compute_movement(data)
                 self.send_data_8_values(data)
                 pygame.time.wait(10)
             except KeyboardInterrupt:
