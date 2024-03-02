@@ -149,23 +149,23 @@ class MovementPackage:
         if data['X'] != 0.0 or data['Y'] != 0.0 or data['Yaw'] != 0.0:
             if data['X'] >= 0.1 or data['X'] <= -0.1:
                 for i in range(4):
-                    values[i] = data['X'] * self.motors1_4[0][i]
+                    values[i] = round(data['X'] * self.motors1_4[0][i], 2)
             elif data['Y'] >= 0.1 or data['Y'] <= -0.1:
                 for i in range(4):
-                    values[i] = data['Y'] * self.motors1_4[1][i]
+                    values[i] = round(data['Y'] * self.motors1_4[1][i], 2)
             elif data['Yaw'] >= 0.1 or data['Yaw'] <= -0.1:
                 for i in range(4):
-                    values[i] = data['Yaw'] * self.motors1_4[2][i]
+                    values[i] = round(data['Yaw'] * self.motors1_4[2][i], 2)
         if data['Z'] != 0.0 or data['Pitch'] != 0.0 or data['Roll'] != 0.0:
             if data['Z'] >= 0.1 or data['Z'] <= -0.1:
                 for i in range(4):
-                    values[i + 4] = data['Z'] * self.motors5_8[0][i]
+                    values[i + 4] = round(data['Z'] * self.motors5_8[0][i], 2)
             elif data['Pitch'] >= 0.1 or data['Pitch'] <= -0.1:
                 for i in range(4):
-                    values[i + 4] = data['Pitch'] * self.motors5_8[1][i]
+                    values[i + 4] = round(data['Pitch'] * self.motors5_8[1][i], 2)
             elif data['Roll'] >= 0.1 or data['Roll'] <= -0.1:
                 for i in range(4):
-                    values[i + 4] = data['Roll'] * self.motors5_8[2][i]
+                    values[i + 4] = round(data['Roll'] * self.motors5_8[2][i], 2)
         return values
 
 
