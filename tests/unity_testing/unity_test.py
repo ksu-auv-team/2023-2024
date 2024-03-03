@@ -104,23 +104,16 @@ class CM:
 
         return self.out_data
 
-    def print_in(self):
+    def print_data(self):
         """
-        @brief Print the current state of the `data` array.
+        Print the data array.
         """
-        s = '\r'
+        s = "\r"
         for i in range(len(self.joy_data)):
-            s += f' {i}: {self.joy_data[i]} |'
-        print(s, end='')
-
-    def print_out(self):
-        """
-        @brief Print the current state of the `data` array.
-        """
-        # print(self.out_data)
-        s = '\r'
-        for key in self.out_data:
-            s += f' {key}: {self.out_data[key]} |'
+            s += f"{self.joy_data[i]}, "
+        s = "\r"
+        for i in range(len(self.out_data)):
+            s += f"{self.out_data[i]}, "
         print(s, end='')
 
     def map(self, x : float, in_min : float = -1.0, in_max : float = 1.0, out_min : int = 1000, out_max : int = 2000):
@@ -179,7 +172,7 @@ class MovementPackage:
 
 
 class Unity:
-    def __init__(self, host : str = '127.0.0.1', port : int = 5005):
+    def __init__(self, host : str = '127.0.0.1', port : int = 1234):
         self.host = host
         self.port = port
         self.sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
@@ -216,8 +209,7 @@ class Unity:
         while True:
             try:
                 data = self.get_data()
-                # self.controller.print_in()
-                # self.controller.print_out()
+                # self.controller.print_data()
                 data = self.mapper.compute_movement(data)
                 self.send_data_8_values(data)
                 print(f'\r{data[0]}, {data[1]}, {data[2]}, {data[3]}, {data[4]}, {data[5]}, {data[6]}, {data[7]}', end='')
