@@ -175,7 +175,7 @@ class Unity:
     def __init__(self, host : str = '127.0.0.1', port : int = 1234):
         self.host = host
         self.port = port
-        self.sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+        self.sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.sock.connect((self.host, self.port))
 
         self.controller = CM()
