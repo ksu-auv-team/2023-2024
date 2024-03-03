@@ -213,7 +213,7 @@ class Unity:
                 data = self.mapper.compute_movement(data)
                 self.send_data_8_values(data)
                 print(f'\r{data[0]}, {data[1]}, {data[2]}, {data[3]}, {data[4]}, {data[5]}, {data[6]}, {data[7]}', end='')
-                pygame.time.wait(10)
+                pygame.time.wait(11)
             except KeyboardInterrupt:
                 pygame.quit()
                 break
