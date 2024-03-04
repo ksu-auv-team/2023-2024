@@ -1,6 +1,7 @@
 import socket
 import numpy
 import pygame
+from flask import Flask, request, jsonify
 
 
 class CM:
@@ -172,12 +173,7 @@ class MovementPackage:
 
 
 class Unity:
-    def __init__(self, host : str = '127.0.0.1', port : int = 1234):
-        self.host = host
-        self.port = port
-        self.sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        self.sock.connect((self.host, self.port))
-
+    def __init__(self):
         self.controller = CM()
         self.mapper = MovementPackage()
     
@@ -188,36 +184,35 @@ class Unity:
         self.controller.get_data()
         return self.controller.map_data()
     
-    def send_data_6_values(self, data : dict):
+    def get_mapped_data(self) -> list:
         """
-        @brief Send the data to the Unity simulation only works for 6 values. 
+        @brief Get the data from the controller and map it to the correct output.
         """
-        s = f'{data["X"]},{data["Y"]},{data["Z"]},{data["Pitch"]},{data["Roll"]},{data["Yaw"]}R'
-        self.sock.sendall(s.encode('utf-8'))
+        data = self.get_data()
+        return self.mapper.compute_movement(data)
 
-    def send_data_8_values(self, data : list):
-        """
-        @brief Send the data to the Unity simulation only works for 8 values. 
-        """
-        s = f'{data[0]},{data[1]},{data[2]},{data[3]},{data[4]},{data[5]},{data[6]},{data[7]},R'
-        self.sock.sendall(s.encode('utf-8'))
-    
-    def run(self):
-        """
-        @brief Run the main loop for the controller and the Unity simulation.
-        """
-        while True:
-            try:
-                data = self.get_data()
-                # self.controller.print_data()
-                data = self.mapper.compute_movement(data)
-                self.send_data_8_values(data)
-                print(f'\r{data[0]}, {data[1]}, {data[2]}, {data[3]}, {data[4]}, {data[5]}, {data[6]}, {data[7]}', end='')
-                pygame.time.wait(11)
-            except KeyboardInterrupt:
-                pygame.quit()
-                break
+app = Flask(__name__)
+unity_instance = Unity()
+
+@app.route('/get_motor_data', methods=['GET'])
+def get_motor_data():
+    # Simulate or fetch actual motor data here
+    data = unity_instance.get_mapped_data()
+    print(data)
+    return jsonify(data)
+
+@app.route('/post_imu_camera_data', methods=['POST'])
+def post_imu_camera_data():
+    imu_data = request.json.get('imu_data')
+    # Process IMU data here
+
+    # For camera images, you might need to handle file upload differently, 
+    # e.g., using request.files
+    # camera_image = request.files['camera_image']
+    # camera_image.save('path/to/save/image.jpg')
+
+    return jsonify({"status": "success"})
 
 if __name__ == '__main__':
-    unity = Unity()
-    unity.run()
+    pygame.init() # Ensure pygame is initialized outside the request context
+    app.run(debug=True, host='0.0.0.0', port=5000)
