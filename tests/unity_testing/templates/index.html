@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Unity Testing</title>
+    <style>
+        #tableContainer, #graphContainer {
+            margin: 20px;
+            padding: 20px;
+            border: 1px solid #ddd;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h1>Database Content</h1>
+    <div id="tableContainer">
+        <table id="dataTable">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Motor 1</th>
+                    <th>Motor 2</th>
+                    <th>Motor 3</th>
+                    <th>Motor 4</th>
+                    <th>Motor 5</th>
+                    <th>Motor 6</th>
+                    <th>Motor 7</th>
+                    <th>Motor 8</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Table rows will be added here dynamically -->
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            $.ajax({
+                url: "/motor_data", // Update this with the actual path to your Flask endpoint
+                type: "GET",
+                success: function(data) {
+                    populateTable(data);
+                    visualizeData(data);
+                },
+                error: function(error) {
+                    console.log("Error fetching data: ", error);
+                }
+            });
+        });
+
+        function populateTable(data) {
+            // Assuming 'data' is an array of objects where each object represents a row
+            data.forEach(function(row) {
+                $('#dataTable tbody').append(`<tr>
+                    <td>${row.id}</td>
+                    <td>${row.m1}</td>
+                    <td>${row.m2}</td>
+                    <!-- Add other motor data as needed -->
+                </tr>`);
+            });
+        }
+    </script>
+</html>

@@ -1,7 +1,7 @@
-import socket
+import requests
 import numpy
 import pygame
-from flask import Flask, request, jsonify
+import numpy as np
 
 
 class CM:
@@ -173,7 +173,8 @@ class MovementPackage:
 
 
 class Unity:
-    def __init__(self):
+    def __init__(self, server_url='http://45.79.205.148:5000'):
+        self.server_url = server_url
         self.controller = CM()
         self.mapper = MovementPackage()
     
@@ -190,29 +191,38 @@ class Unity:
         """
         data = self.get_data()
         return self.mapper.compute_movement(data)
+    
+    def send_motor_data(self):
+        """
+        Send motor data to the server.
+        """
+        data = self.get_mapped_data()
+        motor_data = {
+            'm1': data[0], 'm2': data[1], 'm3': data[2], 'm4': data[3],
+            'm5': data[4], 'm6': data[5], 'm7': data[6], 'm8': data[7]
+        }
+        response = requests.post(f'{self.server_url}/motor_data', json=motor_data)
+        print(f'Status Code: {response.status_code}, Response: {response.json()}')
 
-app = Flask(__name__)
-unity_instance = Unity()
-
-@app.route('/get_motor_data', methods=['GET'])
-def get_motor_data():
-    # Simulate or fetch actual motor data here
-    data = unity_instance.get_mapped_data()
-    print(data)
-    return jsonify(data)
-
-@app.route('/post_imu_camera_data', methods=['POST'])
-def post_imu_camera_data():
-    imu_data = request.json.get('imu_data')
-    # Process IMU data here
-
-    # For camera images, you might need to handle file upload differently, 
-    # e.g., using request.files
-    # camera_image = request.files['camera_image']
-    # camera_image.save('path/to/save/image.jpg')
-
-    return jsonify({"status": "success"})
+    def fetch_image_data(self, image_id):
+        """
+        Fetch image data for a specific ID from the server.
+        """
+        response = requests.get(f'{self.server_url}/image_data/{image_id}')
+        if response.status_code == 200:
+            image_data = response.json()
+            front_image = np.array(image_data['front_camera'])  # Assuming image data is serialized in a compatible format
+            bottom_image = np.array(image_data['bottom_camera'])
+            return front_image, bottom_image
+        else:
+            print(f'Failed to fetch image data. Status Code: {response.status_code}')
+            return None, None
 
 if __name__ == '__main__':
-    pygame.init() # Ensure pygame is initialized outside the request context
-    app.run(debug=True, host='0.0.0.0', port=5000)
+    unity = Unity()
+    while True:
+        try:
+            unity.send_motor_data()
+            # front_img, bottom_img = unity.fetch_image_data(image_id=1)
+        except KeyboardInterrupt:
+            break
