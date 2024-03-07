@@ -11,10 +11,10 @@
 # ## How to Run
 # - Initialize a `CM` object and call its `get_data` and `print` methods in a loop.
 
-import numpy as np
 import requests
+import numpy
 import pygame
-import json
+import numpy as np
 
 
 class CM:
@@ -39,14 +39,17 @@ class CM:
         self.joystick = None
         self.init_joystick()
 
-        with open('static/configs/controller.json') as f:
-            self.config = json.load(f)
+        self.config = {
+            "X": 4,
+            "Y": 3,
+            "Z": 1,
+            "Pitch": [20, 4],
+            "Roll": [20, 3],
+            "Yaw": 0
+        }
 
         self.joy_data = []
-        self.out_data = {"ARM": 0, "X": 0.0, "Y": 0.0, "Z": 0.0, "Pitch": 0.0, "Roll": 0.0, "Yaw_Right": 0.0, "Yaw_Left": 0.0, "Claw_Close": 0.0, "Claw_Open": 0.0}
-
-        orin_ip = '127.0.0.1'
-        self.url = f"http://{orin_ip}:5000/post_input_data"
+        self.out_data = {"X": 0.0, "Y": 0.0, "Z": 0.0, "Pitch": 0.0, "Roll": 0.0, "Yaw": 0.0}
 
     def init_joystick(self):
         """
@@ -91,71 +94,54 @@ class CM:
     def map_data(self):
         """
         Map the data to the correct output values.
+        self.config = {
+            "X": 4,
+            "Y": 3,
+            "Z": 1,
+            "Pitch": [20, 4],
+            "Roll": [20, 3],
+            "Yaw": 0
+        }
         """
-        for keys in self.config:
-            if keys == "Yaw_Right" and abs(self.joy_data[self.config[keys]]) > 0.1:
-                self.out_data['Yaw'] = -1 * self.joy_data[self.config[keys]]
-            elif keys == "Yaw_Left" and abs(self.joy_data[self.config[keys]]) > 0.1:
-                self.out_data['Yaw'] = self.joy_data[self.config[keys]]
-            elif keys == "Claw_Close" and abs(self.joy_data[self.config[keys]]) > 0.1:
-                self.out_data['Claw'] = -1 * self.joy_data[self.config[keys]]
-            elif keys == "Claw_Open" and abs(self.joy_data[self.config[keys]]) > 0.1:
-                self.out_data['Claw'] = self.joy_data[self.config[keys]]
-            else:
-                if abs(self.joy_data[self.config[keys]]) > 0.1:
-                    self.out_data[keys] = self.joy_data[self.config[keys]]
-                else:
-                    pass
+        if self.joy_data[self.config["Pitch"][0]] == 1:
+            self.out_data["Pitch"] = self.joy_data[self.config["Pitch"][1]] if abs(self.joy_data[self.config["Pitch"][1]]) > 0.1 else 0.0
+            self.out_data["Roll"] = self.joy_data[self.config["Roll"][1]] if abs(self.joy_data[self.config["Roll"][1]]) > 0.1 else 0.0
+            self.out_data["X"] = 0.0
+            self.out_data["Y"] = 0.0
+        else:
+            self.out_data["X"] = self.joy_data[self.config["X"]] if abs(self.joy_data[self.config["X"]]) > 0.1 else 0.0
+            self.out_data["Y"] = self.joy_data[self.config["Y"]] if abs(self.joy_data[self.config["Y"]]) > 0.1 else 0.0
+            self.out_data["Pitch"] = 0.0
+            self.out_data["Roll"] = 0.0
+        self.out_data["Z"] = self.joy_data[self.config["Z"]] if abs(self.joy_data[self.config["Z"]]) > 0.1 else 0.0
+        self.out_data["Yaw"] = self.joy_data[self.config["Yaw"]] if abs(self.joy_data[self.config["Yaw"]]) > 0.1 else 0.0
+
         return self.out_data
-    
-    def send_data(self, data : dict):
-        """
-        Sends controller data to the server.
-        """
-        headers = {'Content-Type': 'application/json'}
-        response = requests.post(self.url, headers=headers, data=json.dumps(data))
-        return response
 
-    def print_in(self):
+    def print_data(self):
         """
-        @brief Print the current state of the `data` array.
+        Print the data array.
         """
-        s = ''
+        s = "\r"
         for i in range(len(self.joy_data)):
-            s += f'   {i}: {self.joy_data[i]}   |'
-        print(s)
-
-    def print_out(self):
-        """
-        @brief Print the current state of the `data` array.
-        """
-        print(self.out_data)
+            s += f"{self.joy_data[i]}, "
+        s = "\r"
+        for i in range(len(self.out_data)):
+            s += f"{self.out_data[i]}, "
+        print(s, end='')
 
     def map(self, x : float, in_min : float = -1.0, in_max : float = 1.0, out_min : int = 1000, out_max : int = 2000):
         """
         @brief Map a value from one range to another.
         """
         return round((x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min)
-
-    def run(self, debug : int = 0):
+    
+    def run(self):
         """
-        @brief Run the controller.
+        Run the main loop to get and print the data.
         """
         while True:
             self.get_data()
             self.map_data()
-            # response = self.send_data(self.out_data)
-            if debug == 1:
-                self.print_in()
-                # print("Server response:", response.text)
-            elif debug == 2:
-                self.print_out()
-                # print("Server response:", response.text)
-            else:
-                # print("Server response:", response.text)
-                pass
-
-
-if __name__ == "__main__":
-    cm = CM()
-    cm.run(debug=2)    
+            self.print_data()
+            pygame.time.wait(100)
