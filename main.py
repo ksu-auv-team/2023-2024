@@ -2,7 +2,6 @@ from flask import Flask, Response, render_template, request
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 from time import sleep
-import pyzed.sl as sl
 import numpy as np
 import threading
 import logging
@@ -15,10 +14,6 @@ import cv2
 # from static.modules.Movement_Package import MovementPackage
 # from static.modules.Neural_Network import NeuralNetworkPackage
 
-# Global storage for camera frames and locks
-camera_frames = {}
-camera_locks = {}
-
 app = Flask(__name__)
 # Database configuration
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
@@ -28,61 +23,6 @@ db = SQLAlchemy(app)
 # Create the logging objects for the application and setup logging to a file
 logging.basicConfig(filename='app.log', level=logging.DEBUG)
 logger = logging.getLogger(__name__)
-
-# Global storage for camera frames and locks
-camera_frames = {"usb": None, "zed": None}
-camera_locks = {"usb": threading.Lock(), "zed": threading.Lock()}
-
-def usb_camera_capture_thread(camera_index, camera_frames, camera_locks):
-    cap = cv2.VideoCapture(camera_index)
-    cap.set(cv2.CAP_PROP_FPS, 30)
-
-    # Set lower resolution for higher framerate
-    cap.set(cv2.CAP_PROP_FRAME_WIDTH, 640)  # Example: set width
-    cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 480)  # Example: set height
-    
-    # Ensure camera is opened successfully
-    if not cap.isOpened():
-        print(f"Failed to open camera {camera_index}")
-        return
-    
-    # Initialize lock for current camera
-    camera_locks[camera_index] = threading.Lock()
-    while cap.isOpened():
-        ret, frame = cap.read()
-        if ret:
-            with camera_locks["usb"]:
-                _, buffer = cv2.imencode('.jpg', frame)
-                camera_frames["usb"] = buffer.tobytes()
-    cap.release()
-
-
-def zed_camera_capture_thread(camera_frames, camera_locks):
-    init_params = sl.InitParameters()
-    cap = sl.Camera()
-    if cap.open(init_params) != sl.ERROR_CODE.SUCCESS:
-        print("Failed to open ZED camera")
-        return
-    
-    image = sl.Mat()
-    runtime_parameters = sl.RuntimeParameters()
-    
-    while cap.is_opened():
-        if cap.grab(runtime_parameters) == sl.ERROR_CODE.SUCCESS:
-            cap.retrieve_image(image, sl.VIEW.LEFT)
-            frame = image.get_data()
-            with camera_locks["zed"]:
-                _, buffer = cv2.imencode('.jpg', frame)
-                camera_frames["zed"] = buffer.tobytes()
-    cap.close()
-
-def generate_frames(camera_key):
-    while True:
-        if camera_key in camera_frames and camera_frames[camera_key] is not None:
-            with camera_locks[camera_key]:
-                frame = camera_frames[camera_key]
-                yield (b'--frame\r\nContent-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
-
 
 # Database models
 class InputData(db.Model):
@@ -201,41 +141,18 @@ def post_sensor_data():
     db.session.commit()
     return 'Sensor data posted successfully'
 
-@app.route('/video_feed/<int:camera_index>')
-def video_feed(camera_index):
-    """
-    Route to serve the video feed for the requested camera.
-    """
-    return Response(generate_frames(camera_index),
-                    mimetype='multipart/x-mixed-replace; boundary=frame')
-
 @app.route('/')
 def index():
     """
     Main page route to display available camera feeds.
     """
-    # Example to display links to available camera feeds
-    cameras = list(camera_frames.keys())
-    return render_template('index.html', cameras=cameras)
+    # # Example to display links to available camera feeds
+    # cameras = list(camera_frames.keys())
+    # return render_template('index.html', cameras=cameras)
+    return render_template('index.html')
 
 def shutdown_handler(signum, frame):
     print("Shutdown signal received")
-
-    # Example: Release resources for the ZED camera
-    if 'zed' in camera_locks:
-        with camera_locks['zed']:
-            # Assuming `cam` is your ZED camera object
-            # You might need to make `cam` accessible here
-            cap.close()
-            print("ZED camera closed")
-
-    # Example: Stop USB camera capture by releasing the capture object
-    if 'usb' in camera_locks:
-        with camera_locks['usb']:
-            # Assuming `cap` is your OpenCV capture object for the USB camera
-            # You might need to adjust this part to access the `cap` object correctly
-            cap.release()
-            print("USB camera released")
 
     # Add additional cleanup steps here
 
@@ -250,9 +167,4 @@ if __name__ == '__main__':
     # Register the shutdown handler
     signal.signal(signal.SIGINT, shutdown_handler)
 
-    # Pre-start camera capture threads for known camera indices
-    # Start camera capture threads
-    threading.Thread(target=usb_camera_capture_thread, args=(0, camera_frames, camera_locks), daemon=True).start()  # Adjust 0 to your USB camera index
-    threading.Thread(target=zed_camera_capture_thread, args=(camera_frames, camera_locks), daemon=True).start()
-    
     app.run(debug=True, threaded=True, host='0.0.0.0')

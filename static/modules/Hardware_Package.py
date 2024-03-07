@@ -24,7 +24,6 @@ class HardwarePackage:
         self.ser = serial.Serial(port, baudrate, timeout=1)
         self.thread = threading.Thread(target=self.read_from_serial)
         self.thread.daemon = True
-
         self.hardware_logger = hardware_logger
         self.db = db
         self.SensorsInputDB = SensorsInputDB
