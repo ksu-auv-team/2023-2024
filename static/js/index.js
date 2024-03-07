@@ -5,17 +5,7 @@ document.addEventListener("DOMContentLoaded", function() {
     createServoElements();
     startDataDemo();
 
-    /*
-    const limit = 5
-    let timeout = 0
-
-    for (let i =0; i < limit; i++) {
-        setTimeout(() => {
-            newMessage(1, "Battery", "Battery voltage is low. and the yes ok but the no ")
-        }, timeout)
-        timeout += 1000
-    }
-*/
+//     MAKE SURE TO MAKE GET REQUESTS TO UPDATE ANY ITEMS IN CASE USER REFRESHES PAGE
 })
 
 
@@ -108,7 +98,29 @@ function displayMessage(message_data) {
 }
 
 
-//     -------------------------------------------- END MESSAGE CENTER  |  START BATTERY DATA  --------------------------------------------
+//     -------------------------------------------- END MESSAGE CENTER  |  START POWER BUTTON --------------------------------------------
+
+let auv_power = false; //False = off
+
+function power() { //Make async when adding post requests
+    const power_svg = document.getElementById('power_svg');
+    if (!auv_power) { //if off
+        // INSERT CODE TO POWER SUB AND WAIT FOR RESPONSE | HANDLE ERRORS
+        // .then
+        power_svg.src = '../static/imgs/svg_icons/power-on.svg';
+        power_svg.alt = 'Power ON';
+        auv_power = true;
+    } else {
+        // INSERT CODE TO TURN OFF SUB AND WAIT FOR RESPONSE | HANDLE ERRORS
+        // CREATE DIALOG TO MAKE SURE USER WANTS TO POWER OFF
+        power_svg.src = '../static/imgs/svg_icons/power-off.svg';
+        power_svg.alt = 'Power OFF';
+        auv_power = false;
+    }
+}
+
+
+//     -------------------------------------------- END POWER BUTTON  |  START BATTERY DATA  --------------------------------------------
 
 
 
@@ -176,7 +188,7 @@ function createMotorElements() {
         batteryDiv.className = 'motor';
         batteryDiv.id = 'motor_' + motor.id;
         batteryDiv.innerHTML = `
-            <h2>Battery ${motor.id}</h2>
+            <h2>Motor ${motor.id}</h2>
             <p>pwm: <span class="pwm"></span>%</p>
         `;
         container.appendChild(batteryDiv);

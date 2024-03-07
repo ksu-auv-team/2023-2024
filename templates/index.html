@@ -8,18 +8,26 @@
     <script src="../static/js/index.js"></script>
 </head>
 
-<header></header>
+<header>
+    <nav>
+        <button class="active-tab">Stream</button>
+        <button>Data Monitoring</button>
+        <button>Log</button>
+    </nav>
+    <button id="power_button" onclick="power()">
+        <img id="power_svg" src="../static/imgs/svg_icons/power-off.svg" alt="Power OFF">
+    </button>
+</header>
 
 <body>
-    <main>
-        <section id="camera_streams">
+    <main class="active">
             <h1 class="section_title">Camera Feeds (VGA)</h1>
             <div id="stream">
 
                 <div class="video_stream">
                     <div class="stream_header">
                         <h2 class="camera_title">Camera 1</h2>
-                        <button onclick="test_webcam(1)">
+                        <button onclick="alert('nothing right now')">
                             <img src="/static/imgs/camera_svg.svg" alt="Toggle Camera">
                         </button>
                     </div>
@@ -35,7 +43,7 @@
                 <div class="video_stream">
                     <div class="stream_header">
                         <h2 class="camera_title">Camera 2</h2>
-                        <button onclick="test_webcam(2)">
+                        <button onclick="alert('nothing right now')">
                             <img src="/static/imgs/camera_svg.svg" alt="Toggle Camera">
                         </button>
                     </div>
@@ -44,21 +52,22 @@
                 </div>
 
             </div>
-        </section>
 
-        <hr>
+        <div class="data_container" id="battery_data"></div>
 
+
+    </main>
+
+    <main id="data_dialog">
         <h1>Data Monitoring</h1>
+        <p>Possibly use a diagram of sub to show which motors each sensor is connected to</p>
         <section id="data_monitoring">
-<!--            4 batteries(voltage:float | amps: int)  |  8 Motors(pwm: int)  |  2 Servos(pwm: int)     -->
-            <div class="data_container" id="battery_data"></div>
+            <!--            4 batteries(voltage:float | amps: int)  |  8 Motors(pwm: int)  |  3 Servos(pwm: int)     -->
 
             <div class="data_container" id="motor_data"></div>
 
             <div class="data_container" id="servo_data"></div>
         </section>
-
-
     </main>
 </body>
 </html>
