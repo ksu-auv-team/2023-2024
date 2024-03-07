@@ -145,3 +145,7 @@ class CM:
             self.map_data()
             self.print_data()
             pygame.time.wait(100)
+
+if __name__ == "__main__":
+    cm = CM()
+    cm.run()
