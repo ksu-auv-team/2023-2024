@@ -123,11 +123,10 @@ class CM:
         Print the data array.
         """
         s = "\r"
-        for i in range(len(self.joy_data)):
-            s += f"{self.joy_data[i]}, "
-        s = "\r"
-        for i in range(len(self.out_data)):
-            s += f"{self.out_data[i]}, "
+        # for i in range(len(self.joy_data)):
+        #     s += f"{self.joy_data[i]}, "
+        for key in self.out_data:
+            s += f"{self.out_data[key]}, "
         print(s, end='')
 
     def map(self, x : float, in_min : float = -1.0, in_max : float = 1.0, out_min : int = 1000, out_max : int = 2000):
