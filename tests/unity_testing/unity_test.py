@@ -88,7 +88,7 @@ class CM:
             "Pitch": [20, 4],
             "Roll": [20, 3],
             "Yaw": 0
-        } 
+        }
         or On personal controller
         self.config = {
             "X": 4,
@@ -204,7 +204,8 @@ class Unity:
         """
         Get the data from the controller and map it to the correct output.
         """
-        return self.controller.get_data()
+        self.controller.get_data()
+        return self.controller.map_data()
 
     def get_mapped_data(self) -> list:
         """
@@ -241,8 +242,8 @@ if __name__ == '__main__':
     while True:
         try:
             # unity.send_motor_data()
-            print(unity.get_mapped_data())
-            # print(unity.get_data())
+            # print(unity.get_mapped_data())
+            print(unity.get_data())
             # Note: The image fetching functionality is not implemented for TCP.
         except KeyboardInterrupt:
             print("Program interrupted by user. Exiting...")
