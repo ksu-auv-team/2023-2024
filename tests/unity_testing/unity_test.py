@@ -30,8 +30,8 @@ class CM:
             "X": 4,
             "Y": 3,
             "Z": 1,
-            "Pitch": [20, 4],
-            "Roll": [20, 3],
+            "Pitch": [8, 4],
+            "Roll": [8, 3],
             "Yaw": 0
         }
 
@@ -87,6 +87,15 @@ class CM:
             "Z": 1,
             "Pitch": [20, 4],
             "Roll": [20, 3],
+            "Yaw": 0
+        } 
+        or On personal controller
+        self.config = {
+            "X": 4,
+            "Y": 3,
+            "Z": 1,
+            "Pitch": [8, 4],
+            "Roll": [8, 3],
             "Yaw": 0
         }
         """
@@ -232,8 +241,8 @@ if __name__ == '__main__':
     while True:
         try:
             # unity.send_motor_data()
-            # print(unity.get_mapped_data())
-            print(unity.get_data())
+            print(unity.get_mapped_data())
+            # print(unity.get_data())
             # Note: The image fetching functionality is not implemented for TCP.
         except KeyboardInterrupt:
             print("Program interrupted by user. Exiting...")
