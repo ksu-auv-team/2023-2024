@@ -172,7 +172,7 @@ class MovementPackage:
         return values
 
 class Unity:
-    def __init__(self, ip='127.0.0.01', port=1234):
+    def __init__(self, ip='localhost', port=1234):
         """
         Initialize the Unity object.
         
