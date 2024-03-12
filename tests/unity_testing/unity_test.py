@@ -1,4 +1,4 @@
-import requests
+import socket 
 import numpy
 import pygame
 import numpy as np
@@ -171,58 +171,69 @@ class MovementPackage:
             values[i] = self.map(values[i], -0.5, 0.5, -1, 1)
         return values
 
-
 class Unity:
-    def __init__(self, server_url='http://45.79.205.148:5000'):
-        self.server_url = server_url
+    def __init__(self, ip='10.0.0.52', port=1234):
+        """
+        Initialize the Unity object.
+        
+        Parameters:
+        - `ip`: IP address of the remote computer. Default is '10.0.0.52'.
+        - `port`: Port number for the TCP connection. Default is 1234.
+        """
+        self.ip = ip
+        self.port = port
         self.controller = CM()
         self.mapper = MovementPackage()
-    
+
+        # Create a socket object
+        self.s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+
+        # Connect to the remote server
+        self.s.connect((self.ip, self.port))
+
     def get_data(self) -> dict:
         """
-        @brief Get the data from the controller and map it to the correct output.
+        Get the data from the controller and map it to the correct output.
         """
         self.controller.get_data()
         return self.controller.map_data()
-    
+
     def get_mapped_data(self) -> list:
         """
-        @brief Get the data from the controller and map it to the correct output.
+        Get the data from the controller and map it to the correct output.
         """
         data = self.get_data()
         return self.mapper.compute_movement(data)
-    
+
     def send_motor_data(self):
         """
-        Send motor data to the server.
+        Send motor data to the remote computer over a TCP connection.
         """
         data = self.get_mapped_data()
-        motor_data = {
-            'm1': data[0], 'm2': data[1], 'm3': data[2], 'm4': data[3],
-            'm5': data[4], 'm6': data[5], 'm7': data[6], 'm8': data[7]
-        }
-        response = requests.post(f'{self.server_url}/motor_data', json=motor_data)
-        print(f'Status Code: {response.status_code}, Response: {response.json()}')
+        motor_data_str = ','.join([str(i) for i in data])
+        motor_data_str = motor_data_str + ',R'
+
+        print(f"Sending motor data: {motor_data_str}")
+
+        # Send the motor data
+        self.s.sendall(motor_data_str.encode('utf-8'))
+
+        # Close the socket
+        self.s.close()
+        print('Motor data sent to the server successfully.')
 
     def fetch_image_data(self, image_id):
         """
-        Fetch image data for a specific ID from the server.
+        This method will not be functional in the TCP version as it was designed for HTTP communication.
         """
-        response = requests.get(f'{self.server_url}/image_data/{image_id}')
-        if response.status_code == 200:
-            image_data = response.json()
-            front_image = np.array(image_data['front_camera'])  # Assuming image data is serialized in a compatible format
-            bottom_image = np.array(image_data['bottom_camera'])
-            return front_image, bottom_image
-        else:
-            print(f'Failed to fetch image data. Status Code: {response.status_code}')
-            return None, None
+        pass
 
 if __name__ == '__main__':
     unity = Unity()
     while True:
         try:
             unity.send_motor_data()
-            # front_img, bottom_img = unity.fetch_image_data(image_id=1)
+            # Note: The image fetching functionality is not implemented for TCP.
         except KeyboardInterrupt:
+            print("Program interrupted by user. Exiting...")
             break
