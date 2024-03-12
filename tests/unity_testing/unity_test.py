@@ -198,7 +198,12 @@ class Unity:
         self.s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
         # Connect to the remote server
-        self.s.connect((self.ip, self.port))
+        try:
+            self.s.connect((self.ip, self.port))
+            print("Connected to the server successfully.")
+        except socket.error as err:
+            print(f"Failed to connect to the server: {err}")
+            # It's a good practice to handle connection errors such as this.
 
     def get_data(self) -> dict:
         """
@@ -219,17 +224,24 @@ class Unity:
         Send motor data to the remote computer over a TCP connection.
         """
         data = self.get_mapped_data()
-        motor_data_str = ','.join([str(i) for i in data])
-        motor_data_str = motor_data_str + ',R'
+        motor_data_str = ','.join([str(i) for i in data]) + ',R'  # Assuming you want to append ',R' for some reason.
 
         print(f"Sending motor data: {motor_data_str}")
 
-        # Send the motor data
-        self.s.sendall(motor_data_str.encode('utf-8'))
+        try:
+            # Send the motor data
+            self.s.sendall(motor_data_str.encode('utf-8'))
+            print('Motor data sent to the server successfully.')
+        except socket.error as err:
+            print(f"Failed to send data: {err}")
+            # Handle potential errors, such as disconnection or server unavailability.
 
-        # Close the socket
+    def close_connection(self):
+        """
+        Close the TCP connection when done.
+        """
         self.s.close()
-        print('Motor data sent to the server successfully.')
+        print("Connection closed.")
 
     def fetch_image_data(self, image_id):
         """
@@ -239,12 +251,11 @@ class Unity:
 
 if __name__ == '__main__':
     unity = Unity()
-    while True:
-        try:
+    try:
+        while True:
             unity.send_motor_data()
-            # print(unity.get_mapped_data())
-            # print(unity.get_data())
-            # Note: The image fetching functionality is not implemented for TCP.
-        except KeyboardInterrupt:
-            print("Program interrupted by user. Exiting...")
-            break
+            # Additional operations...
+    except KeyboardInterrupt:
+        print("Program interrupted by user. Exiting...")
+    finally:
+        unity.close_connection()
