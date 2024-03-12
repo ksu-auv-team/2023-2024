@@ -232,7 +232,8 @@ if __name__ == '__main__':
     unity = Unity()
     while True:
         try:
-            unity.send_motor_data()
+            # unity.send_motor_data()
+            print(unity.get_mapped_data())
             # Note: The image fetching functionality is not implemented for TCP.
         except KeyboardInterrupt:
             print("Program interrupted by user. Exiting...")
