@@ -195,8 +195,7 @@ class Unity:
         """
         Get the data from the controller and map it to the correct output.
         """
-        self.controller.get_data()
-        return self.controller.map_data()
+        return self.controller.get_data()
 
     def get_mapped_data(self) -> list:
         """
