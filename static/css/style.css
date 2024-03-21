@@ -36,16 +36,18 @@ body {
 }
 
 main {
-    width: calc(100% - 2rem);
-    padding: 0 1rem;
-    z-index: -1;
-    opacity: 0;
+    width: 100dvw;
+    top: var(--header_height);
 }
 
-main.active {
-    z-index: 1;
-    opacity: 1;
+main[hidden] {
+    z-index: -1;
 }
+
+/*main.active {*/
+/*    z-index: 1;*/
+/*    opacity: 1;*/
+/*}*/
 
 nav {
     display: flex;
@@ -101,13 +103,14 @@ h1 {
     aspect-ratio: 1;
 }
 
-/*----------------------------- STREAM AND MESSAGE CENTER ----------------------------- */
+/*-------------------------------------------------- STREAM -------------------------------------------------- */
 
 #stream {
     display: flex;
     justify-content: space-evenly;
     width: 100%;
-    max-width: 95vw;
+    max-width: 95dvw;
+    margin: 1rem 0;
 }
 
 .stream_header {
@@ -141,47 +144,16 @@ h1 {
     aspect-ratio: 4/3;
 }
 
-
-#message_center {
-    padding: 0 1rem;
-    border-radius: 1rem;
-    align-self: center;
+#battery_data {
+    flex-direction: column;
     max-height: 100%;
 }
-
-#messages {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 0 1rem;
-    gap: 1rem;
-}
-
-.single_message {
-    width: 100%;
-    border: solid 2px var(--text);
-    border-radius: .5rem;
-    transition: 800ms;
-}
-
-.single_message_clear {
-    opacity: 0;
-}
-
-.single_message h3, .single_message p {
-    padding: 0 .5rem;
-}
-
-.warning { border: solid 2px darkgoldenrod; }
-.alert { border: solid 2px darkred }
 
 /*-------------------------------------------- DATA SECTION --------------------------------------------*/
 
 #data_dialog {
     position: absolute;
     top: var(--header_height);
-    width: 100%;
-    height: 100%;
     left: 0;
     background-color: var(--background);
 }
@@ -218,3 +190,38 @@ h1 {
 .servo {
     border: solid 2px green;
 }
+
+/*-------------------------------------------- MESSAGE CENTER --------------------------------------------*/
+
+
+#message_center {
+    background-color: var(--background_2);
+    width: 100%;
+    max-width: 100dvw;
+}
+
+#messages {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0 1rem;
+    gap: 1rem;
+}
+
+.single_message {
+    width: 100%;
+    border: solid 2px var(--text);
+    border-radius: .5rem;
+    transition: 800ms;
+}
+
+.single_message_clear {
+    opacity: 0;
+}
+
+.single_message h3, .single_message p {
+    padding: 0 .5rem;
+}
+
+.warning { border: solid 2px darkgoldenrod; }
+.alert { border: solid 2px darkred }

@@ -10,9 +10,9 @@
 
 <header>
     <nav>
-        <button class="active-tab">Stream</button>
-        <button>Data Monitoring</button>
-        <button>Log</button>
+        <button id="stream_tag" class="active-tab" onclick="switchTab(0)">Stream</button>
+        <button id="data_tag" onclick="switchTab(1)">Data Monitoring</button>
+        <button id="log_tag" onclick="switchTab(2)">Log</button>
     </nav>
     <button id="power_button" onclick="power()">
         <img id="power_svg" src="../static/imgs/svg_icons/power-off.svg" alt="Power OFF">
@@ -20,10 +20,9 @@
 </header>
 
 <body>
-    <main class="active">
+    <main class="active" id="stream_main">
             <h1 class="section_title">Camera Feeds (VGA)</h1>
             <div id="stream">
-
                 <div class="video_stream">
                     <div class="stream_header">
                         <h2 class="camera_title">Camera 1</h2>
@@ -35,10 +34,7 @@
                     <video id="camera_feed_1" src="" autoplay></video>
                 </div>
 
-<!--                Messages inserted from JS    -->
-                <div id="message_center">
-                    <div id="messages"></div>
-                </div>
+                <div class="data_container" id="battery_data"></div>
 
                 <div class="video_stream">
                     <div class="stream_header">
@@ -50,15 +46,16 @@
                     <hr>
                     <video id="camera_feed_2" src="" autoplay></video>
                 </div>
-
             </div>
 
-        <div class="data_container" id="battery_data"></div>
-
+        <!--                Messages inserted from JS    -->
+        <div id="message_center">
+            <div id="messages">test</div>
+        </div>
 
     </main>
 
-    <main id="data_dialog">
+    <main id="data_dialog" hidden>
         <h1>Data Monitoring</h1>
         <p>Possibly use a diagram of sub to show which motors each sensor is connected to</p>
         <section id="data_monitoring">
@@ -69,5 +66,7 @@
             <div class="data_container" id="servo_data"></div>
         </section>
     </main>
+
+    <main id="log_main" hidden>LOG</main>
 </body>
 </html>

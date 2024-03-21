@@ -41,7 +41,36 @@ function test_webcam(camera_identifier) {
     }
 }
 
-//     -------------------------------------------- END TESTING WEBCAM  |  START MESSAGE CENTER  --------------------------------------------
+//     -------------------------------------------- END TESTING WEBCAM  |  START TAB PAGES  --------------------------------------------
+
+function switchTab(tab_index) {
+    const stream = document.getElementById('stream_main');
+    const data = document.getElementById('data_dialog');
+    const log = document.getElementById('log_main');
+
+    document.getElementById('stream_tag').classList.remove('active-tab');
+    document.getElementById('data_tag').classList.remove('active-tab');
+    document.getElementById('log_tag').classList.remove('active-tab');
+    if (tab_index === 1) {
+        stream.setAttribute("hidden", "true");
+        log.setAttribute('hidden', 'true');
+        data.removeAttribute('hidden');
+        document.getElementById('data_tag').classList.add('active-tab');
+    } else if (tab_index === 2) {
+        stream.setAttribute("hidden", "true");
+        data.setAttribute('hidden', 'true');
+        log.removeAttribute('hidden');
+        document.getElementById('log_tag').classList.add('active-tab');
+    } else {
+        data.setAttribute('hidden', 'true');
+        log.setAttribute("hidden", "true");
+        stream.removeAttribute('hidden');
+        document.getElementById('stream_tag').classList.add('active-tab');
+    }
+}
+
+
+//     -------------------------------------------- END TAB PAGES  |  START MESSAGE CENTER  --------------------------------------------
 
 function Message(severity, source, message) {
     this.severity =  severity;
