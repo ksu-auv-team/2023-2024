@@ -165,6 +165,13 @@ function updateBatteryDisplays() {
         let battery_div = document.getElementById(`battery_${battery_object.id}`);
         battery_div.querySelector('.voltage').textContent = battery_object.voltage;
         battery_div.querySelector('.amps').textContent = battery_object.amps;
+        if(battery_object.voltage > (50*.8)) { // Estimate Battery %. Given that max voltage is 50V
+            battery_div.style.borderColor = "Green"
+        } else if(battery_object.voltage > (50*.3)) {
+            battery_div.style.borderColor = "Darkgoldenrod"
+        } else {
+            battery_div.style.borderColor = "Red"
+        }
     })
 }
 
@@ -268,6 +275,15 @@ function resetServoElements() {
 
 //     -------------------------------------------- END SERVO DATA  --------------------------------------------
 
+// ------------------------------------------------- LOG PAGE -------------------------------------------------
+
+function highlight_message(message_container) {
+    if(message_container.classList.contains('marked')) { message_container.classList.remove('marked');
+    } else { message_container.classList.add('marked'); }
+}
+
+
+//  -----------------------------------------START DATA DEMO -----------------------------------------
 
 let data_demo
 function startDataDemo() {

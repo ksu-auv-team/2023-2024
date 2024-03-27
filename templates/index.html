@@ -21,7 +21,6 @@
 
 <body>
     <main class="active" id="stream_main">
-            <h1 class="section_title">Camera Feeds (VGA)</h1>
             <div id="stream">
                 <div class="video_stream">
                     <div class="stream_header">
@@ -59,7 +58,6 @@
     </main>
 
     <main id="data_dialog" hidden>
-        <h1>Data Monitoring</h1>
         <p>Possibly use a diagram of sub to show which motors each sensor is connected to</p>
         <section id="data_monitoring">
             <!--            4 batteries(voltage:float | amps: int)  |  8 Motors(pwm: int)  |  3 Servos(pwm: int)     -->
@@ -70,6 +68,39 @@
         </section>
     </main>
 
-    <main id="log_main" hidden>LOG</main>
+    <main id="log_main" hidden>
+        <p class="log_message marked" onclick="highlight_message(this)">
+            March 27, 04:30pm | AUV Powered ON
+            <span class="highlight_indicator">•</span>
+            <label class="log_comment">
+                <input type="text" placeholder="Comment Area">
+            </label>
+        </p>
+
+        <p class="log_message" onclick="highlight_message(this)">
+            March 27, 04:35pm | Battery 1 Low
+            <span class="highlight_indicator">•</span>
+            <label class="log_comment">
+                <input type="text" placeholder="Comment Area">
+            </label>
+        </p>
+
+        <p class="log_message" onclick="highlight_message(this)">
+            March 27, 04:36pm | Battery 2 Low
+            <span class="highlight_indicator">•</span>
+            <label class="log_comment">
+                <input type="text" placeholder="Comment Area">
+            </label>
+        </p>
+
+        <p class="log_message" onclick="highlight_message(this)">
+            March 27, 04:51pm | Motor 3 Unresponsive
+            <span class="highlight_indicator">•</span>
+            <label class="log_comment">
+                <input type="text" placeholder="Comment Area">
+            </label>
+        </p>
+
+    </main>
 </body>
 </html>

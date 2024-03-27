@@ -44,11 +44,6 @@ main[hidden] {
     z-index: -1;
 }
 
-/*main.active {*/
-/*    z-index: 1;*/
-/*    opacity: 1;*/
-/*}*/
-
 nav {
     display: flex;
     justify-content: center;
@@ -65,7 +60,6 @@ nav button {
 
 nav button.active-tab {
     background-color: var(--theme);
-    text-decoration: solid 2px underline;
 }
 
 
@@ -209,4 +203,41 @@ h1 {
 
 .servo {
     border: solid 2px green;
+}
+
+/*------------------------------------------------------ LOG ------------------------------------------------------*/
+
+#log_main {}
+
+.log_message {
+    position: relative;
+    cursor: pointer;
+    padding: 2px 1rem;
+    transition: 130ms;
+}
+.log_message.marked { background-color: var(--background_2); }
+.log_message:hover { background-color: var(--background_2); }
+
+.highlight_indicator {
+    font-weight: bold;
+    color: var(--theme);
+    opacity: 0;
+}
+.log_message.marked > .highlight_indicator { opacity: 1; }
+.log_message:hover > .highlight_indicator { opacity: 1 }
+
+.log_comment {
+    position: absolute;
+    top: 0;
+    right: 2rem;
+    width: 25%;
+    height: 100%;
+}
+
+.log_comment input {
+    width: 100%;
+    background-color: transparent;
+    border: solid 1px var(--text);
+    border-radius: 5px;
+    color: var(--text);
 }

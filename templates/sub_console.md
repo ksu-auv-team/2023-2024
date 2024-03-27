@@ -9,10 +9,9 @@ Contact: Discord > Sergio SA
   - Stream
     - Zed Camera Stream
     - Batteries
-    - Message Center | Log
+    - Notification Center
   - Data Monitoring
     - Batteries - Motors - Servos
     - Visual graphs over time
   - Log
       - Log and Message Center | TimeDates | Allow highlight lines | Allow save
-
