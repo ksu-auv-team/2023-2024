@@ -24,26 +24,24 @@
             <div id="stream">
                 <div class="video_stream">
                     <div class="stream_header">
-                        <h2 class="camera_title">Camera 1</h2>
-                        <button onclick="alert('nothing right now')">
-                            <img src="/static/imgs/camera_svg.svg" alt="Toggle Camera">
-                        </button>
+                        <h2 class="camera_title">Regular View</h2>
                     </div>
                     <hr>
-                    <video id="camera_feed_1" src="" autoplay></video>
+                    <div class="stream_container">
+                        <img id="camera_feed_1" src="../static/imgs/svg_icons/disconnected.svg" alt="Regular Stream">
+                    </div>
                 </div>
 
                 <div class="data_container" id="battery_data"></div>
 
                 <div class="video_stream">
                     <div class="stream_header">
-                        <h2 class="camera_title">Camera 2</h2>
-                        <button onclick="alert('nothing right now')">
-                            <img src="/static/imgs/camera_svg.svg" alt="Toggle Camera">
-                        </button>
+                        <h2 class="camera_title">Depth Sensor</h2>
                     </div>
                     <hr>
-                    <video id="camera_feed_2" src="" autoplay></video>
+                    <div class="stream_container">
+                        <img id="camera_feed_2" src="../static/imgs/depth_ex.jpg" alt="Depth Sensor">
+                    </div>
                 </div>
             </div>
 
