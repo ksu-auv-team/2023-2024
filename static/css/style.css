@@ -214,6 +214,7 @@ h1 {
     cursor: pointer;
     padding: 2px 1rem;
     transition: 130ms;
+    font-size: 1.1rem;
 }
 .log_message.marked { background-color: var(--background_2); }
 .log_message:hover { background-color: var(--background_2); }
@@ -240,4 +241,5 @@ h1 {
     border: solid 1px var(--text);
     border-radius: 5px;
     color: var(--text);
+    font-size: 1.07rem;
 }
