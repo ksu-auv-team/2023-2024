@@ -10,7 +10,6 @@ document.addEventListener("DOMContentLoaded", function() {
     google.charts.load('current', {'packages':['corechart']});
     google.charts.setOnLoadCallback(data_charts); //Call main chart initializer
 
-    timer();
 
 //     GET REQUESTS ON LOAD (in-case user refreshes page or auv is already powered on)
 })
@@ -58,6 +57,7 @@ function switchTab(tab_index) {
 
 //     -------------------------------------------- GLOBAL VARIABLES  |  START POWER BUTTON --------------------------------------------
 let auv_power = false; //False = off
+let initial_power = false;
 
 function power() { //Make async when adding post requests
     const power_svg = document.getElementById('power_svg');
@@ -67,12 +67,20 @@ function power() { //Make async when adding post requests
         power_svg.src = '../static/imgs/svg_icons/power-on.svg';
         power_svg.alt = 'Power ON';
         auv_power = true;
+        power_on_graphs();
+        initial_power = true;
     } else {
         // INSERT CODE TO TURN OFF SUB AND WAIT FOR RESPONSE | HANDLE ERRORS
         // CREATE DIALOG TO MAKE SURE USER WANTS TO POWER OFF
         power_svg.src = '../static/imgs/svg_icons/power-off.svg';
         power_svg.alt = 'Power OFF';
         auv_power = false;
+    }
+}
+
+function power_on_graphs() {
+    if(!initial_power) {
+        timer();
     }
 }
 

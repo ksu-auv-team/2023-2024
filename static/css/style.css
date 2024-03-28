@@ -210,6 +210,15 @@ h1 {
     gap: 1rem;
 }
 
+#example_chart_size {
+    width: calc(33% - .5rem);
+    aspect-ratio: 16/9;
+    position: fixed;
+    opacity: 0;
+    left: -20rem;
+    z-index: -10;
+}
+
 .chart_container {
     text-align: center;
     width: calc(33% - .5rem);

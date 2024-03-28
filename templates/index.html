@@ -23,7 +23,7 @@
 
 <body>
 <!---------------------------------------------- STREAM TAB ---------------------------------------------->
-    <main class="active" id="stream_main" hidden>
+    <main class="active" id="stream_main">
             <div id="stream">
                 <div class="video_stream">
                     <div class="stream_header">
@@ -56,10 +56,11 @@
             <p class="alert">Motor 3 Unresponsive</p>
         </div>
 
+        <span id="example_chart_size"></span>
     </main>
 
 <!------------------------------------------------- DATA TAB ------------------------------------------------->
-    <main id="data_dialog">
+    <main id="data_dialog" hidden>
         <section id="data_monitoring">
             <!--            4 batteries(voltage:float | amps: int)  |  8 Motors(pwm: int)  |  3 Servos(pwm: int)     -->
 
@@ -69,7 +70,7 @@
         </section>
 
         <section id="data_charts">
-            <div id="example_chart_size" class="chart_container">
+            <div class="chart_container">
                 <div id="battery_voltage"></div>
             </div>
 
