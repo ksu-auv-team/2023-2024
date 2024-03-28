@@ -212,7 +212,7 @@ h1 {
 
 .chart_container {
     text-align: center;
-    width: calc(33% - 4rem);
+    width: calc(33% - .5rem);
     aspect-ratio: 16/9;
 }
 
