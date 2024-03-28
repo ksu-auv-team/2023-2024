@@ -5,8 +5,29 @@ document.addEventListener("DOMContentLoaded", function() {
     createServoElements();
     startDataDemo();
 
-//     MAKE SURE TO MAKE GET REQUESTS TO UPDATE ANY ITEMS IN CASE USER REFRESHES PAGE
+
+    // //Google Chart API
+    google.charts.load('current', {'packages':['corechart']});
+    google.charts.setOnLoadCallback(data_charts); //Call main chart initializer
+
+    timer();
+
+//     GET REQUESTS ON LOAD (in-case user refreshes page or auv is already powered on)
 })
+
+let timeActive = 0;
+function timer() {
+    setInterval(() => {
+        timeActive += 2;
+        updateBatteryData();
+    }, 4000);
+}
+
+// ---------------------------------------- GLOBAL VARIABLES ----------------------------------------
+const numberOfBatteries = 4;
+const batteryMaxVoltage = 50;
+const batteryMaxAmps = 30;
+
 
 
 // -------------------------------------------- TESTING WEBCAM   --------------------------------------------
@@ -196,6 +217,11 @@ function resetBatteryElements() {
     createBatteryElements();
 }
 
+// Battery Google Area Chart
+function battery_chart() {
+
+}
+
 //     -------------------------------------------- END BATTERY DATA  |  START MOTOR DATA  --------------------------------------------
 
 const motors = [
@@ -225,7 +251,7 @@ function createMotorElements() {
         batteryDiv.id = 'motor_' + motor.id;
         batteryDiv.innerHTML = `
             <h2>Motor ${motor.id}</h2>
-            <p>pwm: <span class="pwm"></span>%</p>
+            <p>pwm: <span class="pwm">0</span>%</p>
         `;
         container.appendChild(batteryDiv);
     });
@@ -261,7 +287,7 @@ function createServoElements() {
         servo_div.id = 'servo_' + servo.id;
         servo_div.innerHTML = `
             <h2>Servo ${servo.id}</h2>
-            <p>pwm: <span class="pwm"></span>%</p>
+            <p>pwm: <span class="pwm">0</span>%</p>
         `;
         container.appendChild(servo_div);
     });
@@ -273,7 +299,54 @@ function resetServoElements() {
 }
 
 
-//     -------------------------------------------- END SERVO DATA  --------------------------------------------
+//     -------------------- END SERVO DATA | START DATA CHARTS  --------------------
+
+// Battery Chart
+let batteryData;
+let batteryOptions;
+let batteryChart;
+function initBatteryChart() {
+    let computedSize = window.getComputedStyle(document.getElementById('example_chart_size')) ;
+    console.log(parseInt(computedSize.getPropertyValue('height')))
+    batteryData = google.visualization.arrayToDataTable([
+        ['3 Second Interval', 'Battery1', 'Battery2', 'Battery3', 'Battery4'],
+        [0,0,0,0,0]
+    ]);
+    batteryOptions = {
+        backgroundColor: "#343434",
+        title: "Battery Voltage",
+        titleTextStyle: {color: "white"},
+        legend: {textStyle: {color: "#FFFFFF"}, position: 'in'},
+        hAxis: {title: '3 Second Interval',titleTextStyle: {color: "white"}, textStyle: {color: "white"}, baselineColor: "white", gridLines: {color: "#FFFFFF"}},
+        vAxis: {title: 'Voltage',titleTextStyle: {color: "white"}, textStyle: {color: "white"}, minValue: 0, maxValue: (batteryMaxVoltage+10)},
+        width: parseInt(computedSize.getPropertyValue('width')),
+        height: parseInt(computedSize.getPropertyValue('height')),
+        chartArea: {width: '70%', height: '85%', left: 70, right: 25},
+        explorer: {
+            actions: ['dragToZoom', 'rightClickToReset'],
+            axis: 'horizontal',
+            keepInBounds: true,
+            maxZoomIn: 10
+        }
+    }
+
+    batteryChart = new google.visualization.AreaChart(document.getElementById('battery_voltage'));
+    batteryChart.draw(batteryData, batteryOptions);
+}
+function updateBatteryData() { //Call this function per get/post request on .then
+    let newInsert = [timeActive];
+    batteries.forEach(function(battery) {
+        newInsert.push(battery.voltage);
+    });
+    batteryData.addRow(newInsert);
+    batteryChart.draw(batteryData, batteryOptions);
+}
+
+
+function data_charts() {
+    console.log("Loaded")
+    initBatteryChart();
+}
 
 // ------------------------------------------------- LOG PAGE -------------------------------------------------
 
@@ -305,7 +378,7 @@ function startDataDemo() {
         updateMotorDisplays();
         updateBatteryDisplays();
         updateServoDisplays();
-    }, 3000);
+    }, 5000);
     console.log("Timeout Started")
 }
 

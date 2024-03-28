@@ -38,6 +38,7 @@ body {
 main {
     width: 100dvw;
     top: var(--header_height);
+    margin: .5rem 0;
 }
 
 main[hidden] {
@@ -104,7 +105,6 @@ h1 {
     justify-content: space-evenly;
     width: 100%;
     max-width: 95dvw;
-    margin: .5rem 0;
 }
 
 .stream_header {
@@ -197,6 +197,22 @@ h1 {
 
 .servo {
     border: solid 2px green;
+}
+
+/* Data Charts */
+#data_charts {
+    margin-top: 1rem;
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
+
+.chart_container {
+    text-align: center;
+    width: calc(33% - 4rem);
+    aspect-ratio: 16/9;
 }
 
 /*------------------------------------------------------ LOG ------------------------------------------------------*/

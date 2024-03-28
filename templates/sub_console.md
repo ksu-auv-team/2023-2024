@@ -13,5 +13,6 @@ Contact: Discord > Sergio SA
   - Data Monitoring
     - Batteries - Motors - Servos
     - Visual graphs over time
+    - Possibly use a diagram of sub to represent components
   - Log
       - Log and Message Center | TimeDates | Allow highlight lines | Allow save

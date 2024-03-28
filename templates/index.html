@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AUV Control Panel</title>
     <link rel="stylesheet" href="../static/css/style.css">
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script src="../static/js/index.js"></script>
 </head>
 
@@ -20,7 +21,8 @@
 </header>
 
 <body>
-    <main class="active" id="stream_main">
+<!---------------------------------------------- STREAM TAB ---------------------------------------------->
+    <main class="active" id="stream_main" hidden>
             <div id="stream">
                 <div class="video_stream">
                     <div class="stream_header">
@@ -55,8 +57,8 @@
 
     </main>
 
-    <main id="data_dialog" hidden>
-        <p>Possibly use a diagram of sub to show which motors each sensor is connected to</p>
+<!------------------------------------------------- DATA TAB ------------------------------------------------->
+    <main id="data_dialog">
         <section id="data_monitoring">
             <!--            4 batteries(voltage:float | amps: int)  |  8 Motors(pwm: int)  |  3 Servos(pwm: int)     -->
 
@@ -64,8 +66,24 @@
 
             <div class="data_container" id="servo_data"></div>
         </section>
+
+        <section id="data_charts">
+            <div id="example_chart_size" class="chart_container">
+                <div id="battery_voltage"></div>
+            </div>
+
+            <div class="chart_container">
+                <div id="motor_chart"></div>
+            </div>
+
+            <div class="chart_container">
+                <div id="servo_chart"></div>
+            </div>
+        </section>
     </main>
 
+
+<!-------------------------------------------------- LOG TAB -------------------------------------------------->
     <main id="log_main" hidden>
         <p class="log_message marked" onclick="highlight_message(this)">
             March 27, 04:30pm | AUV Powered ON
