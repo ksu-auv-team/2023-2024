@@ -14,12 +14,14 @@ document.addEventListener("DOMContentLoaded", function() {
 
 //     GET REQUESTS ON LOAD (in-case user refreshes page or auv is already powered on)
 })
-
+let data_demo
 let timeActive = 0;
 function timer() {
     setInterval(() => {
         timeActive += 2;
-        updateBatteryData();
+        updateBatteryVoltageChart();
+        updateBatteryAmpChart();
+        updateMotorChart();
     }, 4000);
 }
 
@@ -27,6 +29,9 @@ function timer() {
 const numberOfBatteries = 4;
 const batteryMaxVoltage = 50;
 const batteryMaxAmps = 30;
+
+const numberOfMotors = 8;
+const motorMaxPWM = 100;
 
 
 
@@ -300,24 +305,33 @@ function resetServoElements() {
 
 
 //     -------------------- END SERVO DATA | START DATA CHARTS  --------------------
-
-// Battery Chart
-let batteryData;
-let batteryOptions;
-let batteryChart;
-function initBatteryChart() {
-    let computedSize = window.getComputedStyle(document.getElementById('example_chart_size')) ;
-    console.log(parseInt(computedSize.getPropertyValue('height')))
-    batteryData = google.visualization.arrayToDataTable([
+const intervalTitle = "4 Second Interval"
+const chart_colors = {
+    0: {color: '#0000FF'},
+    1: {color: '#FF0000'},
+    2: {color: '#FFFF00'},
+    3: {color: '#008000'},
+    4: {color: '#FF00FF'},
+    5: {color: '#00FFFF'},
+    6: {color: '#FFA500'},
+    7: {color: '#800080'}
+}
+// BATTERY VOLTAGE ----------------------------------------------------------------------------------
+let batteryVoltageData;
+let batteryVoltageOptions;
+let batteryVoltageChart;
+function initBatteryVoltageChart() {
+    const computedSize = window.getComputedStyle(document.getElementById('example_chart_size'));
+    batteryVoltageData = google.visualization.arrayToDataTable([
         ['3 Second Interval', 'Battery1', 'Battery2', 'Battery3', 'Battery4'],
         [0,0,0,0,0]
     ]);
-    batteryOptions = {
+    batteryVoltageOptions = {
         backgroundColor: "#343434",
         title: "Battery Voltage",
         titleTextStyle: {color: "white"},
         legend: {textStyle: {color: "#FFFFFF"}, position: 'in'},
-        hAxis: {title: '3 Second Interval',titleTextStyle: {color: "white"}, textStyle: {color: "white"}, baselineColor: "white", gridLines: {color: "#FFFFFF"}},
+        hAxis: {title: intervalTitle,titleTextStyle: {color: "white"}, textStyle: {color: "white"}, baselineColor: "white", gridLines: {color: "#FFFFFF"}},
         vAxis: {title: 'Voltage',titleTextStyle: {color: "white"}, textStyle: {color: "white"}, minValue: 0, maxValue: (batteryMaxVoltage+10)},
         width: parseInt(computedSize.getPropertyValue('width')),
         height: parseInt(computedSize.getPropertyValue('height')),
@@ -327,27 +341,154 @@ function initBatteryChart() {
             axis: 'horizontal',
             keepInBounds: true,
             maxZoomIn: 10
-        }
+        },
+        series: {chart_colors}
     }
 
-    batteryChart = new google.visualization.AreaChart(document.getElementById('battery_voltage'));
-    batteryChart.draw(batteryData, batteryOptions);
+    batteryVoltageChart = new google.visualization.AreaChart(document.getElementById('battery_voltage'));
+    batteryVoltageChart.draw(batteryVoltageData, batteryVoltageOptions);
 }
-function updateBatteryData() { //Call this function per get/post request on .then
+function updateBatteryVoltageChart() { //Call this function per get/post request on .then
     let newInsert = [timeActive];
     batteries.forEach(function(battery) {
         newInsert.push(battery.voltage);
     });
-    batteryData.addRow(newInsert);
-    batteryChart.draw(batteryData, batteryOptions);
+    batteryVoltageData.addRow(newInsert);
+    batteryVoltageChart.draw(batteryVoltageData, batteryVoltageOptions);
+}
+
+// BATTERY AMP ------------------------------------------------------------------------------------------
+let batteryAmpData;
+let batteryAmpOptions;
+let batteryAmpChart;
+
+function initBatteryAmpChart() {
+    const computedSize = window.getComputedStyle(document.getElementById('example_chart_size'));
+    batteryAmpData = google.visualization.arrayToDataTable([
+        ['3 Second Interval', 'Battery1', 'Battery2', 'Battery3', 'Battery4'],
+        [0,0,0,0,0]
+    ]);
+    batteryAmpOptions = {
+        backgroundColor: "#343434",
+        title: "Battery Amps",
+        titleTextStyle: {color: "white"},
+        legend: {textStyle: {color: "#FFFFFF"}, position: 'in'},
+        hAxis: {title: intervalTitle,titleTextStyle: {color: "white"}, textStyle: {color: "white"}, baselineColor: "white", gridLines: {color: "#FFFFFF"}},
+        vAxis: {title: 'Amps',titleTextStyle: {color: "white"}, textStyle: {color: "white"}, minValue: 0, maxValue: (batteryMaxAmps+10)},
+        width: parseInt(computedSize.getPropertyValue('width')),
+        height: parseInt(computedSize.getPropertyValue('height')),
+        chartArea: {width: '70%', height: '85%', left: 70, right: 25},
+        explorer: {
+            actions: ['dragToZoom', 'rightClickToReset'],
+            axis: 'horizontal',
+            keepInBounds: true,
+            maxZoomIn: 10
+        },
+        series: {chart_colors}
+    }
+
+    batteryAmpChart = new google.visualization.AreaChart(document.getElementById('battery_amp'));
+    batteryAmpChart.draw(batteryAmpData, batteryAmpOptions);
+}
+function updateBatteryAmpChart() { //Call this function per get/post request on .then
+    let newInsert = [timeActive];
+    batteries.forEach(function(battery) {
+        newInsert.push(battery.amps);
+    });
+    batteryAmpData.addRow(newInsert);
+    batteryAmpChart.draw(batteryAmpData, batteryAmpOptions);
+}
+
+// MOTOR PWM ---------------------------------------------------------------------------------------------
+
+let motorData;
+let motorOptions;
+let motorChart;
+function initMotorChart() {
+    const computedSize = window.getComputedStyle(document.getElementById('example_chart_size'));
+    motorData = google.visualization.arrayToDataTable([
+        ['3 Second Interval', 'Motor1', 'Motor2', 'Motor3', 'Motor4', 'Motor5', 'Motor 6', 'Motor 7', 'Motor 8'],
+        [0,0,0,0,0,0,0,0,0]
+    ]);
+    motorOptions = {
+        backgroundColor: "#343434",
+        title: "Motor PWM",
+        titleTextStyle: {color: "white"},
+        legend: {textStyle: {color: "#FFFFFF"}, position: 'in'},
+        hAxis: {title: intervalTitle,titleTextStyle: {color: "white"}, textStyle: {color: "white"}, baselineColor: "white", gridLines: {color: "#FFFFFF"}},
+        vAxis: {title: 'PWM',titleTextStyle: {color: "white"}, textStyle: {color: "white"}, minValue: 0, maxValue: (motorMaxPWM+10)},
+        width: parseInt(computedSize.getPropertyValue('width')),
+        height: parseInt(computedSize.getPropertyValue('height')),
+        chartArea: {width: '70%', height: '85%', left: 70, right: 25},
+        explorer: {
+            actions: ['dragToZoom', 'rightClickToReset'],
+            axis: 'horizontal',
+            keepInBounds: true,
+            maxZoomIn: 10
+        },
+        series: {chart_colors}
+    }
+
+    motorChart = new google.visualization.AreaChart(document.getElementById('motor_pwm'));
+    motorChart.draw(motorData, motorOptions);
+}
+function updateMotorChart() { //Call this function per get/post request on .then
+    let newInsert = [timeActive];
+    motors.forEach(function(motor) {
+        newInsert.push(motor.pwm);
+    });
+    motorData.addRow(newInsert);
+    motorChart.draw(motorData, motorOptions);
 }
 
 
-function data_charts() {
+// CHART MASTER FUNCTIONS -------------------------------------------------------------------
+let batteryVoltageChartSelected = false;
+let batteryAmpChartSelected = false;
+let motorChartSelected = false;
+function data_charts(callback) {
     console.log("Loaded")
-    initBatteryChart();
+    initBatteryVoltageChart();
+    initBatteryAmpChart();
+    initMotorChart();
+
+    chartSelections(batteryVoltageChart, batteryVoltageData, batteryVoltageOptions, batteryVoltageChartSelected);
+    chartSelections(batteryAmpChart, batteryAmpData, batteryAmpOptions, batteryAmpChartSelected);
+    chartSelections(motorChart, motorData, motorOptions, motorChartSelected);
 }
 
+function chartSelections(chart, data, options, selectionBool) {
+    google.visualization.events.addListener(chart, 'click', function () {
+        let series = JSON.parse(JSON.stringify(chart_colors));
+        setTimeout(() => {
+            let selectedItem = chart.getSelection();
+            if(!selectedItem) {
+                options.series = series;
+                chart.draw(data, options);
+                return;
+            }
+            if(!selectionBool) {
+                if (selectedItem.length > 0) {
+                    let columnIndex = selectedItem[0].column - 1;
+                    if (columnIndex != null) {
+                        for (let i = 0; i < data.getNumberOfColumns(); i++) {
+                            if (i !== columnIndex) {
+                                series[i] = {color: 'transparent'};
+                            }
+                        }
+                        options.series = series;
+                        chart.draw(data, options);
+                    }
+                    selectionBool = true;
+                }
+            } else {
+                options.series = series;
+                chart.draw(data, options);
+                selectionBool = false;
+            }
+        }, 40)
+    });
+}
 // ------------------------------------------------- LOG PAGE -------------------------------------------------
 
 function highlight_message(message_container) {
@@ -358,13 +499,12 @@ function highlight_message(message_container) {
 
 //  -----------------------------------------START DATA DEMO -----------------------------------------
 
-let data_demo
 function startDataDemo() {
     data_demo = setInterval(function() {
         batteries.forEach(function(battery) {
 
             battery.voltage = parseFloat((Math.random() * 50).toFixed(2));
-            battery.amps = parseFloat((Math.random() * 50).toFixed(2));
+            battery.amps = parseFloat((Math.random() * 30).toFixed(2));
         });
 
         motors.forEach(function (motor) {
