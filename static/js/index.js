@@ -22,6 +22,7 @@ function timer() {
         updateBatteryVoltageChart();
         updateBatteryAmpChart();
         updateMotorChart();
+        updateServoChart();
     }, 4000);
 }
 
@@ -342,7 +343,7 @@ function initBatteryVoltageChart() {
             keepInBounds: true,
             maxZoomIn: 10
         },
-        series: {chart_colors}
+        series: chart_colors
     }
 
     batteryVoltageChart = new google.visualization.AreaChart(document.getElementById('battery_voltage'));
@@ -384,7 +385,7 @@ function initBatteryAmpChart() {
             keepInBounds: true,
             maxZoomIn: 10
         },
-        series: {chart_colors}
+        series: chart_colors
     }
 
     batteryAmpChart = new google.visualization.AreaChart(document.getElementById('battery_amp'));
@@ -426,7 +427,7 @@ function initMotorChart() {
             keepInBounds: true,
             maxZoomIn: 10
         },
-        series: {chart_colors}
+        series: chart_colors
     }
 
     motorChart = new google.visualization.AreaChart(document.getElementById('motor_pwm'));
@@ -441,20 +442,65 @@ function updateMotorChart() { //Call this function per get/post request on .then
     motorChart.draw(motorData, motorOptions);
 }
 
+// SERVER PWM --------------------------------------------------------------------------------------------
+
+let servoData;
+let servoOptions;
+let servoChart;
+function initServoChart() {
+    const computedSize = window.getComputedStyle(document.getElementById('example_chart_size'));
+    servoData = google.visualization.arrayToDataTable([
+        ['3 Second Interval', 'Servo1', 'Servo2'],
+        [0,0,0]
+    ]);
+    servoOptions = {
+        backgroundColor: "#343434",
+        title: "Servo PWM",
+        titleTextStyle: {color: "white"},
+        legend: {textStyle: {color: "#FFFFFF"}, position: 'in'},
+        hAxis: {title: intervalTitle,titleTextStyle: {color: "white"}, textStyle: {color: "white"}, baselineColor: "white", gridLines: {color: "#FFFFFF"}},
+        vAxis: {title: 'PWM',titleTextStyle: {color: "white"}, textStyle: {color: "white"}, minValue: 0, maxValue: (motorMaxPWM+10)},
+        width: parseInt(computedSize.getPropertyValue('width')),
+        height: parseInt(computedSize.getPropertyValue('height')),
+        chartArea: {width: '70%', height: '85%', left: 70, right: 25},
+        explorer: {
+            actions: ['dragToZoom', 'rightClickToReset'],
+            axis: 'horizontal',
+            keepInBounds: true,
+            maxZoomIn: 10
+        },
+        series: chart_colors
+    }
+
+    servoChart = new google.visualization.AreaChart(document.getElementById('servo_pwm'));
+    servoChart.draw(servoData, servoOptions);
+}
+function updateServoChart() { //Call this function per get/post request on .then
+    let newInsert = [timeActive];
+    servos.forEach(function(servo) {
+        newInsert.push(servo.pwm);
+    });
+    servoData.addRow(newInsert);
+    servoChart.draw(servoData, servoOptions);
+}
+
 
 // CHART MASTER FUNCTIONS -------------------------------------------------------------------
 let batteryVoltageChartSelected = false;
 let batteryAmpChartSelected = false;
 let motorChartSelected = false;
+let servoChartSelected = false;
 function data_charts(callback) {
     console.log("Loaded")
     initBatteryVoltageChart();
     initBatteryAmpChart();
     initMotorChart();
+    initServoChart();
 
     chartSelections(batteryVoltageChart, batteryVoltageData, batteryVoltageOptions, batteryVoltageChartSelected);
     chartSelections(batteryAmpChart, batteryAmpData, batteryAmpOptions, batteryAmpChartSelected);
     chartSelections(motorChart, motorData, motorOptions, motorChartSelected);
+    chartSelections(servoChart, servoData, servoOptions, servoChartSelected);
 }
 
 function chartSelections(chart, data, options, selectionBool) {

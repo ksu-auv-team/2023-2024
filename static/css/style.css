@@ -207,6 +207,7 @@ h1 {
     display: flex;
     justify-content: space-evenly;
     flex-wrap: wrap;
+    gap: 1rem;
 }
 
 .chart_container {
