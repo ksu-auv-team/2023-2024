@@ -81,83 +81,82 @@ function initChartProperties() {
     };
 }
 function data_charts(callback) {
-    initChart(battery_voltage_chart);
-    initChart(battery_amp_chart);
-    initChart(motor_chart);
-    initChart(servo_chart)
-
-    chartSelections(battery_voltage_chart);
-    chartSelections(battery_amp_chart);
-    chartSelections(motor_chart);
-    chartSelections(servo_chart);
+    initChart([battery_voltage_chart, battery_amp_chart, motor_chart, servo_chart]);
+    chartSelections([battery_voltage_chart, battery_amp_chart, motor_chart, servo_chart]);
 }
 
-function initChart(chart) {
-    const computedSize = window.getComputedStyle(document.getElementById('example_chart_size'));
-    chart.chartData = new google.visualization.DataTable();
-    for (let i = 0; i <= chart.column_count; i++) {
-        if(i === 0) { chart.chartData.addColumn('number', chart.y_title) } else { chart.chartData.addColumn('number', chart.subject + i); }
-    }
-    chart.chartOptions = {
-        backgroundColor: "#343434",
-        title: chart.title,
-        titleTextStyle: {color: "white"},
-        legend: {textStyle: {color: "#FFFFFF"}, position: 'in'},
-        hAxis: {title: intervalTitle,titleTextStyle: {color: "white"}, textStyle: {color: "white"}, baselineColor: "white", gridLines: {color: "#FFFFFF"}},
-        vAxis: {title: chart.y_title, titleTextStyle: {color: "white"}, textStyle: {color: "white"}, minValue: 0, maxValue: (chart.y_max+10)},
-        width: parseInt(computedSize.getPropertyValue('width')),
-        height: parseInt(computedSize.getPropertyValue('height')),
-        chartArea: {width: '70%', height: '85%', left: 70, right: 25},
-        explorer: {
-            actions: ['dragToZoom', 'rightClickToReset'],
-            axis: 'horizontal',
-            keepInBounds: true,
-            maxZoomIn: 10
-        },
-        series: chart_colors
-    }
+function initChart(charts) {
+    charts.forEach((chart) => {
+        const computedSize = window.getComputedStyle(document.getElementById('example_chart_size'));
+        chart.chartData = new google.visualization.DataTable();
+        for (let i = 0; i <= chart.column_count; i++) {
+            if(i === 0) { chart.chartData.addColumn('number', chart.y_title) } else { chart.chartData.addColumn('number', chart.subject + i); }
+        }
+        chart.chartOptions = {
+            backgroundColor: "#343434",
+            title: chart.title,
+            titleTextStyle: {color: "white"},
+            legend: {textStyle: {color: "#FFFFFF"}, position: 'in'},
+            hAxis: {title: intervalTitle,titleTextStyle: {color: "white"}, textStyle: {color: "white"}, baselineColor: "white", gridLines: {color: "#FFFFFF"}},
+            vAxis: {title: chart.y_title, titleTextStyle: {color: "white"}, textStyle: {color: "white"}, minValue: 0, maxValue: (chart.y_max+10)},
+            width: parseInt(computedSize.getPropertyValue('width')),
+            height: parseInt(computedSize.getPropertyValue('height')),
+            chartArea: {width: '70%', height: '85%', left: 70, right: 25},
+            explorer: {
+                actions: ['dragToZoom', 'rightClickToReset'],
+                axis: 'horizontal',
+                keepInBounds: true,
+                maxZoomIn: 10
+            },
+            series: chart_colors
+        }
 
-    chart.chart = new google.visualization.AreaChart(document.getElementById(chart.container_id));
-    chart.chart.draw(chart.chartData, chart.chartOptions);
+        chart.chart = new google.visualization.AreaChart(document.getElementById(chart.container_id));
+        chart.chart.draw(chart.chartData, chart.chartOptions);
+    })
 }
-function updateCharts(chart) { //Call this function per get/post request on .then
-    let newInsert = [timeActive];
-    chart.unit_reference.forEach(function(unit) {
-        newInsert.push(unit[chart.reference_unit]);
-    });
-    chart.chartData.addRow(newInsert);
-    chart.chart.draw(chart.chartData, chart.chartOptions);
+function updateCharts(charts) { //Call this function per get/post request on .then
+    charts.forEach((chart) => {
+        let newInsert = [timeActive];
+        chart.unit_reference.forEach(function(unit) {
+            newInsert.push(unit[chart.reference_unit]);
+        });
+        chart.chartData.addRow(newInsert);
+        chart.chart.draw(chart.chartData, chart.chartOptions);
+    })
 }
 
-function chartSelections(chart) {
-    google.visualization.events.addListener(chart.chart, 'click', function () {
-        let series = JSON.parse(JSON.stringify(chart_colors));
-        setTimeout(() => {
-            let selectedItem = chart.chart.getSelection();
-            if(!selectedItem) {
-                chart.chartOptions.series = series;
-                chart.chart.draw(chart.chartData, chart.chartOptions);
-                return;
-            }
-            if(!chart.selectionBool) {
-                if (selectedItem.length > 0) {
-                    let columnIndex = selectedItem[0].column - 1;
-                    if (columnIndex != null) {
-                        for (let i = 0; i < chart.chartData.getNumberOfColumns(); i++) {
-                            if (i !== columnIndex) {
-                                series[i] = {color: 'transparent'};
-                            }
-                        }
-                        chart.chartOptions.series = series;
-                        chart.chart.draw(chart.chartData, chart.chartOptions);
-                    }
-                    chart.selectionBool = true;
+function chartSelections(charts) {
+    charts.forEach((chart) => {
+        google.visualization.events.addListener(chart.chart, 'click', function () {
+            let series = JSON.parse(JSON.stringify(chart_colors));
+            setTimeout(() => {
+                let selectedItem = chart.chart.getSelection();
+                if(!selectedItem) {
+                    chart.chartOptions.series = series;
+                    chart.chart.draw(chart.chartData, chart.chartOptions);
+                    return;
                 }
-            } else {
-                chart.chartOptions.series = series;
-                chart.chart.draw(chart.chartData, chart.chartOptions);
-                chart.selectionBool = false;
-            }
-        }, 40)
-    });
+                if(!chart.selectionBool) {
+                    if (selectedItem.length > 0) {
+                        let columnIndex = selectedItem[0].column - 1;
+                        if (columnIndex != null) {
+                            for (let i = 0; i < chart.chartData.getNumberOfColumns(); i++) {
+                                if (i !== columnIndex) {
+                                    series[i] = {color: 'transparent'};
+                                }
+                            }
+                            chart.chartOptions.series = series;
+                            chart.chart.draw(chart.chartData, chart.chartOptions);
+                        }
+                        chart.selectionBool = true;
+                    }
+                } else {
+                    chart.chartOptions.series = series;
+                    chart.chart.draw(chart.chartData, chart.chartOptions);
+                    chart.selectionBool = false;
+                }
+            }, 40)
+        });
+    })
 }

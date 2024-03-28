@@ -19,10 +19,7 @@ let timeActive = 0;
 function timer() { //later, call this after the api
     setInterval(() => {
         timeActive += 2;
-        updateCharts(battery_voltage_chart);
-        updateCharts(battery_amp_chart);
-        updateCharts(motor_chart);
-        updateCharts(servo_chart)
+        updateCharts([battery_voltage_chart, battery_amp_chart, motor_chart, servo_chart]);
     }, 5500);
 }
 
