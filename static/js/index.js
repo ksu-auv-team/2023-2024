@@ -31,7 +31,7 @@ const motorMaxPWM = 100;
 //     -------------------------------------------- GLOBAL VARIABLES  |  START TAB PAGES  --------------------------------------------
 function switchTab(tab_index) {
     const stream = document.getElementById('stream_main');
-    const data = document.getElementById('data_dialog');
+    const data = document.getElementById('data_main');
     const log = document.getElementById('log_main');
 
     document.getElementById('stream_tag').classList.remove('active-tab');
@@ -81,6 +81,59 @@ function power() { //Make async when adding post requests
 function power_on_graphs() {
     if(!initial_power) {
         timer();
+    }
+}
+
+//---------------------------------------------- END POWER BUTTON | START DIALOG OPTIONS -----------------------------------------------
+
+const dialogOptions  = {
+    clearCharts: {
+        title: "Clear Charts",
+        message: "Are you sure you want to clear the charts? All data related to the charts will be lost.",
+        buttons: ["Proceed"], // Button titles should have corresponding function. Closing button is already included
+        button_functions: [clearCharts]
+    }
+}
+
+let dialog_active = false;
+function toggleDialog(dialog_request) {
+    const dialog = document.getElementById('dialog');
+    const dialog_content = document.getElementById('dialog_content');
+    let dialog_content_object;
+    if(!dialog_active) {
+        switch (dialog_request) {
+            case 'clear_charts':
+                dialog_content_object = dialogOptions.clearCharts;
+                break;
+            default:
+                break;
+        }
+
+        if(dialog_content_object) {
+            const dialog_title = document.createElement('h1');              dialog_title.innerText = dialog_content_object.title;
+            const dialog_message = document.createElement('p');    dialog_message.innerText = dialog_content_object.message
+            const dialog_buttons = document.createElement('div');               dialog_buttons.classList.add('dialog_buttons');
+            let closingButton = document.createElement('button');
+            closingButton.innerText = "Cancel";     closingButton.onclick = toggleDialog;
+            dialog_buttons.appendChild(closingButton);
+            for(let i = 0; i < dialog_content_object.buttons.length; i++) {
+                let newButton = document.createElement('button');
+                newButton.innerText = dialog_content_object.buttons[i];
+                newButton.onclick = dialog_content_object.button_functions[i];
+                dialog_buttons.appendChild(newButton);
+            }
+            dialog_buttons.id = "dialog_buttons";
+            dialog_content.appendChild(dialog_title);
+            dialog_content.appendChild(dialog_message);
+            dialog_content.appendChild(dialog_buttons);
+        }
+
+        dialog.style.display = 'flex';
+        dialog_active = true;
+    } else {
+        dialog.style.display = 'none';
+        dialog_active =false;
+        dialog_content.innerHTML = "";
     }
 }
 

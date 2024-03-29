@@ -98,7 +98,51 @@ h1 {
     aspect-ratio: 1;
 }
 
-/*-------------------------------------------------- STREAM -------------------------------------------------- */
+/*------------------------------------- MULTIPURPOSE DIALOG -------------------------------------*/
+#dialog {
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: calc(99vh - var(--header_height));
+    margin: 0;
+    padding: 0;
+    color: var(--text);
+    background-color: rgba(50,50,50, 50%);
+    border: none;
+    z-index: +10;
+}
+
+#dialog_content {
+    margin-bottom: 25%;
+    background-color: var(--background_2);
+    border: solid 2px var(--text);
+    border-radius: 1rem;
+    padding: 1rem;
+}
+
+#dialog_buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+
+#dialog_content h1 {
+    color: var(--theme);
+}
+
+#dialog button {
+    width: 5rem;
+    font-size: 1rem;
+    aspect-ratio: 2/1;
+    border-radius: 5px;
+}
+
+#dialog button:hover {
+    background-color: var(--theme);
+}
+
+
+/*------------------------------------------------- STREAM -------------------------------------------------- */
 
 #stream {
     display: flex;
@@ -159,7 +203,16 @@ h1 {
 
 /*-------------------------------------------- DATA SECTION --------------------------------------------*/
 
-#data_dialog {
+#example_chart_size {
+    width: calc(33% - .5rem);
+    aspect-ratio: 16/9;
+    position: fixed;
+    opacity: 0;
+    left: -20rem;
+    z-index: -10;
+}
+
+#data_main {
     position: absolute;
     top: var(--header_height);
     left: 0;
@@ -200,6 +253,18 @@ h1 {
 }
 
 /* Data Charts */
+#chart_controls {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+
+#chart_controls button {
+    aspect-ratio: 3/1;
+    border-radius: 8px;
+    font-size: 1rem;
+}
+
 #data_charts {
     margin-top: 1rem;
     width: 100%;
@@ -208,15 +273,6 @@ h1 {
     justify-content: space-evenly;
     flex-wrap: wrap;
     gap: 1rem;
-}
-
-#example_chart_size {
-    width: calc(33% - .5rem);
-    aspect-ratio: 16/9;
-    position: fixed;
-    opacity: 0;
-    left: -20rem;
-    z-index: -10;
 }
 
 .chart_container {

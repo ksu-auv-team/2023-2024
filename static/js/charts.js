@@ -21,7 +21,7 @@ function initChartProperties() {
         chartData: null,
         chartOptions: null,
         subject: "Battery",
-        column_count: 4,
+        column_count: batteries.length,
         title: "Battery Voltage",
         x_title: intervalTitle,
         y_title: "Voltage",
@@ -37,7 +37,7 @@ function initChartProperties() {
         chartData: null,
         chartOptions: null,
         subject: "Battery",
-        column_count: 4,
+        column_count: batteries.length,
         title: "Battery Amps",
         x_title: intervalTitle,
         y_title: "Amps",
@@ -53,7 +53,7 @@ function initChartProperties() {
         chartData: null,
         chartOptions: null,
         subject: "Motor",
-        column_count: 8,
+        column_count: motors.length,
         title: "Motor PWM",
         x_title: intervalTitle,
         y_title: "PWM",
@@ -69,7 +69,7 @@ function initChartProperties() {
         chartData: null,
         chartOptions: null,
         subject: 'Servo',
-        column_count: 2,
+        column_count: servos.length,
         title: "Servo PWM",
         x_title: intervalTitle,
         y_title: "PWM",
@@ -159,4 +159,46 @@ function chartSelections(charts) {
             }, 40)
         });
     })
+}
+
+//------------------------------------------ CHART CONTROLS ------------------------------------------
+function clearCharts() {
+    battery_voltage_chart.chart.clearChart();
+    battery_voltage_chart.chartData = null;
+    battery_voltage_chart.chartOptions = null;
+
+    battery_amp_chart.chart.clearChart();
+    battery_amp_chart.chartData = null;
+    battery_amp_chart.chartOptions = null;
+
+    motor_chart.chart.clearChart();
+    motor_chart.chartData = null;
+    motor_chart.chartOptions = null;
+
+    servo_chart.chart.clearChart();
+    servo_chart.chartData = null;
+    servo_chart.chartOptions = null;
+    data_charts();
+
+    toggleDialog();
+}
+
+function saveCharts() {
+    let chartsHTML = "";
+    let chartDivs = document.querySelectorAll('.chart_container');
+    chartDivs.forEach((div) => {
+        chartsHTML += div.outerHTML;
+    })
+
+    const currentDate = new Date().toLocaleString();
+
+    let htmlContent = '<!DOCTYPE html><html lang="en"><head><title>' + currentDate + ' Data Charts</title></head><body>';
+    htmlContent += chartsHTML;
+    htmlContent += '</body></html>';
+
+    let htmlBlob = new Blob([htmlContent], {type: 'text/html'});
+    const download_link = document.createElement('a');
+    download_link.href = URL.createObjectURL(htmlBlob);
+    download_link.download = `${currentDate} Data Charts`;
+    download_link.click();
 }

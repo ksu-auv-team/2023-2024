@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="../static/imgs/favicon.ico">
     <title>AUV Control Panel</title>
     <link rel="stylesheet" href="../static/css/style.css">
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
@@ -22,8 +23,15 @@
 </header>
 
 <body>
+<span id="example_chart_size"></span>
+<!------------------------------------- MULTIPURPOSE DIALOG ------------------------------------->
+<dialog id="dialog">
+    <div id="dialog_content">
+    </div>
+</dialog>
+
 <!---------------------------------------------- STREAM TAB ---------------------------------------------->
-    <main class="active" id="stream_main">
+    <main class="active" id="stream_main" hidden>
             <div id="stream">
                 <div class="video_stream">
                     <div class="stream_header">
@@ -55,35 +63,41 @@
             <p class="warning">Battery 2 Low</p>
             <p class="alert">Motor 3 Unresponsive</p>
         </div>
-
-        <span id="example_chart_size"></span>
     </main>
 
 <!------------------------------------------------- DATA TAB ------------------------------------------------->
-    <main id="data_dialog" hidden>
-        <section id="data_monitoring">
-            <!--            4 batteries(voltage:float | amps: int)  |  8 Motors(pwm: int)  |  3 Servos(pwm: int)     -->
-
-            <div class="data_container" id="motor_data"></div>
-
-            <div class="data_container" id="servo_data"></div>
+    <main id="data_main">
+        <section>
+            <h1>Data Monitoring</h1>
+            <div id="data_monitoring">
+                <!--            4 batteries(voltage:float | amps: int)  |  8 Motors(pwm: int)  |  3 Servos(pwm: int)     -->
+                <div class="data_container" id="motor_data"></div>
+                <div class="data_container" id="servo_data"></div>
+            </div>
         </section>
 
-        <section id="data_charts">
-            <div class="chart_container">
-                <div id="battery_voltage"></div>
+        <section>
+            <h1>Data Charts</h1>
+            <div id="chart_controls">
+                <button onclick="toggleDialog('clear_charts')">Clear Charts</button>
+                <button onclick="saveCharts()">Save Charts</button>
             </div>
+            <div id="data_charts">
+                <div class="chart_container">
+                    <div id="battery_voltage"></div>
+                </div>
 
-            <div class="chart_container">
-                <div id="battery_amp"></div>
-            </div>
+                <div class="chart_container">
+                    <div id="battery_amp"></div>
+                </div>
 
-            <div class="chart_container">
-                <div id="motor_pwm"></div>
-            </div>
+                <div class="chart_container">
+                    <div id="motor_pwm"></div>
+                </div>
 
-            <div class="chart_container">
-                <div id="servo_pwm"></div>
+                <div class="chart_container">
+                    <div id="servo_pwm"></div>
+                </div>
             </div>
         </section>
     </main>
