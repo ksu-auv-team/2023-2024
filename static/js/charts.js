@@ -184,6 +184,15 @@ function clearCharts() {
 }
 
 function saveCharts() {
+    // Check if user left a comment when saving charts
+    let userChartComment = "";
+    if(dialogOptions.saveCharts.textArea) {
+        if(document.getElementById('dialog_text_area').value) {
+            userChartComment = "Comments: " + document.getElementById('dialog_text_area').value;
+        }
+    }
+
+
     let chartsHTML = "";
     let chartDivs = document.querySelectorAll('.chart_container');
     chartDivs.forEach((div) => {
@@ -192,7 +201,15 @@ function saveCharts() {
 
     const currentDate = new Date().toLocaleString();
 
-    let htmlContent = '<!DOCTYPE html><html lang="en"><head><title>' + currentDate + ' Data Charts</title></head><body>';
+    let htmlContent = `<!DOCTYPE html><html lang="en">
+        <head>
+            <title> ${currentDate} Data Charts</title>
+            <header style="width: 100vw; color: white; text-align: center">
+                <h1>Charts Saved from ${currentDate}</h1>
+                <p style="font-size: 1.5rem">${userChartComment}</p>
+            </header>
+        </head>
+        <body style="display: flex; flex-wrap: wrap; background-color: #121212; gap: 1rem; justify-content: center;">`;
     htmlContent += chartsHTML;
     htmlContent += '</body></html>';
 
@@ -201,4 +218,6 @@ function saveCharts() {
     download_link.href = URL.createObjectURL(htmlBlob);
     download_link.download = `${currentDate} Data Charts`;
     download_link.click();
+
+    toggleDialog();
 }

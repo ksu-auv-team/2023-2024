@@ -91,7 +91,19 @@ const dialogOptions  = {
         title: "Clear Charts",
         message: "Are you sure you want to clear the charts? All data related to the charts will be lost.",
         buttons: ["Proceed"], // Button titles should have corresponding function. Closing button is already included
-        button_functions: [clearCharts]
+        button_functions: [clearCharts],
+        textArea: false,
+        textAreaFunctionIndex: null,
+        textAreaMessage: null
+    },
+    saveCharts: {
+        title: "Save Charts",
+        message: "Would you like to add any comments? Comments will appear at the top of the page.",
+        buttons: ["Proceed"],
+        button_functions: [saveCharts],
+        textArea: true,
+        textAreaFunctionIndex: 0,
+        textAreaMessage: null
     }
 }
 
@@ -105,6 +117,9 @@ function toggleDialog(dialog_request) {
             case 'clear_charts':
                 dialog_content_object = dialogOptions.clearCharts;
                 break;
+            case 'save_charts':
+                dialog_content_object = dialogOptions.saveCharts;
+                break;
             default:
                 break;
         }
@@ -112,6 +127,10 @@ function toggleDialog(dialog_request) {
         if(dialog_content_object) {
             const dialog_title = document.createElement('h1');              dialog_title.innerText = dialog_content_object.title;
             const dialog_message = document.createElement('p');    dialog_message.innerText = dialog_content_object.message
+            let dialog_text_area;
+            if(dialog_content_object.textArea) {
+                dialog_text_area = document.createElement('textarea'); dialog_text_area.id = 'dialog_text_area';
+            }
             const dialog_buttons = document.createElement('div');               dialog_buttons.classList.add('dialog_buttons');
             let closingButton = document.createElement('button');
             closingButton.innerText = "Cancel";     closingButton.onclick = toggleDialog;
@@ -125,6 +144,7 @@ function toggleDialog(dialog_request) {
             dialog_buttons.id = "dialog_buttons";
             dialog_content.appendChild(dialog_title);
             dialog_content.appendChild(dialog_message);
+            if(dialog_content_object.textArea) { dialog_content.appendChild(dialog_text_area); }
             dialog_content.appendChild(dialog_buttons);
         }
 

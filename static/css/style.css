@@ -120,6 +120,14 @@ h1 {
     padding: 1rem;
 }
 
+#dialog_content textarea {
+    width: calc(100% - 1rem);
+    resize: none;
+    height: 5rem;
+    font-size: 1rem;
+    padding: .5rem;
+}
+
 #dialog_buttons {
     display: flex;
     justify-content: center;
@@ -135,6 +143,7 @@ h1 {
     font-size: 1rem;
     aspect-ratio: 2/1;
     border-radius: 5px;
+    min-width: fit-content;
 }
 
 #dialog button:hover {
