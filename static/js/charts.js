@@ -199,13 +199,26 @@ function saveCharts() {
         chartsHTML += div.outerHTML;
     })
 
-    const currentDate = new Date().toLocaleString();
+    // Create date to display on file name & title
+    const currentDate = new Date();
+    const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+    const time_period = currentDate.getHours() < 12 ? "am" : "pm";
+
+    const month = months[currentDate.getMonth()];
+    const day = currentDate.getDate();
+    const year = currentDate.getFullYear();
+    let hours = currentDate.getHours();
+    let minutes = currentDate.getMinutes();
+
+    if (hours > 12) { hours -= 12; }
+    if (hours === 0) { hours = 12; }
+    if (minutes < 10) { minutes = `0${minutes}`; }
 
     let htmlContent = `<!DOCTYPE html><html lang="en">
         <head>
-            <title> ${currentDate} Data Charts</title>
+            <title>KSU AUV Recorded Data</title>
             <header style="width: 100vw; color: white; text-align: center">
-                <h1>Charts Saved from ${currentDate}</h1>
+                <h1>AUV Data saved at ${month} ${day}, ${year} at ${hours}:${minutes}${time_period}</h1>
                 <p style="font-size: 1.5rem">${userChartComment}</p>
             </header>
         </head>
@@ -216,7 +229,7 @@ function saveCharts() {
     let htmlBlob = new Blob([htmlContent], {type: 'text/html'});
     const download_link = document.createElement('a');
     download_link.href = URL.createObjectURL(htmlBlob);
-    download_link.download = `${currentDate} Data Charts`;
+    download_link.download = `${year} ${month} ${day}, ${hours}_${minutes}_${time_period} AUV Data Charts`;
     download_link.click();
 
     toggleDialog();

@@ -17,7 +17,7 @@
         <button id="data_tag" onclick="switchTab(1)">Data Monitoring</button>
         <button id="log_tag" onclick="switchTab(2)">Log</button>
     </nav>
-    <button id="power_button" onclick="power()">
+    <button id="power_button" onclick="powerButton()">
         <img id="power_svg" src="../static/imgs/svg_icons/power-off.svg" alt="Power OFF">
     </button>
 </header>
@@ -71,6 +71,7 @@
             <h1>Data Monitoring</h1>
             <div id="data_monitoring">
                 <!--            4 batteries(voltage:float | amps: int)  |  8 Motors(pwm: int)  |  3 Servos(pwm: int)     -->
+                <div class="data_container" id="battery_data_2"></div>
                 <div class="data_container" id="motor_data"></div>
                 <div class="data_container" id="servo_data"></div>
             </div>

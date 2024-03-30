@@ -4,7 +4,6 @@ document.addEventListener("DOMContentLoaded", function() {
     createMotorElements();
     createServoElements();
     initChartProperties();
-    startDataDemo();
 
     // //Google Chart API
     google.charts.load('current', {'packages':['corechart']});
@@ -23,10 +22,6 @@ function timer() { //later, call this after the api
 }
 
 // ---------------------------------------- GLOBAL VARIABLES ----------------------------------------
-const batteryMaxVoltage = 50;
-const batteryMaxAmps = 30;
-
-const motorMaxPWM = 100;
 
 //     -------------------------------------------- GLOBAL VARIABLES  |  START TAB PAGES  --------------------------------------------
 function switchTab(tab_index) {
@@ -59,7 +54,7 @@ function switchTab(tab_index) {
 let auv_power = false; //False = off
 let initial_power = false;
 
-function power() { //Make async when adding post requests
+function powerButton() { //Make async when adding post requests
     const power_svg = document.getElementById('power_svg');
     if (!auv_power) { //if off
         // INSERT CODE TO POWER SUB AND WAIT FOR RESPONSE | HANDLE ERRORS
@@ -68,6 +63,7 @@ function power() { //Make async when adding post requests
         power_svg.alt = 'Power ON';
         auv_power = true;
         power_on_graphs();
+        startDataDemo();
         initial_power = true;
     } else {
         // INSERT CODE TO TURN OFF SUB AND WAIT FOR RESPONSE | HANDLE ERRORS
@@ -75,6 +71,7 @@ function power() { //Make async when adding post requests
         power_svg.src = '../static/imgs/svg_icons/power-off.svg';
         power_svg.alt = 'Power OFF';
         auv_power = false;
+        stopDataDemo();
     }
 }
 
@@ -169,20 +166,27 @@ const batteries = [
 function updateBatteryDisplays() {
     batteries.forEach(function (battery_object) {
         let battery_div = document.getElementById(`battery_${battery_object.id}`);
-        battery_div.querySelector('.voltage').textContent = battery_object.voltage;
-        battery_div.querySelector('.amps').textContent = battery_object.amps;
+        let battery_div_2 = document.getElementById(`battery_${battery_object.id}_${battery_object.id}`);
+        battery_div.querySelector('.voltage').textContent = `${battery_object.voltage}V`;
+        battery_div.querySelector('.amps').textContent = `${battery_object.amps}A`;
+        battery_div_2.querySelector('.voltage').textContent = `${battery_object.voltage}V`;
+        battery_div_2.querySelector('.amps').textContent = `${battery_object.amps}A`;
         if(battery_object.voltage > (50*.8)) { // Estimate Battery %. Given that max voltage is 50V
             battery_div.style.borderColor = "Green"
+            battery_div_2.style.borderColor = "Green"
         } else if(battery_object.voltage > (50*.3)) {
             battery_div.style.borderColor = "Darkgoldenrod"
+            battery_div_2.style.borderColor = "Darkgoldenrod"
         } else {
             battery_div.style.borderColor = "Red"
+            battery_div_2.style.borderColor = "Red"
         }
     })
 }
 
 function createBatteryElements() {
     let container = document.getElementById('battery_data');
+    let container_2 = document.getElementById('battery_data_2');
 
     batteries.forEach(function(battery) {
         let batteryDiv = document.createElement('div');
@@ -194,6 +198,16 @@ function createBatteryElements() {
             <p>Amps: <span class="amps"></span></p>
         `;
         container.appendChild(batteryDiv);
+
+        let batteryDiv_2 = document.createElement('div');
+        batteryDiv_2.className = 'battery';
+        batteryDiv_2.id = `battery_${battery.id}_${battery.id}`;
+        batteryDiv_2.innerHTML = `
+            <h2>Battery ${battery.id}</h2>
+            <p>Voltage: <span class="voltage">0V</span></p>
+            <p>Amps: <span class="amps">0A</span></p>
+        `;
+        container_2.appendChild(batteryDiv_2);
     });
 }
 //     -------------------------------------------- END BATTERY DATA  |  START MOTOR DATA  --------------------------------------------

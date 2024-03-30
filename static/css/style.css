@@ -9,6 +9,17 @@
     --header_height: 4rem;
 }
 
+::-webkit-scrollbar {
+    width: 10px;
+}
+::-webkit-scrollbar-track {
+    background-color: var(--background);
+}
+::-webkit-scrollbar-thumb {
+    background-color: var(--theme);
+    border-radius: 0 0 5px 5px;
+}
+
 header {
     height: var(--header_height);
     background-image: url("../imgs/banner.png");
@@ -234,7 +245,7 @@ h1 {
     flex-wrap: nowrap;
 }
 
-#battery_data, #motor_data, #servo_data {
+#battery_data, #battery_data_2, #motor_data, #servo_data {
     width: fit-content;
     display: flex;
     flex-wrap: wrap;
