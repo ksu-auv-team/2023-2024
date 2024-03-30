@@ -16,6 +16,7 @@
         <button id="stream_tag" class="active-tab" onclick="switchTab(0)">Stream</button>
         <button id="data_tag" onclick="switchTab(1)">Data Monitoring</button>
         <button id="log_tag" onclick="switchTab(2)">Log</button>
+        <button id="save_data">Save Data</button>
     </nav>
     <button id="power_button" onclick="powerButton()">
         <img id="power_svg" src="../static/imgs/svg_icons/power-off.svg" alt="Power OFF">
@@ -31,7 +32,7 @@
 </dialog>
 
 <!---------------------------------------------- STREAM TAB ---------------------------------------------->
-    <main class="active" id="stream_main" hidden>
+    <main class="active" id="stream_main">
             <div id="stream">
                 <div class="video_stream">
                     <div class="stream_header">
@@ -56,17 +57,11 @@
                 </div>
             </div>
 
-        <!--                Messages inserted from JS    -->
-        <div id="notification_center">
-            <p>AUV Powered ON</p>
-            <p class="warning">Battery 1 Low</p>
-            <p class="warning">Battery 2 Low</p>
-            <p class="alert">Motor 3 Unresponsive</p>
-        </div>
+        <div id="notification_center"></div>
     </main>
 
 <!------------------------------------------------- DATA TAB ------------------------------------------------->
-    <main id="data_main">
+    <main id="data_main" hidden>
         <section>
             <h1>Data Monitoring</h1>
             <div id="data_monitoring">
@@ -106,37 +101,6 @@
 
 <!-------------------------------------------------- LOG TAB -------------------------------------------------->
     <main id="log_main" hidden>
-        <p class="log_message marked" onclick="highlight_message(this)">
-            March 27, 04:30pm | AUV Powered ON
-            <span class="highlight_indicator">•</span>
-            <label class="log_comment">
-                <input type="text" placeholder="Comment Area">
-            </label>
-        </p>
-
-        <p class="log_message" onclick="highlight_message(this)">
-            March 27, 04:35pm | Battery 1 Low
-            <span class="highlight_indicator">•</span>
-            <label class="log_comment">
-                <input type="text" placeholder="Comment Area">
-            </label>
-        </p>
-
-        <p class="log_message" onclick="highlight_message(this)">
-            March 27, 04:36pm | Battery 2 Low
-            <span class="highlight_indicator">•</span>
-            <label class="log_comment">
-                <input type="text" placeholder="Comment Area">
-            </label>
-        </p>
-
-        <p class="log_message" onclick="highlight_message(this)">
-            March 27, 04:51pm | Motor 3 Unresponsive
-            <span class="highlight_indicator">•</span>
-            <label class="log_comment">
-                <input type="text" placeholder="Comment Area">
-            </label>
-        </p>
 
     </main>
 </body>

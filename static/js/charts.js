@@ -80,7 +80,7 @@ function initChartProperties() {
         selection_bool: false
     };
 }
-function data_charts(callback) {
+function data_charts() {
     initChart([battery_voltage_chart, battery_amp_chart, motor_chart, servo_chart]);
     chartSelections([battery_voltage_chart, battery_amp_chart, motor_chart, servo_chart]);
 }
@@ -115,7 +115,7 @@ function initChart(charts) {
         chart.chart.draw(chart.chartData, chart.chartOptions);
     })
 }
-function updateCharts(charts) { //Call this function per get/post request on .then
+function updateCharts(charts) {
     charts.forEach((chart) => {
         let newInsert = [timeActive];
         chart.unit_reference.forEach(function(unit) {
@@ -198,27 +198,13 @@ function saveCharts() {
     chartDivs.forEach((div) => {
         chartsHTML += div.outerHTML;
     })
-
-    // Create date to display on file name & title
-    const currentDate = new Date();
-    const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-    const time_period = currentDate.getHours() < 12 ? "am" : "pm";
-
-    const month = months[currentDate.getMonth()];
-    const day = currentDate.getDate();
-    const year = currentDate.getFullYear();
-    let hours = currentDate.getHours();
-    let minutes = currentDate.getMinutes();
-
-    if (hours > 12) { hours -= 12; }
-    if (hours === 0) { hours = 12; }
-    if (minutes < 10) { minutes = `0${minutes}`; }
+    const date = getDateTime();
 
     let htmlContent = `<!DOCTYPE html><html lang="en">
         <head>
             <title>KSU AUV Recorded Data</title>
             <header style="width: 100vw; color: white; text-align: center">
-                <h1>AUV Data saved at ${month} ${day}, ${year} at ${hours}:${minutes}${time_period}</h1>
+                <h1>AUV Data saved at ${date.month} ${date.day}, ${date.year} at ${date.hours}:${date.minutes}${date.time_period}</h1>
                 <p style="font-size: 1.5rem">${userChartComment}</p>
             </header>
         </head>
@@ -229,7 +215,7 @@ function saveCharts() {
     let htmlBlob = new Blob([htmlContent], {type: 'text/html'});
     const download_link = document.createElement('a');
     download_link.href = URL.createObjectURL(htmlBlob);
-    download_link.download = `${year} ${month} ${day}, ${hours}_${minutes}_${time_period} AUV Data Charts`;
+    download_link.download = `${date.year} ${date.month} ${date.day}, ${date.hours}_${date.minutes}_${date.time_period} AUV Data Charts`;
     download_link.click();
 
     toggleDialog();

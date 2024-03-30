@@ -218,8 +218,8 @@ h1 {
     text-shadow: var(--background) 1px 1px;
 }
 
-.warning { background-color: darkgoldenrod;}
-.alert { background-color: red }
+.notification_warning { background-color: darkgoldenrod;}
+.notification_alert { background-color: red }
 
 /*-------------------------------------------- DATA SECTION --------------------------------------------*/
 
@@ -327,7 +327,7 @@ h1 {
     position: absolute;
     top: 0;
     right: 2rem;
-    width: 25%;
+    width: 40%;
     height: 100%;
 }
 

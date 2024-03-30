@@ -5,12 +5,21 @@ document.addEventListener("DOMContentLoaded", function() {
     createServoElements();
     initChartProperties();
 
+    // Render data_tab to correctly render google charts, then hide it once it is complete
+    const data_tab = document.getElementById('data_main');
+    data_tab.style.position = 'absolute';
+    data_tab.style.opacity = '0';
+    data_tab.hidden = false;
     // //Google Chart API
     google.charts.load('current', {'packages':['corechart']});
     google.charts.setOnLoadCallback(data_charts); //Call main chart initializer
+    setTimeout(() => {
+        data_tab.hidden = true;
+        data_tab.style.position = 'initial';
+        data_tab.style.opacity = '1';
+    }, 100)
 
 
-//     GET REQUESTS ON LOAD (in-case user refreshes page or auv is already powered on)
 })
 let data_demo
 let timeActive = 0;
@@ -21,7 +30,31 @@ function timer() { //later, call this after the api
     }, 5500);
 }
 
-// ---------------------------------------- GLOBAL VARIABLES ----------------------------------------
+//---------------------------------------------- GLOBAL VARIABLES  | GLOBAL FUNCTIONS ----------------------------------------------
+function getDateTime() {
+    const currentDate = new Date();
+    const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+    const time_period = currentDate.getHours() < 12 ? "am" : "pm";
+
+    const month = months[currentDate.getMonth()];
+    const day = currentDate.getDate();
+    const year = currentDate.getFullYear();
+    let hours = currentDate.getHours();
+    let minutes = currentDate.getMinutes();
+
+    if (hours > 12) { hours -= 12; }
+    if (hours === 0) { hours = 12; }
+    if (minutes < 10) { minutes = `0${minutes}`; }
+
+    return {
+        month: month,
+        day: day,
+        year: year,
+        hours: hours,
+        minutes: minutes,
+        time_period: time_period
+    };
+}
 
 //     -------------------------------------------- GLOBAL VARIABLES  |  START TAB PAGES  --------------------------------------------
 function switchTab(tab_index) {
@@ -48,6 +81,7 @@ function switchTab(tab_index) {
         stream.removeAttribute('hidden');
         document.getElementById('stream_tag').classList.add('active-tab');
     }
+
 }
 
 //     -------------------------------------------- GLOBAL VARIABLES  |  START POWER BUTTON --------------------------------------------
@@ -65,13 +99,13 @@ function powerButton() { //Make async when adding post requests
         power_on_graphs();
         startDataDemo();
         initial_power = true;
+        createNotification("AUV Powered ON");
     } else {
-        // INSERT CODE TO TURN OFF SUB AND WAIT FOR RESPONSE | HANDLE ERRORS
-        // CREATE DIALOG TO MAKE SURE USER WANTS TO POWER OFF
         power_svg.src = '../static/imgs/svg_icons/power-off.svg';
         power_svg.alt = 'Power OFF';
         auv_power = false;
         stopDataDemo();
+        createNotification("AUV Powered OFF");
     }
 }
 
@@ -153,9 +187,28 @@ function toggleDialog(dialog_request) {
         dialog_content.innerHTML = "";
     }
 }
+//--------------------------------------- END POWER BUTTON | START NOTIFICATION CENTER ----------------------------------------
+function createNotification(message, severity) {
+// Message: String | Severity: Integer (0-2) --> Normal --> Warning --> Severe
+    const notification = document.createElement('p');
+    notification.innerText = message;
+    if(severity === 1) { notification.classList.add('notification_warning'); }
+    if (severity === 2) { notification.classList.add('notification_alert'); }
+    const notification_center = document.getElementById('notification_center');
+    notification_center.appendChild(notification);
+    createLog(message);
+    deleteNotification();
+}
+
+function deleteNotification() { // Automatically delete notifications after 5 seconds
+    setTimeout(() => {
+        const message = document.getElementById('notification_center').querySelector('p');
+        message.parentNode.removeChild(message);
+    }, 10000)
+}
 
 
-//     -------------------------------------------- END POWER BUTTON  |  START BATTERY DATA  --------------------------------------------
+//--------------------------------------- END NOTIFICATION CENTER  |  START BATTERY DATA  ---------------------------------------
 const batteries = [
     { id: 1, voltage: 0, amps: 0 },
     { id: 2, voltage: 0, amps: 0 },
@@ -172,14 +225,15 @@ function updateBatteryDisplays() {
         battery_div_2.querySelector('.voltage').textContent = `${battery_object.voltage}V`;
         battery_div_2.querySelector('.amps').textContent = `${battery_object.amps}A`;
         if(battery_object.voltage > (50*.8)) { // Estimate Battery %. Given that max voltage is 50V
-            battery_div.style.borderColor = "Green"
-            battery_div_2.style.borderColor = "Green"
+            battery_div.style.borderColor = "Green";
+            battery_div_2.style.borderColor = "Green";
         } else if(battery_object.voltage > (50*.3)) {
-            battery_div.style.borderColor = "Darkgoldenrod"
-            battery_div_2.style.borderColor = "Darkgoldenrod"
+            battery_div.style.borderColor = "Darkgoldenrod";
+            battery_div_2.style.borderColor = "Darkgoldenrod";
         } else {
-            battery_div.style.borderColor = "Red"
-            battery_div_2.style.borderColor = "Red"
+            battery_div.style.borderColor = "Red";
+            battery_div_2.style.borderColor = "Red";
+            createNotification(`Battery ${battery_object.id} Low`, 1);
         }
     })
 }
@@ -277,6 +331,25 @@ function createServoElements() {
 function highlight_message(message_container) {
     if(message_container.classList.contains('marked')) { message_container.classList.remove('marked');
     } else { message_container.classList.add('marked'); }
+}
+
+function createLog(message) {
+    const date = getDateTime();
+    const log_dateTime = `${date.month} ${date.day}, ${date.hours}:${date.minutes}${date.time_period}`;
+    const complete_message = `${log_dateTime} | ${message}`;
+
+    const log_message = document.createElement('p');
+    log_message.classList.add('log_message');
+    log_message.onclick = function () { highlight_message(log_message); }
+    log_message.innerHTML = `
+        ${complete_message}
+        <span class="highlight_indicator">•</span>
+        <label class="log_comment">
+            <input type="text" placeholder="Comment Area">
+        </label>
+    `
+
+    document.getElementById('log_main').appendChild(log_message);
 }
 
 
