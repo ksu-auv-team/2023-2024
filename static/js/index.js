@@ -18,8 +18,6 @@ document.addEventListener("DOMContentLoaded", function() {
         data_tab.style.position = 'initial';
         data_tab.style.opacity = '1';
     }, 100)
-
-
 })
 let data_demo
 let timeActive = 0;
@@ -327,7 +325,6 @@ function createServoElements() {
     });
 }
 // ------------------------ END SERVO DATA | START LOG PAGE  ----------------------------
-
 function highlight_message(message_container) {
     if(message_container.classList.contains('marked')) { message_container.classList.remove('marked');
     } else { message_container.classList.add('marked'); }
@@ -348,8 +345,25 @@ function createLog(message) {
             <input type="text" placeholder="Comment Area">
         </label>
     `
+    const log_main = document.getElementById('log_main');
+    log_main.appendChild(log_message);
 
-    document.getElementById('log_main').appendChild(log_message);
+    scrollLogDown();
+}
+let scroll_paused = false;
+
+function control_scroll() {
+     scroll_paused = !scroll_paused;
+     if(!scroll_paused) {
+         document.getElementById('log_scroll_control').querySelector('img').src = "../static/imgs/svg_icons/scroll_pause.svg";
+     } else {
+         document.getElementById('log_scroll_control').querySelector('img').src = "../static/imgs/svg_icons/scroll_down.svg";
+
+     }
+}
+function scrollLogDown() {
+    if(log_main.scrollHeight > log_main.clientHeight) { document.getElementById('log_scroll_control').style.display = 'initial'; }
+    if(!scroll_paused) { log_main.scrollTop = log_main.scrollHeight; }
 }
 
 

@@ -303,8 +303,46 @@ h1 {
 
 /*------------------------------------------------------ LOG ------------------------------------------------------*/
 
-#log_main {}
+#log_main {
+    margin: 0;
+    max-height: calc(100vh - var(--header_height));
+    overflow-y: scroll;
+}
 
+#log_scroll_control {
+    display: none;
+    position: fixed;
+    width: 4rem;
+    aspect-ratio: 1;
+    bottom: 2rem;
+    right: 2rem;
+    border-radius: 2rem;
+    background-color: var(--background_2);
+    transition: 400ms;
+    z-index: 2;
+}
+#log_scroll_control img { width: 80%; }
+#log_scroll_control:hover { scale: 1.05; }
+#log_scroll_control:hover::before {
+    display: initial;
+}
+
+#log_scroll_control::before {
+    display: none;
+    position: absolute;
+    width: 100%;
+    font-size: 1rem;
+    content: "Scroll Control";
+    top: -90%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: var(--background_2);
+    color: var(--text);
+    padding: 2px;
+    border: solid 1px var(--text);
+    border-radius: 5px;
+    transition: 400ms;
+}
 .log_message {
     position: relative;
     cursor: pointer;

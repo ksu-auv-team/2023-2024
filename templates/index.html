@@ -32,7 +32,7 @@
 </dialog>
 
 <!---------------------------------------------- STREAM TAB ---------------------------------------------->
-    <main class="active" id="stream_main">
+    <main class="active" id="stream_main" hidden>
             <div id="stream">
                 <div class="video_stream">
                     <div class="stream_header">
@@ -100,8 +100,10 @@
 
 
 <!-------------------------------------------------- LOG TAB -------------------------------------------------->
-    <main id="log_main" hidden>
-
+    <main id="log_main">
+        <button id="log_scroll_control" onclick="control_scroll()">
+            <img src="../static/imgs/svg_icons/scroll_pause.svg" alt="Scroll Control">
+        </button>
     </main>
 </body>
 </html>
