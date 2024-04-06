@@ -28,11 +28,14 @@
   import power_off from '@/assets/svg_icons/power-off.svg';
   import {useStore} from "vuex";
   import router from "@/router";
-  import {getCurrentInstance, onMounted, ref} from "vue";
+  import {getCurrentInstance, onMounted, reactive, ref, watchEffect} from "vue";
 
   const store = useStore();
+  const state = reactive(store.state);
   const currentView = ref(null)
   let data_demo;
+  const batteries = ref(state.batteries);
+  const watchAllow = ref(false);
 
   const powerButton = () => { //Make async when adding post requests
     store.commit("togglePower")
@@ -43,14 +46,26 @@
       power_svg.alt = 'Power ON';
       // power_on_graphs();
       // startDataDemo();
-      // createNotification("AUV Powered ON");
     } else {
       power_svg.src = power_off;
       power_svg.alt = 'Power OFF';
       // stopDataDemo();
-      // createNotification("AUV Powered OFF");
     }
   }
+
+  watchEffect(() => { //Later use server to determine when to allow watch
+    if(watchAllow.value) {
+      batteries.value.forEach((battery) => {
+        if(battery.voltage <= (50*.3)) {
+          store.commit('newNotification', {message: `Battery ${battery.id} Low`, severity: "notification_alert"});
+        }
+      });
+    }
+  });
+
+  setTimeout(() => {
+    watchAllow.value = true;
+  }, 5500)
 
   const startDataDemo = () => {
     data_demo = setInterval(function() {

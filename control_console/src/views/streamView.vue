@@ -44,7 +44,6 @@ import {reactive, ref, watch, watchEffect} from "vue";
   const state = reactive(store.state);
   const batteries = ref(state.batteries);
   const notifications = ref(state.notifications);
-  const watchAllow = ref(false);
 
 const batteryBorderColor = (battery) => {
   if(battery.voltage > (50*.8)) { // Estimate Battery %. Given that max voltage is 50V
@@ -57,19 +56,4 @@ const batteryBorderColor = (battery) => {
     return "White";
   }
 };
-
-
-watchEffect(() => { //Later use server to determine when to allow watch
-  if(watchAllow.value) {
-    batteries.value.forEach((battery) => {
-      if(battery.voltage < (50*.3)) {
-        store.commit('newNotification', {message: `Battery ${battery.id} Low`, severity: "notification_alert"});
-      }
-    });
-  }
-});
-
-setTimeout(() => {
-  watchAllow.value = true;
-}, 5500)
 </script>

@@ -64,6 +64,19 @@ const store = createStore({
     mutations: {
         togglePower(state) {
             state.power = !state.power;
+            const powerState = state.power ? "ON" : "OFF";
+            state.notifications.push({ message: `AUV ${powerState}` });
+
+            const date = getDateTime();
+            const log_dateTime = `${date.month} ${date.day}, ${date.hours}:${date.minutes}${date.time_period}`;
+            const complete_message = `${log_dateTime} | AUV ${powerState}`;
+            state.log.push({id: state.logID, message: `${complete_message}`});
+            state.logID++;
+            setTimeout(() => {
+                if (state.notifications.length > 0) {
+                    state.notifications.shift();
+                }
+            }, 10000);
         },
 
         newNotification(state, {message, severity}) {
@@ -74,6 +87,7 @@ const store = createStore({
             const complete_message = `${log_dateTime} | ${message}`;
 
             state.log.push({id: state.logID, message: complete_message});
+            state.logID++;
 
             setTimeout(() => {
                 if (state.notifications.length > 0) {
