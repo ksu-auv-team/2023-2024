@@ -77,26 +77,6 @@
     console.log("Timeout Stopped")
   }
 
-  const createNotification = (message, severity) => {
-  // Message: String | Severity: Integer (0-2) --> Normal --> Warning --> Severe
-    const notification = document.createElement('p');
-    notification.innerText = message;
-    if(severity === 1) { notification.classList.add('notification_warning'); }
-    if (severity === 2) { notification.classList.add('notification_alert'); }
-    const notification_center = document.getElementById('notification_center');
-    notification_center.appendChild(notification);
-    createLog(message);
-    deleteNotification();
-  }
-
-  const deleteNotification = () => { // Automatically delete notifications after 5 seconds
-    setTimeout(() => {
-      const message = document.getElementById('notification_center').querySelector('p');
-      message.parentNode.removeChild(message);
-    }, 10000)
-  }
-
-
   const dialogOptions  = {
     clearCharts: {
       title: "Clear Charts",

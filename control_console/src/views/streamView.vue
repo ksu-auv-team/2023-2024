@@ -12,28 +12,10 @@
       </div>
 
       <div class="data_container" id="battery_data">
-        <div class="battery" id="battery_1">
-          <h2>Battery </h2>
-          <p>Voltage: <span class="voltage">{{batteries[0].voltage}}V</span></p>
-          <p>Amps: <span class="amps">{{batteries[0].amps}}A</span></p>
-        </div>
-
-        <div class="battery" id="battery_2">
-          <h2>Battery </h2>
-          <p>Voltage: <span class="voltage">{{batteries[1].voltage}}V</span></p>
-          <p>Amps: <span class="amps">{{batteries[1].amps}}A</span></p>
-        </div>
-
-        <div class="battery" id="battery_3">
-          <h2>Battery </h2>
-          <p>Voltage: <span class="voltage">{{batteries[2].voltage}}V</span></p>
-          <p>Amps: <span class="amps">{{batteries[2].amps}}A</span></p>
-        </div>
-
-        <div class="battery" id="battery_4">
-          <h2>Battery </h2>
-          <p>Voltage: <span class="voltage">{{batteries[3].voltage}}V</span></p>
-          <p>Amps: <span class="amps">{{batteries[3].amps}}A</span></p>
+        <div v-for="(battery, index) in batteries" :key="battery.id" :id="'battery_' + (index + 1)" class="battery" :style="{ borderColor: batteryBorderColor(battery) }">
+          <h2>Battery {{battery.id}}</h2>
+          <p>Voltage: <span class="voltage">{{ battery.voltage }}V</span></p>
+          <p>Amps: <span class="amps">{{ battery.amps }}A</span></p>
         </div>
       </div>
 
@@ -48,15 +30,46 @@
       </div>
     </div>
 
-    <div id="notification_center"></div>
+    <div id="notification_center">
+      <p v-for="(notification, index) in notifications" :key="index" :class="notification.severity">{{ notification.message }}</p>
+    </div>
   </main>
 </template>
 
 <script setup>
-import {reactive, ref} from "vue";
+import {reactive, ref, watch, watchEffect} from "vue";
   import {useStore} from "vuex";
   const store = useStore();
 
   const state = reactive(store.state);
   const batteries = ref(state.batteries);
+  const notifications = ref(state.notifications);
+  const watchAllow = ref(false);
+
+const batteryBorderColor = (battery) => {
+  if(battery.voltage > (50*.8)) { // Estimate Battery %. Given that max voltage is 50V
+    return "Green";
+  } else if(battery.voltage > (50*.3)) {
+    return "Darkgoldenrod";
+  } else if(battery.voltage > 0) {
+    return "Red";
+  } else {
+    return "White";
+  }
+};
+
+
+watchEffect(() => { //Later use server to determine when to allow watch
+  if(watchAllow.value) {
+    batteries.value.forEach((battery) => {
+      if(battery.voltage < (50*.3)) {
+        store.commit('newNotification', {message: `Battery ${battery.id} Low`, severity: "notification_alert"});
+      }
+    });
+  }
+});
+
+setTimeout(() => {
+  watchAllow.value = true;
+}, 5500)
 </script>

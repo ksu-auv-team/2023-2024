@@ -1,5 +1,30 @@
 import {createStore} from "vuex";
 
+function getDateTime () {
+    const currentDate = new Date();
+    const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+    const time_period = currentDate.getHours() < 12 ? "am" : "pm";
+
+    const month = months[currentDate.getMonth()];
+    const day = currentDate.getDate();
+    const year = currentDate.getFullYear();
+    let hours = currentDate.getHours();
+    let minutes = currentDate.getMinutes();
+
+    if (hours > 12) { hours -= 12; }
+    if (hours === 0) { hours = 12; }
+    if (minutes < 10) { minutes = `0${minutes}`; }
+
+    return {
+        month: month,
+        day: day,
+        year: year,
+        hours: hours,
+        minutes: minutes,
+        time_period: time_period
+    };
+}
+
 const store = createStore({
     state: {
         power: false,
@@ -27,6 +52,11 @@ const store = createStore({
             { id: 2, pwm: 0 },
         ],
 
+        notifications: [
+
+        ],
+
+        logID: 0,
         log: [
 
         ]
@@ -34,6 +64,30 @@ const store = createStore({
     mutations: {
         togglePower(state) {
             state.power = !state.power;
+        },
+
+        newNotification(state, {message, severity}) {
+            state.notifications.push({ message, severity });
+
+            const date = getDateTime();
+            const log_dateTime = `${date.month} ${date.day}, ${date.hours}:${date.minutes}${date.time_period}`;
+            const complete_message = `${log_dateTime} | ${message}`;
+
+            state.log.push({id: state.logID, message: complete_message});
+
+            setTimeout(() => {
+                if (state.notifications.length > 0) {
+                    state.notifications.shift();
+                }
+            }, 10000);
+        },
+
+        newLog(state, message) {
+            const date = getDateTime;
+            const log_dateTime = `${date.month} ${date.day}, ${date.hours}:${date.minutes}${date.time_period}`;
+            const complete_message = `${log_dateTime} | ${message}`;
+
+            state.log.push({id: state.logID, message: complete_message});
         }
     },
 
