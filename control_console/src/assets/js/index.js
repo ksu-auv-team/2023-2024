@@ -6,18 +6,9 @@ document.addEventListener("DOMContentLoaded", function() {
 //     initChartProperties();
 
     // //Google Chart API
-    // google.charts.load('current', {'packages':['corechart']});
-    // google.charts.setOnLoadCallback(data_charts); //Call main chart initializer
+    google.charts.load('current', {'packages':['corechart']});
+    google.charts.setOnLoadCallback(data_charts); //Call main chart initializer
 })
-let data_demo
-let timeActive = 0;
-function timer() { //later, call this after the api
-    setInterval(() => {
-        timeActive += 2;
-        updateCharts([battery_voltage_chart, battery_amp_chart, motor_chart, servo_chart]);
-    }, 5500);
-}
-
 //---------------------------------------------- GLOBAL VARIABLES  | GLOBAL FUNCTIONS ----------------------------------------------
 
 //     -------------------------------------------- GLOBAL VARIABLES  |  START POWER BUTTON --------------------------------------------
@@ -47,7 +38,7 @@ function power_on_graphs() {
 
 
 
-const intervalTitle = "6 Second Interval"
+const intervalTitle = "Time"
 const chart_colors = {
     0: {color: '#0000FF'},
     1: {color: '#FF0000'},
@@ -65,69 +56,6 @@ let motor_chart = {}
 let servo_chart = {}
 
 function initChartProperties() {
-    battery_voltage_chart = {
-        chart: 0,
-        chartData: null,
-        chartOptions: null,
-        subject: "Battery",
-        column_count: batteries.length,
-        title: "Battery Voltage",
-        x_title: intervalTitle,
-        y_title: "Voltage",
-        y_max: 50,
-        container_id: 'battery_voltage',
-        unit_reference: batteries,
-        reference_unit: 'voltage',
-        selection_bool: false
-    };
-
-    battery_amp_chart = {
-        chart: 1,
-        chartData: null,
-        chartOptions: null,
-        subject: "Battery",
-        column_count: batteries.length,
-        title: "Battery Amps",
-        x_title: intervalTitle,
-        y_title: "Amps",
-        y_max: 30,
-        container_id: 'battery_amp',
-        unit_reference: batteries,
-        reference_unit: 'amps',
-        selection_bool: false
-    };
-
-    motor_chart = {
-        chart: 2,
-        chartData: null,
-        chartOptions: null,
-        subject: "Motor",
-        column_count: motors.length,
-        title: "Motor PWM",
-        x_title: intervalTitle,
-        y_title: "PWM",
-        y_max: 100,
-        container_id: 'motor_pwm',
-        unit_reference: motors,
-        reference_unit: 'pwm',
-        selection_bool: false
-    };
-
-    servo_chart = {
-        chart: 3,
-        chartData: null,
-        chartOptions: null,
-        subject: 'Servo',
-        column_count: servos.length,
-        title: "Servo PWM",
-        x_title: intervalTitle,
-        y_title: "PWM",
-        y_max: 100,
-        container_id: 'servo_pwm',
-        unit_reference: servos,
-        reference_unit: 'pwm',
-        selection_bool: false
-    };
 }
 function data_charts() {
     initChart([battery_voltage_chart, battery_amp_chart, motor_chart, servo_chart]);
