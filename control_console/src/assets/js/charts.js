@@ -4,26 +4,7 @@ let battery_amp_chart = {}
 let motor_chart = {}
 let servo_chart = {}
 //------------------------------------------ CHART CONTROLS ------------------------------------------
-function clearCharts() {
-    battery_voltage_chart.chart.clearChart();
-    battery_voltage_chart.chartData = null;
-    battery_voltage_chart.chartOptions = null;
 
-    battery_amp_chart.chart.clearChart();
-    battery_amp_chart.chartData = null;
-    battery_amp_chart.chartOptions = null;
-
-    motor_chart.chart.clearChart();
-    motor_chart.chartData = null;
-    motor_chart.chartOptions = null;
-
-    servo_chart.chart.clearChart();
-    servo_chart.chartData = null;
-    servo_chart.chartOptions = null;
-    data_charts();
-
-    toggleDialog();
-}
 
 function saveCharts() {
     // Check if user left a comment when saving charts

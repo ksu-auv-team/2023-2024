@@ -1,3 +1,7 @@
+// //Google Chart API
+google.charts.load('current', {'packages':['corechart']});
+
+
 import {createStore} from "vuex";
 
 function getDateTime () {
@@ -52,15 +56,16 @@ const store = createStore({
             { id: 2, pwm: 0 },
         ],
 
+        chartIteration: 1,
         charts: {
             battery_voltage_chart : {
-                chart: 0,
+                chart: null,
                 chartData: null,
                 chartOptions: null,
                 subject: "Battery",
                 column_count: 4,
                 title: "Battery Voltage",
-                x_title: "Time",
+                x_title: "Per Fetch Iteration",
                 y_title: "Voltage",
                 y_max: 50,
                 container_id: 'battery_voltage',
@@ -70,13 +75,13 @@ const store = createStore({
             },
 
             battery_amp_chart : {
-                chart: 1,
+                chart: null,
                 chartData: null,
                 chartOptions: null,
                 subject: "Battery",
                 column_count: 4,
                 title: "Battery Amps",
-                x_title: "Time",
+                x_title: "Per Fetch Iteration",
                 y_title: "Amps",
                 y_max: 30,
                 container_id: 'battery_amp',
@@ -86,13 +91,13 @@ const store = createStore({
             },
 
             motor_chart : {
-                chart: 2,
+                chart: null,
                 chartData: null,
                 chartOptions: null,
                 subject: "Motor",
                 column_count: 8,
                 title: "Motor PWM",
-                x_title: "Time",
+                x_title: "Per Fetch Iteration",
                 y_title: "PWM",
                 y_max: 100,
                 container_id: 'motor_pwm',
@@ -102,13 +107,13 @@ const store = createStore({
             },
 
             servo_chart : {
-                chart: 3,
+                chart: null,
                 chartData: null,
                 chartOptions: null,
                 subject: 'Servo',
                 column_count: 2,
                 title: "Servo PWM",
-                x_title: "Time",
+                x_title: "Per Fetch Iteration",
                 y_title: "PWM",
                 y_max: 100,
                 container_id: 'servo_pwm',
@@ -152,6 +157,74 @@ const store = createStore({
                     state.notifications.shift();
                 }
             }, 10000);
+        },
+
+        addChartData(state) {
+            // Ensure that chart.chartData is not null
+            const chartArray = [state.charts.battery_voltage_chart, state.charts.battery_amp_chart, state.charts.motor_chart, state.charts.servo_chart]
+            chartArray.forEach((chart) => {
+                if(chart.chartData === null) {
+                    chart.chartData = new google.visualization.DataTable();
+                    for (let i = 0; i <= chart.column_count; i++) { //Add first row to create title and subject names
+                        if(i === 0) { chart.chartData.addColumn('number', chart.y_title) } else { chart.chartData.addColumn('number', chart.subject + i); }
+                    }
+                }
+            })
+
+            // Get current data from objects and add it to their respective chart data
+            // Battery Voltages & Amps
+            const batteryVoltages = [state.chartIteration];
+            const batteryAmps = [state.chartIteration];
+            const motorPWM = [state.chartIteration];
+            const servoPWM = [state.chartIteration];
+            state.chartIteration++;
+
+            state.batteries.forEach((battery) => {
+                batteryVoltages.push(battery.voltage);
+                batteryAmps.push(battery.amps);
+            })
+            state.charts.battery_voltage_chart.chartData.addRow(batteryVoltages);
+            state.charts.battery_amp_chart.chartData.addRow(batteryAmps);
+
+            //  Motor PWM
+            state.motors.forEach(motor => {
+                motorPWM.push(motor.pwm);
+            })
+            state.charts.motor_chart.chartData.addRow(motorPWM);
+
+            //  Servo PWM
+            state.servos.forEach((servo) => {
+                servoPWM.push(servo.pwm);
+            })
+            state.charts.servo_chart.chartData.addRow(servoPWM);
+
+            if(state.charts.battery_voltage_chart.chart !== null) {
+                state.charts.battery_voltage_chart.chart.draw(state.charts.battery_voltage_chart.chartData, state.charts.battery_voltage_chart.chartOptions);
+                state.charts.battery_amp_chart.chart.draw(state.charts.battery_amp_chart.chartData, state.charts.battery_amp_chart.chartOptions);
+                state.charts.motor_chart.chart.draw(state.charts.motor_chart.chartData, state.charts.motor_chart.chartOptions);
+                state.charts.servo_chart.chart.draw(state.charts.servo_chart.chartData, state.charts.servo_chart.chartOptions);
+            }
+        },
+
+        clearChartData(state) {
+            const batteryVoltageChart = state.charts.battery_voltage_chart;
+            const batteryAmpsChart = state.charts.battery_amp_chart;
+            const motorChart = state.charts.motor_chart;
+            const servoChart = state.charts.servo_chart;
+            const charts = [batteryVoltageChart, batteryAmpsChart, motorChart, servoChart]
+
+            batteryVoltageChart.chartData = null;
+            batteryAmpsChart.chartData = null;
+            motorChart.chartData = null;
+            servoChart.chartData = null;
+
+            charts.forEach((chart) => {
+                chart.chartData = new google.visualization.DataTable();
+                for (let i = 0; i <= chart.column_count; i++) { //Add first row to create title and subject names
+                    if(i === 0) { chart.chartData.addColumn('number', chart.y_title) } else { chart.chartData.addColumn('number', chart.subject + i); }
+                }
+                chart.chart.draw(chart.chartData, chart.chartOptions);
+            })
         },
 
         newLog(state, message) {

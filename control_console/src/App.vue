@@ -11,7 +11,7 @@
     </button>
   </header>
 
-  <router-view ref="currentView"></router-view>
+  <router-view ref="currentView" @toggleDialog="toggleDialog"></router-view>
 
   <span id="example_chart_size"></span>
 
@@ -27,12 +27,11 @@
   import power_on from '@/assets/svg_icons/power-on.svg';
   import power_off from '@/assets/svg_icons/power-off.svg';
   import {useStore} from "vuex";
-  import router from "@/router";
-  import {getCurrentInstance, onMounted, reactive, ref, watchEffect} from "vue";
+  import {onMounted, reactive, ref, watchEffect} from "vue";
 
   const store = useStore();
   const state = reactive(store.state);
-  const currentView = ref(null)
+  const currentView = ref(null);
   let data_demo;
   const batteries = ref(state.batteries);
   const watchAllow = ref(false);
@@ -67,6 +66,7 @@
     watchAllow.value = true;
   }, 5500)
 
+  // Later replace with the function to fetch data and call the chart updater
   const startDataDemo = () => {
     data_demo = setInterval(function() {
       store.state.batteries.forEach(function(battery) {
@@ -83,6 +83,7 @@
         servo.pwm = Math.floor(Math.random() * 100) + 1;
       });
 
+      store.commit('addChartData');
     }, 5000);
     console.log("Timeout Started")
   }
@@ -97,7 +98,7 @@
       title: "Clear Charts",
       message: "Are you sure you want to clear the charts? All data related to the charts will be lost.",
       buttons: ["Proceed"], // Button titles should have corresponding function. Closing button is already included
-      // button_functions: [clearCharts],
+      button_functions: [store.commit.bind(store, 'clearChartData')],
       textArea: false,
       textAreaFunctionIndex: null,
       textAreaMessage: null
@@ -113,12 +114,12 @@
     }
   }
 
-  let dialog_active = false;
+  const dialog_active = ref(false);
   function toggleDialog(dialog_request) {
     const dialog = document.getElementById('dialog');
     const dialog_content = document.getElementById('dialog_content');
     let dialog_content_object;
-    if(!dialog_active) {
+    if(!dialog_active.value) {
       switch (dialog_request) {
         case 'clear_charts':
           dialog_content_object = dialogOptions.clearCharts;
@@ -144,7 +145,7 @@
         for(let i = 0; i < dialog_content_object.buttons.length; i++) {
           let newButton = document.createElement('button');
           newButton.innerText = dialog_content_object.buttons[i];
-          newButton.onclick = dialog_content_object.button_functions[i];
+          newButton.onclick = () => dialogFunctions(dialog_content_object.button_functions[i]);
           dialog_buttons.appendChild(newButton);
         }
         dialog_buttons.id = "dialog_buttons";
@@ -155,12 +156,17 @@
       }
 
       dialog.style.display = 'flex';
-      dialog_active = true;
+      dialog_active.value = true;
     } else {
       dialog.style.display = 'none';
-      dialog_active =false;
+      dialog_active.value =false;
       dialog_content.innerHTML = "";
     }
+  }
+
+  function dialogFunctions(newFunction) {
+    newFunction();
+    toggleDialog();
   }
 
 onMounted(() => {

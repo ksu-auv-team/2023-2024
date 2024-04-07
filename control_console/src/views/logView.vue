@@ -25,11 +25,11 @@
   const log_main = document.getElementById("log_main");
 
 
-  // const highlight_message = (message_container) => {
-  //   const container = document.getElementById(message_container);
-  //   if(container.classList.contains('marked')) { container.classList.remove('marked');
-  //   } else { container.classList.add('marked'); }
-  // }
+  const highlight_message = (message_container) => {
+    const container = document.getElementById(message_container);
+    if(container.classList.contains('marked')) { container.classList.remove('marked');
+    } else { container.classList.add('marked'); }
+  }
   //
   // const control_scroll = () => {
   //   scroll_paused.value = !scroll_paused.value;

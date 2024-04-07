@@ -34,11 +34,11 @@
     <section>
       <h1>Data Charts</h1>
       <div id="chart_controls">
-        <button onclick="toggleDialog('clear_charts')">Clear Charts</button>
-        <button onclick="toggleDialog('save_charts')">Save Charts</button>
+        <button @click="handleClear">Clear Charts</button>
+        <button @click="toggleDialog('save_charts')">Save Charts</button>
       </div>
       <div id="data_charts">
-        <div class="chart_container" id="example_chart_size">
+        <div class="chart_container">
           <div id="battery_voltage"></div>
         </div>
 
@@ -62,6 +62,7 @@
   import {useStore} from "vuex";
   import {onMounted, reactive, ref} from "vue";
   const store = useStore();
+  const emits = defineEmits(['toggleDialog']);
 
   const state = reactive(store.state);
   const batteries = ref(state.batteries);
@@ -99,15 +100,17 @@
 
   function initCharts() {
     drawCharts([batteryVChart.value, batteryAChart.value, motorChart.value, servoChart.value]);
-    // chartSelections([batteryVChart, batteryAChart, motorChart, servoChart]);
+    chartSelections([batteryVChart.value, batteryAChart.value, motorChart.value, servoChart.value]);
   }
 
   function drawCharts(charts) {
+    const computedSize = window.getComputedStyle(document.getElementById('example_chart_size'));
     charts.forEach((chart) => {
-      const computedSize = window.getComputedStyle(document.getElementById('example_chart_size'));
-      chart.chartData = new google.visualization.DataTable();
-      for (let i = 0; i <= chart.column_count; i++) {
-        if(i === 0) { chart.chartData.addColumn('number', chart.y_title) } else { chart.chartData.addColumn('number', chart.subject + i); }
+      if(chart.chartData === null) {
+        chart.chartData = new google.visualization.DataTable();
+        for (let i = 0; i <= chart.column_count; i++) { //Add first row to create title and subject names
+          if(i === 0) { chart.chartData.addColumn('number', chart.y_title) } else { chart.chartData.addColumn('number', chart.subject + i); }
+        }
       }
       chart.chartOptions = {
         backgroundColor: "#343434",
@@ -128,7 +131,6 @@
         series: chart_colors
       }
 
-      console.log(chart.container_id)
       chart.chart = new google.visualization.AreaChart(document.getElementById(chart.container_id));
       chart.chart.draw(chart.chartData, chart.chartOptions);
     })
@@ -178,6 +180,35 @@
       chart.chartData.addRow(newInsert);
       chart.chart.draw(chart.chartData, chart.chartOptions);
     })
+  }
+
+  function handleClear() {
+    emits('toggleDialog', 'clear_charts');
+  }
+
+  function clearCharts() {
+    // Clear chart elements
+    state.charts.battery_voltage_chart.chart.clearChart();
+    state.charts.battery_amp_chart.chart.clearChart();
+    state.charts.motor_chart.chart.clearChart();
+    state.charts.servo_chart.chart.clearChart();
+
+    // Clear chartData and chartOptions
+    state.charts.battery_voltage_chart.chartData = null;
+    state.charts.battery_voltage_chart.chartOptions = null;
+
+    state.charts.battery_amp_chart.chartData = null;
+    state.charts.battery_amp_chart.chartOptions = null;
+
+    state.charts.motor_chart.chartData = null;
+    state.charts.motor_chart.chartOptions = null;
+
+    state.charts.servo_chart.chartData = null;
+    state.charts.servo_chart.chartOptions = null;
+
+    initCharts();
+
+    // toggleDialog();
   }
 
   onMounted(() => {
