@@ -35,7 +35,7 @@
       <h1>Data Charts</h1>
       <div id="chart_controls">
         <button @click="handleClear">Clear Charts</button>
-        <button @click="toggleDialog('save_charts')">Save Charts</button>
+        <button @click="handleSave">Save Charts</button>
       </div>
       <div id="data_charts">
         <div class="chart_container">
@@ -186,29 +186,8 @@
     emits('toggleDialog', 'clear_charts');
   }
 
-  function clearCharts() {
-    // Clear chart elements
-    state.charts.battery_voltage_chart.chart.clearChart();
-    state.charts.battery_amp_chart.chart.clearChart();
-    state.charts.motor_chart.chart.clearChart();
-    state.charts.servo_chart.chart.clearChart();
-
-    // Clear chartData and chartOptions
-    state.charts.battery_voltage_chart.chartData = null;
-    state.charts.battery_voltage_chart.chartOptions = null;
-
-    state.charts.battery_amp_chart.chartData = null;
-    state.charts.battery_amp_chart.chartOptions = null;
-
-    state.charts.motor_chart.chartData = null;
-    state.charts.motor_chart.chartOptions = null;
-
-    state.charts.servo_chart.chartData = null;
-    state.charts.servo_chart.chartOptions = null;
-
-    initCharts();
-
-    // toggleDialog();
+  function handleSave() {
+    emits('toggleDialog', 'save_charts')
   }
 
   onMounted(() => {

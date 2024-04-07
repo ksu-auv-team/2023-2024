@@ -66,6 +66,7 @@
     watchAllow.value = true;
   }, 5500)
 
+
   // Later replace with the function to fetch data and call the chart updater
   const startDataDemo = () => {
     data_demo = setInterval(function() {
@@ -93,6 +94,31 @@
     console.log("Timeout Stopped")
   }
 
+  function getDateTime () {
+    const currentDate = new Date();
+    const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+    const time_period = currentDate.getHours() < 12 ? "am" : "pm";
+
+    const month = months[currentDate.getMonth()];
+    const day = currentDate.getDate();
+    const year = currentDate.getFullYear();
+    let hours = currentDate.getHours();
+    let minutes = currentDate.getMinutes();
+
+    if (hours > 12) { hours -= 12; }
+    if (hours === 0) { hours = 12; }
+    if (minutes < 10) { minutes = `0${minutes}`; }
+
+    return {
+      month: month,
+      day: day,
+      year: year,
+      hours: hours,
+      minutes: minutes,
+      time_period: time_period
+    };
+  }
+
   const dialogOptions  = {
     clearCharts: {
       title: "Clear Charts",
@@ -107,7 +133,7 @@
       title: "Save Charts",
       message: "Would you like to add any comments? Comments will appear at the top of the page.",
       buttons: ["Proceed"],
-      // button_functions: [saveCharts],
+      button_functions: [saveCharts],
       textArea: true,
       textAreaFunctionIndex: 0,
       textAreaMessage: null
@@ -166,6 +192,45 @@
 
   function dialogFunctions(newFunction) {
     newFunction();
+    toggleDialog();
+  }
+
+  function saveCharts() {
+    // Check if user left a comment when saving charts
+    let userChartComment = "";
+    if(dialogOptions.saveCharts.textArea) {
+      if(document.getElementById('dialog_text_area').value) {
+        userChartComment = "Comments: " + document.getElementById('dialog_text_area').value;
+      }
+    }
+
+
+    let chartsHTML = "";
+    let chartDivs = document.querySelectorAll('.chart_container');
+    chartDivs.forEach((div) => {
+      chartsHTML += div.outerHTML;
+    })
+    const date = getDateTime();
+
+    let htmlContent = `<!DOCTYPE html><html lang="en">
+        <head>
+            <title>KSU AUV Recorded Data</title>
+            <header style="width: 100vw; color: white; text-align: center">
+                <h1>AUV Data saved at ${date.month} ${date.day}, ${date.year} at ${date.hours}:${date.minutes}${date.time_period}</h1>
+                <p style="font-size: 1.5rem">${userChartComment}</p>
+            </header>
+        </head>
+        <body style="display: flex; flex-wrap: wrap; background-color: #121212; gap: 1rem; justify-content: center;">`;
+    htmlContent += chartsHTML;
+    htmlContent += '</body></html>';
+
+    let htmlBlob = new Blob([htmlContent], {type: 'text/html'});
+    const download_link = document.createElement('a');
+    download_link.href = URL.createObjectURL(htmlBlob);
+    download_link.download = `${date.year} ${date.month} ${date.day}, ${date.hours}_${date.minutes}_${date.time_period} AUV Data Charts`;
+    download_link.click();
+
+    toggleDialog();
     toggleDialog();
   }
 
