@@ -24,6 +24,7 @@
 
 
 <script setup>
+  import connection from "@/server/connection";
   import power_on from '@/assets/svg_icons/power-on.svg';
   import power_off from '@/assets/svg_icons/power-off.svg';
   import {useStore} from "vuex";
@@ -36,19 +37,35 @@
   const batteries = ref(state.batteries);
   const watchAllow = ref(false);
 
-  const powerButton = () => { //Make async when adding post requests
-    store.commit("togglePower")
-
+  const powerButton = async () => { //Make async when adding post requests
     const power_svg = document.getElementById('power_svg');
-    if (store.state.power) {
+    try {
+      const fetch = await connection.togglePower()
+      const fetchPower = fetch.data.status;
+      if (fetchPower) {
+        power_svg.src =power_on;
+        power_svg.alt = 'Power ON';
+      } else {
+        power_svg.src = power_off;
+        power_svg.alt = 'Power OFF';
+        // stopDataDemo();
+      }
+      if(fetchPower !== state.power) { store.commit("togglePower") }
+    } catch (error) {
+      store.commit("newNotification", {message: "AUV Power Failed"});
+      store.commit('newLog', error);
+    }
+  }
+
+  const updatePowerButton = () => {
+    const power_svg = document.getElementById('power_svg');
+    if(state.power === false) {
       power_svg.src =power_on;
       power_svg.alt = 'Power ON';
-      // power_on_graphs();
-      // startDataDemo();
     } else {
       power_svg.src = power_off;
       power_svg.alt = 'Power OFF';
-      // stopDataDemo();
+
     }
   }
 
@@ -68,7 +85,7 @@
 
 
   // Later replace with the function to fetch data and call the chart updater
-  const startDataDemo = () => {
+  const startDataDemo = async () => {
     data_demo = setInterval(function() {
       store.state.batteries.forEach(function(battery) {
 
@@ -87,6 +104,17 @@
       store.commit('addChartData');
     }, 5000);
     console.log("Timeout Started")
+
+     try {
+       const currentPower = await connection.fetchPower();
+       console.log(currentPower.data.status);
+       console.log(state.power)
+       if(currentPower.data.status !== state.power) {
+         updatePowerButton();
+       }
+     } catch (error) {
+      console.log(error);
+     }
   }
 
   const  stopDataDemo = () => {

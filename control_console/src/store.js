@@ -237,16 +237,7 @@ const store = createStore({
     },
 
     actions: {
-        async fetchPower({ commit }) {
-            try {
-                // INSERT CODE TO POWER SUB AND WAIT FOR RESPONSE | HANDLE ERRORS
-                // .then
-                // const power = fetchedData; then pass it on commit
-                commit('togglePower');
-            } catch (e) {
-                console.error(e);
-            }
-        }
+
     }
 
     // mutations: {
