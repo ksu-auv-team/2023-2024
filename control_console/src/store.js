@@ -135,7 +135,7 @@ const store = createStore({
             const date = getDateTime();
             const log_dateTime = `${date.month} ${date.day}, ${date.hours}:${date.minutes}${date.time_period}`;
             const complete_message = `${log_dateTime} | AUV ${powerState}`;
-            state.log.push({message: `${complete_message}`});
+            state.log.push({message: complete_message,  highlighted: true});
             setTimeout(() => {
                 if (state.notifications.length > 0) {
                     state.notifications.shift();
@@ -143,14 +143,18 @@ const store = createStore({
             }, 10000);
         },
 
-        newNotification(state, {message, severity}) {
+        newNotification(state, {message, severity, highlighted}) {
             state.notifications.push({ message, severity });
 
             const date = getDateTime();
             const log_dateTime = `${date.month} ${date.day}, ${date.hours}:${date.minutes}${date.time_period}`;
             const complete_message = `${log_dateTime} | ${message}`;
 
-            state.log.push({message: complete_message});
+            if(highlighted) {
+                state.log.push({message: complete_message, highlighted: highlighted});
+            } else {
+                state.log.push({message: complete_message, highlighted: false});
+            }
 
             setTimeout(() => {
                 if (state.notifications.length > 0) {
@@ -232,7 +236,10 @@ const store = createStore({
             const log_dateTime = `${date.month} ${date.day}, ${date.hours}:${date.minutes}${date.time_period}`;
             const complete_message = `${log_dateTime} | ${message}`;
 
-            state.log.push({message: complete_message});
+            state.log.push({
+                message: complete_message,
+                highlighted: false
+            });
         }
     },
 

@@ -33,6 +33,7 @@ External Libraries: Google Charts
   - Send Get requests on load
     - Useful if user refreshes page or auv is already powered on
     - Do nothing if there is no response from server
+  - Use database to retrieve previous data starting from marker to sync data
 - AUV Power Switch
     - Send POST request to turn on/off sub & wait for response
       - Handle Errors in notification center, log, & dialog

@@ -4,7 +4,6 @@
       <router-link to="/">Stream</router-link>
       <router-link to="/data">Data Monitoring</router-link>
       <router-link to="/log">Log</router-link>
-      <button id="save_data">Save Data</button>
     </nav>
     <button id="power_button" @click = 'powerButton'>
       <img id="power_svg" src="@/assets/svg_icons/power-off.svg" alt="Power OFF">
@@ -50,7 +49,15 @@
         power_svg.alt = 'Power OFF';
         // stopDataDemo();
       }
-      if(fetchPower !== state.power) { store.commit("togglePower") }
+      let power_status;
+      if(state.power === false) {
+        power_status = "OFF";
+      } else {
+        power_status = "ON";
+      }
+
+      if(fetchPower !== state.power) { store.commit("togglePower") } else {store.commit('newNotification', {message: `AUV ${power_status}`, highlighted: true});}
+
     } catch (error) {
       store.commit("newNotification", {message: "AUV Power Failed"});
       store.commit('newLog', error);
@@ -59,14 +66,16 @@
 
   const updatePowerButton = () => {
     const power_svg = document.getElementById('power_svg');
+    let power_state = "OFF";
     if(state.power === false) {
       power_svg.src =power_on;
       power_svg.alt = 'Power ON';
+      power_state = "ON";
     } else {
       power_svg.src = power_off;
       power_svg.alt = 'Power OFF';
-
     }
+    store.commit("newNotification", {message: `Fetched Power: ${power_state}`, highlighted: true});
   }
 
   watchEffect(() => { //Later use server to determine when to allow watch
@@ -107,8 +116,6 @@
 
      try {
        const currentPower = await connection.fetchPower();
-       console.log(currentPower.data.status);
-       console.log(state.power)
        if(currentPower.data.status !== state.power) {
          updatePowerButton();
        }
@@ -238,6 +245,20 @@
     chartDivs.forEach((div) => {
       chartsHTML += div.outerHTML;
     })
+
+    let logHTML = "<hr><div style='padding: 0 2rem'> <h2>Log</h2>" +
+        "";
+    state.log.forEach((log) => {
+      if(log.highlighted === true) {
+        let pText = "<p style='background-color: #343434; font-size: 1.5rem'>" + log.message + " <span style='color: #E2A300; font-size: 2rem'>&bull;</span></p>"
+        logHTML += pText;
+      } else {
+        let pText = "<p style='font-size: 1.5rem'>" + log.message + "</p>"
+        logHTML += pText;
+      }
+    })
+    logHTML += " </div>";
+
     const date = getDateTime();
 
     let htmlContent = `<!DOCTYPE html><html lang="en">
@@ -245,17 +266,20 @@
             <title>KSU AUV Recorded Data</title>
             <header style="width: 100vw; color: white; text-align: center">
                 <h1>AUV Data saved at ${date.month} ${date.day}, ${date.year} at ${date.hours}:${date.minutes}${date.time_period}</h1>
-                <p style="font-size: 1.5rem">${userChartComment}</p>
+                <p style="font-size: 1.25rem">${userChartComment}</p>
             </header>
         </head>
-        <body style="display: flex; flex-wrap: wrap; background-color: #121212; gap: 1rem; justify-content: center;">`;
+        <body style="background-color: #121212; color: #D1D1D1">
+            <div style="display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center;">`;
     htmlContent += chartsHTML;
-    htmlContent += '</body></html>';
+    htmlContent += `</div><div>`
+    htmlContent += logHTML;
+    htmlContent += '</div></body></html>';
 
     let htmlBlob = new Blob([htmlContent], {type: 'text/html'});
     const download_link = document.createElement('a');
     download_link.href = URL.createObjectURL(htmlBlob);
-    download_link.download = `${date.year} ${date.month} ${date.day}, ${date.hours}_${date.minutes}_${date.time_period} AUV Data Charts`;
+    download_link.download = `${date.year} ${date.month} ${date.day}, ${date.hours}_${date.minutes}_${date.time_period} AUV Data Charts.html`;
     download_link.click();
 
     toggleDialog();
