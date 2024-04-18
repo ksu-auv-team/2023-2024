@@ -5,16 +5,11 @@ import cv2
 import serial
 import time
 
-# Initialize serial connection
-ser = serial.Serial('/dev/ttyTHS0', 115200)
+ser = serial.Serial('/dev/ttyTHS0', 115200)  # Adjust the port as necessary
 
-# Create a list of integers
-data = [121, 122, 123, 124, 125, 126, 127, 128, 0, 0, 0, 0]
+data = [0, 126, 126, 126, 126, 126, 126, 126, 0, 0, 0, 0]
+data_bytes = bytes(data) + b'\n'  # Append newline as end character
 
-# Convert the list to bytes
-data_bytes = bytes(data)
-
-# Try to send the data
 try:
     ser.write(data_bytes)
     time.sleep(1)  # Allow time for data to be transmitted
