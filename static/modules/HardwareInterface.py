@@ -8,7 +8,7 @@ import logging
 class HardwarePackage:
     """Class to handle hardware interface and serial communication."""
 
-    def __init__(self, port: str, baudrate: int = 115200, hardware_logger: logging.Logger = None, db: SQLAlchemy = None, SensorsInputDB: db.Model = None, OutputDB: db.Model = None):
+    def __init__(self, port: str, baudrate: int = 115200, hardware_logger: logging.Logger = None, db: SQLAlchemy = None, SensorsInputDB = None, OutputDB = None):
         """
         Initialize the HardwarePackage.
         """
