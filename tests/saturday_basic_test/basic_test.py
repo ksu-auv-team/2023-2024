@@ -10,7 +10,7 @@ ser = serial.Serial('/dev/ttyTHS0', 115200)  # Adjust the port as necessary
 time.sleep(2)  # Wait for Arduino to reset and the serial connection to establish
 
 # Define the data to send
-data = [127, 127, 127, 127, 127, 127, 127, 127, 0, 0, 0, 0]
+data = [120, 121, 122, 123, 124, 125, 126, 127, 0, 0, 0, 0]
 data_bytes = bytes(data) + b'\n'  # Append newline as end character
 
 # Attempt to send the data
