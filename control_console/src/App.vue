@@ -290,3 +290,9 @@ onMounted(() => {
   startDataDemo()
 })
 </script>
+
+<style>
+header {
+  background-image: url("@/assets/banner.png");
+}
+</style>
