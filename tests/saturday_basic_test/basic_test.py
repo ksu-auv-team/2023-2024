@@ -20,7 +20,7 @@ try:
     print("Data sent, waiting for response...")
 
     # Read the response from Arduino
-    if ser.in_waiting > 0:
+    while ser.in_waiting > 0:
         response = ser.readline()
         print("Received from Arduino:", response.decode().strip())
 
