@@ -34,6 +34,9 @@ with NumpySocket() as s:
     s.connect(("10.0.0.163", 9999))
     while cap.isOpened():
         ret, frame = cap.read()
+
+        print(frame.shape)
+
         # ret2, frame2 = cap2.read()
         # ref_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
         frame_resize = maintain_aspect_ratio_resize(frame, width=240)
