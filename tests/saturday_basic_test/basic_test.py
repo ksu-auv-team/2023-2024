@@ -5,10 +5,19 @@ import cv2
 import serial
 import time
 
+# Initialize serial connection
 ser = serial.Serial('/dev/ttyTHS0', 115200)
+
+# Create a list of integers
+data = [0, 126, 126, 126, 126, 126, 126, 126, 0, 0, 0, 0]
+
+# Convert the list to bytes
+data_bytes = bytes(data)
+
+# Try to send the data
 try:
-    ser.write([0,126,126,126,126,126,126,126,0,0,0,0])
-    time.sleep(1)
+    ser.write(data_bytes)
+    time.sleep(1)  # Allow time for data to be transmitted
 except Exception as e:
     print(f"Error sending data: {e}")
     ser.close()
