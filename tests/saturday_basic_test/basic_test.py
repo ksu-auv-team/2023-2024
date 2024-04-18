@@ -7,14 +7,12 @@ import time
 
 ser = serial.Serial('/dev/ttyTHS0', 115200)
 try:
-    ser.write(b'[0,126,126,126,126,126,126,126,0,0,0,0]')
+    ser.write([0,126,126,126,126,126,126,126,0,0,0,0])
     time.sleep(1)
 except Exception as e:
     print(f"Error sending data: {e}")
     ser.close()
     exit(1)
-
-
 
 # # Initialize the camera
 # cap = cv2.VideoCapture(2)  # Adjust the index as needed
