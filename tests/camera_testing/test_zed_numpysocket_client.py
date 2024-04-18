@@ -4,9 +4,12 @@ from numpysocket import NumpySocket
 import cv2
 
 cap = cv2.VideoCapture(2)
-# cap2 = cv2.VideoCapture(1)
+cap2 = cv2.VideoCapture(0)
 
 cap.set(cv2.CAP_PROP_FRAME_WIDTH, 3840)
+cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 1080)
+cap2.set(cv2.CAP_PROP_FRAME_WIDTH, 1920)
+cap2.set(cv2.CAP_PROP_FRAME_HEIGHT, 1080)
 
 # Resizes a image and maintains aspect ratio
 def maintain_aspect_ratio_resize(image, width=None, height=None, inter=cv2.INTER_AREA):
@@ -36,17 +39,19 @@ with NumpySocket() as s:
     s.connect(("10.0.0.163", 9999))
     while cap.isOpened():
         ret, frame = cap.read()
+        ret2, frame2 = cap2.read()
 
         print(frame.shape)
 
-        # ret2, frame2 = cap2.read()
-        # ref_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-        frame_resize = maintain_aspect_ratio_resize(frame, width=240)
-        # frame_resize2 = maintain_aspect_ratio_resize(frame2, width=240)
+        zed_right = frame[:, 1920:]
+        zed_left = frame[:, :1920]
 
-        # add the two frames together
-        # frame_resize = cv2.hconcat([frame_resize, frame_resize2])
+        zed_right_resize = maintain_aspect_ratio_resize(zed_right, width=240)
+        zed_left_resize = maintain_aspect_ratio_resize(zed_left, width=240)
+        frame2_resize = maintain_aspect_ratio_resize(frame2, width=1920)
 
+        frame_resize = cv2.hconcat([zed_left_resize, zed_right_resize, frame2_resize])
+        
         if ret is True:
             try:
                 s.sendall(frame_resize)
