@@ -1,6 +1,7 @@
 import logging
 import pygame
 import json
+import requests
 
 # Mapping choices
 # - regular: The default mapping.
@@ -29,17 +30,26 @@ class CM:
         self.joy_data = []
 
         # Each element in the map list is a list with three elements: element 0 is the button number, element 1 is the axis number, and element 2 is whether the axis is inverted.
-        self.map = {'Arm': [None, 19, 0], 'Yaw': [None, 0, 0], 'Z': [None, 1, 0], 'X': [None, 3, 0], 'Y': [None, 4, 0], 'Pitch': [20, 3, 0], 'Roll': [20, 4, 0], 'Claw': [None, 7, 0], 'Torpedo_1': [None, 11, 0], 'Torpedo_2': [None, 12, 0]}
+        self.map = {
+            'Arm': self.config['Arm'], 
+            'Yaw': self.config['Yaw'], 
+            'Z': self.config['Z'], 
+            'X': self.config['X'], 
+            'Y': self.config['Y'], 
+            'Pitch': self.config['Pitch'], 
+            'Roll': self.config['Roll'], 
+            'Claw': self.config['Claw'], 
+            'Torpedo_1': self.config['Torpedo_1'], 
+            'Torpedo_2': self.config['Torpedo_2']
+        }
 
         self.out_data = {"Arm": 0, "X": 0.0, "Y": 0.0, "Z": 0.0, "Pitch": 0.0, "Roll": 0.0, "Yaw": 0.0, "Claw": 0.0}
-        self.mapping_choice = mapping_choice
 
-
-        orin_ip = '127.0.0.1'
+        orin_ip = '192.168.0.103'
         self.url = f"http://{orin_ip}:5000/post_input_data"
 
         # Configure logging
-        logging.basicConfig(filename='static/logs/app.log', level=logging.INFO, 
+        logging.basicConfig(filename='static/logs/controller.log', level=logging.INFO, 
                             format='%(asctime)s - %(message)s', datefmt='%Y-%m-%d %H:%M:%S')
 
     def init_joystick(self):
@@ -55,9 +65,6 @@ class CM:
         
         self.joystick = pygame.joystick.Joystick(0)
         self.joystick.init()
-
-    def parse_mapping(self):
-        pass
 
     def get_data(self):
         """
@@ -78,25 +85,35 @@ class CM:
             Left Button: 20th index
         - `data`: [0.06, -0.02, -0.07, -0.01, 0.0, -0.06, -1.0, 0.93, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
         """
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                pygame.quit()
-                quit()
-
-        self.joystick.init()
-
+        pygame.event.pump()  # Process event queue
         self.joy_data = [round(self.joystick.get_axis(i), 2) for i in range(self.joystick.get_numaxes())]
-        for i in range(self.joystick.get_numbuttons()):
-            self.joy_data.append(self.joystick.get_button(i))
-        for i in range(self.joystick.get_numhats()):
-            self.joy_data.append(self.joystick.get_hat(i))
+        self.joy_data += [self.joystick.get_button(i) for i in range(self.joystick.get_numbuttons())]
+        self.joy_data += [self.joystick.get_hat(i) for i in range(self.joystick.get_numhats())]
         return self.joy_data
 
     def map_data(self):
-        pass
+        """
+        Maps the joystick data based on configuration and button presses.
+        """
+        for control, settings in self.config.items():
+            if settings[0] is None:  # No button press required
+                axis_val = self.joy_data[settings[1]]
+                if settings[2]:  # Invert the axis if necessary
+                    axis_val = -axis_val
+                self.out_data[control] = axis_val
+            else:  # Button press affects the mapping
+                if self.joy_data[settings[0]]:  # Check if the button is pressed
+                    axis_val = self.joy_data[settings[1]]
+                    if settings[2]:  # Invert the axis if necessary
+                        axis_val = -axis_val
+                    self.out_data[control] = axis_val
 
-    def post_data(self):
-        pass
+    def send_data(self):
+        try:
+            response = requests.post(self.url, json=self.out_data)
+            print(f"Data sent to {self.url} with response: {response.text}")
+        except requests.exceptions.RequestException as e:
+            print(f"Failed to send data: {e}")
 
     def log_output(self, version: int = 0):
         if version == 0:
@@ -114,6 +131,7 @@ class CM:
             self.get_data()
             self.parse_mapping()
             self.map_data()
-            self.post_data()
-            self.log_output(version = 1)
+            self.send_data()
+            # self.log_output(version = 0)
             pygame.time.wait(10)
+

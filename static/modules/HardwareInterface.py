@@ -1,126 +1,95 @@
 import serial
 import threading
+import time
 from datetime import datetime
 from flask_sqlalchemy import SQLAlchemy
-from flask import Flask
-from logging.handlers import RotatingFileHandler
 import logging
-
-db = SQLAlchemy()
 
 class HardwarePackage:
     """Class to handle hardware interface and serial communication."""
 
-    def __init__(self, port : str, baudrate : int = 9600, hardware_logger : logging.Logger = None, db : SQLAlchemy = None, SensorsInputDB : db.Model = None, OutputDB : db.Model = None):
+    def __init__(self, port: str, baudrate: int = 115200, hardware_logger: logging.Logger = None, db: SQLAlchemy = None, SensorsInputDB: db.Model = None, OutputDB: db.Model = None):
         """
         Initialize the HardwarePackage.
-
-        Args:
-            port (str): Serial port to use.
-            baudrate (int): Baud rate for serial communication.
         """
         self.port = port
         self.baudrate = baudrate
-        self.ser = serial.Serial(port, baudrate, timeout=1)
-        self.thread = threading.Thread(target=self.read_from_serial)
+        self.serial_port = serial.Serial(port, baudrate, timeout=1)
+        self.thread = threading.Thread(target=self.run)
         self.thread.daemon = True
         self.hardware_logger = hardware_logger
         self.db = db
         self.SensorsInputDB = SensorsInputDB
-        self.OutputOutputDB = OutputDB
-
+        self.OutputDB = OutputDB
         hardware_logger.info('Hardware Package initialized')
 
-    def read_from_serial(self):
-        """Continuously read data from the serial port and process it."""
+    def run(self):
+        """Main method to handle reading from and writing to the serial port."""
         while True:
-            data = self.get_data()
-            if data:
-                parsed_data = self.parse_data(data)
-                self.save_data(parsed_data)
-                self.hardware_logger.info(f"Received data: {parsed_data}")
+            self.send_data()
+            time.sleep(2)  # Delay between commands
+            self.receive_data()
 
-    def get_data(self):
-        """
-        Read data from the serial port.
-
-        Returns:
-            str: The read data, or None if there's an error or if the port is closed.
-        """
-        if self.ser.isOpen():
+    def receive_data(self):
+        """Receive data from the serial port and save it to the database."""
+        if self.serial_port.isOpen():
             try:
-                self.hardware_logger.info('Reading data from serial port')
-                return self.ser.readline().decode('utf-8').strip()
-            except serial.SerialException:
-                return None
-        return None
+                data = self.serial_port.readline().decode('utf-8').strip()
+                if data:
+                    self.hardware_logger.info(f'Received data: {data}')
+                    parsed_data = self.parse_data(data)
+                    self.save_data(parsed_data)
+            except serial.SerialException as e:
+                self.hardware_logger.error(f'Serial exception: {e}')
 
     def parse_data(self, data):
-        """
-        Parse the raw data from the serial port.
-
-        Args:
-            data (str): Raw data string from the serial port.
-
-        Returns:
-            list: Parsed data as a list of values.
-        """
+        """Parse the raw data from the serial port."""
         return data.split(',')
 
     def save_data(self, parsed_data):
-        """
-        Save parsed data into the database.
-
-        Args:
-            parsed_data (list): Parsed data to be saved.
-        """
-        new_entry = self.SensorsInputDB(
-            Date=datetime.utcnow(),
-            OTemp=float(parsed_data[15]),
-            TTube=float(parsed_data[16]),
-            Depth=float(parsed_data[17]),
-            Humidity=float(parsed_data[18]),
-            Voltage=float(parsed_data[19]),
-            Current=float(parsed_data[20])
-        )
-        self.hardware_logger.info(f"Saving data: {new_entry}")
-        self.db.session.add(new_entry)
-        self.db.session.commit()
+        """Save parsed data into the database."""
+        if parsed_data and len(parsed_data) >= 6:
+            try:
+                new_entry = self.SensorsInputDB(
+                    Date=datetime.utcnow(),
+                    OTemp=float(parsed_data[0]),
+                    TTube=float(parsed_data[1]),
+                    Depth=float(parsed_data[2]),
+                    Humidity=float(parsed_data[3]),
+                    Voltage=float(parsed_data[4]),
+                    Current=float(parsed_data[5])
+                )
+                self.db.session.add(new_entry)
+                self.db.session.commit()
+                self.hardware_logger.info(f'Saving data: {new_entry}')
+            except Exception as e:
+                self.hardware_logger.error(f'Error saving data: {e}')
 
     def get_output_data(self):
-        """
-        Get the output data from the database.
-
-        Returns:
-            str: The output data as a string.
-        """
+        """Get the output data from the database."""
         data = self.OutputDB.query.order_by(self.OutputDB.Date.desc()).first()
-        return [data.M1, data.M2, data.M3, data.M4, data.M5, data.M6, data.M7, data.M8, data.Claw, data.SB]
-    
-    def send_data(self):
-        """
-        Send data to the serial port.
+        if data:
+            return f"{data.M1},{data.M2},{data.M3},{data.M4},{data.M5},{data.M6},{data.M7},{data.M8},{data.Claw},{data.SB}\n"
+        return ""
 
-        Args:
-            data (str): Data to be sent to the serial device.
-        """
-        if self.ser.isOpen():
+    def send_data(self):
+        """Send data to the serial port based on database outputs."""
+        data = self.get_output_data()
+        if self.serial_port.isOpen() and data:
             try:
-                data = self.get_output_data()
-                self.hardware_logger.info(f"Sending data: {data}")
-                self.ser.write(data.encode())
-            except serial.SerialException:
-                pass
+                self.serial_port.write(data.encode())
+                self.hardware_logger.info(f'Sending data: {data}')
+            except serial.SerialException as e:
+                self.hardware_logger.error(f'Error sending data: {e}')
 
     def start(self):
-        """Start the hardware interface."""
+        """Start the hardware interface thread."""
         if not self.thread.is_alive():
-            self.hardware_logger.info('Starting hardware interface')
             self.thread.start()
-
+            self.hardware_logger.info('Hardware interface started')
 
     def stop(self):
         """Stop the hardware interface."""
-        if self.ser.isOpen():
-            self.hardware_logger.info('Stopping hardware interface')
-            self.ser.close()
+        if self.serial_port.isOpen():
+            self.serial_port.close()
+            self.hardware_logger.info('Hardware interface stopped')
