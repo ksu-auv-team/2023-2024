@@ -13,6 +13,7 @@ data_bytes = bytes(data) + b'\n'  # Append newline as end character
 try:
     ser.write(data_bytes)
     time.sleep(1)  # Allow time for data to be transmitted
+    print(ser.readline())
 except Exception as e:
     print(f"Error sending data: {e}")
     ser.close()
