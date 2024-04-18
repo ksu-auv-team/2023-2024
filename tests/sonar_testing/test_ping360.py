@@ -36,7 +36,6 @@ def test_ping360():
 if __name__ == "__main__":
     test_ping360()
 
-
 # --------------------------------------------------
 # ID: 2300 - device_data
 # Header: start_1: 66 start_2: 82 payload_length: 214 message_id: 2300 src_device_id: 2 dst_device_id: 0
