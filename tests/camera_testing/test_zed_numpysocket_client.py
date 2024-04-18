@@ -4,6 +4,7 @@ from numpysocket import NumpySocket
 import cv2
 
 cap = cv2.VideoCapture(0)
+cap2 = cv2.VideoCapture(1)
 
 # Resizes a image and maintains aspect ratio
 def maintain_aspect_ratio_resize(image, width=None, height=None, inter=cv2.INTER_AREA):
@@ -33,8 +34,14 @@ with NumpySocket() as s:
     s.connect(("10.0.0.163", 9999))
     while cap.isOpened():
         ret, frame = cap.read()
+        ret2, frame2 = cap2.read()
         # ref_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-        frame_resize = maintain_aspect_ratio_resize(frame, width=480)
+        frame_resize = maintain_aspect_ratio_resize(frame, width=240)
+        frame_resize2 = maintain_aspect_ratio_resize(frame2, width=240)
+
+        # add the two frames together
+        frame_resize = cv2.hconcat([frame_resize, frame_resize2])
+
         if ret is True:
             try:
                 s.sendall(frame_resize)
