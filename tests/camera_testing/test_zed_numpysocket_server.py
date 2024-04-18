@@ -47,14 +47,14 @@ with NumpySocket() as s:
                     break
 
                 # unsplit the frames into two separate frames
-                frame1 = frame[:240, :]
-                frame2 = frame[240:, :]
+                # frame1 = frame[:240, :]
+                # frame2 = frame[240:, :]
 
                 try:
-                    frame1 = maintain_aspect_ratio_resize(frame1, width=1920)
-                    frame2 = maintain_aspect_ratio_resize(frame2, width=1920)
+                    frame1 = maintain_aspect_ratio_resize(frame, width=1920)
+                    # frame2 = maintain_aspect_ratio_resize(frame2, width=1920)
                     cv2.imshow("Frame1", frame1)
-                    cv2.imshow("Frame2", frame2)
+                    # cv2.imshow("Frame2", frame2)
 
                 except Exception as e:
                     print(f"Error resizing frame: {e}")

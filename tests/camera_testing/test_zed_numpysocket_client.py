@@ -37,12 +37,12 @@ with NumpySocket() as s:
         zed_left = frame[:, :1920]
 
         zed_right_resize = maintain_aspect_ratio_resize(zed_right, width=240)
-        zed_left_resize = maintain_aspect_ratio_resize(zed_left, width=240)
+        # zed_left_resize = maintain_aspect_ratio_resize(zed_left, width=240)
 
-        frame_resize = cv2.hconcat([zed_left_resize, zed_right_resize])
+        # frame_resize = cv2.hconcat([zed_left_resize, zed_right_resize])
 
         try:
-            s.sendall(frame_resize)
+            s.sendall(zed_right_resize)
         except Exception as e:
             print(f"Error sending data: {e}")
             break
