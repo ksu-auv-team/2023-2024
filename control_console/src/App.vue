@@ -1,5 +1,5 @@
 <template>
-  <header>
+  <header :style="{ backgroundImage: `url(${require('@/assets/banner.png')}` }">
     <nav>
       <router-link to="/">Stream</router-link>
       <router-link to="/data">Data Monitoring</router-link>
@@ -290,9 +290,3 @@ onMounted(() => {
   startDataDemo()
 })
 </script>
-
-<style>
-header {
-  background-image: url("@/assets/banner.png");
-}
-</style>
