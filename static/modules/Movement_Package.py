@@ -374,7 +374,7 @@ class MovementPackage:
 
     def save_data(self, data1, data2, data3):
         output_data = self.OutputControlDB(
-            Date=datetime.utcnow(),
+            Date=datetime.now()(),
             M1=self.mapping(data1[0]),
             M2=self.mapping(data1[1]),
             M3=self.mapping(data1[2]),
