@@ -41,17 +41,18 @@ with NumpySocket() as s:
         ret, frame = cap.read()
         ret2, frame2 = cap2.read()
 
-        print(frame.shape)
+        # print(frame.shape)
 
         zed_right = frame[:, 1920:]
         zed_left = frame[:, :1920]
 
         zed_right_resize = maintain_aspect_ratio_resize(zed_right, width=240)
         zed_left_resize = maintain_aspect_ratio_resize(zed_left, width=240)
-        frame2_resize = maintain_aspect_ratio_resize(frame2, width=1920)
+        frame2_resize = maintain_aspect_ratio_resize(frame2, width=240)
 
         frame_resize = cv2.hconcat([zed_left_resize, zed_right_resize, frame2_resize])
-        
+        print(frame_resize.shape)
+
         if ret is True:
             try:
                 s.sendall(frame_resize)
