@@ -5,19 +5,30 @@ import cv2
 import serial
 import time
 
+# Setup the serial connection
 ser = serial.Serial('/dev/ttyTHS0', 115200)  # Adjust the port as necessary
+time.sleep(2)  # Wait for Arduino to reset and the serial connection to establish
 
+# Define the data to send
 data = [0, 126, 126, 126, 126, 126, 126, 126, 0, 0, 0, 0]
 data_bytes = bytes(data) + b'\n'  # Append newline as end character
 
+# Attempt to send the data
 try:
     ser.write(data_bytes)
-    time.sleep(1)  # Allow time for data to be transmitted
-    print(ser.readline())
+    time.sleep(2)  # Ensure there's enough time for data to be transmitted
+    print("Data sent, waiting for response...")
+
+    # Read the response from Arduino
+    if ser.in_waiting > 0:
+        response = ser.readline()
+        print("Received from Arduino:", response.decode().strip())
+
 except Exception as e:
     print(f"Error sending data: {e}")
-    ser.close()
-    exit(1)
+
+finally:
+    ser.close()  # Ensure the serial port is closed after the operation
 
 # # Initialize the camera
 # cap = cv2.VideoCapture(2)  # Adjust the index as needed
