@@ -9,7 +9,7 @@ import time
 ser = serial.Serial('/dev/ttyTHS0', 115200)
 
 # Create a list of integers
-data = [1, 0, 0, 0, 126, 126, 126, 126, 0, 0, 0, 0]
+data = [1, 1, 1, 1, 126, 126, 126, 126, 0, 0, 0, 0]
 
 # Convert the list to bytes
 data_bytes = bytes(data)
