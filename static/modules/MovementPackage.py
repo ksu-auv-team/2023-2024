@@ -351,24 +351,28 @@ class MovementPackage:
         sensor_value = self.get_sensors_data() # Comes from sensors
         desired_value = [data[0], data[1], data[2], data[3], data[4], data[5]] # Comes from controller
 
-        PID1_desired_data = [desired_value[0], desired_value[1], desired_value[5]]
-        PID2_desired_data = [desired_value[2], desired_value[3], desired_value[4]]
+        # PID1_desired_data = [desired_value[0], desired_value[1], desired_value[5]]
+        # PID2_desired_data = [desired_value[2], desired_value[3], desired_value[4]]
 
-        max_desired_PID1_index = max.index(PID1_desired_data)
-        max_desired_PID2_index = max.index(PID2_desired_data)
+        # max_desired_PID1_index = max.index(PID1_desired_data)
+        # max_desired_PID2_index = max.index(PID2_desired_data)
 
-        self.PIDs[0].setpoint = max(PID1_desired_data)
-        self.PIDs[1].setpoint = max(PID2_desired_data)
+        # self.PIDs[0].setpoint = max(PID1_desired_data)
+        # self.PIDs[1].setpoint = max(PID2_desired_data)
 
-        PID1_sensor_data = [sensor_value[0], sensor_value[1], sensor_value[5]]
-        PID2_sensor_data = [sensor_value[2], sensor_value[3], sensor_value[4]]
+        # PID1_sensor_data = [sensor_value[0], sensor_value[1], sensor_value[5]]
+        # PID2_sensor_data = [sensor_value[2], sensor_value[3], sensor_value[4]]
 
-        PID1_output = self.PIDs[0](PID1_sensor_data)
-        PID2_output = self.PIDs[1](PID2_sensor_data)
+        # PID1_output = self.PIDs[0](PID1_sensor_data)
+        # PID2_output = self.PIDs[1](PID2_sensor_data)
 
-        for i in range(4):
-            self.output_control_data_part_1[i] = self.mapping(self.PID_Matrix_1[max_desired_PID1_index][i] * PID1_output)
-            self.output_control_data_part_2[i] = self.mapping(self.PID_Matrix_2[max_desired_PID2_index][i] * PID2_output)
+        # for i in range(4):
+        #     self.output_control_data_part_1[i] = self.mapping(self.PID_Matrix_1[max_desired_PID1_index][i] * PID1_output)
+        #     self.output_control_data_part_2[i] = self.mapping(self.PID_Matrix_2[max_desired_PID2_index][i] * PID2_output)
+
+        for i in range(3):
+            self.output_control_data_part_1[i] = self.mapping(desired_value[i])
+            self.output_control_data_part_2[i] = self.mapping(desired_value[i]+3)
         
         self.save_data(self.output_control_data_part_1, self.output_control_data_part_2, data[6])
 
