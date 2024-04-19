@@ -27,6 +27,7 @@ class CM:
 
         with open('static/configs/controller.json') as f:
             self.config = json.load(f)
+            self.config = self.config['controller']
         
         self.joy_data = []
 

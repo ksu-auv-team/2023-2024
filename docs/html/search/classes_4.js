@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['neuralnetworkpackage_0',['NeuralNetworkPackage',['../classmodules_1_1_neural___network_1_1_neural_network_package.html',1,'modules::Neural_Network']]]
+  ['outputdata_0',['OutputData',['../classmain_1_1_output_data.html',1,'main']]]
 ];

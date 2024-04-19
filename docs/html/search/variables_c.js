@@ -8,5 +8,7 @@ var searchData=
   ['m6_5',['M6',['../classmain_1_1_output_data_a7ba2f44b4f72ca267b80c92ec6e2cfb5.html#a7ba2f44b4f72ca267b80c92ec6e2cfb5',1,'main::OutputData']]],
   ['m7_6',['M7',['../classmain_1_1_output_data_a12dd864a86567008e367587a739b8b44.html#a12dd864a86567008e367587a739b8b44',1,'main::OutputData']]],
   ['m8_7',['M8',['../classmain_1_1_output_data_aa13e362d5f6c16f3e5c9a510d31abe76.html#aa13e362d5f6c16f3e5c9a510d31abe76',1,'main::OutputData']]],
-  ['movement_5flogger_8',['movement_logger',['../classmodules_1_1_movement___package_1_1_movement_package_a2cbf0398b32e028630290df1a881965e.html#a2cbf0398b32e028630290df1a881965e',1,'modules::Movement_Package::MovementPackage']]]
+  ['map_8',['map',['../classcontroller_1_1_c_m_a5910f3790c80744aebcc6e8b98279677.html#a5910f3790c80744aebcc6e8b98279677',1,'controller::CM']]],
+  ['mapping_5fchoice_9',['mapping_choice',['../classcontroller_1_1_c_m_a0ea5ebacb6f557c5e4cf7ffe0e6bc4c9.html#a0ea5ebacb6f557c5e4cf7ffe0e6bc4c9',1,'controller::CM']]],
+  ['movement_5flogger_10',['movement_logger',['../classmodules_1_1_movement_package_1_1_movement_package_a1f79f40367b3910b5692fc31b055f5f0.html#a1f79f40367b3910b5692fc31b055f5f0',1,'modules::MovementPackage::MovementPackage']]]
 ];

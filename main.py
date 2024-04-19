@@ -9,8 +9,8 @@ import signal
 import cv2
 
 # Import custom packages from the modules folder
-# from static.modules.Hardware_Package import HardwarePackage
-# from static.modules.Movement_Package import MovementPackage
+from static.modules.HardwareInterface import HardwarePackage
+from static.modules.MovementPackage import MovementPackage
 # from static.modules.Neural_Network import NeuralNetworkPackage
 
 app = Flask(__name__)
