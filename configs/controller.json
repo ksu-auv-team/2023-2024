@@ -1,0 +1,28 @@
+{
+    "XboxController": {
+        "_comment": ["button", "axis", "inverted"],
+        "Arm": [null, 19, 0], 
+        "Yaw": [null, 0, 0], 
+        "Z": [null, 1, 0], 
+        "X": [null, 3, 0], 
+        "Y": [null, 4, 0], 
+        "Pitch": [20, 3, 0], 
+        "Roll": [20, 4, 0], 
+        "Claw": [null, 7, 0], 
+        "Torpedo_1": [null, 11, 0], 
+        "Torpedo_2": [null, 12, 0]
+    },
+    "FlightController":{
+        "_comment": ["button", "axis", "inverted"],
+        "Arm": [null, 19, 0], 
+        "Yaw": [null, 0, 0], 
+        "Z": [null, 1, 0], 
+        "X": [null, 3, 0], 
+        "Y": [null, 4, 0], 
+        "Pitch": [20, 3, 0], 
+        "Roll": [20, 4, 0], 
+        "Claw": [null, 7, 0], 
+        "Torpedo_1": [null, 11, 0], 
+        "Torpedo_2": [null, 12, 0]
+    }
+}
