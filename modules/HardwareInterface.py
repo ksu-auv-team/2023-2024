@@ -33,6 +33,7 @@ def read_BatteryMonitor():
     device_address = 0x22
     try:
         data = bus.read_i2c_block_data(device_address, 0, 7)
+        data[6] = bin(data[6])
         print("Message received:", data)
     except Exception as e:
         print("Error reading I2C data:", str(e))
