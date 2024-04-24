@@ -1,3 +1,4 @@
+from kellerLD import KellerLD
 import requests
 import smbus2
 import time
@@ -65,15 +66,21 @@ def read_Hydrophones():
         print("Error reading I2C data:", str(e))
 
 def read_Depth():
-    device_address = 0x05
+    sensor = KellerLD()
+
+    if not sensor.init():
+        print("Failed to initialize Keller LD sensor!")
+        exit(1)
     try:
-        data = bus.read_i2c_block_data(device_address, 0, 2)
-        print("Message received:", data)
+        sensor.read()
+        print("pressure: %7.4f bar\ttemperature: %0.2f C") % (sensor.pressure(), sensor.temperature())
+        time.sleep(0.2)
     except Exception as e:
-        print("Error reading I2C data:", str(e))
+        print(e)
 
 if __name__ == '__main__':
     # write_ESCs([127, 127, 127, 127, 127, 127, 127, 127])
     # for i in range(0, 256):
     #     write_BatteryMonitor([i, 0, 0])
-    read_BatteryMonitor()
+    # read_BatteryMonitor()
+    read_Depth()
