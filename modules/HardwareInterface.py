@@ -14,7 +14,7 @@ def write_ESCs(data = [127, 127, 127, 127, 127, 127, 127, 127]):
         print("Error writing I2C data:", str(e))
 
 def write_BatteryMonitor(data = [127, 127, 127]):
-    device_address = 0x08
+    device_address = 0x22
     try:
         bus.write_i2c_block_data(device_address, 0, data)
         print("Message sent:", data)
@@ -22,7 +22,7 @@ def write_BatteryMonitor(data = [127, 127, 127]):
         print("Error writing I2C data:", str(e))
 
 def read_ESCs():
-    device_address = hex(9)
+    device_address = 0x21
     try:
         data = bus.read_i2c_block_data(device_address, 0, 8)
         print("Message received:", data)
@@ -30,7 +30,7 @@ def read_ESCs():
         print("Error reading I2C data:", str(e))
 
 def read_BatteryMonitor():
-    device_address = 0x08
+    device_address = 0x22
     try:
         data = bus.read_i2c_block_data(device_address, 0, 3)
         print("Message received:", data)
@@ -72,4 +72,5 @@ def read_Depth():
         print("Error reading I2C data:", str(e))
 
 if __name__ == '__main__':
-    write_ESCs([127, 127, 127, 127, 127, 127, 127, 127])
+    # write_ESCs([127, 127, 127, 127, 127, 127, 127, 127])
+    write_BatteryMonitor([127, 0, 1])
