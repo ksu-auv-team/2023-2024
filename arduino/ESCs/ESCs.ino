@@ -15,7 +15,7 @@ Servo ESCs[8];
 
 bool newData = false;
 
-int numOfMotors = 9;
+int numOfMotors = 8;
 
 void setup() {
   Serial.begin(115200);
@@ -25,24 +25,14 @@ void setup() {
 }
 
 void loop() {
-  if (newData) {
-    Serial.print("Motor Values: ");
-    for (int i = 0; i < numOfMotors; i++) {
-      Serial.print(motorValues[i]);
-      if (i < numOfMotors - 1) {
-        Serial.print(", ");
-      }
-    }
-    Serial.println();
-    newData = false;
-  }
+
 }
 
 void receiveEvent(int howMany) {
   Serial.print("Received bytes: ");
   Serial.println(howMany);
-
-  if (howMany != numOfMotors) {
+  Wire.read();
+  if (howMany != (numOfMotors + 1)) {
     // Log an error if the received data does not match the expected size
     Serial.println("Error: Received incorrect number of bytes.");
     while (Wire.available()) Wire.read(); // Clear the buffer to prepare for the next transmission
@@ -52,8 +42,13 @@ void receiveEvent(int howMany) {
   int i = 0;
   while (Wire.available() && i < howMany) {
     motorValues[i] = Wire.read();
+    Serial.print(motorValues[i]);
+    if (i < numOfMotors - 1) {
+      Serial.print(", ");
+    }
     i++;
   }
+  Serial.println();
   newData = true;
 }
 

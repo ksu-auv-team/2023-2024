@@ -19,10 +19,6 @@ import argparse
 import sys
 import os
 import time
-from socket import AF_INET, SOCK_STREAM
-
-# Importing the custom networking protocol
-from modules.NetworkingProtocol import NetworkingProtocol
 
 # Import the necessary modules
 from modules.HardwareInterface import HardwareInterface
@@ -40,20 +36,6 @@ logging.basicConfig(
     datefmt='%Y-%m-%d %H:%M:%S',  # Timestamp format
     level=logging.INFO       # Minimum log level to record
 )
-
-# Setting up the networking protocol
-def setup_networking_protocol(host: str = 'localhost', port: int = 5000):
-    # Creating the server socket
-    server_socket = NetworkingProtocol(AF_INET, SOCK_STREAM)
-    server_socket.bind((host, port))
-    server_socket.listen(1)
-
-    # Accepting the connection
-    logging.info("Waiting for connection...")
-    client_socket, addr = server_socket.accept()
-    logging.info(f"Connection established with {addr}")
-
-    return server_socket, client_socket
 
 # Main function
 def main(args: list = sys.argv):
