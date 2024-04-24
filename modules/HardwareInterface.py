@@ -74,4 +74,4 @@ def read_Depth():
 if __name__ == '__main__':
     # write_ESCs([127, 127, 127, 127, 127, 127, 127, 127])
     for i in range(0, 256):
-        write_BatteryMonitor([i, 0, 1])
+        write_BatteryMonitor([i, 1, 0])
