@@ -1,62 +1,63 @@
-#include <Wire.h>
 #include <Servo.h>
+#include <Wire.h>
 
-#define masterAddress 0x20
-#define ownAddress 0x08
+// this device's i2c address
+#define I2CADDRESS 0x22
 
-uint8_t motorValues[3] = {127, 127, 127};
-uint8_t sensorValues[6] = {0, 0, 0, 0, 0, 0};
-int motorPins[3] = {2, 3, 4};
-int maxPWM = 2000;
-int minPWM = 1000;
-int inMax = 256;
-int inMin = 0;
+// Output values to Orin
+int currentActual1 = 1, voltageActual1 = 2;
+int currentActual2 = 3, voltageActual2 = 4;
+int currentActual3 = 5, voltageActual3 = 6;
 
-Servo servos[3];
+// Input values from Orin
+int armPWM = 127;
+bool torpedo1 = false;
+bool torpedo2 = false;
 
-bool newData = 0;
-
-int numOfServos = 3;
-int numOfSensors = 6;
+bool newData = false;
+Servo Arm;
 
 void setup() {
-  Wire.begin(ownAddress);
-  for (int i = 0; i < numOfServos; i++) {
-    servos[i].attach(motorPins[i]);
-  }
-  Wire.beginTransmission(masterAddress);
-  Wire.write(0x01);
-  Wire.endTransmission();
-
+  Serial.begin(115200);
+  Wire.begin(I2CADDRESS);
+  Wire.onRequest(requestEvent);
   Wire.onReceive(receiveEvent);
+  Arm.attach(2);
+  pinMode(3, OUTPUT);
+  pinMode(5, OUTPUT);
 }
 
 void loop() {
   if (newData) {
-    for (int i = 0; i < numOfServos; i++) {
-      servos[i].writeMicroseconds(map(motorValues[i], inMin, inMax, minPWM, maxPWM));
-    }
-    if (Wire.available()) {
-      Wire.beginTransmission(masterAddress);
-      for (int i = 0; i < numOfSensors; i++) {
-        Wire.write(sensorValues[i]);
-      }
-      Wire.endTransmission();
-    }
-    newData = 0;
+    Arm.writeMicroseconds(map(armPWM, 0, 256, 1000, 2000));
+    digitalWrite(5, torpedo1);
+    digitalWrite(3, torpedo2);
+    newData = false;  // Reset newData after handling
   }
+  delay(100);
 }
 
-void receiveEvent() {
-  int i = 0;
-  while (Wire.available()) {
-    if (i < 8) {
-      motorValues[i] = Wire.read();
-    } else {
-      break;
-    }
-    i++;
-  }
-  newData = 1;
+void requestEvent() {
+  Wire.write((byte)voltageActual1);
+  Wire.write((byte)currentActual1);
+  Wire.write((byte)voltageActual2);
+  Wire.write((byte)currentActual2);
+  Wire.write((byte)voltageActual3);
+  Wire.write((byte)currentActual3);
+  Wire.write((byte)15);
 }
 
+void receiveEvent(int howMany) {
+  if (Wire.available() == 4) {
+    Wire.read();
+    armPWM = Wire.read();           // Read second byte as armPWM
+    torpedo1 = Wire.read();    // Read third byte as torpedo1
+    torpedo2 = Wire.read();    // Read fourth byte as torpedo2
+    Serial.print(armPWM);
+    Serial.print(", ");
+    Serial.print(torpedo1);
+    Serial.print(", ");
+    Serial.println(torpedo2);
+    newData = true;
+  }
+}
