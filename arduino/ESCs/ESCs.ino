@@ -2,9 +2,9 @@
 #include <Wire.h>
 
 #define masterAddress 0x20
-#define ownAddress 0x21
+#define ownAddress 9
 
-uint8_t motorValues[8] = {127, 127, 127, 127, 127, 127, 127, 127};
+uint8_t motorValues[8];  // Holds the actual motor values
 int motorPins[] = {2, 3, 4, 5, 6, 7, 8, 9};
 int maxPWM = 1800;
 int minPWM = 1200;
@@ -13,38 +13,47 @@ int inMin = 0;
 
 Servo ESCs[8];
 
-bool newData = 0;
+bool newData = false;
 
-int numOfMotors = 8;
+int numOfMotors = 9;
 
 void setup() {
+  Serial.begin(115200);
   Wire.begin(ownAddress);
-  for (int i = 0; i < numOfMotors; i++) {
-    ESCs[i].attach(motorPins[i]);
-    ESCs[i].writeMicroseconds(1500);
-    delay(5000);
-  }
-  Wire.beginTransmission(masterAddress);
-  Wire.write(0x01);
-  Wire.endTransmission();
-
   Wire.onReceive(receiveEvent);
+  Serial.println("Setup complete, waiting for data...");
 }
 
 void loop() {
   if (newData) {
+    Serial.print("Motor Values: ");
     for (int i = 0; i < numOfMotors; i++) {
-      ESCs[i].writeMicroseconds(map(motorValues[i], inMin, inMax, minPWM, maxPWM));
+      Serial.print(motorValues[i]);
+      if (i < numOfMotors - 1) {
+        Serial.print(", ");
+      }
     }
-    newData = 0;
+    Serial.println();
+    newData = false;
   }
 }
 
-void receiveEvent(int howMany){
-  if(Wire.available() && (howMany == numOfMotors)){
-    for(int i = 0; i<numOfMotors; i++){
-      motorValues[i]=Wire.read();
-    }
-    newData = 1;
+void receiveEvent(int howMany) {
+  Serial.print("Received bytes: ");
+  Serial.println(howMany);
+
+  if (howMany != numOfMotors) {
+    // Log an error if the received data does not match the expected size
+    Serial.println("Error: Received incorrect number of bytes.");
+    while (Wire.available()) Wire.read(); // Clear the buffer to prepare for the next transmission
+    return;
   }
+
+  int i = 0;
+  while (Wire.available() && i < howMany) {
+    motorValues[i] = Wire.read();
+    i++;
+  }
+  newData = true;
 }
+

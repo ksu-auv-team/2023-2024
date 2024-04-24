@@ -2,7 +2,7 @@
 #include <Servo.h>
 
 #define masterAddress 0x20
-#define ownAddress 0x22
+#define ownAddress 0x08
 
 uint8_t motorValues[3] = {127, 127, 127};
 uint8_t sensorValues[6] = {0, 0, 0, 0, 0, 0};
@@ -47,11 +47,16 @@ void loop() {
   }
 }
 
-void receiveEvent(int howMany) {
-  if(Wire.available() && (howMany == numOfServos)){
-    for(int i = 0; i<numOfServos; i++){
-      motorValues[i]=Wire.read();
+void receiveEvent() {
+  int i = 0;
+  while (Wire.available()) {
+    if (i < 8) {
+      motorValues[i] = Wire.read();
+    } else {
+      break;
     }
-    newData = 1;
+    i++;
   }
+  newData = 1;
 }
+

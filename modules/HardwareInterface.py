@@ -1,41 +1,28 @@
-from smbus2 import SMBus
+import smbus2
+import time
 
-# Define the Arduino addresses
-addresses = {
-    'arduino_1': 0x21,
-    'arduino_2': 0x22,
-    'arduino_3': 0x23,
-    'arduino_4': 0x24
-}
+bus=smbus2.SMBus(7)
 
-def send_data_to_arduino_1(bus):
-    # Arduino at address 0x21 expects an uint8_t array of size 8
-    data = [0, 1, 2, 3, 4, 5, 6, 7]  # Example data
-    bus.write_i2c_block_data(addresses['arduino_1'], 0x00, data)
+def write_ESCs(data = [126, 126, 126, 126, 126, 126, 126, 126]):
+    device_address = 0x09
+    try:
+        data = [120, 121, 122, 123, 124, 125, 126, 127]
 
-def send_and_receive_from_arduino_2(bus):
-    # Arduino at address 0x22 expects an uint8_t array of size 2 and sends back size 8
-    data = [0x10, 0x20]  # Example data
-    bus.write_i2c_block_data(addresses['arduino_2'], 0x00, data)
-    received_data = bus.read_i2c_block_data(addresses['arduino_2'], 0x00, 8)
-    print("Data received from Arduino 2:", received_data)
+        bus.write_i2c_block_data(device_address, 0, data)
+        print("Message sent:", data)
+    except Exception as e:
+        print("Error writing I2C data:", str(e))
 
-def receive_from_arduino_3(bus):
-    # Arduino at address 0x23 expects a get flag and sends back a uint8_t array of size 2
-    # Assuming the get flag is just a write to trigger the response
-    bus.write_byte(addresses['arduino_3'], 0x01)  # Sending a read trigger
-    received_data = bus.read_i2c_block_data(addresses['arduino_3'], 0x00, 2)
-    print("Data received from Arduino 3:", received_data)
+def write_BatteryMonitor(data = [126, 126, 126]):
+    device_address = 0x08
+    try:
+        data = [120, 121, 122, 123, 124, 125, 126, 127]
 
-def receive_from_arduino_4(bus):
-    # Arduino at address 0x24 expects a get flag and sends back a uint8_t array of size 8
-    bus.write_byte(addresses['arduino_4'], 0x01)  # Sending a read trigger
-    received_data = bus.read_i2c_block_data(addresses['arduino_4'], 0x00, 8)
-    print("Data received from Arduino 4:", received_data)
+        bus.write_i2c_block_data(device_address, 0, data)
+        print("Message sent:", data)
+    except Exception as e:
+        print("Error writing I2C data:", str(e))
 
-# Open I2C bus (e.g., bus 0)
-with SMBus(0) as bus:
-    send_data_to_arduino_1(bus)
-    send_and_receive_from_arduino_2(bus)
-    receive_from_arduino_3(bus)
-    receive_from_arduino_4(bus)
+while True:
+    write_ESCs()
+    time.sleep(1)
