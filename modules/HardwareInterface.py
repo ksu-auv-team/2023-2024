@@ -13,7 +13,7 @@ def write_ESCs(data = [127, 127, 127, 127, 127, 127, 127, 127]):
     except Exception as e:
         print("Error writing I2C data:", str(e))
 
-def write_BatteryMonitor(data = [127, 127, 127]):
+def write_BatteryMonitor(data = [127, 0, 0]):
     device_address = 0x22
     try:
         bus.write_i2c_block_data(device_address, 0, data)
@@ -73,4 +73,4 @@ def read_Depth():
 
 if __name__ == '__main__':
     # write_ESCs([127, 127, 127, 127, 127, 127, 127, 127])
-    write_BatteryMonitor([127, 0, 1])
+    write_BatteryMonitor([256, 0, 1])
