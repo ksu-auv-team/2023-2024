@@ -2,7 +2,7 @@
 #include <Wire.h>
 
 #define masterAddress 0x20
-#define ownAddress 9
+#define ownAddress 0x09
 
 uint8_t motorValues[8];  // Holds the actual motor values
 int motorPins[] = {2, 3, 4, 5, 6, 7, 8, 9};

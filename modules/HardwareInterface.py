@@ -6,7 +6,7 @@ import json
 bus=smbus2.SMBus(7)
 
 def write_ESCs(data = [127, 127, 127, 127, 127, 127, 127, 127]):
-    device_address = hex(9)
+    device_address = 0x09
     try:
         bus.write_i2c_block_data(device_address, 0, data)
         print("Message sent:", data)
