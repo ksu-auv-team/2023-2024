@@ -1,4 +1,4 @@
-from kellerLD import KellerLD
+from KellerLD_python import KellerLD
 import requests
 import smbus2
 import time
