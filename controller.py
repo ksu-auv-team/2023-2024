@@ -38,8 +38,8 @@ class CM:
         self.mapping_choice = mapping_choice
 
 
-        orin_ip = '127.0.0.1'
-        self.url = f"http://{orin_ip}:5000/post_input_data"
+        orin_ip = '192.168.0.103'
+        self.url = f"http://{orin_ip}:5000/input"
 
         # Configure logging
         logging.basicConfig(filename='logs/controller.log', level=logging.INFO, 
@@ -155,7 +155,7 @@ class CM:
             self.parse_mapping()
             self.map_data()
             self.post_data()
-            self.log_output(version = 0)
+            # self.log_output(version = 0)
             pygame.time.wait(10)
 
 if __name__ == "__main__":

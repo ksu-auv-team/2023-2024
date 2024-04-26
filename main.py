@@ -220,6 +220,10 @@ def upload():
 def images(filename):
     return send_from_directory(app.config['UPLOAD_FOLDER'], filename)
 
+@app.before_first_request
+def create_tables():
+    db.create_all()
+
 @app.route('/')
 def index():
     return render_template('index.html')
@@ -248,15 +252,24 @@ def main(args: list = sys.argv):
         print("Exiting...")
         exit(1)
 
-    with app.app_context():
-        db.create_all()
     app.run(debug=True, host="0.0.0.0", port=5000)
 
-    hardware_interface.wait()
-    movement_package.wait()
-    neural_network.wait()
-    state_machine.wait()
-    camera_package.wait()
+    if args.run:
+        hardware_interface.wait()
+        movement_package.wait()
+        neural_network.wait()
+        state_machine.wait()
+        camera_package.wait()
+    if args.HI and not args.run:
+        hardware_interface.wait()
+    if args.MP and not args.run:
+        movement_package.wait()
+    if args.NN and not args.run:
+        neural_network.wait()
+    if args.SM and not args.run:
+        state_machine.wait()
+    if args.CP and not args.run:
+        camera_package.wait()
 
 # Running the main function
 if __name__ == "__main__":
