@@ -84,59 +84,53 @@ class HardwareInterface:
             return f"Failed to add data, status code: {response.status_code}"
 
     def run(self):
-        time.sleep(30)
         delay = 0.01
-
-        sensor_data = {
-            "voltage1": 0,
-            "voltage2": 0,
-            "voltage3": 0,
-            "current1": 0,
-            "current2": 0,
-            "current3": 0,
-            "error": 0,
-            "depth": 0,
-            "X": 0,
-            "Y": 0,
-            "Z": 0,
-            "pitch": 0,
-            "roll": 0,
-            "yaw": 0,
-            "temperature": 0,
-            "orin_temp": 0,
-            "humidity": 0,
-            "heading": 0
-        }
-
-        data = {
-            "m1": 127,
-            "m2": 127,
-            "m3": 127,
-            "m4": 127,
-            "m5": 127,
-            "m6": 127,
-            "m7": 127,
-            "m8": 127,
-            "claw": 0,
-            "torp1": 0,
-            "torp2": 0
-        }
+        default_esc_value = 127  # Default value for ESCs when data is missing or there's an error
 
         while True:
             battery_monitor_data = self.read_BatteryMonitor()
-            sensor_data["voltage1"] = battery_monitor_data[0]
-            sensor_data["voltage2"] = battery_monitor_data[2]
-            sensor_data["voltage3"] = battery_monitor_data[4]
-            sensor_data["current1"] = battery_monitor_data[1]
-            sensor_data["current2"] = battery_monitor_data[3]
-            sensor_data["current3"] = battery_monitor_data[5]
-            sensor_data["error"] = battery_monitor_data[6]
+            sensor_data = {
+                "voltage1": battery_monitor_data[0],
+                "voltage2": battery_monitor_data[2],
+                "voltage3": battery_monitor_data[4],
+                "current1": battery_monitor_data[1],
+                "current2": battery_monitor_data[3],
+                "current3": battery_monitor_data[5],
+                "error": battery_monitor_data[6],
+                "depth": 0,  # Example: Add defaults or fetch from sensors
+                "X": 0,
+                "Y": 0,
+                "Z": 0,
+                "pitch": 0,
+                "roll": 0,
+                "yaw": 0,
+                "temperature": 0,
+                "orin_temp": 0,
+                "humidity": 0,
+                "heading": 0
+            }
 
+            # Post sensor data to the server
             self.post_data("sensors", sensor_data)
 
-            data = self.get_data("output")
-            self.write_ESCs([data["m1"], data["m2"], data["m3"], data["m4"], data["m5"], data["m6"], data["m7"], data["m8"]])
-            self.write_BatteryMonitor([data["claw"], data["torp1"], data["torp2"]])
+            # Get output data from the server
+            output_data = self.get_data("output")
+
+            # Check if all required keys are present in the output data
+            required_keys = ["m1", "m2", "m3", "m4", "m5", "m6", "m7", "m8", "claw", "torp1", "torp2"]
+            if all(key in output_data for key in required_keys):
+                esc_values = [output_data[key] for key in required_keys[:8]]  # Get ESC values
+                claw_torp_values = [output_data["claw"], output_data["torp1"], output_data["torp2"]]
+            else:
+                # Log an error and use default values if some data is missing
+                print("Error: Not all required output data keys received, using default values")
+                esc_values = [default_esc_value] * 8
+                claw_torp_values = [0, 0, 0]
+
+            # Send data to ESCs and battery monitor
+            self.write_ESCs(esc_values)
+            self.write_BatteryMonitor(claw_torp_values)
+
             time.sleep(delay)
 
 if __name__ == '__main__':
