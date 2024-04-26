@@ -11,7 +11,7 @@ class HardwareInterface:
         with open('./configs/hardware_interface.json') as f:
             self.config = json.load(f)
 
-        self.baseUrl = self.config["baseUrl"]
+        self.base_url = self.config["baseUrl"]
 
     def write_ESCs(self, data = [127, 127, 127, 127, 127, 127, 127, 127]):
         device_address = 0x21
