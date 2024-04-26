@@ -99,7 +99,7 @@ class HardwareInterface:
             # self.post_data("sensors", sensor_data)
 
             # Get output data from the server
-            output_data = self.get_data("output")
+            output_data = self.get_data("Output")
 
             # Check if all required keys are present in the output data
             required_keys = ["m1", "m2", "m3", "m4", "m5", "m6", "m7", "m8", "claw", "torp1", "torp2"]
