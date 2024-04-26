@@ -250,11 +250,11 @@ def main(args: list = sys.argv):
 
     app.run(debug=True, host="0.0.0.0", port=5000)
 
-    hardware_interface.proc()
-    movement_package.proc()
-    neural_network.proc()
-    state_machine.proc()
-    camera_package.proc()
+    hardware_interface.wait()
+    movement_package.wait()
+    neural_network.wait()
+    state_machine.wait()
+    camera_package.wait()
 
 # Running the main function
 if __name__ == "__main__":
