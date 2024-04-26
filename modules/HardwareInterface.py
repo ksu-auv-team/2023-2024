@@ -84,6 +84,7 @@ class HardwareInterface:
             return f"Failed to add data, status code: {response.status_code}"
 
     def run(self):
+        time.sleep(30)
         delay = 0.01
 
         sensor_data = {
