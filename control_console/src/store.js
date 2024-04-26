@@ -202,6 +202,7 @@ const store = createStore({
             })
             state.charts.servo_chart.chartData.addRow(servoPWM);
 
+            // If the chart exists on the DOM. Basically check if were on the data page and if the chart exists to update it.
             if(state.charts.battery_voltage_chart.chart !== null) {
                 state.charts.battery_voltage_chart.chart.draw(state.charts.battery_voltage_chart.chartData, state.charts.battery_voltage_chart.chartOptions);
                 state.charts.battery_amp_chart.chart.draw(state.charts.battery_amp_chart.chartData, state.charts.battery_amp_chart.chartOptions);

@@ -171,17 +171,6 @@
     })
   }
 
-  function updateCharts(charts) {
-    charts.forEach((chart) => {
-      let newInsert = [timeActive];
-      chart.unit_reference.forEach(function(unit) {
-        newInsert.push(unit[chart.reference_unit]);
-      });
-      chart.chartData.addRow(newInsert);
-      chart.chart.draw(chart.chartData, chart.chartOptions);
-    })
-  }
-
   function handleClear() {
     emits('toggleDialog', 'clear_charts');
   }
