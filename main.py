@@ -16,7 +16,6 @@
 # Importing the necessary libraries
 from flask import Flask, request, jsonify, render_template, send_from_directory
 from flask_sqlalchemy import SQLAlchemy
-import subprocess
 import argparse
 import sys
 import os
@@ -45,6 +44,12 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///KSUAUV.db'  # Adjust for your
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
+
+# Set the upload folder relative to the current script's directory
+app.config['UPLOAD_FOLDER'] = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'uploads')
+
+# Ensure the upload directory exists
+os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
 
 class Sensors(db.Model):
     id = db.Column(db.Integer, primary_key=True)
