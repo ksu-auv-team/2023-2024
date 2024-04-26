@@ -5,7 +5,7 @@ import requests
 
 class CameraPackage:
     def __init__(self):
-        self.cam = cv2.VideoCapture(2)  # Assuming this is your OpenCV camera
+        # self.cam = cv2.VideoCapture(2)  # Assuming this is your OpenCV camera
         self.zed = sl.Camera()
         init_params = sl.InitParameters()
         init_params.camera_resolution = sl.RESOLUTION.AUTO
@@ -23,22 +23,22 @@ class CameraPackage:
 
     def get_frame(self):
         if self.zed.grab() == sl.ERROR_CODE.SUCCESS:
-            ret, frame = self.cam.read()
+            # ret, frame = self.cam.read()
             self.zed.retrieve_image(self.zed_image, sl.VIEW.LEFT)
             self.zed.retrieve_measure(self.zed_depth_image, sl.MEASURE.DEPTH)
             # Encode the ZED image to JPEG format
             zed_image_cv = self.zed_image.get_data()[:, :, :3]
             _, zed_image_encoded = cv2.imencode('.jpg', zed_image_cv)
             # Encode the OpenCV webcam image to JPEG format
-            _, frame_encoded = cv2.imencode('.jpg', frame)
-            return zed_image_encoded.tobytes(), self.zed_depth_image.get_data(), frame_encoded.tobytes()
-        return None, None, None
+            # _, frame_encoded = cv2.imencode('.jpg', frame)
+            return zed_image_encoded.tobytes(), self.zed_depth_image.get_data()
+        return None, None
 
     def post_frame(self, url):
-        zed_image, zed_depth, frame = self.get_frame()
-        if zed_image and frame:
+        zed_image, zed_depth = self.get_frame()
+        if zed_image:
+            # 'webcam_image': ('webcam.jpg', frame, 'image/jpeg'),
             files = {'zed_image': ('zed.jpg', zed_image, 'image/jpeg'),
-                     'webcam_image': ('webcam.jpg', frame, 'image/jpeg'),
                      'zed_depth': ('zed_depth.jpg', zed_depth, 'image/jpeg')}
             response = requests.post(url, files=files)
             return response.text
