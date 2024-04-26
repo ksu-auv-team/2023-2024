@@ -334,7 +334,7 @@ class MovementPackage:
 
     def save_data(self, data1, data2, data3):
         output_data = {
-            "Date": datetime.datetime.now().isoformat(),
+            "id": datetime.now().strftime("%Y%m%d%H%M%S"),
             "m1": self.mapping(data1[0]),
             "m2": self.mapping(data1[1]),
             "m3": self.mapping(data1[2]),
