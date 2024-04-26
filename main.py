@@ -16,6 +16,7 @@
 # Importing the necessary libraries
 from flask import Flask, request, jsonify, render_template, send_from_directory
 from flask_sqlalchemy import SQLAlchemy
+import subprocess
 import argparse
 import sys
 import os
@@ -225,7 +226,35 @@ def index():
 
 # Main function
 def main(args: list = sys.argv):
+    if args.run:
+        hardware_interface = subprocess.run(["python3", "modules/HardwareInterface.py"])
+        movement_package = subprocess.run(["python3", "modules/MovementPackage.py"])
+        neural_network = subprocess.run(["python3", "modules/NeuralNetwork.py"])
+        state_machine = subprocess.run(["python3", "modules/StateMachine.py"])
+        camera_package = subprocess.run(["python3", "modules/CameraPackage.py"])
+    if args.HI and not args.run:
+        hardware_interface = subprocess.run(["python3", "modules/HardwareInterface.py"])
+    if args.MP and not args.run:
+        movement_package = subprocess.run(["python3", "modules/MovementPackage.py"])
+    if args.NN and not args.run:
+        neural_network = subprocess.run(["python3", "modules/NeuralNetwork.py"])
+    if args.SM and not args.run:
+        state_machine = subprocess.run(["python3", "modules/StateMachine.py"])
+    if args.CP and not args.run:
+        camera_package = subprocess.run(["python3", "modules/CameraPackage.py"])
+    if not args.run and not args.HI and not args.MP and not args.NN and not args.SM:
+        print("No arguments provided. Please provide an argument to run the main script.")
+        print("Use the -h flag for more information.")
+        print("Exiting...")
+        exit(1)
+
     app.run(debug=True, host="0.0.0.0", port=5000)
+
+    hardware_interface.proc()
+    movement_package.proc()
+    neural_network.proc()
+    state_machine.proc()
+    camera_package.proc()
 
 # Running the main function
 if __name__ == "__main__":
@@ -236,6 +265,7 @@ if __name__ == "__main__":
     args.add_argument("--MP", help="Run the Movement Package", action="store_true")
     args.add_argument("--NN", help="Run the Neural Network Package", action="store_true")
     args.add_argument("--SM", help="Run the State Machine", action="store_true")
+    args.add_argument("--CP", help="Run the Camera Package", action="store_true")
 
     args = args.parse_args()
     main(args)
