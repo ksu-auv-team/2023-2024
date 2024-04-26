@@ -334,7 +334,6 @@ class MovementPackage:
 
     def save_data(self, data1, data2, data3):
         output_data = {
-            "id": datetime.now().strftime("%Y%m%d%H%M%S"),
             "m1": self.mapping(data1[0]),
             "m2": self.mapping(data1[1]),
             "m3": self.mapping(data1[2]),
@@ -357,9 +356,10 @@ class MovementPackage:
     def run(self):
         while True:
             self.controller_data = self.get_data()
-            self.sensors_data = self.get_sensors_data()
-            if self.controller_data and self.sensors_data:
-                self.neural_network_data = self.neural_network_data
+            # self.sensors_data = self.get_sensors_data()
+            #  and self.sensors_data
+            if self.controller_data:
+                # self.neural_network_data = self.neural_network_data
                 self.save_data(self.output_control_data_part_1, self.output_control_data_part_2, 0)
             else:
                 self.movement_logger.error("Failed to get controller or sensors data")

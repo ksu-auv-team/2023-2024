@@ -82,7 +82,7 @@ class Sensors(db.Model):
                   {self.orin_temp}, {self.humidity}, {self.heading}>'
 
 class Output(db.Model):
-    id = db.Column(db.Date, primary_key=True)
+    id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     M1 = db.Column(db.Integer, nullable=False)
     M2 = db.Column(db.Integer, nullable=False)
     M3 = db.Column(db.Integer, nullable=False)
