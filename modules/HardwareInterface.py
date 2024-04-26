@@ -17,7 +17,7 @@ class HardwareInterface:
         device_address = 0x21
         try:
             self.bus.write_i2c_block_data(device_address, 0, data)
-            print("Message sent:", data)
+            # print("Message sent:", data)
         except Exception as e:
             print("Error writing I2C data:", str(e))
 
@@ -25,7 +25,7 @@ class HardwareInterface:
         device_address = 0x22
         try:
             self.bus.write_i2c_block_data(device_address, 0, data)
-            print("Message sent:", data)
+            # print("Message sent:", data)
         except Exception as e:
             print("Error writing I2C data:", str(e))
 
@@ -34,7 +34,7 @@ class HardwareInterface:
         try:
             data =self.bus.read_i2c_block_data(device_address, 0, 7)
             data[6] = bin(data[6])
-            print("Message received:", data)
+            # print("Message received:", data)
             return data
         except Exception as e:
             print("Error reading I2C data:", str(e))
@@ -118,6 +118,7 @@ class HardwareInterface:
 
             # Check if all required keys are present in the output data
             required_keys = ["m1", "m2", "m3", "m4", "m5", "m6", "m7", "m8", "claw", "torp1", "torp2"]
+            print(output_data.keys())
             if all(key in output_data for key in required_keys):
                 esc_values = [output_data[key] for key in required_keys[:8]]  # Get ESC values
                 claw_torp_values = [output_data["claw"], output_data["torp1"], output_data["torp2"]]
