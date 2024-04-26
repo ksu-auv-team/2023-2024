@@ -68,6 +68,22 @@ class HardwareInterface:
         else:
             return f"Failed to add data, status code: {response.status_code}"
 
+    def get_data(self, data_type):
+        """Retrieves data from the specified data type endpoint.
+
+        Args:
+            data_type (str): 'sensors', 'output', or 'input' indicating the type of data to retrieve.
+
+        Returns:
+            dict: The retrieved data as a dictionary.
+        """
+        response = requests.get(f"{self.base_url}/{data_type}")
+        if response.status_code == 200:
+            return response.json()
+        else:
+            print(f"Failed to get data, status code: {response.status_code}")
+            return {}
+
     def run(self):
         delay = 0.01
         default_esc_value = 127  # Default value for ESCs when data is missing or there's an error
@@ -99,7 +115,7 @@ class HardwareInterface:
             # self.post_data("sensors", sensor_data)
 
             # Get output data from the server
-            output_data = self.get_data("Output")
+            output_data = self.get_data("output")
 
             # Check if all required keys are present in the output data
             required_keys = ["m1", "m2", "m3", "m4", "m5", "m6", "m7", "m8", "claw", "torp1", "torp2"]
