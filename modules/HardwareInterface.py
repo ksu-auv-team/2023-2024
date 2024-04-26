@@ -1,86 +1,130 @@
-from KellerLD_python import KellerLD
 import requests
 import smbus2
 import time
 import json
 
-bus=smbus2.SMBus(7)
 
-def write_ESCs(data = [127, 127, 127, 127, 127, 127, 127, 127]):
-    device_address = 0x21
-    try:
-        bus.write_i2c_block_data(device_address, 0, data)
-        print("Message sent:", data)
-    except Exception as e:
-        print("Error writing I2C data:", str(e))
+class HardwareInterface:
+    def __init__(self):
+        self.bus = smbus2.SMBus(7)
 
-def write_BatteryMonitor(data = [127, 0, 0]):
-    device_address = 0x22
-    try:
-        bus.write_i2c_block_data(device_address, 0, data)
-        print("Message sent:", data)
-    except Exception as e:
-        print("Error writing I2C data:", str(e))
+        with open('./configs/hardware_interface.json') as f:
+            self.config = json.load(f)
 
-def read_ESCs():
-    device_address = 0x21
-    try:
-        data = bus.read_i2c_block_data(device_address, 0, 8)
-        print("Message received:", data)
-    except Exception as e:
-        print("Error reading I2C data:", str(e))
+        self.hardwareDBAddress = self.config['hardwareDBAddress']
+        self.hardwareDBPort = self.config['hardwareDBPort']
 
-def read_BatteryMonitor():
-    device_address = 0x22
-    try:
-        data = bus.read_i2c_block_data(device_address, 0, 7)
-        data[6] = bin(data[6])
-        print("Message received:", data)
-    except Exception as e:
-        print("Error reading I2C data:", str(e))
+    def write_ESCs(self, data = [127, 127, 127, 127, 127, 127, 127, 127]):
+        device_address = 0x21
+        try:
+            self.bus.write_i2c_block_data(device_address, 0, data)
+            print("Message sent:", data)
+        except Exception as e:
+            print("Error writing I2C data:", str(e))
 
-def read_IMU():
-    device_address = 0x68
-    try:
-        data = bus.read_i2c_block_data(device_address, 0x3B, 14)
-        print("Message received:", data)
-    except Exception as e:
-        print("Error reading I2C data:", str(e))
+    def write_BatteryMonitor(self, data = [127, 0, 0]):
+        device_address = 0x22
+        try:
+            self.bus.write_i2c_block_data(device_address, 0, data)
+            print("Message sent:", data)
+        except Exception as e:
+            print("Error writing I2C data:", str(e))
 
-def read_Temp_Humi():
-    device_address = 0x07
-    try:
-        bus.write_byte(device_address, 0x01)
-        time.sleep(0.1)
-        data = bus.read_i2c_block_data(device_address, 0x00, 4)
-        print("Message received:", data)
-    except Exception as e:
-        print("Error reading I2C data:", str(e))
+    def read_BatteryMonitor(self):
+        device_address = 0x22
+        try:
+            data =self.bus.read_i2c_block_data(device_address, 0, 7)
+            data[6] = bin(data[6])
+            print("Message received:", data)
+            return data
+        except Exception as e:
+            print("Error reading I2C data:", str(e))
+            return [0, 0, 0, 0, 0, 0, 0]
 
-def read_Hydrophones():
-    device_address = 0x06
-    try:
-        data = bus.read_i2c_block_data(device_address, 0, 8)
-        print("Message received:", data)
-    except Exception as e:
-        print("Error reading I2C data:", str(e))
+    def read_IMU(self):
+        pass
 
-def read_Depth():
-    sensor = KellerLD()
+    def read_Temp_Humi(self):
+        pass
 
-    if not sensor.init():
-        print("Failed to initialize Keller LD sensor!")
-        exit(1)
-    try:
-        sensor.read()
-        print("pressure: %7.4f bar\ttemperature: %0.2f C") % (sensor.pressure(), sensor.temperature())
-        time.sleep(0.2)
-    except Exception as e:
-        print(e)
+    def read_Hydrophones(self):
+        pass
+
+    def read_Depth(self):
+        pass
+
+    def get_data(self, data_type):
+        """Fetches data from the specified data type endpoint.
+
+        Args:
+            data_type (str): 'sensors', 'output', or 'input' indicating the type of data to fetch.
+
+        Returns:
+            dict: The data fetched from the server.
+        """
+        response = requests.get(f"{self.base_url}/{data_type}")
+        if response.status_code == 200:
+            return response.json()
+        else:
+            return {"error": "Failed to fetch data", "status_code": response.status_code}
+
+    def post_data(self, data_type, data):
+        """Posts data to the specified data type endpoint.
+
+        Args:
+            data_type (str): 'sensors', 'output', or 'input' indicating the type of data to post.
+            data (dict): The data to be posted.
+
+        Returns:
+            str: Server response as a string.
+        """
+        response = requests.post(f"{self.base_url}/{data_type}", json=data)
+        if response.status_code == 201:
+            return "Data added successfully"
+        else:
+            return f"Failed to add data, status code: {response.status_code}"
+
+    def run(self):
+        delay = 0.01
+
+        sensor_data = {
+            "voltage1": 0,
+            "voltage2": 0,
+            "voltage3": 0,
+            "current1": 0,
+            "current2": 0,
+            "current3": 0,
+            "error": 0,
+            "depth": 0,
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "pitch": 0,
+            "roll": 0,
+            "yaw": 0,
+            "temperature": 0,
+            "orin_temp": 0,
+            "humidity": 0,
+            "heading": 0
+        }
+
+        while True:
+            battery_monitor_data = self.read_BatteryMonitor()
+            sensor_data["voltage1"] = battery_monitor_data[0]
+            sensor_data["voltage2"] = battery_monitor_data[2]
+            sensor_data["voltage3"] = battery_monitor_data[4]
+            sensor_data["current1"] = battery_monitor_data[1]
+            sensor_data["current2"] = battery_monitor_data[3]
+            sensor_data["current3"] = battery_monitor_data[5]
+            sensor_data["error"] = battery_monitor_data[6]
+
+            self.post_data("sensors", sensor_data)
+
+            data = self.get_data("output")
+            self.write_ESCs([data["M1"], data["M2"], data["M3"], data["M4"], data["M5"], data["M6"], data["M7"], data["M8"]])
+            self.write_BatteryMonitor([data["Claw"], data["Torp1"], data["Torp2"]])
+            time.sleep(delay)
 
 if __name__ == '__main__':
-    # write_ESCs([127, 127, 127, 127, 127, 127, 127, 127])
-    # for i in range(0, 256):
-    #     write_BatteryMonitor([i, 0, 0])
-    # read_BatteryMonitor()
-    read_Depth()
+    HI = HardwareInterface()
+    HI.run()

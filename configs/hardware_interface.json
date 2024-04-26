@@ -1,0 +1,4 @@
+{
+    "hardwareDBAddress": "http://localhost:3000",
+    "hardwareDBPort": 5000
+}
