@@ -34,7 +34,7 @@ class CM:
         # Each element in the map list is a list with three elements: element 0 is the button number, element 1 is the axis number, and element 2 is whether the axis is inverted.
         self.map = {'Arm': [None, 19, 0], 'Yaw': [None, 0, 0], 'Z': [None, 1, 0], 'X': [None, 3, 0], 'Y': [None, 4, 0], 'Pitch': [20, 3, 0], 'Roll': [20, 4, 0], 'Claw': [None, 7, 0], 'Torpedo_1': [None, 11, 0], 'Torpedo_2': [None, 12, 0]}
 
-        self.out_data = {"Arm": 0, "X": 0.0, "Y": 0.0, "Z": 0.0, "pitch": 0.0, "roll": 0.0, "yaw": 0.0, "Claw": 0.0, "torp1": 0, "torp2": 0}
+        self.out_data = {"Arm": 0, "X": 0.0, "Y": 0.0, "Z": 0.0, "pitch": 0.0, "roll": 0.0, "yaw": 0.0, "claw": 0.0, "torp1": 0, "torp2": 0}
         self.mapping_choice = mapping_choice
 
 
