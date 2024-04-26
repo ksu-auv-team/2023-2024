@@ -108,6 +108,20 @@ class HardwareInterface:
             "heading": 0
         }
 
+        data = {
+            "M1": 127,
+            "M2": 127,
+            "M3": 127,
+            "M4": 127,
+            "M5": 127,
+            "M6": 127,
+            "M7": 127,
+            "M8": 127,
+            "Claw": 0,
+            "Torp1": 0,
+            "Torp2": 0
+        }
+
         while True:
             battery_monitor_data = self.read_BatteryMonitor()
             sensor_data["voltage1"] = battery_monitor_data[0]
