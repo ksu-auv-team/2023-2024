@@ -42,7 +42,7 @@ class CM:
         self.url = f"http://{orin_ip}:5000/post_input_data"
 
         # Configure logging
-        logging.basicConfig(filename='static/logs/app.log', level=logging.INFO, 
+        logging.basicConfig(filename='logs/controller.log', level=logging.INFO, 
                             format='%(asctime)s - %(message)s', datefmt='%Y-%m-%d %H:%M:%S')
 
     def init_joystick(self):
