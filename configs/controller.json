@@ -1,5 +1,5 @@
 {
-    "XboxController": {
+    "Controller": {
         "_comment": ["button", "axis", "inverted"],
         "Arm": [null, 19, 0], 
         "Yaw": [null, 0, 0], 

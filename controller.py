@@ -25,9 +25,9 @@ class CM:
         self.joystick = None
         self.init_joystick()
 
-        with open('static/configs/controller.json') as f:
+        with open('configs/controller.json') as f:
             self.config = json.load(f)
-            self.config = self.config['controller']
+            self.config = self.config['FlightController']
         
         self.joy_data = []
 
