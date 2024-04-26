@@ -311,8 +311,8 @@ class MovementPackage:
 
         self.in_min = -1
         self.in_max = 1
-        self.out_min = 1300
-        self.out_max = 1700
+        self.out_min = 0
+        self.out_max = 256
 
         self.movement_logger.info('Movement Package initialized')
 
@@ -366,7 +366,7 @@ class MovementPackage:
             time.sleep(0.01)
 
 if __name__ == "__main__":
-    logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', handlers=[logging.FileHandler("../logs/movement.log"), logging.StreamHandler()])
+    logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', handlers=[logging.FileHandler("./logs/movement.log"), logging.StreamHandler()])
     movement_logger = logging.getLogger("MovementPackage")
     movement_logger.setLevel(logging.INFO)
     movement_package = MovementPackage(movement_logger, "http://localhost:5000")

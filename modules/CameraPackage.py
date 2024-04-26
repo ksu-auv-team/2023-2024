@@ -38,7 +38,23 @@ class CameraPackage:
         zed_image, zed_depth, frame = self.get_frame()
         if zed_image and frame:
             files = {'zed_image': ('zed.jpg', zed_image, 'image/jpeg'),
-                     'webcam_image': ('webcam.jpg', frame, 'image/jpeg')}
+                     'webcam_image': ('webcam.jpg', frame, 'image/jpeg'),
+                     'zed_depth': ('zed_depth.jpg', zed_depth, 'image/jpeg')}
             response = requests.post(url, files=files)
             return response.text
         return "Failed to capture frames"
+
+    def close(self):
+        self.cam.release()
+        self.zed.close()
+        cv2.destroyAllWindows()
+
+    def run(self):
+        while True:
+            self.post_frame("http://localhost:5000/frame")
+            cv2.waitKey(1)
+
+if __name__ == "__main__":
+    CP = CameraPackage()
+    CP.run()
+    CP.close()

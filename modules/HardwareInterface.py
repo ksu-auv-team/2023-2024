@@ -52,21 +52,6 @@ class HardwareInterface:
     def read_Depth(self):
         pass
 
-    def get_data(self, data_type):
-        """Fetches data from the specified data type endpoint.
-
-        Args:
-            data_type (str): 'sensors', 'output', or 'input' indicating the type of data to fetch.
-
-        Returns:
-            dict: The data fetched from the server.
-        """
-        response = requests.get(f"{self.base_url}/{data_type}")
-        if response.status_code == 200:
-            return response.json()
-        else:
-            return {"error": "Failed to fetch data", "status_code": response.status_code}
-
     def post_data(self, data_type, data):
         """Posts data to the specified data type endpoint.
 
