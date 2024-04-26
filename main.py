@@ -227,21 +227,21 @@ def index():
 # Main function
 def main(args: list = sys.argv):
     if args.run:
-        hardware_interface = subprocess.run(["python3", "modules/HardwareInterface.py"])
-        movement_package = subprocess.run(["python3", "modules/MovementPackage.py"])
-        neural_network = subprocess.run(["python3", "modules/NeuralNetwork.py"])
-        state_machine = subprocess.run(["python3", "modules/StateMachine.py"])
-        camera_package = subprocess.run(["python3", "modules/CameraPackage.py"])
+        hardware_interface = subprocess.Popen(["python3", "modules/HardwareInterface.py"])
+        movement_package = subprocess.Popen(["python3", "modules/MovementPackage.py"])
+        neural_network = subprocess.Popen(["python3", "modules/NeuralNetwork.py"])
+        state_machine = subprocess.Popen(["python3", "modules/StateMachine.py"])
+        camera_package = subprocess.Popen(["python3", "modules/CameraPackage.py"])
     if args.HI and not args.run:
-        hardware_interface = subprocess.run(["python3", "modules/HardwareInterface.py"])
+        hardware_interface = subprocess.Popen(["python3", "modules/HardwareInterface.py"])
     if args.MP and not args.run:
-        movement_package = subprocess.run(["python3", "modules/MovementPackage.py"])
+        movement_package = subprocess.Popen(["python3", "modules/MovementPackage.py"])
     if args.NN and not args.run:
-        neural_network = subprocess.run(["python3", "modules/NeuralNetwork.py"])
+        neural_network = subprocess.Popen(["python3", "modules/NeuralNetwork.py"])
     if args.SM and not args.run:
-        state_machine = subprocess.run(["python3", "modules/StateMachine.py"])
+        state_machine = subprocess.Popen(["python3", "modules/StateMachine.py"])
     if args.CP and not args.run:
-        camera_package = subprocess.run(["python3", "modules/CameraPackage.py"])
+        camera_package = subprocess.Popen(["python3", "modules/CameraPackage.py"])
     if not args.run and not args.HI and not args.MP and not args.NN and not args.SM:
         print("No arguments provided. Please provide an argument to run the main script.")
         print("Use the -h flag for more information.")
