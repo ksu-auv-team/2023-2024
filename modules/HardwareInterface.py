@@ -109,17 +109,17 @@ class HardwareInterface:
         }
 
         data = {
-            "M1": 127,
-            "M2": 127,
-            "M3": 127,
-            "M4": 127,
-            "M5": 127,
-            "M6": 127,
-            "M7": 127,
-            "M8": 127,
-            "Claw": 0,
-            "Torp1": 0,
-            "Torp2": 0
+            "m1": 127,
+            "m2": 127,
+            "m3": 127,
+            "m4": 127,
+            "m5": 127,
+            "m6": 127,
+            "m7": 127,
+            "m8": 127,
+            "claw": 0,
+            "torp1": 0,
+            "torp2": 0
         }
 
         while True:
@@ -135,8 +135,8 @@ class HardwareInterface:
             self.post_data("sensors", sensor_data)
 
             data = self.get_data("output")
-            self.write_ESCs([data["M1"], data["M2"], data["M3"], data["M4"], data["M5"], data["M6"], data["M7"], data["M8"]])
-            self.write_BatteryMonitor([data["Claw"], data["Torp1"], data["Torp2"]])
+            self.write_ESCs([data["m1"], data["m2"], data["m3"], data["m4"], data["m5"], data["m6"], data["m7"], data["m8"]])
+            self.write_BatteryMonitor([data["claw"], data["torp1"], data["torp2"]])
             time.sleep(delay)
 
 if __name__ == '__main__':
