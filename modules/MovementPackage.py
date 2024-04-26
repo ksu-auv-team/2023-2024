@@ -1,3 +1,4 @@
+import time
 import logging
 import numpy as np
 import requests
@@ -350,3 +351,21 @@ class MovementPackage:
 
     def mapping(self, x):
         return (x - self.in_min) * (self.out_max - self.out_min) / (self.in_max - self.in_min) + self.out_min
+
+    def run(self):
+        while True:
+            self.controller_data = self.get_data()
+            self.sensors_data = self.get_sensors_data()
+            if self.controller_data and self.sensors_data:
+                self.neural_network_data = self.neural_network_data
+                self.save_data(self.output_control_data_part_1, self.output_control_data_part_2, 0)
+            else:
+                self.movement_logger.error("Failed to get controller or sensors data")
+            time.sleep(0.01)
+
+if __name__ == "__main__":
+    logging.basicConfig(level=logging.INFO)
+    movement_logger = logging.getLogger("MovementPackage")
+    movement_logger.setLevel(logging.INFO)
+    movement_package = MovementPackage(movement_logger, "http://localhost:5000")
+    movement_package.run()
