@@ -59,8 +59,32 @@
       if(fetchPower !== state.power) { store.commit("togglePower") } else {store.commit('newNotification', {message: `AUV ${power_status}`, highlighted: true});}
 
     } catch (error) {
-      store.commit("newNotification", {message: "AUV Power Failed"});
-      store.commit('newLog', error);
+      if(error.request && !error.response) {
+        console.log("***Not connected to internet. Cannot contact external servers.***");
+      } else {
+        store.commit("newNotification", {message: "AUV Power Failed"});
+        store.commit('newLog', error);
+      }
+    }
+  }
+
+  const getActiveSession = async () => {
+    try {
+      const session = await connection.checkActiveSession();
+      if(session.data !== false) {
+        // Update any state variables
+        const power = await connection.fetchPower();
+        if(power.data.status === true) { updatePowerButton(); }
+        // Notify that session has resumed
+        store.commit("newNotification", {message: `Session Resumed. Time: ${session.data.date}`, highlighted: false});
+      }
+    } catch (error) {
+      if(error.request && !error.response) {
+        console.log("***Not connected to internet. Cannot contact external servers.***");
+      } else {
+        store.commit("newNotification", {message: "Could not retrieve sessions."});
+        store.commit('newLog', error);
+      }
     }
   }
 
@@ -113,15 +137,6 @@
       store.commit('addChartData');
     }, 5000);
     console.log("Timeout Started")
-
-     try {
-       const currentPower = await connection.fetchPower();
-       if(currentPower.data.status !== state.power) {
-         updatePowerButton();
-       }
-     } catch (error) {
-      console.log(error);
-     }
   }
 
   const  stopDataDemo = () => {
@@ -287,6 +302,7 @@
   }
 
 onMounted(() => {
-  startDataDemo()
+  // startDataDemo();
+  // getActiveSession();
 })
 </script>

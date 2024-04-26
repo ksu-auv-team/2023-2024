@@ -1,7 +1,7 @@
-import axios from 'axios'
+import axios from 'axios';
 
-export default () => {
+export default baseURL => {
     return axios.create({
-        baseURL: "https://sanchezalvarez.dev/api"
-    })
-}
+        baseURL
+    });
+};
