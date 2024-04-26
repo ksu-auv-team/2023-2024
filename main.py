@@ -248,6 +248,8 @@ def main(args: list = sys.argv):
         print("Exiting...")
         exit(1)
 
+    with app.app_context():
+        db.create_all()
     app.run(debug=True, host="0.0.0.0", port=5000)
 
     hardware_interface.wait()
@@ -268,7 +270,6 @@ if __name__ == "__main__":
     args.add_argument("--CP", help="Run the Camera Package", action="store_true")
 
     args = args.parse_args()
-    db.create_all()
 
     main(args)
 
