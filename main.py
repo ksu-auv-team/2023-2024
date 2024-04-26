@@ -220,13 +220,12 @@ def upload():
 def images(filename):
     return send_from_directory(app.config['UPLOAD_FOLDER'], filename)
 
-@app.before_first_request
-def create_tables():
-    db.create_all()
-
 @app.route('/')
 def index():
     return render_template('index.html')
+
+def create_tables():
+    db.create_all()
 
 # Main function
 def main(args: list = sys.argv):
@@ -252,6 +251,8 @@ def main(args: list = sys.argv):
         print("Exiting...")
         exit(1)
 
+    with app.app_context():
+        create_tables()
     app.run(debug=True, host="0.0.0.0", port=5000)
 
     if args.run:
