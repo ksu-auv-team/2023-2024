@@ -113,24 +113,24 @@ class HardwareInterface:
             # Post sensor data to the server
             self.post_data("sensors", sensor_data)
 
-            # Get output data from the server
-            output_data = self.get_data("output")
+            # # Get output data from the server
+            # output_data = self.get_data("output")
 
-            # Check if all required keys are present in the output data
-            required_keys = ["m1", "m2", "m3", "m4", "m5", "m6", "m7", "m8", "claw", "torp1", "torp2"]
-            print(output_data.keys())
-            if all(key in output_data for key in required_keys):
-                esc_values = [output_data[key] for key in required_keys[:8]]  # Get ESC values
-                claw_torp_values = [output_data["claw"], output_data["torp1"], output_data["torp2"]]
-            else:
-                # Log an error and use default values if some data is missing
-                print("Error: Not all required output data keys received, using default values")
-                esc_values = [default_esc_value] * 8
-                claw_torp_values = [0, 0, 0]
+            # # Check if all required keys are present in the output data
+            # required_keys = ["m1", "m2", "m3", "m4", "m5", "m6", "m7", "m8", "claw", "torp1", "torp2"]
+            # if all(key in output_data for key in required_keys):
+            #     esc_values = [output_data[key] for key in required_keys[:8]]  # Get ESC values
+            #     claw_torp_values = [output_data["claw"], output_data["torp1"], output_data["torp2"]]
+            # else:
+            #     # Log an error and use default values if some data is missing
+            #     print("Error: Not all required output data keys received, using default values")
+            #     print(output_data.keys())
+            #     esc_values = [default_esc_value] * 8
+            #     claw_torp_values = [0, 0, 0]
 
-            # Send data to ESCs and battery monitor
-            self.write_ESCs(esc_values)
-            self.write_BatteryMonitor(claw_torp_values)
+            # # Send data to ESCs and battery monitor
+            # self.write_ESCs(esc_values)
+            # self.write_BatteryMonitor(claw_torp_values)
 
             time.sleep(delay)
 
