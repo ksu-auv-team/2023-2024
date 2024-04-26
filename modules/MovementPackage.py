@@ -1,7 +1,7 @@
 import logging
 import numpy as np
+import requests
 from datetime import datetime
-from flask_sqlalchemy import SQLAlchemy
 
 
 # PID class
@@ -275,22 +275,14 @@ class PID(object):
         self._last_input = None
 
 class MovementPackage:
-    def __init__(self, movement_logger : logging.Logger, db : SQLAlchemy, InputControlDB : SQLAlchemy, OutputControlDB : SQLAlchemy, SensorsInputDB : SQLAlchemy):
+    def __init__(self, movement_logger: logging.Logger, base_url: str):
         """
         Movement Package:
         - Handles the generation of motor and claw commands based on either controller input or neural network output.
-        - All input comes from two databases, and all output is saved to a different database. 
-        - The databases are updated every microsecond.
-        - 
+        - All input and output are handled via HTTP requests.
         """
         self.movement_logger = movement_logger
-        self.InputControlDB = InputControlDB
-        self.OutputControlDB = OutputControlDB
-        self.SensorsInputDB = SensorsInputDB
-        self.db = db
-
-        self.PIDs = []
-        self.PWM_To_Force_Conversion = {}
+        self.base_url = base_url
         self.controller_data = {}
         self.neural_network_data = {}
         self.sensors_data = {}
@@ -316,8 +308,6 @@ class MovementPackage:
             [Fx, -Fx, -Fx, Fx]
         ]).transpose()
 
-        self.initialize_PIDs()
-
         self.in_min = -1
         self.in_max = 1
         self.out_min = 1300
@@ -325,70 +315,38 @@ class MovementPackage:
 
         self.movement_logger.info('Movement Package initialized')
 
-    def initialize_PIDs(self):
-        self.PIDs.append(PID(Kp=1.0, Ki=0.0, Kd=0.0, setpoint=0, sample_time=0.01, output_limits=(None, None), auto_mode=True, proportional_on_measurement=False, differential_on_measurement=True, error_map=None, time_fn=None, starting_output=0.0))
-        self.PIDs.append(PID(Kp=1.0, Ki=0.0, Kd=0.0, setpoint=0, sample_time=0.01, output_limits=(None, None), auto_mode=True, proportional_on_measurement=False, differential_on_measurement=True, error_map=None, time_fn=None, starting_output=0.0))
-
     def get_sensors_data(self):
-        data = self.SensorsInputDB.query.order_by(self.InputControlDB.Date.desc()).first()
-        return {
-            'Date': data.Date, 'X': data.X, 'Y': data.Y, 'Z': data.Z, 
-            'Pitch': data.Pitch, 'Roll': data.Roll, 'Yaw': data.Yaw, 
-            'Claw': data.Claw
-        }
+        response = requests.get(f"{self.base_url}/sensors")
+        if response.status_code == 200:
+            return response.json()
+        else:
+            self.movement_logger.error("Failed to fetch sensors data")
+            return None
 
     def get_data(self):
-        data = self.InputControlDB.query.order_by(self.InputControlDB.Date.desc()).first()
-        return [data.X, data.Y, data.Z, data.Pitch, data.Roll, data.Yaw]
-
-    def map_data(self, data):
-        sensor_value = self.get_sensors_data() # Comes from sensors
-        desired_value = [data[0], data[1], data[2], data[3], data[4], data[5]] # Comes from controller
-
-        # PID1_desired_data = [desired_value[0], desired_value[1], desired_value[5]]
-        # PID2_desired_data = [desired_value[2], desired_value[3], desired_value[4]]
-
-        # max_desired_PID1_index = max.index(PID1_desired_data)
-        # max_desired_PID2_index = max.index(PID2_desired_data)
-
-        # self.PIDs[0].setpoint = max(PID1_desired_data)
-        # self.PIDs[1].setpoint = max(PID2_desired_data)
-
-        # PID1_sensor_data = [sensor_value[0], sensor_value[1], sensor_value[5]]
-        # PID2_sensor_data = [sensor_value[2], sensor_value[3], sensor_value[4]]
-
-        # PID1_output = self.PIDs[0](PID1_sensor_data)
-        # PID2_output = self.PIDs[1](PID2_sensor_data)
-
-        # for i in range(4):
-        #     self.output_control_data_part_1[i] = self.mapping(self.PID_Matrix_1[max_desired_PID1_index][i] * PID1_output)
-        #     self.output_control_data_part_2[i] = self.mapping(self.PID_Matrix_2[max_desired_PID2_index][i] * PID2_output)
-
-        for i in range(3):
-            self.output_control_data_part_1[i] = self.mapping(desired_value[i])
-            self.output_control_data_part_2[i] = self.mapping(desired_value[i]+3)
-        
-        self.save_data(self.output_control_data_part_1, self.output_control_data_part_2, data[6])
+        response = requests.get(f"{self.base_url}/input")
+        if response.status_code == 200:
+            return response.json()
+        else:
+            self.movement_logger.error("Failed to fetch input data")
+            return None
 
     def save_data(self, data1, data2, data3):
-        output_data = self.OutputControlDB(
-            Date=datetime.now()(),
-            M1=self.mapping(data1[0]),
-            M2=self.mapping(data1[1]),
-            M3=self.mapping(data1[2]),
-            M4=self.mapping(data1[3]),
-            M5=self.mapping(data2[0]),
-            M6=self.mapping(data2[1]),
-            M7=self.mapping(data2[2]),
-            M8=self.mapping(data2[3]),
-            Claw=data3
-        )
-        self.db.session.add(output_data)
-        self.db.session.commit()
-
-    def delete_data(self):
-        self.OutputControlDB.query.delete()
-        self.db.session.commit()
+        output_data = {
+            "Date": datetime.datetime.now().isoformat(),
+            "M1": self.mapping(data1[0]),
+            "M2": self.mapping(data1[1]),
+            "M3": self.mapping(data1[2]),
+            "M4": self.mapping(data1[3]),
+            "M5": self.mapping(data2[0]),
+            "M6": self.mapping(data2[1]),
+            "M7": self.mapping(data2[2]),
+            "M8": self.mapping(data2[3]),
+            "Claw": data3
+        }
+        response = requests.post(f"{self.base_url}/output", json=output_data)
+        if response.status_code != 201:
+            self.movement_logger.error("Failed to post output data")
 
     def mapping(self, x):
         return (x - self.in_min) * (self.out_max - self.out_min) / (self.in_max - self.in_min) + self.out_min
