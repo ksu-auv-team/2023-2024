@@ -268,5 +268,7 @@ if __name__ == "__main__":
     args.add_argument("--CP", help="Run the Camera Package", action="store_true")
 
     args = args.parse_args()
+    db.create_all()
+
     main(args)
 
