@@ -184,7 +184,7 @@ def get_output_data():
 def add_input_data():
     data = request.get_json()
 
-    new_input_data = Input(X=data['X'], Y=data['Y'], Z=data['Z'],
+    new_input_data = Input(X=data['X'], Y=data['Y'], Z=data['Z'], 
                            pitch=data['pitch'], roll=data['roll'], yaw=data['yaw'],
                            claw=data['claw'], torp1=data['torp1'], torp2=data['torp2'])
 
