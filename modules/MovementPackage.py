@@ -1,6 +1,5 @@
 import logging
 import numpy as np
-import pandas as pd
 from datetime import datetime
 from flask_sqlalchemy import SQLAlchemy
 
@@ -318,7 +317,6 @@ class MovementPackage:
         ]).transpose()
 
         self.initialize_PIDs()
-        self.initialize_PWM_To_Force_Conversion()
 
         self.in_min = -1
         self.in_max = 1
@@ -330,10 +328,6 @@ class MovementPackage:
     def initialize_PIDs(self):
         self.PIDs.append(PID(Kp=1.0, Ki=0.0, Kd=0.0, setpoint=0, sample_time=0.01, output_limits=(None, None), auto_mode=True, proportional_on_measurement=False, differential_on_measurement=True, error_map=None, time_fn=None, starting_output=0.0))
         self.PIDs.append(PID(Kp=1.0, Ki=0.0, Kd=0.0, setpoint=0, sample_time=0.01, output_limits=(None, None), auto_mode=True, proportional_on_measurement=False, differential_on_measurement=True, error_map=None, time_fn=None, starting_output=0.0))
-
-    def initialize_PWM_To_Force_Conversion(self):
-        df = pd.read_excel('static/data/T200-PWM-Force-Current.xlsx', engine='openpyxl')
-        return df.to_dict()
 
     def get_sensors_data(self):
         data = self.SensorsInputDB.query.order_by(self.InputControlDB.Date.desc()).first()
