@@ -109,7 +109,7 @@ class Input(db.Model):
     pitch = db.Column(db.Float, nullable=False)
     roll = db.Column(db.Float, nullable=False)
     yaw = db.Column(db.Float, nullable=False)
-    claw = db.Column(db.Boolean, nullable=False)
+    claw = db.Column(db.Integer, nullable=False)
     torp1 = db.Column(db.Boolean, nullable=False)
     torp2 = db.Column(db.Boolean, nullable=False)
 
