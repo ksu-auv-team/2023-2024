@@ -120,21 +120,21 @@ class Input(db.Model):
                   {self.torp2}>'
 
 # Creating the flask routes to handle the data
-@app.route('/sensors', methods=['POST'])
-def add_sensor_data():
-    data = request.get_json()
-
-    new_sensor_data = Sensors(voltage1=data['voltage1'], voltage2=data['voltage2'], voltage3=data['voltage3'],
-                              current1=data['current1'], current2=data['current2'], current3=data['current3'],
-                              depth=data['depth'], X=data['X'], Y=data['Y'], Z=data['Z'],
-                              pitch=data['pitch'], roll=data['roll'], yaw=data['yaw'],
-                              temperature=data['temperature'], orin_temp=data['orin_temp'], humidity=data['humidity'],
-                              heading=data['heading'])
-
-    db.session.add(new_sensor_data)
-    db.session.commit()
-
-    return 'Data added', 201
+@app.route('/sensors', methods=['GET'])
+def get_sensor_data():
+    sensor_data = Sensors.query.order_by(Sensors.id.desc()).first()
+    if sensor_data:
+        data_dict = {
+            'voltage1': sensor_data.voltage1, 'voltage2': sensor_data.voltage2, 'voltage3': sensor_data.voltage3,
+            'current1': sensor_data.current1, 'current2': sensor_data.current2, 'current3': sensor_data.current3,
+            'depth': sensor_data.depth, 'X': sensor_data.X, 'Y': sensor_data.Y, 'Z': sensor_data.Z,
+            'pitch': sensor_data.pitch, 'roll': sensor_data.roll, 'yaw': sensor_data.yaw,
+            'temperature': sensor_data.temperature, 'orin_temp': sensor_data.orin_temp, 'humidity': sensor_data.humidity,
+            'heading': sensor_data.heading
+        }
+        return jsonify(data_dict)
+    else:
+        return jsonify({'message': 'No data found'}), 404
 
 @app.route('/sensors', methods=['GET'])
 def get_sensor_data():
@@ -168,30 +168,29 @@ def add_output_data():
 
 @app.route('/output', methods=['GET'])
 def get_output_data():
-    output_data = Output.query.all()
-    output = []
+    output_data = Output.query.order_by(Output.id.desc()).first()
+    if output_data:
+        data_dict = {
+            'M1': output_data.M1, 'M2': output_data.M2, 'M3': output_data.M3, 'M4': output_data.M4,
+            'M5': output_data.M5, 'M6': output_data.M6, 'M7': output_data.M7, 'M8': output_data.M8,
+            'Claw': output_data.Claw, 'Torp1': output_data.Torp1, 'Torp2': output_data.Torp2
+        }
+        return jsonify(data_dict)
+    else:
+        return jsonify({'message': 'No data found'}), 404
 
-    for data in output_data:
-        data_dict = {'M1': data.M1, 'M2': data.M2, 'M3': data.M3, 'M4': data.M4,
-                     'M5': data.M5, 'M6': data.M6, 'M7': data.M7, 'M8': data.M8,
-                     'Claw': data.Claw, 'Torp1': data.Torp1, 'Torp2': data.Torp2}
-
-        output.append(data_dict)
-
-    return jsonify({'output_data': output})
-
-@app.route('/input', methods=['POST'])
-def add_input_data():
-    data = request.get_json()
-
-    new_input_data = Input(X=data['X'], Y=data['Y'], Z=data['Z'], 
-                           pitch=data['pitch'], roll=data['roll'], yaw=data['yaw'],
-                           claw=data['claw'], torp1=data['torp1'], torp2=data['torp2'])
-
-    db.session.add(new_input_data)
-    db.session.commit()
-
-    return 'Data added', 201
+@app.route('/input', methods=['GET'])
+def get_input_data():
+    input_data = Input.query.order_by(Input.id.desc()).first()
+    if input_data:
+        data_dict = {
+            'X': input_data.X, 'Y': input_data.Y, 'Z': input_data.Z,
+            'pitch': input_data.pitch, 'roll': input_data.roll, 'yaw': input_data.yaw,
+            'claw': input_data.claw, 'torp1': input_data.torp1, 'torp2': input_data.torp2
+        }
+        return jsonify(data_dict)
+    else:
+        return jsonify({'message': 'No data found'}), 404
 
 @app.route('/input', methods=['GET'])
 def get_input_data():
