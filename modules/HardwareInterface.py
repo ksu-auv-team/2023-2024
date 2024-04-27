@@ -117,10 +117,11 @@ class HardwareInterface:
             # self.post_data("sensors", sensor_data)
 
             # Get output data from the server
-            output_data = self.get_data("output")['output_data']
+            output_data = self.get_data("output")
 
             # Debug 
             print(output_data)
+
             # Check if all required keys are present in the output data
             # required_keys = ["M1", "M2", "M3", "M4", "M5", "M6", "M7", "M8", "Claw", "Torp1", "Torp2"]
             # if all(key in output_data for key in required_keys):
@@ -134,8 +135,8 @@ class HardwareInterface:
             #     claw_torp_values = [0, 0, 0]
 
             # Send data to ESCs and battery monitor
-            self.write_ESCs(esc_values)
-            self.write_BatteryMonitor(claw_torp_values)
+            # self.write_ESCs(esc_values)
+            # self.write_BatteryMonitor(claw_torp_values)
 
             time.sleep(delay)
 
