@@ -332,7 +332,16 @@ class MovementPackage:
             self.movement_logger.error("Failed to fetch input data")
             return None
 
-    def save_data(self, data1, data2, data3):
+    def convert_to_motor_values(self, data):
+        """
+        Convert the received data into motor values using PID matrices.
+        - data: an array representing sensor or controller data
+        """
+        control_data_1 = np.dot(data, self.PID_Matrix_1)
+        control_data_2 = np.dot(data, self.PID_Matrix_2)
+        return control_data_1, control_data_2
+
+    def save_data(self, data1, data2, data3, data4, data5):
         output_data = {
             "M1": self.mapping(data1[0]),
             "M2": self.mapping(data1[1]),
@@ -343,8 +352,8 @@ class MovementPackage:
             "M7": self.mapping(data2[2]),
             "M8": self.mapping(data2[3]),
             "Claw": data3,
-            "Torp1": 0,
-            "Torp2": 0
+            "Torp1": data4,
+            "Torp2": data5
         }
         response = requests.post(f"{self.base_url}/output", json=output_data)
         if response.status_code != 201:
@@ -360,7 +369,8 @@ class MovementPackage:
             #  and self.sensors_data
             if self.controller_data:
                 # self.neural_network_data = self.neural_network_data
-                self.save_data(self.output_control_data_part_1, self.output_control_data_part_2, 0)
+                self.output_control_data_part_1, self.output_control_data_part_2 = self.convert_to_motor_values(np.array([self.controller_data["X"], self.controller_data["Y"], self.controller_data["Z"], self.controller_data["pitch"], self.controller_data["roll"], self.controller_data["yaw"]))
+                self.save_data(self.output_control_data_part_1, self.output_control_data_part_2, 127, 0, 0)
             else:
                 self.movement_logger.error("Failed to get controller or sensors data")
             time.sleep(0.01)
