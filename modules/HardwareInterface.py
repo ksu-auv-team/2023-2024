@@ -125,6 +125,8 @@ class HardwareInterface:
                 esc_values = [output_data[key] for key in required_keys[:8]]  # Get ESC values
                 claw_torp_values = [output_data["Claw"], output_data["Torp1"], output_data["Torp2"]]
             else:
+                for key in output_data['output_data']:
+                    print(key)
                 # Log an error and use default values if some data is missing
                 print("Error: Not all required output data keys received, using default values")
                 print(output_data.keys())
