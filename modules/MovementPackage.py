@@ -369,7 +369,7 @@ class MovementPackage:
             #  and self.sensors_data
             if self.controller_data:
                 # self.neural_network_data = self.neural_network_data
-                self.output_control_data_part_1, self.output_control_data_part_2 = self.convert_to_motor_values(np.array([self.controller_data["X"], self.controller_data["Y"], self.controller_data["Z"], self.controller_data["pitch"], self.controller_data["roll"], self.controller_data["yaw"]))
+                self.output_control_data_part_1, self.output_control_data_part_2 = self.convert_to_motor_values(np.array([self.controller_data["X"], self.controller_data["Y"], self.controller_data["Z"], self.controller_data["pitch"], self.controller_data["roll"], self.controller_data["yaw"]]))
                 self.save_data(self.output_control_data_part_1, self.output_control_data_part_2, 127, 0, 0)
             else:
                 self.movement_logger.error("Failed to get controller or sensors data")
