@@ -343,14 +343,14 @@ class MovementPackage:
 
     def save_data(self, data1, data2, data3, data4, data5):
         output_data = {
-            "M1": self.mapping(data1[0]),
-            "M2": self.mapping(data1[1]),
-            "M3": self.mapping(data1[2]),
-            "M4": self.mapping(data1[3]),
-            "M5": self.mapping(data2[0]),
-            "M6": self.mapping(data2[1]),
-            "M7": self.mapping(data2[2]),
-            "M8": self.mapping(data2[3]),
+            "M1": round(self.mapping(data1[0])),
+            "M2": round(self.mapping(data1[1])),
+            "M3": round(self.mapping(data1[2])),
+            "M4": round(self.mapping(data1[3])),
+            "M5": round(self.mapping(data2[0])),
+            "M6": round(self.mapping(data2[1])),
+            "M7": round(self.mapping(data2[2])),
+            "M8": round(self.mapping(data2[3])),
             "Claw": data3,
             "Torp1": data4,
             "Torp2": data5
