@@ -3,7 +3,7 @@ import time
 import random
 
 # Configuration for the target API endpoint
-api_url = 'http://localhost:5000/input'  # Adjust this to your actual API URL
+api_url = 'http://192.168.0.103:5000/input'  # Adjust this to your actual API URL
 
 def post_data():
     """
