@@ -334,17 +334,17 @@ class MovementPackage:
 
     def save_data(self, data1, data2, data3):
         output_data = {
-            "m1": self.mapping(data1[0]),
-            "m2": self.mapping(data1[1]),
-            "m3": self.mapping(data1[2]),
-            "m4": self.mapping(data1[3]),
-            "m5": self.mapping(data2[0]),
-            "m6": self.mapping(data2[1]),
-            "m7": self.mapping(data2[2]),
-            "m8": self.mapping(data2[3]),
-            "claw": data3,
-            "torp1": 0,
-            "torp2": 0
+            "M1": self.mapping(data1[0]),
+            "M2": self.mapping(data1[1]),
+            "M3": self.mapping(data1[2]),
+            "M4": self.mapping(data1[3]),
+            "M5": self.mapping(data2[0]),
+            "M6": self.mapping(data2[1]),
+            "M7": self.mapping(data2[2]),
+            "M8": self.mapping(data2[3]),
+            "Claw": data3,
+            "Torp1": 0,
+            "Torp2": 0
         }
         response = requests.post(f"{self.base_url}/output", json=output_data)
         if response.status_code != 201:
@@ -369,5 +369,5 @@ if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', handlers=[logging.FileHandler("./logs/movement.log"), logging.StreamHandler()])
     movement_logger = logging.getLogger("MovementPackage")
     movement_logger.setLevel(logging.INFO)
-    movement_package = MovementPackage(movement_logger, "http://localhost:5000")
+    movement_package = MovementPackage(movement_logger, "http://192.168.0.103:5000")
     movement_package.run()

@@ -156,6 +156,7 @@ class CM:
             self.map_data()
             self.post_data()
             # self.log_output(version = 0)
+            print(self.out_data)
             pygame.time.wait(10)
 
 if __name__ == "__main__":
