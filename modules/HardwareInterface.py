@@ -119,17 +119,19 @@ class HardwareInterface:
             # Get output data from the server
             output_data = self.get_data("output")['output_data']
 
+            # Debug 
+            print(output_data)
             # Check if all required keys are present in the output data
-            required_keys = ["M1", "M2", "M3", "M4", "M5", "M6", "M7", "M8", "Claw", "Torp1", "Torp2"]
-            if all(key in output_data for key in required_keys):
-                esc_values = [output_data[key] for key in required_keys[:8]]  # Get ESC values
-                claw_torp_values = [output_data["Claw"], output_data["Torp1"], output_data["Torp2"]]
-            else:
-                # Log an error and use default values if some data is missing
-                print("Error: Not all required output data keys received, using default values")
-                print(output_data.keys())
-                esc_values = [default_esc_value] * 8
-                claw_torp_values = [0, 0, 0]
+            # required_keys = ["M1", "M2", "M3", "M4", "M5", "M6", "M7", "M8", "Claw", "Torp1", "Torp2"]
+            # if all(key in output_data for key in required_keys):
+            #     esc_values = [output_data[key] for key in required_keys[:8]]  # Get ESC values
+            #     claw_torp_values = [output_data["Claw"], output_data["Torp1"], output_data["Torp2"]]
+            # else:
+            #     # Log an error and use default values if some data is missing
+            #     print("Error: Not all required output data keys received, using default values")
+            #     print(output_data.keys())
+            #     esc_values = [default_esc_value] * 8
+            #     claw_torp_values = [0, 0, 0]
 
             # Send data to ESCs and battery monitor
             self.write_ESCs(esc_values)
