@@ -120,6 +120,22 @@ class Input(db.Model):
                   {self.torp2}>'
 
 # Creating the flask routes to handle the data
+@app.route('/sensors', methods=['POST'])
+def add_sensor_data():
+    data = request.get_json()
+
+    new_sensor_data = Sensors(voltage1=data['voltage1'], voltage2=data['voltage2'], voltage3=data['voltage3'],
+                              current1=data['current1'], current2=data['current2'], current3=data['current3'],
+                              depth=data['depth'], X=data['X'], Y=data['Y'], Z=data['Z'],
+                              pitch=data['pitch'], roll=data['roll'], yaw=data['yaw'],
+                              temperature=data['temperature'], orin_temp=data['orin_temp'], humidity=data['humidity'],
+                              heading=data['heading'])
+
+    db.session.add(new_sensor_data)
+    db.session.commit()
+
+    return 'Data added', 201
+
 @app.route('/sensors', methods=['GET'])
 def get_sensor_data():
     sensor_data = Sensors.query.order_by(Sensors.id.desc()).first()
@@ -135,23 +151,6 @@ def get_sensor_data():
         return jsonify(data_dict)
     else:
         return jsonify({'message': 'No data found'}), 404
-
-@app.route('/sensors', methods=['GET'])
-def get_sensor_data():
-    sensor_data = Sensors.query.all()
-    output = []
-
-    for data in sensor_data:
-        data_dict = {'voltage1': data.voltage1, 'voltage2': data.voltage2, 'voltage3': data.voltage3,
-                     'current1': data.current1, 'current2': data.current2, 'current3': data.current3,
-                     'depth': data.depth, 'X': data.X, 'Y': data.Y, 'Z': data.Z,
-                     'pitch': data.pitch, 'roll': data.roll, 'yaw': data.yaw,
-                     'temperature': data.temperature, 'orin_temp': data.orin_temp, 'humidity': data.humidity,
-                     'heading': data.heading}
-
-        output.append(data_dict)
-
-    return jsonify({'sensor_data': output})
 
 @app.route('/output', methods=['POST'])
 def add_output_data():
@@ -179,6 +178,19 @@ def get_output_data():
     else:
         return jsonify({'message': 'No data found'}), 404
 
+@app.route('/input', methods=['POST'])
+def add_input_data():
+    data = request.get_json()
+
+    new_input_data = Input(X=data['X'], Y=data['Y'], Z=data['Z'], 
+                           pitch=data['pitch'], roll=data['roll'], yaw=data['yaw'],
+                           claw=data['claw'], torp1=data['torp1'], torp2=data['torp2'])
+
+    db.session.add(new_input_data)
+    db.session.commit()
+
+    return 'Data added', 201
+
 @app.route('/input', methods=['GET'])
 def get_input_data():
     input_data = Input.query.order_by(Input.id.desc()).first()
@@ -191,20 +203,6 @@ def get_input_data():
         return jsonify(data_dict)
     else:
         return jsonify({'message': 'No data found'}), 404
-
-@app.route('/input', methods=['GET'])
-def get_input_data():
-    input_data = Input.query.all()
-    output = []
-
-    for data in input_data:
-        data_dict = {'X': data.X, 'Y': data.Y, 'Z': data.Z,
-                     'pitch': data.pitch, 'roll': data.roll, 'yaw': data.yaw,
-                     'claw': data.claw, 'torp1': data.torp1, 'torp2': data.torp2}
-
-        output.append(data_dict)
-
-    return jsonify({'input_data': output})
 
 @app.route('/upload', methods=['POST'])
 def upload():
