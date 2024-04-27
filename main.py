@@ -229,48 +229,48 @@ def create_tables():
 
 # Main function
 def main(args: list = sys.argv):
-    # if args.run:
-    #     hardware_interface = subprocess.Popen(["python3", "modules/HardwareInterface.py"])
-    #     movement_package = subprocess.Popen(["python3", "modules/MovementPackage.py"])
-    #     neural_network = subprocess.Popen(["python3", "modules/NeuralNetwork.py"])
-    #     state_machine = subprocess.Popen(["python3", "modules/StateMachine.py"])
-    #     camera_package = subprocess.Popen(["python3", "modules/CameraPackage.py"])
-    # if args.HI and not args.run:
-    #     hardware_interface = subprocess.Popen(["python3", "modules/HardwareInterface.py"])
-    # if args.MP and not args.run:
-    #     movement_package = subprocess.Popen(["python3", "modules/MovementPackage.py"])
-    # if args.NN and not args.run:
-    #     neural_network = subprocess.Popen(["python3", "modules/NeuralNetwork.py"])
-    # if args.SM and not args.run:
-    #     state_machine = subprocess.Popen(["python3", "modules/StateMachine.py"])
-    # if args.CP and not args.run:
-    #     camera_package = subprocess.Popen(["python3", "modules/CameraPackage.py"])
-    # if not args.run and not args.HI and not args.MP and not args.NN and not args.SM:
-    #     print("No arguments provided. Please provide an argument to run the main script.")
-    #     print("Use the -h flag for more information.")
-    #     print("Exiting...")
-    #     exit(1)
+    if args.run:
+        hardware_interface = subprocess.Popen(["python3", "modules/HardwareInterface.py"])
+        movement_package = subprocess.Popen(["python3", "modules/MovementPackage.py"])
+        neural_network = subprocess.Popen(["python3", "modules/NeuralNetwork.py"])
+        state_machine = subprocess.Popen(["python3", "modules/StateMachine.py"])
+        camera_package = subprocess.Popen(["python3", "modules/CameraPackage.py"])
+    if args.HI and not args.run:
+        hardware_interface = subprocess.Popen(["python3", "modules/HardwareInterface.py"])
+    if args.MP and not args.run:
+        movement_package = subprocess.Popen(["python3", "modules/MovementPackage.py"])
+    if args.NN and not args.run:
+        neural_network = subprocess.Popen(["python3", "modules/NeuralNetwork.py"])
+    if args.SM and not args.run:
+        state_machine = subprocess.Popen(["python3", "modules/StateMachine.py"])
+    if args.CP and not args.run:
+        camera_package = subprocess.Popen(["python3", "modules/CameraPackage.py"])
+    if not args.run and not args.HI and not args.MP and not args.NN and not args.SM:
+        print("No arguments provided. Please provide an argument to run the main script.")
+        print("Use the -h flag for more information.")
+        print("Exiting...")
+        exit(1)
 
     with app.app_context():
         create_tables()
     app.run(debug=True, host="0.0.0.0", port=5000)
 
-    # if args.run:
-    #     hardware_interface.wait()
-    #     movement_package.wait()
-    #     neural_network.wait()
-    #     state_machine.wait()
-    #     camera_package.wait()
-    # if args.HI and not args.run:
-    #     hardware_interface.wait()
-    # if args.MP and not args.run:
-    #     movement_package.wait()
-    # if args.NN and not args.run:
-    #     neural_network.wait()
-    # if args.SM and not args.run:
-    #     state_machine.wait()
-    # if args.CP and not args.run:
-    #     camera_package.wait()
+    if args.run:
+        hardware_interface.wait()
+        movement_package.wait()
+        neural_network.wait()
+        state_machine.wait()
+        camera_package.wait()
+    if args.HI and not args.run:
+        hardware_interface.wait()
+    if args.MP and not args.run:
+        movement_package.wait()
+    if args.NN and not args.run:
+        neural_network.wait()
+    if args.SM and not args.run:
+        state_machine.wait()
+    if args.CP and not args.run:
+        camera_package.wait()
 
 # Running the main function
 if __name__ == "__main__":
