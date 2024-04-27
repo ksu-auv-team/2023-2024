@@ -172,9 +172,9 @@ def get_output_data():
     output = []
 
     for data in output_data:
-        data_dict = {'m1': data.M1, 'm2': data.M2, 'm3': data.M3, 'm4': data.M4,
-                     'm5': data.M5, 'm6': data.M6, 'm7': data.M7, 'm8': data.M8,
-                     'claw': data.Claw, 'torp1': data.Torp1, 'torp2': data.Torp2}
+        data_dict = {'M1': data.M1, 'M2': data.M2, 'M3': data.M3, 'M4': data.M4,
+                     'M5': data.M5, 'M6': data.M6, 'M7': data.M7, 'M8': data.M8,
+                     'Claw': data.Claw, 'Torp1': data.Torp1, 'Torp2': data.Torp2}
 
         output.append(data_dict)
 
