@@ -337,8 +337,8 @@ class MovementPackage:
         Convert the received data into motor values using PID matrices.
         - data: an array representing sensor or controller data
         """
-        control_data_1 = np.dot(data[:3], self.PID_Matrix_1)
-        control_data_2 = np.dot(data[3:], self.PID_Matrix_2)
+        control_data_1 = np.dot(data[:3], self.PID_Matrix_1.T)
+        control_data_2 = np.dot(data[3:], self.PID_Matrix_2.T)
         return control_data_1, control_data_2
 
     def save_data(self, data1, data2, data3, data4, data5):
