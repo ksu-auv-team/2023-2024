@@ -266,9 +266,9 @@ const store = createStore({
             //     console.log(`Official Error Message: ${state.currentError.officialErrorMessage}`);
             // }
             commit('newNotification', {message: `Error Code: ${errorCode} `, severity: 'notification_alert', highlighted: true});
-            commit('newLog', {message: `Error Message: ${errorMessage}`});
+            commit('newLog', `Error Message: ${errorMessage}`);
             if(officialErrorMessage !== null) {
-                commit('newLog', {message: `Official Error Message: ${officialErrorMessage}`});
+                commit('newLog', `Official Error Message: ${officialErrorMessage}`);
             }
         }
     }
