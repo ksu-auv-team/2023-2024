@@ -259,7 +259,7 @@ const store = createStore({
     },
 
     actions: {
-        relayErrors(state) {
+        relayErrors({ state }) {
             console.log(`Error Code: ${state.currentError.errorCode}`);
             console.log(`Error Message: ${state.currentError.errorMessage}`);
             if(state.currentError.officialErrorMessage !== null) {
