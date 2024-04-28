@@ -40,7 +40,12 @@
     try {
       const response = await connection.getInputData();
       if(response.data.hasOwnProperty('error')) {
-        store.commit('httpErrorHandler', {data: response.data});
+        let data = {
+          errorCode: response.data.errorCode,
+          errorMessage: response.data.errorMessage,
+          officialErrorMessage: response.data.officialErrorMessage,
+        }
+        store.commit('httpErrorHandler', {data: data});
         await store.dispatch('relayErrors');
         // console.log();
         // console.log(`Error Code: ${response.data.error}`);
