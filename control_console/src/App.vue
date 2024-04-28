@@ -69,6 +69,7 @@
         console.log("Unknown Error: ", error);
       }
     }
+    await store.dispatch('relayErrors');
   }
 
   const powerButton = async () => { //Make async when adding http requests
