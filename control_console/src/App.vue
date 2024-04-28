@@ -40,11 +40,6 @@
     try {
       const response = await connection.getInputData();
       if(response.data.hasOwnProperty('errorCode')) {
-        // store.commit('httpErrorHandler', {
-        //   errorCode: response.data.errorCode,
-        //   errorMessage: response.data.errorMessage,
-        //   officialErrorMessage: response.data.officialErrorMessage
-        // });
         await store.dispatch('relayErrors', {
             errorCode: response.data.errorCode,
             errorMessage: response.data.errorMessage,
@@ -56,9 +51,17 @@
       }
     } catch (error) {
       if(error.request && !error.response) {
-        console.log("Network connection error: ", error);
+        await store.dispatch('relayErrors', {
+          errorCode: error.status,
+          errorMessage: `Unable to contact ORIN`,
+          officialErrorMessage: error.message,
+        })
       } else {
-        console.log("Unknown Error: ", error);
+        await store.dispatch('relayErrors', {
+          errorCode: error.status,
+          errorMessage: `Unknown Error`,
+          officialErrorMessage: error.message,
+        })
       }
     }
   }
