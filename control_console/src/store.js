@@ -251,6 +251,28 @@ const store = createStore({
     },
 
     actions: {
+        handleErrors({ dispatch }, error) {
+            if(error.request && !error.response) {
+                dispatch('relayErrors', {
+                    errorCode: '404',
+                    errorMessage: `Unable to contact ORIN`,
+                    officialErrorMessage: error.message,
+                })
+            } else if (error.message === "404") {
+                dispatch('relayErrors', {
+                    errorCode: '404',
+                    errorMessage: `Unable to contact ORIN - Connection Severed`,
+                    officialErrorMessage: null,
+                })
+            } else {
+                dispatch('relayErrors', {
+                    errorCode: '500',
+                    errorMessage: `Unable to contact ORIN - Reason Unknown`,
+                    officialErrorMessage: null,
+                })
+            }
+        },
+
         relayErrors({ commit }, {errorCode, errorMessage, officialErrorMessage}) {
             commit('newNotification', {message: `Error Code: ${errorCode} `, severity: 'notification_alert', highlighted: true});
             commit('newLog', `Error Message: ${errorMessage}`);

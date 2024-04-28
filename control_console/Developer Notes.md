@@ -43,6 +43,7 @@ External Libraries: Google Charts, Axios, VueJS & VueX
   - Store.js errorHandler
   - Use global errorMessage state variable for output
   - Create another function for notification & log, then set state variables to null
+  - Global error handler function or global http request function
 - ReadMe Additions
   - store
     - relayErrors action
