@@ -36,9 +36,17 @@
   const batteries = ref(state.batteries);
   const watchAllow = ref(false);
 
+  const timeoutPromise = new Promise((resolve, reject) => {
+    setTimeout(() => {
+      reject(new Error("Request Timed Out"));
+    }, 4000)
+  })
+
   const testApi = async () => {
     try {
-      const response = await connection.getInputData();
+      const responseFunction = connection.getInputData();
+      const response = await Promise.race([responseFunction, timeoutPromise]);
+
       if(response.data.hasOwnProperty('errorCode')) {
         await store.dispatch('relayErrors', {
             errorCode: response.data.errorCode,
@@ -50,9 +58,16 @@
         console.log(response.data);
       }
     } catch (error) {
-      if(error.request && !error.response) {
+      if (error instanceof Error && error.message === 'Request Timed Out') {
+        // Handle timeout error
         await store.dispatch('relayErrors', {
-          errorCode: error.status,
+          errorCode: '404',
+          errorMessage: `Unable to contact ORIN`,
+          officialErrorMessage: error.message,
+        });
+      } else if(error.request && !error.response) {
+        await store.dispatch('relayErrors', {
+          errorCode: '404',
           errorMessage: `Unable to contact ORIN`,
           officialErrorMessage: error.message,
         })
