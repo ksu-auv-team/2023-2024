@@ -38,7 +38,7 @@
 
   const testApi = async () => {
     try {
-      console.log(await connection.testAPI());
+      console.log(await connection.testAPI().data);
     } catch (error) {
       if(error.request && !error.response) {
         console.log("Network connection error: ", error);
