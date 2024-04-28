@@ -51,4 +51,6 @@ External Libraries: Google Charts, Axios, VueJS & VueX
   - connection.js
     - testAPI
     - getInputData
+  - Strange Things
+    - Let others know to go to index.html to fix /favicon. Remove /
 

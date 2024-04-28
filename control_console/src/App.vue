@@ -90,7 +90,7 @@
           startDataDemo();
           setTimeout(() => {
             watchAllow.value = true;
-          }, 2000)
+          }, 5500)
         } else {
           power_svg.src = power_off;
           power_svg.alt = 'Power OFF';
