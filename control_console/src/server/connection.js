@@ -20,8 +20,15 @@ export default {
         return sergiosApi.get("/auv/log/checkSession");
     },
 
+
+    // ORIN API
+
     testAPI() {
         return orinApi.get("/testAPI");
+    },
+
+    getInputData() {
+        return orinApi.get("/get_input_data");
     }
 
 };

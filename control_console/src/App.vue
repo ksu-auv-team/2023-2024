@@ -38,7 +38,7 @@
 
   const testApi = async () => {
     try {
-      const response = await connection.testAPI();
+      const response = await connection.getInputData();
       if(response.data.hasOwnProperty('error')) {
         console.log(response.data.error);
       } else {
