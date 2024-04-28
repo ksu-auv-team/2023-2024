@@ -40,16 +40,16 @@
     try {
       const response = await connection.getInputData();
       if(response.data.hasOwnProperty('errorCode')) {
-        let data = {
+        let errorData = {
           errorCode: response.data.errorCode,
           errorMessage: response.data.errorMessage,
           officialErrorMessage: response.data.officialErrorMessage,
         }
-        store.commit('httpErrorHandler', {data: data});
+        store.commit('httpErrorHandler', {errorData: errorData});
         await store.dispatch('relayErrors');
-        console.log(`App.vue Code Error: ${response.data.errorCode}`);
-        console.log(`App.vue Code MSG: ${response.data.errorMessage}`)
-        console.log(`App.vue Code Official: ${response.data.officialErrorMessage}`)
+        console.log(`App.vue Code Error: ${errorData.errorCode}`);
+        console.log(`App.vue Code MSG: ${errorData.errorMessage}`)
+        console.log(`App.vue Code Official: ${errorData.officialErrorMessage}`)
         // console.log();
         // console.log(`Error Code: ${response.data.error}`);
         // if(response.data.hasOwnProperty('errorMessage')) {
