@@ -38,7 +38,8 @@
 
   const testApi = async () => {
     try {
-      console.log(await connection.testAPI().data);
+      const response = await connection.testAPI();
+      console.log(response.data.decode("utf-8"));
     } catch (error) {
       if(error.request && !error.response) {
         console.log("Network connection error: ", error);
