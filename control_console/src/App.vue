@@ -44,7 +44,7 @@
 
   const testApi = async () => {
     try {
-      const responseFunction = connection.getInputData();
+      const responseFunction = connection.getInputData;
       const response = await Promise.race([responseFunction, timeoutPromise]);
 
       if(response.data.hasOwnProperty('errorCode')) {
