@@ -259,7 +259,7 @@ const store = createStore({
     },
 
     actions: {
-        relayErrors({ state, commit, errorCode, errorMessage, officialErrorMessage }) {
+        relayErrors({ commit }, {errorCode, errorMessage, officialErrorMessage}) {
             // console.log(`Error Code: ${state.currentError.errorCode}`);
             // console.log(`Error Message: ${state.currentError.errorMessage}`);
             // if(state.currentError.officialErrorMessage !== null) {
