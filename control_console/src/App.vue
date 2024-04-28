@@ -43,6 +43,7 @@
         console.log(response.data.error);
       } else {
         console.log("Use the data somehow");
+        console.log(response.data);
       }
     } catch (error) {
       if(error.request && !error.response) {
