@@ -40,7 +40,7 @@
     try {
       const response = await connection.getInputData();
       if(response.data.hasOwnProperty('error')) {
-        console.log(store.commit('httpErrorHandler', response));
+        console.log(store.commit('httpErrorHandler', {data: response.data}));
       } else {
         console.log("Use the data somehow");
         console.log(response.data);

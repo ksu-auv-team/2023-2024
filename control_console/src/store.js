@@ -243,14 +243,14 @@ const store = createStore({
             });
         },
 
-        httpErrorHandler(response) { // Update later to handler more gracefully
+        httpErrorHandler(data) { // Update later to handler more gracefully
             let output = "";
-            output += `Error Code: ${response.data.error} \n`;
-            if(response.data.hasOwnProperty('errorMessage')) {
-                output += `Error Message: ${response.data.errorMessage}`;
+            output += `Error Code: ${data.error} \n`;
+            if(data.hasOwnProperty('errorMessage')) {
+                output += `Error Message: ${data.errorMessage}`;
             }
-            if(response.data.hasOwnProperty('officialErrorMessage')) {
-                output += `Official Error Message: ${response.data.officialErrorMessage}`;
+            if(data.hasOwnProperty('officialErrorMessage')) {
+                output += `Official Error Message: ${data.officialErrorMessage}`;
             }
             return output;
         }
