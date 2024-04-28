@@ -5,7 +5,7 @@
       <router-link to="/data">Data Monitoring</router-link>
       <router-link to="/log">Log</router-link>
     </nav>
-    <button id="power_button" @click = 'powerButton'>
+    <button id="power_button" @click = 'testApi'>
       <img id="power_svg" src="@/assets/svg_icons/power-off.svg" alt="Power OFF">
     </button>
   </header>
@@ -36,7 +36,19 @@
   const batteries = ref(state.batteries);
   const watchAllow = ref(false);
 
-  const powerButton = async () => { //Make async when adding post requests
+  const testApi = async () => {
+    try {
+      console.log(await connection.testAPI());
+    } catch (error) {
+      if(error.request && !error.response) {
+        console.log("Network connection error: ", error);
+      } else {
+        console.log("Something went wrong: ", error);
+      }
+    }
+  }
+
+  const powerButton = async () => { //Make async when adding http requests
     const power_svg = document.getElementById('power_svg');
     try {
       const fetch = await connection.togglePower()

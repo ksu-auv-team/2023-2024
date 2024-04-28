@@ -1,13 +1,13 @@
 import Api from './api';
 
 const sergiosApi = Api('https://sanchezalvarez.dev/api'); //Do not try to access if not connected to internet
-const orinApi = Api('http://192.168.0.1:5000'); //Update to match local DHCP url on local network
+const orinApi = Api('http://192.168.1.16:5000'); //Update to match local DHCP url on local network (1.16 is my PC @ my house)
 
 
 export default {
 
 
-    // POWER FUNCTIONS
+    // DEVELOPMENT FUNCTIONS
     fetchPower() {
         return sergiosApi.get("/auv/power/fetch");
     },
@@ -18,5 +18,10 @@ export default {
 
     checkActiveSession() {
         return sergiosApi.get("/auv/log/checkSession");
+    },
+
+    testAPI() {
+        return orinApi.get("/testAPI");
     }
+
 };
