@@ -46,7 +46,7 @@
         }, 4000)
       })
 
-      const race = await connection.getInputData();
+      const race = connection.getInputData();
       const response = await Promise.race([race, timeoutPromise]);
 
       if(response.data.hasOwnProperty('errorCode')) {
