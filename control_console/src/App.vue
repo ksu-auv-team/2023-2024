@@ -40,12 +40,16 @@
     try {
       const response = await connection.getInputData();
       if(response.data.hasOwnProperty('errorCode')) {
-        store.commit('httpErrorHandler', {
-          errorCode: response.data.errorCode,
-          errorMessage: response.data.errorMessage,
-          officialErrorMessage: response.data.officialErrorMessage
+        // store.commit('httpErrorHandler', {
+        //   errorCode: response.data.errorCode,
+        //   errorMessage: response.data.errorMessage,
+        //   officialErrorMessage: response.data.officialErrorMessage
+        // });
+        await store.dispatch('relayErrors', {
+            errorCode: response.data.errorCode,
+            errorMessage: response.data.errorMessage,
+            officialErrorMessage: response.data.officialErrorMessage
         });
-        // await store.dispatch('relayErrors');
       } else {
         console.log("Use the data somehow");
         console.log(response.data);
