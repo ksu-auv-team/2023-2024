@@ -249,11 +249,11 @@ const store = createStore({
             });
         },
 
-        httpErrorHandler(state, errorData) { // Update later to handle more gracefully -> Dev notes
-            state.currentError.errorCode = errorData.errorCode;
-            state.currentError.errorMessage = errorData.errorMessage;
-            if(errorData.hasOwnProperty('officialErrorMessage')) {
-                state.currentError.officialErrorMessage = errorData.officialErrorMessage;
+        httpErrorHandler(state, { errorCode, errorMessage, officialErrorMessage }) { // Update later to handle more gracefully -> Dev notes
+            state.currentError.errorCode = errorCode;
+            state.currentError.errorMessage = errorMessage;
+            if(officialErrorMessage !== null) {
+                state.currentError.officialErrorMessage = officialErrorMessage;
             }
         }
     },

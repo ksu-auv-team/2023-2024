@@ -45,7 +45,11 @@
           errorMessage: response.data.errorMessage,
           officialErrorMessage: response.data.officialErrorMessage,
         }
-        store.commit('httpErrorHandler', {errorData: errorData});
+        store.commit('httpErrorHandler', {
+          errorCode: response.data.errorCode,
+          errorMessage: response.data.errorMessage,
+          officialErrorMessage: response.data.officialErrorMessage
+        });
         await store.dispatch('relayErrors');
         console.log(`App.vue Code Error: ${errorData.errorCode}`);
         console.log(`App.vue Code MSG: ${errorData.errorMessage}`)
