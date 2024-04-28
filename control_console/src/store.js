@@ -250,7 +250,7 @@ const store = createStore({
         },
 
         httpErrorHandler(state, data) { // Update later to handle more gracefully -> Dev notes
-            state.currentError.errorCode = data.error;
+            state.currentError.errorCode = data.errorCode;
             state.currentError.errorMessage = data.errorMessage;
             if(data.hasOwnProperty('officialErrorMessage')) {
                 state.currentError.officialErrorMessage = data.officialErrorMessage;

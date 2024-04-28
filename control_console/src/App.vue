@@ -39,7 +39,7 @@
   const testApi = async () => {
     try {
       const response = await connection.getInputData();
-      if(response.data.hasOwnProperty('error')) {
+      if(response.data.hasOwnProperty('errorCode')) {
         let data = {
           errorCode: response.data.errorCode,
           errorMessage: response.data.errorMessage,
