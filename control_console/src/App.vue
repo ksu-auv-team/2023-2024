@@ -40,28 +40,12 @@
     try {
       const response = await connection.getInputData();
       if(response.data.hasOwnProperty('errorCode')) {
-        let errorData = {
-          errorCode: response.data.errorCode,
-          errorMessage: response.data.errorMessage,
-          officialErrorMessage: response.data.officialErrorMessage,
-        }
         store.commit('httpErrorHandler', {
           errorCode: response.data.errorCode,
           errorMessage: response.data.errorMessage,
           officialErrorMessage: response.data.officialErrorMessage
         });
         await store.dispatch('relayErrors');
-        console.log(`App.vue Code Error: ${errorData.errorCode}`);
-        console.log(`App.vue Code MSG: ${errorData.errorMessage}`)
-        console.log(`App.vue Code Official: ${errorData.officialErrorMessage}`)
-        // console.log();
-        // console.log(`Error Code: ${response.data.error}`);
-        // if(response.data.hasOwnProperty('errorMessage')) {
-        //   console.log(`Error Message: ${response.data.errorMessage}`);
-        // }
-        // if(response.data.hasOwnProperty('officialErrorMessage')) {
-        //   console.log(`Official Error Message: ${response.data.officialErrorMessage}`);
-        // }
       } else {
         console.log("Use the data somehow");
         console.log(response.data);
@@ -73,7 +57,6 @@
         console.log("Unknown Error: ", error);
       }
     }
-    await store.dispatch('relayErrors');
   }
 
   const powerButton = async () => { //Make async when adding http requests
