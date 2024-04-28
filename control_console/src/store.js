@@ -241,6 +241,18 @@ const store = createStore({
                 message: complete_message,
                 highlighted: false
             });
+        },
+
+        httpErrorHandler(response) { // Update later to handler more gracefully
+            let output = "";
+            output += `Error Code: ${response.data.error} \n`;
+            if(response.data.hasOwnProperty('errorMessage')) {
+                output += `Error Message: ${response.data.errorMessage}`;
+            }
+            if(response.data.hasOwnProperty('officialErrorMessage')) {
+                output += `Official Error Message: ${response.data.officialErrorMessage}`;
+            }
+            return output;
         }
     },
 
