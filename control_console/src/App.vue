@@ -87,11 +87,17 @@
         if (fetchPower) {
           power_svg.src =power_on;
           power_svg.alt = 'Power ON';
+          startDataDemo();
+          setTimeout(() => {
+            watchAllow.value = true;
+          }, 2000)
         } else {
           power_svg.src = power_off;
           power_svg.alt = 'Power OFF';
-          // stopDataDemo();
+          stopDataDemo();
+          watchAllow.value = false;
         }
+        // Update State Variable
         let power_status;
         if(state.power === false) {
           power_status = "OFF";
@@ -102,11 +108,7 @@
         if(fetchPower !== state.power) { store.commit("togglePower") } else {store.commit('newNotification', {message: `AUV ${power_status}`, highlighted: true});}
       }
     } catch (error) {
-      if(error.request && !error.response) {
-        console.log("***Not connected to internet. Cannot contact external servers.***");
-      } else {
-        await store.dispatch('handleErrors', error);
-      }
+      await store.dispatch('handleErrors', error);
     }
   }
 
@@ -154,13 +156,9 @@
     }
   });
 
-  setTimeout(() => {
-    watchAllow.value = true;
-  }, 5500)
-
 
   // Later replace with the function to fetch data and call the chart updater
-  const startDataDemo = async () => {
+  const startDataDemo = () => {
     data_demo = setInterval(function() {
       store.state.batteries.forEach(function(battery) {
 
