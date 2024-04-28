@@ -30,13 +30,13 @@ function getDateTime () {
 }
 
 const store = createStore({
-    currentError: {
-        errorCode: null,
-        errorMessage: null,
-        officialErrorMessage: null
-    },
-
     state: {
+        currentError: {
+            errorCode: null,
+            errorMessage: null,
+            officialErrorMessage: null
+        },
+
         power: false,
 
         batteries : [
@@ -253,7 +253,7 @@ const store = createStore({
             state.currentError.errorCode = data.error;
             state.currentError.errorMessage = data.errorMessage;
             if(data.hasOwnProperty('officialErrorMessage')) {
-                state.error.officialErrorMessage = data.officialErrorMessage;
+                state.currentError.officialErrorMessage = data.officialErrorMessage;
             }
         }
     },
