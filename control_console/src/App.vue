@@ -40,14 +40,16 @@
     try {
       const response = await connection.getInputData();
       if(response.data.hasOwnProperty('error')) {
-        console.log(store.commit('httpErrorHandler', {data: response.data}));
-        console.log(`Error Code: ${response.data.error}`);
-        if(response.data.hasOwnProperty('errorMessage')) {
-          console.log(`Error Message: ${response.data.errorMessage}`);
-        }
-        if(response.data.hasOwnProperty('officialErrorMessage')) {
-          console.log(`Official Error Message: ${response.data.officialErrorMessage}`);
-        }
+        store.commit('httpErrorHandler', {data: response.data});
+        await store.dispatch('relayErrors');
+        // console.log();
+        // console.log(`Error Code: ${response.data.error}`);
+        // if(response.data.hasOwnProperty('errorMessage')) {
+        //   console.log(`Error Message: ${response.data.errorMessage}`);
+        // }
+        // if(response.data.hasOwnProperty('officialErrorMessage')) {
+        //   console.log(`Official Error Message: ${response.data.officialErrorMessage}`);
+        // }
       } else {
         console.log("Use the data somehow");
         console.log(response.data);
@@ -56,7 +58,7 @@
       if(error.request && !error.response) {
         console.log("Network connection error: ", error);
       } else {
-        console.log("Something went wrong: ", error);
+        console.log("Unknown Error: ", error);
       }
     }
   }

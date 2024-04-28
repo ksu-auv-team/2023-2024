@@ -30,6 +30,12 @@ function getDateTime () {
 }
 
 const store = createStore({
+    currentError: {
+        errorCode: null,
+        errorMessage: null,
+        officialErrorMessage: null
+    },
+
     state: {
         power: false,
 
@@ -243,21 +249,23 @@ const store = createStore({
             });
         },
 
-        httpErrorHandler(data) { // Update later to handler more gracefully
-            let output = "";
-            output += `Error Code: ${data.error} \n`;
-            if(data.hasOwnProperty('errorMessage')) {
-                output += `Error Message: ${data.errorMessage}`;
-            }
+        httpErrorHandler(state, data) { // Update later to handle more gracefully -> Dev notes
+            state.currentError.errorCode = data.error;
+            state.currentError.errorMessage = data.errorMessage;
             if(data.hasOwnProperty('officialErrorMessage')) {
-                output += `Official Error Message: ${data.officialErrorMessage}`;
+                state.error.officialErrorMessage = data.officialErrorMessage;
             }
-            return output;
         }
     },
 
     actions: {
-
+        relayErrors(state) {
+            console.log(`Error Code: ${state.currentError.errorCode}`);
+            console.log(`Error Message: ${state.currentError.errorMessage}`);
+            if(state.currentError.officialErrorMessage !== null) {
+                console.log(`Official Error Message: ${state.currentError.officialErrorMessage}`);
+            }
+        }
     }
 
     // mutations: {

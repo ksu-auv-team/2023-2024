@@ -39,3 +39,7 @@ External Libraries: Google Charts, Axios, VueJS & VueX
 - Log
   - Automatically scroll if needed
   - Allow user to pause automatic scrolling
+- HTTP Requests
+  - Store.js errorHandler
+  - Use global errorMessage state variable for output
+  - Create another function for notification & log, then set state variables to null
