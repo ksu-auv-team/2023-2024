@@ -44,8 +44,7 @@
 
   const testApi = async () => {
     try {
-      const responseFunction = connection.getInputData;
-      const response = await Promise.race([responseFunction, timeoutPromise]);
+      const response = await connection.getInputData();
 
       if(response.data.hasOwnProperty('errorCode')) {
         await store.dispatch('relayErrors', {
@@ -58,24 +57,17 @@
         console.log(response.data);
       }
     } catch (error) {
-      if (error instanceof Error && error.message === 'Request Timed Out') {
-        // Handle timeout error
-        await store.dispatch('relayErrors', {
-          errorCode: '404',
-          errorMessage: `Unable to contact ORIN`,
-          officialErrorMessage: error.message,
-        });
-      } else if(error.request && !error.response) {
+      if(error.request && !error.response) {
         await store.dispatch('relayErrors', {
           errorCode: '404',
           errorMessage: `Unable to contact ORIN`,
           officialErrorMessage: error.message,
         })
-      } else {
+      } else if (error.name === "Network connection error") {
         await store.dispatch('relayErrors', {
-          errorCode: error.status,
-          errorMessage: `Unknown Error`,
-          officialErrorMessage: error.message,
+          errorCode: '404',
+          errorMessage: `Unable to contact ORIN`,
+          officialErrorMessage: error.cause,
         })
       }
     }

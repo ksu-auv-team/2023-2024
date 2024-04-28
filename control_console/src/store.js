@@ -248,23 +248,10 @@ const store = createStore({
                 highlighted: false
             });
         },
-
-        httpErrorHandler(state, { errorCode, errorMessage, officialErrorMessage }) { // Update later to handle more gracefully -> Dev notes
-            state.currentError.errorCode = errorCode;
-            state.currentError.errorMessage = errorMessage;
-            if(officialErrorMessage !== null) {
-                state.currentError.officialErrorMessage = officialErrorMessage;
-            }
-        }
     },
 
     actions: {
         relayErrors({ commit }, {errorCode, errorMessage, officialErrorMessage}) {
-            // console.log(`Error Code: ${state.currentError.errorCode}`);
-            // console.log(`Error Message: ${state.currentError.errorMessage}`);
-            // if(state.currentError.officialErrorMessage !== null) {
-            //     console.log(`Official Error Message: ${state.currentError.officialErrorMessage}`);
-            // }
             commit('newNotification', {message: `Error Code: ${errorCode} `, severity: 'notification_alert', highlighted: true});
             commit('newLog', `Error Message: ${errorMessage}`);
             if(officialErrorMessage !== null) {
