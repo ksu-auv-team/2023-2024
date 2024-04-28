@@ -8,9 +8,9 @@ export default {
 
 
     // DEVELOPMENT FUNCTIONS
-    fetchPower() {
-        return sergiosApi.get("/auv/power/fetch");
-    },
+    // fetchPower() {
+    //     return sergiosApi.get("/auv/power/fetch");
+    // },
 
     togglePower() {
         return sergiosApi.post("/auv/power/toggle");
@@ -29,6 +29,10 @@ export default {
 
     handlePower() {
         return orinApi.get("/handlePower");
+    },
+
+    fetchPower() {
+        return orinApi.get("/fetchPower");
     },
 
     getInputData() {

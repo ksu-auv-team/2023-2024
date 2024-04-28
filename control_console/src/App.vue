@@ -140,7 +140,7 @@
         }, 4000)
       })
 
-      const race = connection.handlePower();
+      const race = connection.fetchPower();
       const response = await Promise.race([race, timeoutPromise]);
 
       if(response.data.hasOwnProperty('errorCode')) { // If ORiN returns an error
