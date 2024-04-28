@@ -41,6 +41,13 @@
       const response = await connection.getInputData();
       if(response.data.hasOwnProperty('error')) {
         console.log(store.commit('httpErrorHandler', {data: response.data}));
+        console.log(`Error Code: ${response.data.error}`);
+        if(response.data.hasOwnProperty('errorMessage')) {
+          console.log(`Error Message: ${response.data.errorMessage}`);
+        }
+        if(response.data.hasOwnProperty('officialErrorMessage')) {
+          console.log(`Official Error Message: ${response.data.officialErrorMessage}`);
+        }
       } else {
         console.log("Use the data somehow");
         console.log(response.data);
