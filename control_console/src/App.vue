@@ -118,7 +118,7 @@
       if(session.data !== false) {
         // Update any state variables
         const power = await connection.fetchPower();
-        if(power.data.status === true) { updatePowerButton(); }
+        // if(power.data.status === true) { updatePowerButton(); }
         // Notify that session has resumed
         store.commit("newNotification", {message: `Session Resumed. Time: ${session.data.date}`, highlighted: false});
       }
@@ -132,18 +132,39 @@
     }
   }
 
-  const updatePowerButton = () => {
-    const power_svg = document.getElementById('power_svg');
-    let power_state = "OFF";
-    if(state.power === false) {
-      power_svg.src =power_on;
-      power_svg.alt = 'Power ON';
-      power_state = "ON";
-    } else {
-      power_svg.src = power_off;
-      power_svg.alt = 'Power OFF';
+  const onloadFetch = async () => {
+    try {
+      const timeoutPromise = new Promise((resolve, reject) => {
+        setTimeout(() => {
+          reject(new Error("404"));
+        }, 4000)
+      })
+
+      const race = connection.handlePower();
+      const response = await Promise.race([race, timeoutPromise]);
+
+      if(response.data.hasOwnProperty('errorCode')) { // If ORiN returns an error
+        await store.dispatch('relayErrors', {
+          errorCode: response.data.errorCode,
+          errorMessage: response.data.errorMessage,
+          officialErrorMessage: response.data.officialErrorMessage
+        })
+      } else {
+        const power_svg = document.getElementById('power_svg');
+        if(response.data.status === true) {
+          power_svg.src =power_on;
+          power_svg.alt = 'Power ON';
+          startDataDemo();
+          setTimeout(() => {
+            watchAllow.value = true;
+          }, 5500)
+          store.commit('togglePower');
+          store.commit("newNotification", {message: `Fetched Power: ${store.state.power}`, highlighted: true});
+        }
+      }
+    } catch (error) {
+      await store.dispatch('handleErrors', error);
     }
-    store.commit("newNotification", {message: `Fetched Power: ${power_state}`, highlighted: true});
   }
 
   watchEffect(() => { //Later use server to determine when to allow watch
@@ -344,5 +365,6 @@
 onMounted(() => {
   // startDataDemo();
   // getActiveSession();
+  onloadFetch();
 })
 </script>
