@@ -40,11 +40,9 @@ External Libraries: Google Charts, Axios, VueJS & VueX
   - Automatically scroll if needed
   - Allow user to pause automatic scrolling
 - HTTP Requests
-  - Store.js errorHandler
-  - Use global errorMessage state variable for output
-  - Create another function for notification & log, then set state variables to null
-  - Global error handler function or global http request function
+  - When sending requests, disable the button/function that activated it
 - ReadMe Additions
+  - Notify that when calling functions, check if it expects an object or raw parameters
   - store
     - relayErrors action
   - app.vue

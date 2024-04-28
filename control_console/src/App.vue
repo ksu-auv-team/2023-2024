@@ -5,7 +5,7 @@
       <router-link to="/data">Data Monitoring</router-link>
       <router-link to="/log">Log</router-link>
     </nav>
-    <button id="power_button" @click = 'testApi'>
+    <button id="power_button" @click = 'powerButton'>
       <img id="power_svg" src="@/assets/svg_icons/power-off.svg" alt="Power OFF">
     </button>
   </header>
@@ -49,13 +49,13 @@
       const race = connection.getInputData();
       const response = await Promise.race([race, timeoutPromise]);
 
-      if(response.data.hasOwnProperty('errorCode')) {
+      if(response.data.hasOwnProperty('errorCode')) { // If ORiN returns an error
         await store.dispatch('relayErrors', {
             errorCode: response.data.errorCode,
             errorMessage: response.data.errorMessage,
             officialErrorMessage: response.data.officialErrorMessage
         });
-      } else {
+      } else { // No Errors, Execute code
         console.log("Use the data somehow");
         console.log(response.data);
       }
@@ -67,31 +67,45 @@
   const powerButton = async () => { //Make async when adding http requests
     const power_svg = document.getElementById('power_svg');
     try {
-      const fetch = await connection.togglePower()
-      const fetchPower = fetch.data.status;
-      if (fetchPower) {
-        power_svg.src =power_on;
-        power_svg.alt = 'Power ON';
-      } else {
-        power_svg.src = power_off;
-        power_svg.alt = 'Power OFF';
-        // stopDataDemo();
-      }
-      let power_status;
-      if(state.power === false) {
-        power_status = "OFF";
-      } else {
-        power_status = "ON";
-      }
+      const timeoutPromise = new Promise((resolve, reject) => {
+        setTimeout(() => {
+          reject(new Error("404"));
+        }, 4000)
+      })
 
-      if(fetchPower !== state.power) { store.commit("togglePower") } else {store.commit('newNotification', {message: `AUV ${power_status}`, highlighted: true});}
+      const race = connection.handlePower();
+      const fetch = await Promise.race([race, timeoutPromise]);
 
+      if(fetch.data.hasOwnProperty('errorCode')) { // If ORiN returns an error
+        await store.dispatch('relayErrors', {
+          errorCode: fetch.data.errorCode,
+          errorMessage: fetch.data.errorMessage,
+          officialErrorMessage: fetch.data.officialErrorMessage
+        })
+      } else {
+        const fetchPower = fetch.data.status;
+        if (fetchPower) {
+          power_svg.src =power_on;
+          power_svg.alt = 'Power ON';
+        } else {
+          power_svg.src = power_off;
+          power_svg.alt = 'Power OFF';
+          // stopDataDemo();
+        }
+        let power_status;
+        if(state.power === false) {
+          power_status = "OFF";
+        } else {
+          power_status = "ON";
+        }
+
+        if(fetchPower !== state.power) { store.commit("togglePower") } else {store.commit('newNotification', {message: `AUV ${power_status}`, highlighted: true});}
+      }
     } catch (error) {
       if(error.request && !error.response) {
         console.log("***Not connected to internet. Cannot contact external servers.***");
       } else {
-        store.commit("newNotification", {message: "AUV Power Failed"});
-        store.commit('newLog', error);
+        await store.dispatch('handleErrors', error);
       }
     }
   }

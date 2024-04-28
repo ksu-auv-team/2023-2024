@@ -27,6 +27,10 @@ export default {
         return orinApi.get("/testAPI");
     },
 
+    handlePower() {
+        return orinApi.get("/handlePower");
+    },
+
     getInputData() {
         return orinApi.get("/get_input_data");
     }
