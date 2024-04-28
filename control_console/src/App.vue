@@ -45,7 +45,7 @@
           errorMessage: response.data.errorMessage,
           officialErrorMessage: response.data.officialErrorMessage
         });
-        await store.dispatch('relayErrors');
+        // await store.dispatch('relayErrors');
       } else {
         console.log("Use the data somehow");
         console.log(response.data);

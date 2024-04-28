@@ -259,11 +259,16 @@ const store = createStore({
     },
 
     actions: {
-        relayErrors({ state }) {
-            console.log(`Error Code: ${state.currentError.errorCode}`);
-            console.log(`Error Message: ${state.currentError.errorMessage}`);
-            if(state.currentError.officialErrorMessage !== null) {
-                console.log(`Official Error Message: ${state.currentError.officialErrorMessage}`);
+        relayErrors({ state, commit, errorCode, errorMessage, officialErrorMessage }) {
+            // console.log(`Error Code: ${state.currentError.errorCode}`);
+            // console.log(`Error Message: ${state.currentError.errorMessage}`);
+            // if(state.currentError.officialErrorMessage !== null) {
+            //     console.log(`Official Error Message: ${state.currentError.officialErrorMessage}`);
+            // }
+            commit('newNotification', {message: `Error Code: ${errorCode} `, severity: 'notification_alert', highlighted: true});
+            commit('newLog', {message: `Error Message: ${errorMessage}`});
+            if(officialErrorMessage !== null) {
+                commit('newLog', {message: `Official Error Message: ${officialErrorMessage}`});
             }
         }
     }
