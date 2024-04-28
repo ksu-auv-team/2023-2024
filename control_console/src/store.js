@@ -239,7 +239,7 @@ const store = createStore({
         },
 
         newLog(state, message) {
-            const date = getDateTime;
+            const date = getDateTime();
             const log_dateTime = `${date.month} ${date.day}, ${date.hours}:${date.minutes}${date.time_period}`;
             const complete_message = `${log_dateTime} | ${message}`;
 
