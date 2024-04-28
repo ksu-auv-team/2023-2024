@@ -39,7 +39,11 @@
   const testApi = async () => {
     try {
       const response = await connection.testAPI();
-      console.log(response.data.msg);
+      if(response.data.hasOwnProperty('error')) {
+        console.log(response.data.error);
+      } else {
+        console.log("Use the data somehow");
+      }
     } catch (error) {
       if(error.request && !error.response) {
         console.log("Network connection error: ", error);
