@@ -47,6 +47,9 @@
         }
         store.commit('httpErrorHandler', {data: data});
         await store.dispatch('relayErrors');
+        console.log(`App.vue Code Error: ${response.data.errorCode}`);
+        console.log(`App.vue Code MSG: ${response.data.errorMessage}`)
+        console.log(`App.vue Code Official: ${response.data.officialErrorMessage}`)
         // console.log();
         // console.log(`Error Code: ${response.data.error}`);
         // if(response.data.hasOwnProperty('errorMessage')) {
