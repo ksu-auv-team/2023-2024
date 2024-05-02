@@ -132,6 +132,9 @@ header > div {
 
 /*------------------------------------- MULTIPURPOSE DIALOG -------------------------------------*/
 #dialog {
+    position: fixed;
+    left: 0;
+    top: var(--header_height);
     justify-content: center;
     align-items: center;
     width: 100%;
