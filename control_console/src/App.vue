@@ -6,8 +6,8 @@
       <router-link to="/log">Log</router-link>
     </nav>
     <div>
-      <button id="test_connection" @click="testApi">Test Connection</button>
-      <button id="power_button" @click = 'powerButton'>
+      <button id="test_connection" @click="testApi" :disabled="connectionButtonDisabled">Test Connection</button>
+      <button id="power_button" @click = 'powerOnClick' :disabled="powerButtonDisabled">
         <img id="power_svg" src="@/assets/svg_icons/power-off.svg" alt="Power OFF">
       </button>
     </div>
@@ -29,6 +29,8 @@
   import connection from "@/server/connection";
   import power_on from '@/assets/svg_icons/power-on.svg';
   import power_off from '@/assets/svg_icons/power-off.svg';
+  import power_wait from '@/assets/svg_icons/power-wait.svg';
+  import power_error from '@/assets/svg_icons/power-error.svg'
   import {useStore} from "vuex";
   import {onMounted, reactive, ref, watchEffect} from "vue";
 
@@ -38,10 +40,12 @@
   let data_demo;
   const batteries = ref(state.batteries);
   const watchAllow = ref(false);
-
+  const connectionButtonDisabled = ref(false);
+  const powerButtonDisabled = ref(false);
 
 
   const testApi = async () => {
+    connectionButtonDisabled.value = true;
     try {
       const timeoutPromise = new Promise((resolve, reject) => {
         setTimeout(() => {
@@ -63,11 +67,16 @@
       }
     } catch (error) {
       await store.dispatch('handleErrors', error);
+    } finally {
+      connectionButtonDisabled.value = false;
     }
   }
 
   const powerButton = async () => { //Make async when adding http requests
+    powerButtonDisabled.value = true;
     const power_svg = document.getElementById('power_svg');
+    power_svg.src = power_wait;
+    power_svg.alt = "Waiting"
     try {
       const timeoutPromise = new Promise((resolve, reject) => {
         setTimeout(() => {
@@ -89,6 +98,7 @@
         if (fetchPower) {
           power_svg.src =power_on;
           power_svg.alt = 'Power ON';
+          powerOnClick.value = () => toggleDialog('powerAUV');
           startDataDemo();
           setTimeout(() => {
             watchAllow.value = true;
@@ -96,6 +106,7 @@
         } else {
           power_svg.src = power_off;
           power_svg.alt = 'Power OFF';
+          powerOnClick.value = () => powerButton();
           stopDataDemo();
           watchAllow.value = false;
         }
@@ -111,8 +122,14 @@
       }
     } catch (error) {
       await store.dispatch('handleErrors', error);
+      power_svg.src = power_error;
+      power_svg.alt = "Power OFF"
+    } finally {
+      powerButtonDisabled.value = false;
     }
   }
+  // Holds power button's dynamic function
+  const powerOnClick = ref(powerButton);
 
   const getActiveSession = async () => {
     try {
@@ -250,10 +267,21 @@
       textArea: true,
       textAreaFunctionIndex: 0,
       textAreaMessage: null
+    },
+    powerAUV: {
+      title: "Power Off AUV",
+      message: "Are you sure you want to power of the AUV?",
+      buttons: ["Proceed"],
+      button_functions: [powerButton],
+      textArea: false,
+      textAreaFunctionIndex: null,
+      textAreaMessage: null
     }
   }
 
+  // keep track of whether dialog is open
   const dialog_active = ref(false);
+  // Function to toggle dialog. Pass in the action you want.
   function toggleDialog(dialog_request) {
     const dialog = document.getElementById('dialog');
     const dialog_content = document.getElementById('dialog_content');
@@ -266,10 +294,14 @@
         case 'save_charts':
           dialog_content_object = dialogOptions.saveCharts;
           break;
+        case 'powerAUV':
+          dialog_content_object = dialogOptions.powerAUV;
+          break;
         default:
           break;
       }
 
+      // Build the dialog interface using the dialog_request
       if(dialog_content_object) {
         const dialog_title = document.createElement('h1');              dialog_title.innerText = dialog_content_object.title;
         const dialog_message = document.createElement('p');    dialog_message.innerText = dialog_content_object.message
