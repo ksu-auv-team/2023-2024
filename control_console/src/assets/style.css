@@ -134,11 +134,11 @@ header > div {
 #dialog {
     position: fixed;
     left: 0;
-    top: var(--header_height);
+    top: 0;
     justify-content: center;
     align-items: center;
     width: 100%;
-    height: calc(99vh - var(--header_height));
+    height: 100%;
     margin: 0;
     padding: 0;
     color: var(--text);
