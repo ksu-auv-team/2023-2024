@@ -108,6 +108,20 @@ h1 {
     font-size: 1.7rem;
 }
 /*--------------------------------------------- HEADER AREA --------------------------------------------- */
+header > div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
+
+#test_connection {
+    height: 70%;
+    min-height: fit-content;
+    border: 2px solid var(--background);
+    border-radius: .5rem;
+    font-weight: bold;
+}
 
 #power_button {
     background-color: white;

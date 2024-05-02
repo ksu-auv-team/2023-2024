@@ -7,7 +7,8 @@ External Libraries: Google Charts, Axios, VueJS & VueX
 ## Structure
 
 - 3 Pages | Stream - Data Monitoring - Log ✔
-- Header ✔
+- Header 
+  - Test ORIN Connection
 - Stream
   - Zed Camera Stream - _Wait for completion of server_
   - Batteries ✔
@@ -31,6 +32,7 @@ External Libraries: Google Charts, Axios, VueJS & VueX
   - Send Get requests on load
     - Useful if user refreshes page or auv is already powered on
     - Do nothing if there is no response from server
+  - beforeUnmount() -> beforeunload dialog to ask user if they want to refresh
 - AUV Power Switch
     - Send POST request to turn on/off sub & wait for response
     - When powering off, use dialog to ask if user wants to turn off sub

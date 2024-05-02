@@ -5,9 +5,12 @@
       <router-link to="/data">Data Monitoring</router-link>
       <router-link to="/log">Log</router-link>
     </nav>
-    <button id="power_button" @click = 'powerButton'>
-      <img id="power_svg" src="@/assets/svg_icons/power-off.svg" alt="Power OFF">
-    </button>
+    <div>
+      <button id="test_connection" @click="testApi">Test Connection</button>
+      <button id="power_button" @click = 'powerButton'>
+        <img id="power_svg" src="@/assets/svg_icons/power-off.svg" alt="Power OFF">
+      </button>
+    </div>
   </header>
 
   <router-view ref="currentView" @toggleDialog="toggleDialog"></router-view>
@@ -46,7 +49,7 @@
         }, 4000)
       })
 
-      const race = connection.getInputData();
+      const race = connection.testAPI();
       const response = await Promise.race([race, timeoutPromise]);
 
       if(response.data.hasOwnProperty('errorCode')) { // If ORiN returns an error
@@ -56,8 +59,7 @@
             officialErrorMessage: response.data.officialErrorMessage
         });
       } else { // No Errors, Execute code
-        console.log("Use the data somehow");
-        console.log(response.data);
+        store.commit('newNotification', {message: "Connection OK"});
       }
     } catch (error) {
       await store.dispatch('handleErrors', error);
