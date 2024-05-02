@@ -7,35 +7,22 @@ const routes = [
   {
     path: '/',
     name: 'AUV Stream',
-    component: streamView,
-    meta: {
-      reload: true
-    }
+    component: streamView
   },
   {
     path: '/data',
     name: 'AUV Data',
-    component: dataView,
-    meta: {
-      reload: true
-    }
+    component: dataView
   },
   {
     path: '/log',
     name: 'AUV Log',
-    component: logView,
-    meta: {
-      reload: true
-    }
+    component: logView
   },
-  // Error route - page not found
-  {
-    path: '/:pathMatch(.*)*',
+  { // Error route
+    path: '/*',
     name: 'AUV Stream',
-    component: streamView,
-    meta: {
-      reload: true
-    }
+    component: streamView
   }
 ]
 
