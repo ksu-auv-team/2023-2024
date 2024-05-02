@@ -87,7 +87,7 @@ class SensorData(db.Model):
 
 @app.route('/testAPI')
 def testAPI():
-    return jsonify({"msg": "Hello World!"})
+    return "True"
 
 
 powered = False
@@ -192,8 +192,9 @@ def post_sensor_data():
     return 'Sensor data posted successfully'
 
 
-@app.route('/')
-def index():
+@app.route('/', defaults={'path': ''})
+@app.route('/<path:path>')
+def index(path):
     """
     Main page route to display available camera feeds.
     """
