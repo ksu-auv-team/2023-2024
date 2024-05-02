@@ -7,17 +7,26 @@ const routes = [
   {
     path: '/',
     name: 'AUV Stream',
-    component: streamView
+    component: streamView,
+    meta: {
+      reload: true
+    }
   },
   {
     path: '/data',
     name: 'AUV Data',
-    component: dataView
+    component: dataView,
+    meta: {
+      reload: true
+    }
   },
   {
     path: '/log',
     name: 'AUV Log',
-    component: logView
+    component: logView,
+    meta: {
+      reload: true
+    }
   },
   // { // Error route
   //   path: '/*',
