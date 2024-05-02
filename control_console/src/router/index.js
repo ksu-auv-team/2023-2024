@@ -19,11 +19,11 @@ const routes = [
     name: 'AUV Log',
     component: logView
   },
-  { // Error route
-    path: '/*',
-    name: 'AUV Stream',
-    component: streamView
-  }
+  // { // Error route
+  //   path: '/*',
+  //   name: 'AUV Stream',
+  //   component: streamView
+  // }
 ]
 
 const router = createRouter({
