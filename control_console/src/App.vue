@@ -396,9 +396,15 @@
     toggleDialog();
   }
 
+  const preventReload = (event) => {
+    event.preventDefault();
+  }
+
 onMounted(() => {
   // startDataDemo();
   // getActiveSession();
   onloadFetch();
 })
+
+window.addEventListener('beforeunload', preventReload);
 </script>
