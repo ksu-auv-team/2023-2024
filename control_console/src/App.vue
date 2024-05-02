@@ -270,7 +270,7 @@
     },
     powerAUV: {
       title: "Power Off AUV",
-      message: "Are you sure you want to power of the AUV?",
+      message: "Are you sure you want to power off the AUV?",
       buttons: ["Proceed"],
       button_functions: [powerButton],
       textArea: false,

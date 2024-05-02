@@ -18,6 +18,12 @@ const routes = [
     path: '/log',
     name: 'AUV Log',
     component: logView
+  },
+  // Error route - page not found
+  {
+    path: '/:pathMatch(.*)*',
+    name: 'AUV Stream',
+    component: streamView
   }
 ]
 
