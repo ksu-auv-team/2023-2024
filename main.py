@@ -7,7 +7,7 @@
         - Neural Network Package
         - Web Interface
 
-    These four sub-processes will be run in parallel to each other and communicate via the custom networking protocol.
+    These four sub-processes will be run in parallel to each other and communicate via the custom database system.
 
     The main script will be responsible for handling the communication between the sub-processes and the handling of the state machine.
     The state machine will be responsible for the overall control of the project.
@@ -18,9 +18,9 @@ from flask import Flask, request, jsonify, render_template, send_from_directory
 from flask_sqlalchemy import SQLAlchemy
 import subprocess
 import argparse
+import time
 import sys
 import os
-import time
 
 # Import the necessary modules
 from modules.HardwareInterface import HardwareInterface
@@ -182,7 +182,7 @@ def get_output_data():
 def add_input_data():
     data = request.get_json()
 
-    new_input_data = Input(X=data['X'], Y=data['Y'], Z=data['Z'], 
+    new_input_data = Input(X=data['X'], Y=data['Y'], Z=data['Z'],
                            pitch=data['pitch'], roll=data['roll'], yaw=data['yaw'],
                            claw=data['claw'], torp1=data['torp1'], torp2=data['torp2'])
 
@@ -283,4 +283,3 @@ if __name__ == "__main__":
     args = args.parse_args()
 
     main(args)
-
