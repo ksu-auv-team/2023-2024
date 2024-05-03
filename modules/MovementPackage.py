@@ -379,5 +379,5 @@ if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', handlers=[logging.FileHandler("./logs/movement.log"), logging.StreamHandler()])
     movement_logger = logging.getLogger("MovementPackage")
     movement_logger.setLevel(logging.INFO)
-    movement_package = MovementPackage(movement_logger, "http://192.168.0.100:5000")
+    movement_package = MovementPackage(movement_logger, "http://192.168.0.104:5000")
     movement_package.run()
