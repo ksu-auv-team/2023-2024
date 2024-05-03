@@ -91,30 +91,30 @@ class HardwareInterface:
         time.sleep(10)  # Wait for the server to start
 
         while True:
-            # battery_monitor_data = self.read_BatteryMonitor()
-            # sensor_data = {
-            #     "voltage1": battery_monitor_data[0],
-            #     "voltage2": battery_monitor_data[2],
-            #     "voltage3": battery_monitor_data[4],
-            #     "current1": battery_monitor_data[1],
-            #     "current2": battery_monitor_data[3],
-            #     "current3": battery_monitor_data[5],
-            #     "error": battery_monitor_data[6],
-            #     "depth": 0,  # Example: Add defaults or fetch from sensors
-            #     "X": 0,
-            #     "Y": 0,
-            #     "Z": 0,
-            #     "pitch": 0,
-            #     "roll": 0,
-            #     "yaw": 0,
-            #     "temperature": 0,
-            #     "orin_temp": 0,
-            #     "humidity": 0,
-            #     "heading": 0
-            # }
+            battery_monitor_data = self.read_BatteryMonitor()
+            sensor_data = {
+                "voltage1": battery_monitor_data[0],
+                "voltage2": battery_monitor_data[2],
+                "voltage3": battery_monitor_data[4],
+                "current1": battery_monitor_data[1],
+                "current2": battery_monitor_data[3],
+                "current3": battery_monitor_data[5],
+                "error": battery_monitor_data[6],
+                "depth": 0,  # Example: Add defaults or fetch from sensors
+                "X": 0,
+                "Y": 0,
+                "Z": 0,
+                "pitch": 0,
+                "roll": 0,
+                "yaw": 0,
+                "temperature": 0,
+                "orin_temp": 0,
+                "humidity": 0,
+                "heading": 0
+            }
 
-            # # Post sensor data to the server
-            # self.post_data("sensors", sensor_data)
+            # Post sensor data to the server
+            self.post_data("sensors", sensor_data)
 
             # Get output data from the server
             output_data = self.get_data("output")
