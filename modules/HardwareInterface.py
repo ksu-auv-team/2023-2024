@@ -145,7 +145,7 @@ class HardwareInterface:
         default_esc_value = 127
         esc_data = [160, 160, 160, 160, 160, 160, 160, 160]
         while True:
-            self.write_ESCs()
+            self.write_ESCs(esc_data)
             # print(1)
             time.sleep(delay)
 
