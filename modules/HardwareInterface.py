@@ -145,9 +145,13 @@ class HardwareInterface:
         default_esc_value = 127
         esc_data = [160, 160, 160, 160, 160, 160, 160, 160]
         while True:
-            self.write_ESCs()
-            # print(1)
-            time.sleep(delay)
+            # self.write_ESCs()
+            # # print(1)
+            # time.sleep(delay)
+            motor_choice = input("Enter motor number (1 - 8): ")
+            motor_value = input("Enter motor value (64 - 191): ")
+            esc_data[int(motor_choice) - 1] = int(motor_value)
+            self.write_ESCs(esc_data)
 
 if __name__ == '__main__':
     HI = HardwareInterface()
