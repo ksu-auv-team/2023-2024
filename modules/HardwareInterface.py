@@ -14,7 +14,7 @@ class HardwareInterface:
         self.base_url = self.config["baseUrl"]
 
     def write_ESCs(self, data = [127, 127, 127, 127, 127, 127, 127, 127]):
-        device_address = 0x21
+        device_address = 8
         try:
             self.bus.write_i2c_block_data(device_address, 0, data)
             # print("Message sent:", data)
