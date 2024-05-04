@@ -146,6 +146,8 @@ class HardwareInterface:
         esc_data = [160, 160, 160, 160, 160, 160, 160, 160]
         while True:
             self.write_ESCs(esc_data)
+            print(1)
+            time.sleep(delay)
 
 if __name__ == '__main__':
     HI = HardwareInterface()
