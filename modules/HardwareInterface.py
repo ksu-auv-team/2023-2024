@@ -17,7 +17,7 @@ class HardwareInterface:
         device_address = 8
         try:
             self.bus.write_i2c_block_data(device_address, 0, data)
-            # print("Message sent:", data)
+            print("Message sent:", data)
         except Exception as e:
             print("Error writing I2C data:", str(e))
 
@@ -146,7 +146,7 @@ class HardwareInterface:
         esc_data = [160, 160, 160, 160, 160, 160, 160, 160]
         while True:
             self.write_ESCs(esc_data)
-            print(1)
+            # print(1)
             time.sleep(delay)
 
 if __name__ == '__main__':
