@@ -140,6 +140,13 @@ class HardwareInterface:
 
             time.sleep(delay)
 
+    def test_run(self):
+        delay = 0.01
+        default_esc_value = 127
+        esc_data = [160, 160, 160, 160, 160, 160, 160, 160]
+        self.write_ESCs(esc_data)
+
 if __name__ == '__main__':
     HI = HardwareInterface()
-    HI.run()
+    # HI.run()
+    HI.test_run()
