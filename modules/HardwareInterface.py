@@ -100,7 +100,7 @@ class HardwareInterface:
                 "current2": battery_monitor_data[3],
                 "current3": battery_monitor_data[5],
                 "error": battery_monitor_data[6],
-                "depth": 0,  # Example: Add defaults or fetch from sensors
+                "depth": 0,
                 "X": 0,
                 "Y": 0,
                 "Z": 0,
@@ -142,8 +142,7 @@ class HardwareInterface:
 
     def test_run(self):
         delay = 0.01
-        default_esc_value = 127
-        esc_data = [160, 160, 160, 160, 160, 160, 160, 160]
+        esc_data = [127, 127, 127, 127, 127, 127, 127, 127]
         while True:
             # self.write_ESCs()
             # # print(1)
@@ -152,6 +151,7 @@ class HardwareInterface:
             motor_value = input("Enter motor value (64 - 191): ")
             esc_data[int(motor_choice) - 1] = int(motor_value)
             self.write_ESCs(esc_data)
+            time.sleep(delay)
 
 if __name__ == '__main__':
     HI = HardwareInterface()
