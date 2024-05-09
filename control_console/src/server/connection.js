@@ -37,6 +37,25 @@ export default {
 
     getInputData() {
         return orinApi.get("/get_input_data");
-    }
+    },
 
+    getOutputData() {
+        return orinApi.get("/get_output_data");
+    },
+
+    getSensorData() {
+        return orinApi.get("/get_sensor_data");
+    },
+
+    postInputData(data) {
+        return orinApi.post("/post_input_data", data);
+    },
+
+    postOutputData(data) {
+        return orinApi.post("/post_output_data", data);
+    },
+
+    postSensorData(data) {
+        return orinApi.post("/post_sensor_data", data);
+    }
 };
