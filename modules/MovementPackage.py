@@ -2,6 +2,7 @@ import time
 import logging
 import numpy as np
 import requests
+import json
 from datetime import datetime
 
 
@@ -379,5 +380,8 @@ if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', handlers=[logging.FileHandler("./logs/movement.log"), logging.StreamHandler()])
     movement_logger = logging.getLogger("MovementPackage")
     movement_logger.setLevel(logging.INFO)
-    movement_package = MovementPackage(movement_logger, "http://192.168.0.104:5000")
+    with open('./configs/movement_package.json') as f:
+            config = json.load(f)
+    base_url = config["baseUrl"]
+    movement_package = MovementPackage(movement_logger, base_url)
     movement_package.run()
