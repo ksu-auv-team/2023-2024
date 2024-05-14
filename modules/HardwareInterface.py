@@ -157,5 +157,5 @@ class HardwareInterface:
 
 if __name__ == '__main__':
     HI = HardwareInterface()
-    # HI.run()
-    HI.test_run()
+    HI.run()
+    # HI.test_run()
