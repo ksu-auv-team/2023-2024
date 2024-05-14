@@ -289,6 +289,11 @@ class MovementPackage:
         self.neural_network_data = {}
         self.sensors_data = {}
         
+        self.in_min = -1
+        self.in_max = 1
+        self.out_min = 0
+        self.out_max = 256
+        
         self.Thruster_Values = [127, 127, 127, 127, 127, 127, 127, 127]
         
     def get_sensors_data(self):
@@ -326,17 +331,19 @@ class MovementPackage:
         if abs(X) >= 0.1:
             df = X / 4
             for i in range(4):
-                self.Thruster_Values[i] = self.mapping(df * np.cos(45))
+                self.Thruster_Values[i] = int(self.mapping(df * np.cos(45)))
         elif abs(Y) >= 0.1:
             df = Y / 4
             for i in range(4):
-                self.Thruster_Values[i] = self.mapping(df * np.cos(45))
+                self.Thruster_Values[i] = int(self.mapping(df * np.cos(45)))
         elif abs(Yaw) >= 0.1:
             pass
         
         # Vertical Motor Mapping
         if abs(Z) >= 0.1:
-            pass
+            df = Z
+            for i in range(4, 8):
+                self.Thruster_Values[i] = int(self.mapping(df))
         elif abs(Pitch) >= 0.1:
             pass
         elif abs(Roll) >= 0.1:
@@ -344,14 +351,14 @@ class MovementPackage:
         
     def save_data(self, data1, data2, data3, data4, data5):
         output_data = {
-            "M1": round(self.Thruster_Values[0]),
-            "M2": round(self.Thruster_Values[1]),
-            "M3": round(self.Thruster_Values[2]),
-            "M4": round(self.Thruster_Values[3]),
-            "M5": round(self.Thruster_Values[4]),
-            "M6": round(self.Thruster_Values[5]),
-            "M7": round(self.Thruster_Values[6]),
-            "M8": round(self.Thruster_Values[7]),
+            "M1": self.Thruster_Values[0],
+            "M2": self.Thruster_Values[1],
+            "M3": self.Thruster_Values[2],
+            "M4": self.Thruster_Values[3],
+            "M5": self.Thruster_Values[4],
+            "M6": self.Thruster_Values[5],
+            "M7": self.Thruster_Values[6],
+            "M8": self.Thruster_Values[7],
             "Claw": 127,
             "Torp1": 0,
             "Torp2": 0
