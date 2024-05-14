@@ -379,7 +379,7 @@ class MovementPackage:
 
     def run(self):
         data = self.get_data()
-        data = [data["X"], data["Y"], data["Z"], data["Pitch"], data["Roll"], data["Yaw"], data["Claw"], data["Torp1"], data["Torp2"]]
+        data = [data["X"], data["Y"], data["Z"], data["pitch"], data["roll"], data["yaw"], data["claw"], data["torp1"], data["torp2"]]
         self.convert_to_motor_values(data)
         self.save_data()
         self.movement_logger.info(f"Thruster Values: {self.Thruster_Values}")
