@@ -30,6 +30,8 @@ class CM:
             self.config = self.config['FlightController']
         
         self.joy_data = []
+        
+        del self.config['_comment']
 
         # Each element in the map list is a list with three elements: element 0 is the button number, element 1 is the axis number, and element 2 is whether the axis is inverted.
         self.map = self.config
@@ -37,7 +39,7 @@ class CM:
         self.out_data = {"Arm": 0, "X": 0.0, "Y": 0.0, "Z": 0.0, "pitch": 0.0, "roll": 0.0, "yaw": 0.0, "claw": 0.0, "torp1": 0, "torp2": 0}
         self.mapping_choice = mapping_choice
 
-        orin_ip = '192.168.1.246'
+        orin_ip = '192.168.0.104'
         self.url = f"http://{orin_ip}:5000/input"
 
         # Configure logging
@@ -106,6 +108,7 @@ class CM:
             #     continue  # Skip this mapping if the required button is not pressed
 
             # Retrieve the axis value
+            
             if axis_index is not None:
                 value = self.joy_data[axis_index]
                 if invert:
@@ -154,8 +157,8 @@ class CM:
             self.parse_mapping()
             self.map_data()
             self.post_data()
-            # self.log_output(version = 0)
-            print(self.out_data)
+            self.log_output(version = 0)
+            # print(self.out_data)
             pygame.time.wait(10)
             
     def test_run(self):
@@ -169,5 +172,5 @@ class CM:
 
 if __name__ == "__main__":
     cm = CM()
-    # cm.run()
-    cm.test_run()
+    cm.run()
+    # cm.test_run()
