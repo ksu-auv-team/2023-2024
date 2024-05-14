@@ -37,8 +37,7 @@ class CM:
         self.out_data = {"Arm": 0, "X": 0.0, "Y": 0.0, "Z": 0.0, "pitch": 0.0, "roll": 0.0, "yaw": 0.0, "claw": 0.0, "torp1": 0, "torp2": 0}
         self.mapping_choice = mapping_choice
 
-
-        orin_ip = '192.168.0.103'
+        orin_ip = '192.168.1.246'
         self.url = f"http://{orin_ip}:5000/input"
 
         # Configure logging
@@ -103,8 +102,8 @@ class CM:
             button_index, axis_index, invert = mapping
 
             # Check if there's a specific button press required for this control
-            if button_index is not None and not self.joy_data[button_index]:
-                continue  # Skip this mapping if the required button is not pressed
+            # if button_index is not None and not self.joy_data[button_index]:
+            #     continue  # Skip this mapping if the required button is not pressed
 
             # Retrieve the axis value
             if axis_index is not None:
@@ -158,7 +157,17 @@ class CM:
             # self.log_output(version = 0)
             print(self.out_data)
             pygame.time.wait(10)
+            
+    def test_run(self):
+        while True:
+            axis = input('Enter axis (X, Y, Z, Pitch, Roll, Yaw): ')
+            value = float(input('Enter value (-1.0 to 1.0): '))
+            
+            self.out_data[axis] = value
+            
+            self.post_data()
 
 if __name__ == "__main__":
     cm = CM()
-    cm.run()
+    # cm.run()
+    cm.test_run()

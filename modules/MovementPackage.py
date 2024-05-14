@@ -287,35 +287,9 @@ class MovementPackage:
         self.controller_data = {}
         self.neural_network_data = {}
         self.sensors_data = {}
-        self.output_control_data_part_1 = [1500, 1500, 1500, 1500]
-        self.output_control_data_part_2 = [1500, 1500, 1500, 1500]
-
-        d1 = 0.3
-        d2 = 0.15
-        d3 = 0.2
-        dh = np.sqrt(d1**2 + d3**2)
-        dv = np.sqrt(d2**2 + d3**2)
-        Fx = np.sin(45) * dh
-        Fy = np.cos(45) * dv
-        Fz = -1
-        self.PID_Matrix_1 = np.array([
-            [Fx, Fx, Fx, Fx],
-            [Fy, Fy, Fy, Fy],
-            [dh, dh, dh, dh]
-        ]).transpose()
-        self.PID_Matrix_2 = np.array([
-            [Fz, Fz, Fz, Fz],
-            [Fy, -Fy, -Fy, Fy],
-            [Fx, -Fx, -Fx, Fx]
-        ]).transpose()
-
-        self.in_min = -1
-        self.in_max = 1
-        self.out_min = 0
-        self.out_max = 256
-
-        self.movement_logger.info('Movement Package initialized')
-
+        
+        self.Thruster_Values = [127, 127, 127, 127, 127, 127, 127, 127]
+        
     def get_sensors_data(self):
         response = requests.get(f"{self.base_url}/sensors")
         if response.status_code == 200:
@@ -337,23 +311,49 @@ class MovementPackage:
         Convert the received data into motor values using PID matrices.
         - data: an array representing sensor or controller data
         """
-        control_data_1 = np.dot(data[:3], self.PID_Matrix_1.T)
-        control_data_2 = np.dot(data[3:], self.PID_Matrix_2.T)
-        return control_data_1, control_data_2
-
+        # control_data_1 = np.dot(data[:3], self.PID_Matrix_1.T)
+        # control_data_2 = np.dot(data[3:], self.PID_Matrix_2.T)
+        # return control_data_1, control_data_2
+        X = data[0]
+        Y = data[1]
+        Z = data[2]
+        Pitch = data[3]
+        Roll = data[4]
+        Yaw = data[5]
+        
+        # Horizontal Motor Mapping
+        if abs(X) >= 0.1:
+            df = X / 4
+            for i in range(4):
+                self.Thruster_Values[i] = self.mapping(df * np.cos(45))
+        elif abs(Y) >= 0.1:
+            df = Y / 4
+            for i in range(4):
+                self.Thruster_Values[i] = self.mapping(df * np.cos(45))
+        elif abs(Yaw) >= 0.1:
+            pass
+        
+        # Vertical Motor Mapping
+        if abs(Z) >= 0.1:
+            pass
+        elif abs(Pitch) >= 0.1:
+            pass
+        elif abs(Roll) >= 0.1:
+            pass
+        
     def save_data(self, data1, data2, data3, data4, data5):
         output_data = {
-            "M1": round(self.mapping(data1[0])),
-            "M2": round(self.mapping(data1[1])),
-            "M3": round(self.mapping(data1[2])),
-            "M4": round(self.mapping(data1[3])),
-            "M5": round(self.mapping(data2[0])),
-            "M6": round(self.mapping(data2[1])),
-            "M7": round(self.mapping(data2[2])),
-            "M8": round(self.mapping(data2[3])),
-            "Claw": data3,
-            "Torp1": data4,
-            "Torp2": data5
+            "M1": round(self.Thruster_Values[0]),
+            "M2": round(self.Thruster_Values[1]),
+            "M3": round(self.Thruster_Values[2]),
+            "M4": round(self.Thruster_Values[3]),
+            "M5": round(self.Thruster_Values[4]),
+            "M6": round(self.Thruster_Values[5]),
+            "M7": round(self.Thruster_Values[6]),
+            "M8": round(self.Thruster_Values[7]),
+            "Claw": 127,
+            "Torp1": 0,
+            "Torp2": 0
         }
         response = requests.post(f"{self.base_url}/output", json=output_data)
         if response.status_code != 201:
@@ -379,5 +379,5 @@ if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', handlers=[logging.FileHandler("./logs/movement.log"), logging.StreamHandler()])
     movement_logger = logging.getLogger("MovementPackage")
     movement_logger.setLevel(logging.INFO)
-    movement_package = MovementPackage(movement_logger, "http://192.168.0.104:5000")
+    movement_package = MovementPackage(movement_logger, "http://192.168.1.246:5000")
     movement_package.run()

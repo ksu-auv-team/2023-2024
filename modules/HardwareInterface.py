@@ -125,7 +125,9 @@ class HardwareInterface:
             # Check if all required keys are present in the output data
             required_keys = ["M1", "M2", "M3", "M4", "M5", "M6", "M7", "M8", "Claw", "Torp1", "Torp2"]
             if all(key in output_data for key in required_keys):
-                esc_values = [output_data[key] for key in required_keys[:8]]  # Get ESC values
+                # esc_values = [output_data["M1"], output_data["M2"], output_data["M3"], output_data["M4"], 
+                #               output_data["M5"], output_data["M6"], output_data["M7"], output_data["M8"]]
+                esc_values = [output_data[key] for key in required_keys[:8]]
                 claw_torp_values = [output_data["Claw"], output_data["Torp1"], output_data["Torp2"]]
             else:
                 # Log an error and use default values if some data is missing

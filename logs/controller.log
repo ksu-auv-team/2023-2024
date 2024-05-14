@@ -4065,3 +4065,13 @@
 2024-04-26 18:20:24 - Mapped data: {'Arm': 1, 'X': -0.02, 'Y': 0.0, 'Z': -0.15, 'pitch': 0.0, 'roll': 0.0, 'yaw': 0.0, 'claw': 0.0, 'torp1': 0, 'torp2': 0, 'Yaw': 0.07, 'Claw': -0.48, 'Torpedo_1': 0, 'Torpedo_2': 0}
 2024-04-26 18:20:24 - Error sending data: HTTPConnectionPool(host='192.168.0.103', port=5000): Max retries exceeded with url: /input (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x11e21d730>: Failed to establish a new connection: [Errno 61] Connection refused'))
 2024-04-26 18:20:24 - Mapped data: {'Arm': 1, 'X': -0.02, 'Y': 0.0, 'Z': -0.15, 'pitch': 0.0, 'roll': 0.0, 'yaw': 0.0, 'claw': 0.0, 'torp1': 0, 'torp2': 0, 'Yaw': 0.07, 'Claw': -0.48, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-05-11 13:35:51 - Failed to send data: Data added
+2024-05-11 13:36:01 - Failed to send data: Data added
+2024-05-11 13:36:29 - Failed to send data: Data added
+2024-05-11 13:37:01 - Failed to send data: Data added
+2024-05-11 13:41:06 - Failed to send data: Data added
+2024-05-11 13:41:42 - Failed to send data: Data added
+2024-05-11 13:42:47 - Failed to send data: Data added
+2024-05-11 13:42:54 - Failed to send data: Data added
+2024-05-11 13:43:05 - Failed to send data: Data added
+2024-05-11 13:43:13 - Failed to send data: Data added
