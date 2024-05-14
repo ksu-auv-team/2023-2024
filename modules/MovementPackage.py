@@ -411,6 +411,7 @@ class MovementPackage:
                 continue
 
             self.convert_to_motor_values(data)
+            self.save_data()
             print(self.Thruster_Values)
 
 if __name__ == "__main__":
@@ -421,5 +422,5 @@ if __name__ == "__main__":
             config = json.load(f)
     base_url = config["baseUrl"]
     movement_package = MovementPackage(movement_logger, base_url)
-    movement_package.run()
-    # movement_package.test_run()
+    # movement_package.run()
+    movement_package.test_run()
