@@ -378,8 +378,11 @@ class MovementPackage:
         return (x - self.in_min) * (self.out_max - self.out_min) / (self.in_max - self.in_min) + self.out_min
 
     def run(self):
-        time.sleep(10)
-        data = self.get_data()
+        # time.sleep(10)
+        if self.get_data() is None:
+            return
+        else:
+            data = self.get_data()
         data = [data["X"], data["Y"], data["Z"], data["pitch"], data["roll"], data["yaw"], data["claw"], data["torp1"], data["torp2"]]
         self.convert_to_motor_values(data)
         self.save_data()
