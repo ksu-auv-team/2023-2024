@@ -417,5 +417,5 @@ if __name__ == "__main__":
             config = json.load(f)
     base_url = config["baseUrl"]
     movement_package = MovementPackage(movement_logger, base_url)
-    # movement_package.run()
-    movement_package.test_run()
+    movement_package.run()
+    # movement_package.test_run()
