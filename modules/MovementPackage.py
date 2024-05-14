@@ -317,9 +317,6 @@ class MovementPackage:
         Convert the received data into motor values using PID matrices.
         - data: an array representing sensor or controller data
         """
-        # control_data_1 = np.dot(data[:3], self.PID_Matrix_1.T)
-        # control_data_2 = np.dot(data[3:], self.PID_Matrix_2.T)
-        # return control_data_1, control_data_2
         X = data[0]
         Y = data[1]
         Z = data[2]
@@ -327,29 +324,39 @@ class MovementPackage:
         Roll = data[4]
         Yaw = data[5]
         
+        deadzone = 0.1
+        
         # Horizontal Motor Mapping
-        if abs(X) >= 0.1:
-            df = X / 4
+        if abs(X) >= deadzone:
+            df = X
             for i in range(4):
                 self.Thruster_Values[i] = int(self.mapping(df * np.cos(45)))
-        elif abs(Y) >= 0.1:
-            df = Y / 4
-            for i in range(4):
-                self.Thruster_Values[i] = int(self.mapping(df * np.cos(45)))
-        elif abs(Yaw) >= 0.1:
+        elif abs(Y) >= deadzone:
+            df = Y
+            self.Thruster_Values[0] = int(self.mapping(-1 * df * np.cos(45)))
+            self.Thruster_Values[1] = int(self.mapping(df * np.cos(45)))
+            self.Thruster_Values[2] = int(self.mapping(-1 * df * np.cos(45)))
+            self.Thruster_Values[3] = int(self.mapping(df * np.cos(45)))
+        elif abs(Yaw) >= deadzone:
             pass
+        else:
+            for i in range(4):
+                self.Thruster_Values[i] = 127
         
         # Vertical Motor Mapping
-        if abs(Z) >= 0.1:
+        if abs(Z) >= deadzone:
             df = Z
             for i in range(4, 8):
-                self.Thruster_Values[i] = int(self.mapping(df))
-        elif abs(Pitch) >= 0.1:
+                self.Thruster_Values[i] = int(self.mapping(-1 * df))
+        elif abs(Pitch) >= deadzone:
             pass
-        elif abs(Roll) >= 0.1:
+        elif abs(Roll) >= deadzone:
             pass
+        else:
+            for i in range(4, 8):
+                self.Thruster_Values[i] = 127
         
-    def save_data(self, data1, data2, data3, data4, data5):
+    def save_data(self):
         output_data = {
             "M1": self.Thruster_Values[0],
             "M2": self.Thruster_Values[1],
@@ -371,17 +378,32 @@ class MovementPackage:
         return (x - self.in_min) * (self.out_max - self.out_min) / (self.in_max - self.in_min) + self.out_min
 
     def run(self):
+        pass
+            
+    def test_run(self):
         while True:
-            self.controller_data = self.get_data()
-            # self.sensors_data = self.get_sensors_data()
-            #  and self.sensors_data
-            if self.controller_data:
-                # self.neural_network_data = self.neural_network_data
-                self.output_control_data_part_1, self.output_control_data_part_2 = self.convert_to_motor_values(np.array([self.controller_data["X"], self.controller_data["Y"], self.controller_data["Z"], self.controller_data["pitch"], self.controller_data["roll"], self.controller_data["yaw"]]))
-                self.save_data(self.output_control_data_part_1, self.output_control_data_part_2, 127, 0, 0)
+            input_axis = input("Enter which axis to test (X, Y, Z, pitch, roll, yaw): ")
+            input_value = float(input("Enter the value to test: "))
+            
+            data = [0, 0, 0, 0, 0, 0]
+            if input_axis == "X":
+                data[0] = input_value
+            elif input_axis == "Y":
+                data[1] = input_value
+            elif input_axis == "Z":
+                data[2] = input_value
+            elif input_axis == "pitch":
+                data[3] = input_value
+            elif input_axis == "roll":
+                data[4] = input_value
+            elif input_axis == "yaw":
+                data[5] = input_value
             else:
-                self.movement_logger.error("Failed to get controller or sensors data")
-            time.sleep(0.01)
+                print("Invalid axis")
+                continue
+
+            self.convert_to_motor_values(data)
+            print(self.Thruster_Values)
 
 if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', handlers=[logging.FileHandler("./logs/movement.log"), logging.StreamHandler()])
@@ -391,4 +413,5 @@ if __name__ == "__main__":
             config = json.load(f)
     base_url = config["baseUrl"]
     movement_package = MovementPackage(movement_logger, base_url)
-    movement_package.run()
+    # movement_package.run()
+    movement_package.test_run()
