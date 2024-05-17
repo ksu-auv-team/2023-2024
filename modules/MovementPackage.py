@@ -291,8 +291,8 @@ class MovementPackage:
         
         self.in_min = -1
         self.in_max = 1
-        self.out_min = 0
-        self.out_max = 256
+        self.out_min = 64
+        self.out_max = 191
         
         self.Thruster_Values = [127, 127, 127, 127, 127, 127, 127, 127]
         
@@ -325,20 +325,22 @@ class MovementPackage:
         Yaw = data[5]
         
         deadzone = 0.1
+        motor_mapping = np.array([[1, -1, -1, 1],
+                                  [-1, 1, 1, -1]])
         
         # Horizontal Motor Mapping
         if abs(X) >= deadzone:
             df = X
-            for i in range(4):
-                self.Thruster_Values[i] = int(self.mapping(df * np.cos(45)))
+            for i in range(0, 4):
+                self.Thruster_Values[i] = int(self.mapping(df * motor_mapping[0][i]))
         elif abs(Y) >= deadzone:
             df = Y
-            self.Thruster_Values[0] = int(self.mapping(-1 * df * np.cos(45)))
-            self.Thruster_Values[1] = int(self.mapping(df * np.cos(45)))
-            self.Thruster_Values[2] = int(self.mapping(-1 * df * np.cos(45)))
-            self.Thruster_Values[3] = int(self.mapping(df * np.cos(45)))
+            for i in range(0, 4):
+                self.Thruster_Values[i] = int(self.mapping(df * motor_mapping[0][i]))
         elif abs(Yaw) >= deadzone:
-            pass
+            df = Z
+            for i in range(0, 4):
+                self.Thruster_Values[i] = int(self.mapping(df * motor_mapping[0][i]))
         else:
             for i in range(4):
                 self.Thruster_Values[i] = 127
@@ -347,11 +349,17 @@ class MovementPackage:
         if abs(Z) >= deadzone:
             df = Z
             for i in range(4, 8):
-                self.Thruster_Values[i] = int(self.mapping(-1 * df))
+                self.Thruster_Values[i] = int(self.mapping(df * motor_mapping[1][i-4]))
         elif abs(Pitch) >= deadzone:
-            pass
+            df = Pitch
+            for i in range(4, 8):
+                self.Thruster_Values[i] = int(self.mapping(df))
         elif abs(Roll) >= deadzone:
-            pass
+            df = Roll
+            self.Thruster_Values[4] = int(self.mapping(df))
+            self.Thruster_Values[5] = int(self.mapping(df * -1))
+            self.Thruster_Values[6] = int(self.mapping(df))
+            self.Thruster_Values[7] = int(self.mapping(df * -1))
         else:
             for i in range(4, 8):
                 self.Thruster_Values[i] = 127
@@ -390,29 +398,34 @@ class MovementPackage:
             
     def test_run(self):
         while True:
-            input_axis = input("Enter which axis to test (X, Y, Z, pitch, roll, yaw): ")
-            input_value = float(input("Enter the value to test: "))
-            
-            data = [0, 0, 0, 0, 0, 0]
-            if input_axis == "X":
-                data[0] = input_value
-            elif input_axis == "Y":
-                data[1] = input_value
-            elif input_axis == "Z":
-                data[2] = input_value
-            elif input_axis == "pitch":
-                data[3] = input_value
-            elif input_axis == "roll":
-                data[4] = input_value
-            elif input_axis == "yaw":
-                data[5] = input_value
-            else:
-                print("Invalid axis")
-                continue
+            try:
+                input_axis = input("Enter which axis to test (X, Y, Z, pitch, roll, yaw): ")
+                input_value = float(input("Enter the value to test: "))
+                data = [0, 0, 0, 0, 0, 0]
+                if input_axis == "X":
+                    data[0] = input_value
+                elif input_axis == "Y":
+                    data[1] = input_value
+                elif input_axis == "Z":
+                    data[2] = input_value
+                elif input_axis == "pitch":
+                    data[3] = input_value
+                elif input_axis == "roll":
+                    data[4] = input_value
+                elif input_axis == "yaw":
+                    data[5] = input_value
+                else:
+                    print("Invalid axis")
+                    continue
 
-            self.convert_to_motor_values(data)
-            self.save_data()
-            print(self.Thruster_Values)
+                self.convert_to_motor_values(data)
+                # self.save_data()
+                print(self.Thruster_Values)
+            except KeyboardInterrupt as e:
+                exit()      
+            except:
+                print("Invalid data")
+            
 
 if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', handlers=[logging.FileHandler("./logs/movement.log"), logging.StreamHandler()])
