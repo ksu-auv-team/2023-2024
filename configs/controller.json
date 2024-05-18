@@ -1,4 +1,7 @@
 {
+    "labUrl": "http://192.168.0.104:5000",
+    "poolUrl": "http://192.168.1.246:5000",
+
     "Controller": {
         "_comment": ["button", "axis", "inverted"],
         "Arm": [null, 19, 0], 

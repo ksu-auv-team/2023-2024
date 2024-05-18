@@ -3,6 +3,8 @@ import requests
 import logging
 import pygame
 import json
+import argparse
+import sys
 
 # Mapping choices
 # - regular: The default mapping.
@@ -21,13 +23,18 @@ import json
 
 
 class CM:
-    def __init__(self, mapping_choice : str = 'regular'):
+    def __init__(self, mapping_choice : str = 'regular', args: list = sys.argv):
         self.joystick = None
         self.init_joystick()
 
         with open('configs/controller.json') as f:
             self.config = json.load(f)
+            if args.P:
+                self.baseurl = self.config['poolUrl']
+            else:
+                self.baseurl = self.config['labUrl']
             self.config = self.config['FlightController']
+
         
         self.joy_data = []
         
@@ -171,6 +178,10 @@ class CM:
             self.post_data()
 
 if __name__ == "__main__":
-    cm = CM()
+    args = argparse.ArgumentParser()
+    args.add_argument("--P", help = "Use the pool IP address", actions = "store_true")
+    args.add_argument("--L", help = "Use the lab IP address", actions = "store_true")
+    args = args.parse_args()
+    cm = CM(args)
     cm.run()
     # cm.test_run()

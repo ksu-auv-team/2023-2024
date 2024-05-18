@@ -2,16 +2,21 @@ import requests
 import smbus2
 import time
 import json
+import sys
+import argparse
 
 
 class HardwareInterface:
-    def __init__(self):
+    def __init__(self, args: list = sys.argv):
         self.bus = smbus2.SMBus(7)
 
         with open('./configs/hardware_interface.json') as f:
             self.config = json.load(f)
 
-        self.base_url = self.config["baseUrl"]
+        if args.P:
+            self.baseurl = self.config['poolUrl']
+        else:
+            self.baseurl = self.config['labUrl']
 
     def write_ESCs(self, data = [127, 127, 127, 127, 127, 127, 127, 127]):
         device_address = 8
@@ -156,6 +161,10 @@ class HardwareInterface:
             time.sleep(delay)
 
 if __name__ == '__main__':
-    HI = HardwareInterface()
+    args = argparse.ArgumentParser()
+    args.add_argument("--P", help = "Use the pool IP address", actions = "store_true")
+    args.add_argument("--L", help = "Use the lab IP address", actions = "store_true")
+    args = args.parse_args()
+    HI = HardwareInterface(args)
     # HI.run()
     HI.test_run()

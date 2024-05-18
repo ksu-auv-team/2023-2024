@@ -4,6 +4,7 @@ import numpy as np
 import requests
 import json
 from datetime import datetime
+import argparse
 
 
 # PID class
@@ -418,9 +419,16 @@ if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', handlers=[logging.FileHandler("./logs/movement.log"), logging.StreamHandler()])
     movement_logger = logging.getLogger("MovementPackage")
     movement_logger.setLevel(logging.INFO)
+    args = argparse.ArgumentParser()
+    args.add_argument("--P", help = "Use the pool IP address", actions = "store_true")
+    args.add_argument("--L", help = "Use the lab IP address", actions = "store_true")
+    args = args.parse_args()
     with open('./configs/movement_package.json') as f:
             config = json.load(f)
-    base_url = config["baseUrl"]
+    if args.P:
+        base_url = config["poolUrl"]
+    else:
+        base_url = config["labUrl"]
     movement_package = MovementPackage(movement_logger, base_url)
     # movement_package.run()
     movement_package.test_run()
