@@ -39,7 +39,7 @@ class CM:
         self.out_data = {"Arm": 0, "X": 0.0, "Y": 0.0, "Z": 0.0, "pitch": 0.0, "roll": 0.0, "yaw": 0.0, "claw": 0.0, "torp1": 0, "torp2": 0}
         self.mapping_choice = mapping_choice
 
-        orin_ip = '192.168.0.104'
+        orin_ip = '192.168.1.246'
         self.url = f"http://{orin_ip}:5000/input"
 
         # Configure logging
@@ -158,7 +158,6 @@ class CM:
             self.map_data()
             self.post_data()
             self.log_output(version = 0)
-            # print(self.out_data)
             pygame.time.wait(10)
             
     def test_run(self):

@@ -188,6 +188,7 @@ def add_input_data():
 
     db.session.add(new_input_data)
     db.session.commit()
+    # print(new_input_data)
 
     return 'Data added', 201
 
@@ -200,6 +201,7 @@ def get_input_data():
             'pitch': input_data.pitch, 'roll': input_data.roll, 'yaw': input_data.yaw,
             'claw': input_data.claw, 'torp1': input_data.torp1, 'torp2': input_data.torp2
         }
+        print(data_dict)
         return jsonify(data_dict)
     else:
         return jsonify({'message': 'No data found'}), 404

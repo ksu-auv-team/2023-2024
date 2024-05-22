@@ -325,7 +325,9 @@ class MovementPackage:
         Yaw = data[5]
         
         deadzone = 0.1
-        motor_mapping = np.array([[1, -1, -1, 1],
+        motor_mapping = np.array([[-1, 1, 1, -1], # Forward
+                                  [-1, -1, 1, 1], # Strafe
+                                  [-1, 1, -1, 1], # 
                                   [-1, 1, 1, -1]])
         
         # Horizontal Motor Mapping
@@ -336,11 +338,11 @@ class MovementPackage:
         elif abs(Y) >= deadzone:
             df = Y
             for i in range(0, 4):
-                self.Thruster_Values[i] = int(self.mapping(df * motor_mapping[0][i]))
+                self.Thruster_Values[i] = int(self.mapping(df * motor_mapping[1][i]))
         elif abs(Yaw) >= deadzone:
-            df = Z
+            df = Yaw
             for i in range(0, 4):
-                self.Thruster_Values[i] = int(self.mapping(df * motor_mapping[0][i]))
+                self.Thruster_Values[i] = int(self.mapping(df * motor_mapping[2][i]))
         else:
             for i in range(4):
                 self.Thruster_Values[i] = 127
@@ -349,7 +351,7 @@ class MovementPackage:
         if abs(Z) >= deadzone:
             df = Z
             for i in range(4, 8):
-                self.Thruster_Values[i] = int(self.mapping(df * motor_mapping[1][i-4]))
+                self.Thruster_Values[i] = int(self.mapping(df * motor_mapping[3][i-4]))
         elif abs(Pitch) >= deadzone:
             df = Pitch
             for i in range(4, 8):
@@ -386,15 +388,14 @@ class MovementPackage:
         return (x - self.in_min) * (self.out_max - self.out_min) / (self.in_max - self.in_min) + self.out_min
 
     def run(self):
-        # time.sleep(10)
-        if self.get_data() is None:
-            return
-        else:
+        time.sleep(10)
+        while True:
             data = self.get_data()
-        data = [data["X"], data["Y"], data["Z"], data["pitch"], data["roll"], data["yaw"], data["claw"], data["torp1"], data["torp2"]]
-        self.convert_to_motor_values(data)
-        self.save_data()
-        self.movement_logger.info(f"Thruster Values: {self.Thruster_Values}")
+            data = [data["X"], data["Y"], data["Z"], data["pitch"], data["roll"], data["yaw"], data["claw"], data["torp1"], data["torp2"]]
+            self.convert_to_motor_values(data)
+            self.save_data()
+            time.sleep(0.01)
+            # self.movement_logger.info(f"Thruster Values: {self.Thruster_Values}")
             
     def test_run(self):
         while True:
@@ -419,12 +420,9 @@ class MovementPackage:
                     continue
 
                 self.convert_to_motor_values(data)
-                # self.save_data()
                 print(self.Thruster_Values)
             except KeyboardInterrupt as e:
                 exit()      
-            except:
-                print("Invalid data")
             
 
 if __name__ == "__main__":
@@ -434,6 +432,7 @@ if __name__ == "__main__":
     with open('./configs/movement_package.json') as f:
             config = json.load(f)
     base_url = config["baseUrl"]
+    print("peepeepoopoo")
     movement_package = MovementPackage(movement_logger, base_url)
-    # movement_package.run()
-    movement_package.test_run()
+    movement_package.run()
+    # movement_package.test_run()
