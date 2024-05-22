@@ -229,21 +229,38 @@ def create_tables():
 # Main function
 def main(args: list = sys.argv):
     if args.run:
-        hardware_interface = subprocess.Popen(["python3", "modules/HardwareInterface.py"])
-        movement_package = subprocess.Popen(["python3", "modules/MovementPackage.py"])
-        neural_network = subprocess.Popen(["python3", "modules/NeuralNetwork.py"])
-        state_machine = subprocess.Popen(["python3", "modules/StateMachine.py"])
-        camera_package = subprocess.Popen(["python3", "modules/CameraPackage.py"])
+        if args.P:
+            hardware_interface = subprocess.Popen(["python3", "modules/HardwareInterface.py", '--P'])
+            movement_package = subprocess.Popen(["python3", "modules/MovementPackage.py", '--P'])
+            neural_network = subprocess.Popen(["python3", "modules/NeuralNetwork.py", '--P'])
+            state_machine = subprocess.Popen(["python3", "modules/StateMachine.py", '-PL'])
+            camera_package = subprocess.Popen(["python3", "modules/CameraPackage.py", '--P'])
+
+        hardware_interface = subprocess.Popen(["python3", "modules/HardwareInterface.py", '--L'])
+        movement_package = subprocess.Popen(["python3", "modules/MovementPackage.py", '--L'])
+        neural_network = subprocess.Popen(["python3", "modules/NeuralNetwork.py", '--L'])
+        state_machine = subprocess.Popen(["python3", "modules/StateMachine.py", '--L'])
+        camera_package = subprocess.Popen(["python3", "modules/CameraPackage.py", '--L'])
     if args.HI and not args.run:
-        hardware_interface = subprocess.Popen(["python3", "modules/HardwareInterface.py"])
+        if args.P:
+            hardware_interface = subprocess.Popen(["python3", "modules/HardwareInterface.py", '--P'])
+        hardware_interface = subprocess.Popen(["python3", "modules/HardwareInterface.py", '--L'])
     if args.MP and not args.run:
-        movement_package = subprocess.Popen(["python3", "modules/MovementPackage.py"])
+        if args.P:
+            movement_package = subprocess.Popen(["python3", "modules/MovementPackage.py", '--P'])
+        movement_package = subprocess.Popen(["python3", "modules/MovementPackage.py", '--L'])
     if args.NN and not args.run:
-        neural_network = subprocess.Popen(["python3", "modules/NeuralNetwork.py"])
+        if args.P: 
+            neural_network = subprocess.Popen(["python3", "modules/NeuralNetwork.py", '--P'])
+        neural_network = subprocess.Popen(["python3", "modules/NeuralNetwork.py", '--L'])
     if args.SM and not args.run:
-        state_machine = subprocess.Popen(["python3", "modules/StateMachine.py"])
+        if args.P:
+            state_machine = subprocess.Popen(["python3", "modules/StateMachine.py", '--P'])
+        state_machine = subprocess.Popen(["python3", "modules/StateMachine.py", '--L'])
     if args.CP and not args.run:
-        camera_package = subprocess.Popen(["python3", "modules/CameraPackage.py"])
+        if args.P:
+            camera_package = subprocess.Popen(["python3", "modules/CameraPackage.py", '--P'])
+        camera_package = subprocess.Popen(["python3", "modules/CameraPackage.py", '--L'])
     if not args.run and not args.HI and not args.MP and not args.NN and not args.SM:
         print("No arguments provided. Please provide an argument to run the main script.")
         print("Use the -h flag for more information.")
@@ -281,6 +298,8 @@ if __name__ == "__main__":
     args.add_argument("--NN", help="Run the Neural Network Package", action="store_true")
     args.add_argument("--SM", help="Run the State Machine", action="store_true")
     args.add_argument("--CP", help="Run the Camera Package", action="store_true")
+    args.add_argument("--P", help = "Use the pool IP address", actions = "store_true")
+    args.add_argument("--L", help = "Use the lab IP address", actions = "store_true")
 
     args = args.parse_args()
 

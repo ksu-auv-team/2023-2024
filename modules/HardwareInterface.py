@@ -2,6 +2,8 @@ import requests
 import smbus2
 import time
 import json
+import sys
+import argparse
 
 class MPU6050:
 
@@ -248,7 +250,7 @@ class MPU6050:
         return {'x': x, 'y': y, 'z': z}
 
 class HardwareInterface:
-    def __init__(self):
+    def __init__(self, args: list = sys.argv):
         self.bus = smbus2.SMBus(7)
 
         with open('./configs/hardware_interface.json') as f:
@@ -256,6 +258,11 @@ class HardwareInterface:
 
         self.base_url = self.config["baseUrl"]
         
+        if args.P:
+            self.baseurl = self.config['poolUrl']
+        else:
+            self.baseurl = self.config['labUrl']
+            
         self.IMU = MPU6050(0x69)      
         
         self.TEMP_CALIBRATION_OFFSET = -5.75
@@ -488,6 +495,10 @@ class HardwareInterface:
         time.sleep(delay)
 
 if __name__ == '__main__':
-    HI = HardwareInterface()
-    HI.run()
-    # HI.test_run([127, 127, 127, 127, 127, 127, 127, 127])
+    args = argparse.ArgumentParser()
+    args.add_argument("--P", help = "Use the pool IP address", actions = "store_true")
+    args.add_argument("--L", help = "Use the lab IP address", actions = "store_true")
+    args = args.parse_args()
+    HI = HardwareInterface(args)
+    # HI.run()
+    HI.test_run()
