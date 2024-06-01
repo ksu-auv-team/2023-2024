@@ -328,8 +328,8 @@ class MovementPackage:
         deadzone = 0.1
         motor_mapping = np.array([[-1, 1, 1, -1], # Forward
                                   [-1, -1, 1, 1], # Strafe
-                                  [-1, 1, -1, 1], # 
-                                  [-1, 1, 1, -1]])
+                                  [-1, 1, -1, 1], # Yaw
+                                  [-1, 1, 1, -1]]) # Vertical
         
         # Horizontal Motor Mapping
         if abs(X) >= deadzone:
@@ -366,6 +366,18 @@ class MovementPackage:
         else:
             for i in range(4, 8):
                 self.Thruster_Values[i] = 127
+                
+    def newConversion(self, input_data):
+        motor_mapping = np.array([
+            [-1, 1, 1, -1], # Forward
+            [-1, -1, 1, 1], # Strafe
+            [-1, 1, -1, 1], # Yaw
+            [-1, 1, 1, -1] # Vertical
+        ])
+        deadzone = 0.2
+        
+        desired_translation_yaw = input_data[:3]
+        desired_roll_pitch_z = input_data[3:]
         
     def save_data(self):
         output_data = {
@@ -392,7 +404,7 @@ class MovementPackage:
         time.sleep(10)
         while True:
             data = self.get_data()
-            data = [data["X"], data["Y"], data["Z"], data["pitch"], data["roll"], data["yaw"], data["claw"], data["torp1"], data["torp2"]]
+            data = [data["X"], data["Y"], data["Z"], data["Pitch"], data["Roll"], data["Yaw"], data["Claw"], data["Torpedo_1"], data["Torpedo_2"]]
             self.convert_to_motor_values(data)
             self.save_data()
             time.sleep(0.01)
@@ -410,11 +422,11 @@ class MovementPackage:
                     data[1] = input_value
                 elif input_axis == "Z":
                     data[2] = input_value
-                elif input_axis == "pitch":
+                elif input_axis == "Pitch":
                     data[3] = input_value
-                elif input_axis == "roll":
+                elif input_axis == "Roll":
                     data[4] = input_value
-                elif input_axis == "yaw":
+                elif input_axis == "Yaw":
                     data[5] = input_value
                 else:
                     print("Invalid axis")
@@ -431,15 +443,16 @@ if __name__ == "__main__":
     movement_logger = logging.getLogger("MovementPackage")
     movement_logger.setLevel(logging.INFO)
     args = argparse.ArgumentParser()
-    args.add_argument("--P", help = "Use the pool IP address", actions = "store_true")
-    args.add_argument("--L", help = "Use the lab IP address", actions = "store_true")
+    args.add_argument("--P", help = "Use the pool IP address", action = "store_true")
+    args.add_argument("--L", help = "Use the lab IP address", action = "store_true")
     args = args.parse_args()
     with open('./configs/movement_package.json') as f:
             config = json.load(f)
-    if args.P:
-        base_url = config["poolUrl"]
-    else:
-        base_url = config["labUrl"]
+    # if args.P:
+    #     base_url = config["poolUrl"]
+    # else:
+    #     base_url = config["labUrl"]
+    base_url = "http://192.168.1.246:5000"
     movement_package = MovementPackage(movement_logger, base_url)
     movement_package.run()
     # movement_package.test_run()

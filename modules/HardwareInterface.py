@@ -255,15 +255,15 @@ class HardwareInterface:
 
         with open('./configs/hardware_interface.json') as f:
             self.config = json.load(f)
-
-        self.base_url = self.config["baseUrl"]
+                    
+        # if args.P:
+        #     self.baseurl = self.config['poolUrl']
+        # else:
+        #     self.baseurl = self.config['labUrl']
         
-        if args.P:
-            self.baseurl = self.config['poolUrl']
-        else:
-            self.baseurl = self.config['labUrl']
+        self.baseurl = "http://192.168.1.246:5000"
             
-        self.IMU = MPU6050(0x69)      
+        self.IMU = MPU6050(0x69)   
         
         self.TEMP_CALIBRATION_OFFSET = -5.75
 
@@ -340,7 +340,7 @@ class HardwareInterface:
         value = ((data[0] << 8) | data[1]) & 0x3FFF
         # Convert to Celsius
         temp = ((value * 165.0) / 16383.0) - 40.0 + self.TEMP_CALIBRATION_OFFSET
-        print(f"Raw Temp Value: {value}, Converted Temp: {temp}")  # Debugging statement
+        # print(f"Raw Temp Value: {value}, Converted Temp: {temp}")  # Debugging statement
         return temp
 
     def convert_humi(self, data):
@@ -357,7 +357,7 @@ class HardwareInterface:
         value = ((data[0] << 8) | data[1]) & 0x3FFF
         # Convert to percentage
         humi = (value / 16383.0) * 100
-        print(f"Raw Humi Value: {value}, Converted Humi: {humi}")  # Debugging statement
+        # print(f"Raw Humi Value: {value}, Converted Humi: {humi}")  # Debugging statement
         return humi
 
     def read_Temp_Humi(self):
@@ -367,7 +367,7 @@ class HardwareInterface:
         time.sleep(0.1)
         temp = self.bus.read_i2c_block_data(device_address, 0, 2)
         
-        self.bus.write_bytes(device_address, 0x01)
+        self.bus.write_byte(device_address, 0x01)
         time.sleep(0.1)
         humi = self.bus.read_i2c_block_data(device_address, 0, 2)
         
@@ -426,17 +426,17 @@ class HardwareInterface:
         time.sleep(10)  # Wait for the server to start
 
         while True:
-            battery_monitor_data = self.read_BatteryMonitor()
+            # battery_monitor_data = self.read_BatteryMonitor()
             IMU_data = self.read_IMU()
             temp_humi_data = self.read_Temp_Humi()
             sensor_data = {
-                "voltage1": battery_monitor_data[0],
-                "voltage2": battery_monitor_data[2],
-                "voltage3": battery_monitor_data[4],
-                "current1": battery_monitor_data[1],
-                "current2": battery_monitor_data[3],
-                "current3": battery_monitor_data[5],
-                "error": battery_monitor_data[6],
+                "voltage1": 0,
+                "voltage2": 0,
+                "voltage3": 0,
+                "current1": 0,
+                "current2": 0,
+                "current3": 0,
+                "error": 0,
                 "depth": 0,
                 "X": IMU_data["accel_x"],
                 "Y": IMU_data["accel_y"],
@@ -450,15 +450,15 @@ class HardwareInterface:
                 "heading": 0
             }
 
-            # # Post sensor data to the server
-            # self.post_data("sensors", sensor_data)
+            # Post sensor data to the server
+            self.post_data("sensors", sensor_data)
 
             # Get output data from the server
             output_data = self.get_data("output")
 
             # Debug 
             # print(output_data)
-            print(sensor_data)
+            # print(sensor_data)
 
             # Check if all required keys are present in the output data
             required_keys = ["M1", "M2", "M3", "M4", "M5", "M6", "M7", "M8", "Claw", "Torp1", "Torp2"]
@@ -496,9 +496,9 @@ class HardwareInterface:
 
 if __name__ == '__main__':
     args = argparse.ArgumentParser()
-    args.add_argument("--P", help = "Use the pool IP address", actions = "store_true")
-    args.add_argument("--L", help = "Use the lab IP address", actions = "store_true")
+    args.add_argument("--P", help = "Use the pool IP address", action = "store_true")
+    args.add_argument("--L", help = "Use the lab IP address", action = "store_true")
     args = args.parse_args()
-    HI = HardwareInterface(args)
+    HI = HardwareInterface(args=args)
     # HI.run()
     HI.test_run()
