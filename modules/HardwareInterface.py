@@ -499,31 +499,33 @@ class HardwareInterface:
         
         # This is IMU testing code
         while True:
-            IMU_data = self.read_IMU()
-            temp_humi_data = self.read_Temp_Humi()
-            sensor_data = {
-                "voltage1": 0,
-                "voltage2": 0,
-                "voltage3": 0,
-                "current1": 0,
-                "current2": 0,
-                "current3": 0,
-                "error": 0,
-                "depth": 0,
-                "X": IMU_data["accel_x"],
-                "Y": IMU_data["accel_y"],
-                "Z": IMU_data["accel_z"],
-                "pitch": IMU_data["gyro_x"],
-                "roll": IMU_data["gyro_y"],
-                "yaw": IMU_data["gyro_z"],
-                "temperature": temp_humi_data["temperature"],
-                "orin_temp": 0,
-                "humidity": temp_humi_data["humidity"],
-                "heading": 0
-            }
-            print(sensor_data)
-        
-        time.sleep(delay)
+            try:
+                IMU_data = self.read_IMU()
+                temp_humi_data = self.read_Temp_Humi()
+                sensor_data = {
+                    "voltage1": 0,
+                    "voltage2": 0,
+                    "voltage3": 0,
+                    "current1": 0,
+                    "current2": 0,
+                    "current3": 0,
+                    "error": 0,
+                    "depth": 0,
+                    "X": IMU_data["accel_x"],
+                    "Y": IMU_data["accel_y"],
+                    "Z": IMU_data["accel_z"],
+                    "pitch": IMU_data["gyro_x"],
+                    "roll": IMU_data["gyro_y"],
+                    "yaw": IMU_data["gyro_z"],
+                    "temperature": temp_humi_data["temperature"],
+                    "orin_temp": 0,
+                    "humidity": temp_humi_data["humidity"],
+                    "heading": 0
+                }
+                print(sensor_data)
+                time.sleep(delay)
+            except OSError as e:        
+                time.sleep(delay)
 
 if __name__ == '__main__':
     args = argparse.ArgumentParser()
