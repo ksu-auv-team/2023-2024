@@ -526,6 +526,7 @@ class HardwareInterface:
                 time.sleep(delay)
             except OSError as e:        
                 time.sleep(delay)
+                continue
 
 if __name__ == '__main__':
     args = argparse.ArgumentParser()
