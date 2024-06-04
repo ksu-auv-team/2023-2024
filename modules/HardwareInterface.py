@@ -262,9 +262,12 @@ class HardwareInterface:
         #     self.baseurl = self.config['labUrl']
         
         self.baseurl = "http://192.168.1.246:5000"
-            
-        self.IMU = MPU6050(0x69)   
         
+        try:
+            self.IMU = MPU6050(0x69)
+        except OSError as e:
+            print("Error initializing the MPU6050:", str(e))
+            self.IMU = None    
         self.TEMP_CALIBRATION_OFFSET = -5.75
 
     def write_ESCs(self, data = [127, 127, 127, 127, 127, 127, 127, 127]):
@@ -500,6 +503,13 @@ class HardwareInterface:
         # This is IMU testing code
         while True:
             try:
+                if self.IMU is None:
+                    print("IMU not initialized")
+                    time.sleep(delay)
+                    print("Retrying...")
+                    self.IMU = MPU6050(0x69)
+                    time.sleep(delay)
+                    continue
                 IMU_data = self.read_IMU()
                 temp_humi_data = self.read_Temp_Humi()
                 sensor_data = {
