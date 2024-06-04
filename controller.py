@@ -43,7 +43,7 @@ class CM:
         # Each element in the map list is a list with three elements: element 0 is the button number, element 1 is the axis number, and element 2 is whether the axis is inverted.
         self.map = self.config
 
-        self.out_data = {"Arm": 0, "X": 0.0, "Y": 0.0, "Z": 0.0, "pitch": 0.0, "roll": 0.0, "yaw": 0.0, "claw": 0.0, "torp1": 0, "torp2": 0}
+        self.out_data = {"Arm": 0, "X": 0.0, "Y": 0.0, "Z": 0.0}
         self.mapping_choice = mapping_choice
 
         orin_ip = '192.168.1.246'
@@ -149,8 +149,11 @@ class CM:
 
     def log_output(self, version: int = 0):
         if version == 0:
-            logging.info(self.out_data)
-            print(self.out_data)
+            # logging.info(self.out_data)
+            d = ''
+            for key in self.out_data:
+                d += f'{key}: {self.out_data[key]}     | '
+            print(d)
         elif version == 1:
             temp = ""
             for i in range(len(self.joy_data)):
@@ -178,9 +181,9 @@ class CM:
 
 if __name__ == "__main__":
     args = argparse.ArgumentParser()
-    args.add_argument("--P", help = "Use the pool IP address", actions = "store_true")
-    args.add_argument("--L", help = "Use the lab IP address", actions = "store_true")
-    args = args.parse_args()
-    cm = CM(args)
+    args.add_argument("--P", help = "Use the pool IP address", action = "store_true")
+    args.add_argument("--L", help = "Use the lab IP address", action = "store_true")
+    arges = args.parse_args()
+    cm = CM(args = arges)
     cm.run()
     # cm.test_run()

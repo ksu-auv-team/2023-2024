@@ -22,13 +22,6 @@ import time
 import sys
 import os
 
-# Import the necessary modules
-from modules.HardwareInterface import HardwareInterface
-from modules.MovementPackage import MovementPackage
-from modules.CameraPackage import CameraPackage
-from modules.NeuralNetwork import NeuralNetwork
-from modules.StateMachine import StateMachine
-
 # Creating the custom logger
 import logging
 logging.basicConfig(
@@ -118,6 +111,15 @@ class Input(db.Model):
                   {self.Z}, {self.pitch}, {self.roll}, \
                   {self.yaw}, {self.claw}, {self.torp1}, \
                   {self.torp2}>'
+                  
+class Objects(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    object = db.Column(db.String(50), nullable=False)
+    distance = db.Column(db.Float, nullable=False)
+    angle = db.Column(db.Float, nullable=False)
+
+    def __repr__(self):
+        return f'<{self.id}, {self.object}, {self.distance}, {self.angle}>'
 
 # Creating the flask routes to handle the data
 @app.route('/sensors', methods=['POST'])
@@ -183,8 +185,8 @@ def add_input_data():
     data = request.get_json()
 
     new_input_data = Input(X=data['X'], Y=data['Y'], Z=data['Z'],
-                           pitch=data['pitch'], roll=data['roll'], yaw=data['yaw'],
-                           claw=data['claw'], torp1=data['torp1'], torp2=data['torp2'])
+                           pitch=data['Pitch'], roll=data['Roll'], yaw=data['Yaw'],
+                           claw=data['Claw'], torp1=data['Torpedo_1'], torp2=data['Torpedo_2'])
 
     db.session.add(new_input_data)
     db.session.commit()
@@ -201,7 +203,31 @@ def get_input_data():
             'pitch': input_data.pitch, 'roll': input_data.roll, 'yaw': input_data.yaw,
             'claw': input_data.claw, 'torp1': input_data.torp1, 'torp2': input_data.torp2
         }
-        print(data_dict)
+        # print(data_dict)
+        return jsonify(data_dict)
+    else:
+        return jsonify({'message': 'No data found'}), 404
+
+@app.route('/objects', methods=['POST'])
+def add_object_data():
+    data = request.get_json()
+
+    new_object_data = Objects(object=data['object'], distance=data['distance'], angle=data['angle'])
+
+    db.session.add(new_object_data)
+    db.session.commit()
+
+    return 'Data added', 201
+
+@app.route('/objects', methods=['GET'])
+def get_object_data():
+    object_data = Objects.query.order_by(Objects.id.desc()).first()
+    if object_data:
+        data_dict = {
+            'object': object_data.object, 
+            'distance': object_data.distance, 
+            'angle': object_data.angle
+        }
         return jsonify(data_dict)
     else:
         return jsonify({'message': 'No data found'}), 404
@@ -261,7 +287,7 @@ def main(args: list = sys.argv):
         if args.P:
             camera_package = subprocess.Popen(["python3", "modules/CameraPackage.py", '--P'])
         camera_package = subprocess.Popen(["python3", "modules/CameraPackage.py", '--L'])
-    if not args.run and not args.HI and not args.MP and not args.NN and not args.SM:
+    if not args.run and not args.HI and not args.MP and not args.NN and not args.SM and not (args.P or args.L):
         print("No arguments provided. Please provide an argument to run the main script.")
         print("Use the -h flag for more information.")
         print("Exiting...")
@@ -298,8 +324,8 @@ if __name__ == "__main__":
     args.add_argument("--NN", help="Run the Neural Network Package", action="store_true")
     args.add_argument("--SM", help="Run the State Machine", action="store_true")
     args.add_argument("--CP", help="Run the Camera Package", action="store_true")
-    args.add_argument("--P", help = "Use the pool IP address", actions = "store_true")
-    args.add_argument("--L", help = "Use the lab IP address", actions = "store_true")
+    args.add_argument("--P", help = "Use the pool IP address", action = "store_true")
+    args.add_argument("--L", help = "Use the lab IP address", action = "store_true")
 
     args = args.parse_args()
 
