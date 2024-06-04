@@ -482,6 +482,12 @@ class HardwareInterface:
 
     def test_run(self, data):
         delay = 0.01
+        
+        # No movement package for testing purposes
+        # esc_data = data
+        # self.write_ESCs(esc_data)
+        
+        # This is manual input for testing motor directions
         # esc_data = [127, 127, 127, 127, 127, 127, 127, 127]
         # while True:
             # self.write_ESCs()
@@ -490,8 +496,33 @@ class HardwareInterface:
             # motor_choice = input("Enter motor number (1 - 8): ")
             # motor_value = input("Enter motor value (64 - 191): ")
             # esc_data[int(motor_choice) - 1] = int(motor_value)
-        esc_data = data
-        self.write_ESCs(esc_data)
+        
+        # This is IMU testing code
+        while True:
+            IMU_data = self.read_IMU()
+            temp_humi_data = self.read_Temp_Humi()
+            sensor_data = {
+                "voltage1": 0,
+                "voltage2": 0,
+                "voltage3": 0,
+                "current1": 0,
+                "current2": 0,
+                "current3": 0,
+                "error": 0,
+                "depth": 0,
+                "X": IMU_data["accel_x"],
+                "Y": IMU_data["accel_y"],
+                "Z": IMU_data["accel_z"],
+                "pitch": IMU_data["gyro_x"],
+                "roll": IMU_data["gyro_y"],
+                "yaw": IMU_data["gyro_z"],
+                "temperature": temp_humi_data["temperature"],
+                "orin_temp": 0,
+                "humidity": temp_humi_data["humidity"],
+                "heading": 0
+            }
+            print(sensor_data)
+        
         time.sleep(delay)
 
 if __name__ == '__main__':
