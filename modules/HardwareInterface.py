@@ -545,4 +545,4 @@ if __name__ == '__main__':
     args = args.parse_args()
     HI = HardwareInterface(args=args)
     # HI.run()
-    HI.test_run()
+    HI.test_run([127, 127, 127, 127, 127, 127, 127, 127])
