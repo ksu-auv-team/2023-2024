@@ -422,6 +422,18 @@ class HardwareInterface:
             print(f"Failed to get data, status code: {response.status_code}")
             return {}
 
+    def print_data(self, data):
+        """Prints the data in a human-readable format.
+
+        Args:
+            data (dict): The data to be printed.
+        """
+        s = ""
+        for key, value in data.items():
+            s += f"{key}: {value: .2f}     "
+        s += "\r"
+        print(s)
+
     def run(self):
         delay = 0.01
         default_esc_value = 127  # Default value for ESCs when data is missing or there's an error
