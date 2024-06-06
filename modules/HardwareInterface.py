@@ -431,7 +431,7 @@ class HardwareInterface:
         while True:
             # battery_monitor_data = self.read_BatteryMonitor()
             IMU_data = self.read_IMU()
-            temp_humi_data = self.read_Temp_Humi()
+            # temp_humi_data = self.read_Temp_Humi()
             sensor_data = {
                 "voltage1": 0,
                 "voltage2": 0,
@@ -447,9 +447,9 @@ class HardwareInterface:
                 "pitch": IMU_data["gyro_x"],
                 "roll": IMU_data["gyro_y"],
                 "yaw": IMU_data["gyro_z"],
-                "temperature": temp_humi_data["temperature"],
+                "temperature": 0,
                 "orin_temp": 0,
-                "humidity": temp_humi_data["humidity"],
+                "humidity": 0,
                 "heading": 0
             }
 
@@ -511,7 +511,7 @@ class HardwareInterface:
                     time.sleep(delay)
                     continue
                 IMU_data = self.read_IMU()
-                temp_humi_data = self.read_Temp_Humi()
+                # temp_humi_data = self.read_Temp_Humi()
                 sensor_data = {
                     "voltage1": 0,
                     "voltage2": 0,
@@ -527,9 +527,9 @@ class HardwareInterface:
                     "pitch": IMU_data["gyro_x"],
                     "roll": IMU_data["gyro_y"],
                     "yaw": IMU_data["gyro_z"],
-                    "temperature": temp_humi_data["temperature"],
+                    "temperature": 0,
                     "orin_temp": 0,
-                    "humidity": temp_humi_data["humidity"],
+                    "humidity": 0,
                     "heading": 0
                 }
                 print(sensor_data)
