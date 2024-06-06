@@ -253,11 +253,6 @@ class MPU6050:
         return [accel, gyro, temp]
 
 if __name__ == "__main__":
-    while True:
-        try:
-            mpu = MPU6050(0x69)
-            data = mpu.get_all_data()
-            print(data)
-        except OSError as e:
-            print(e)
-            continue
+    mpu = MPU6050(0x69)
+    data = mpu.get_all_data()
+    print(data)
