@@ -544,7 +544,7 @@ class HardwareInterface:
                     # "humidity": 0,
                     # "heading": 0
                 }
-                print(sensor_data)
+                self.print_data(sensor_data)
                 time.sleep(delay)
             except OSError as e:        
                 time.sleep(delay)
