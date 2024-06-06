@@ -5,7 +5,7 @@ class MPU6050:
     # Global Variables
     GRAVITIY_MS2 = 9.80665
     address = None
-    bus = smbus2.SMBus(1)
+    bus = smbus2.SMBus(7)
 
     # Scale Modifiers
     ACCEL_SCALE_MODIFIER_2G = 16384.0
