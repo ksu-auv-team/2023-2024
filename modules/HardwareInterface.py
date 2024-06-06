@@ -320,12 +320,12 @@ class HardwareInterface:
         
         # convert the data to single dictionary
         data = {
-            "accel_x": accel_data['x'],
-            "accel_y": accel_data['y'],
-            "accel_z": accel_data['z'],
-            "gyro_x": gyro_data['x'],
-            "gyro_y": gyro_data['y'],
-            "gyro_z": gyro_data['z']
+            "accel_x": round(accel_data['x'], 2),
+            "accel_y": round(accel_data['y'], 2),
+            "accel_z": round(accel_data['z'], 2),
+            "gyro_x": round(gyro_data['x'], 2),
+            "gyro_y": round(gyro_data['y'], 2),
+            "gyro_z": round(gyro_data['z'], 2)
         }
         return data
 
