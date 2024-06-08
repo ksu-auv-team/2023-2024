@@ -29,7 +29,7 @@ pygame==2.5.2
 pyparsing==3.1.1
 pyserial==3.5
 python-dateutil==2.8.2
-python-statemachine==2.2.0
+python-statemachine
 pytz==2023.3.post1
 PyYAML==6.0.1
 requests==2.31.0
