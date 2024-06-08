@@ -29,4 +29,11 @@ def monitoring():
     except Exception as err:
         return Response(f'Error {err}')
 
+@REQUEST_API.route('/stream2')
+def monitoring2():
+    try:
+        webcam = WebCam()
+        return Response(gen(webcam, 2), mimetype='multipart/x-mixed-replace: boundary=frame')
+    except Exception as err:
+        return Response(f'Error {err}')
 
