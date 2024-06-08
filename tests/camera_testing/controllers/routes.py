@@ -9,9 +9,8 @@ def get_blueprint():
     """Return the blueprint for the main app module"""
     return REQUEST_API
 
-
-def gen(webcam):
-    capture = cv2.VideoCapture(0)
+def gen(webcam, index):
+    capture = cv2.VideoCapture(index)
     if not capture:
         raise Exception("Error accessing the WebCam")
 
@@ -22,11 +21,12 @@ def gen(webcam):
             b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n\r\n'
         )
 
-
-@REQUEST_API.route('/stream')
+@REQUEST_API.route('/stream1')
 def monitoring():
     try:
         webcam = WebCam()
-        return Response(gen(webcam), mimetype='multipart/x-mixed-replace; boundary=frame')
+        return Response(gen(webcam, 0), mimetype='multipart/x-mixed-replace; boundary=frame')
     except Exception as err:
         return Response(f'Error {err}')
+
+
