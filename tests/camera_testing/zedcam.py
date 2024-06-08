@@ -2,12 +2,12 @@ import cv2
 
 
 cam = cv2.VideoCapture(0)
-if cam.isOpened():
-    continue
+
+if not cam.isOpened():
+    exit()
 else:
-    print('failed')
 
-while True:
-    ret, frame = cam.read()
+    while True:
+        ret, frame = cam.read()
 
-    print(len(frame))
+        print(len(frame))
