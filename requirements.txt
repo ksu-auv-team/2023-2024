@@ -18,7 +18,7 @@ itsdangerous==2.2.0
 Jinja2==3.1.3
 kiwisolver==1.4.5
 MarkupSafe==2.1.5
-numpy==1.26.4
+numpy
 numpysocket==1.0.1
 opencv-python==4.9.0.80
 packaging==23.2
