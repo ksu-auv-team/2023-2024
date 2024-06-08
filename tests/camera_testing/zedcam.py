@@ -1,13 +1,8 @@
-import cv2
+from flask import Flask
+import routes
 
+app = Flask(__name__)
+app.register_blueprint(routes.get_blueprint())
 
-cam = cv2.VideoCapture(0)
-
-if not cam.isOpened():
-    exit()
-else:
-
-    while True:
-        ret, frame = cam.read()
-
-        print(len(frame))
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', debug=True)
