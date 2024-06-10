@@ -6,7 +6,7 @@ while True:
         # Open i2c bus 1 and read one byte from address 80, offset 0
         bus = SMBus(7)
         # b = bus.read_byte_data(8, 0)
-        b = bus.write_i2c_block_data(0x08,  0, data)
+        b = bus.write_i2c_block_data(8,  0, data)
         print(b)
         bus.close()
     except Exception as e:
