@@ -261,7 +261,6 @@ def main(args: list = sys.argv):
             neural_network = subprocess.Popen(["python3", "modules/NeuralNetwork.py", '--P'])
             state_machine = subprocess.Popen(["python3", "modules/StateMachine.py", '-PL'])
             camera_package = subprocess.Popen(["python3", "modules/CameraPackage.py", '--P'])
-
         hardware_interface = subprocess.Popen(["python3", "modules/HardwareInterface.py", '--L'])
         movement_package = subprocess.Popen(["python3", "modules/MovementPackage.py", '--L'])
         neural_network = subprocess.Popen(["python3", "modules/NeuralNetwork.py", '--L'])
@@ -279,10 +278,6 @@ def main(args: list = sys.argv):
         if args.P: 
             neural_network = subprocess.Popen(["python3", "modules/NeuralNetwork.py", '--P'])
         neural_network = subprocess.Popen(["python3", "modules/NeuralNetwork.py", '--L'])
-    if args.SM and not args.run:
-        if args.P:
-            state_machine = subprocess.Popen(["python3", "modules/StateMachine.py", '--P'])
-        state_machine = subprocess.Popen(["python3", "modules/StateMachine.py", '--L'])
     if args.CP and not args.run:
         if args.P:
             camera_package = subprocess.Popen(["python3", "modules/CameraPackage.py", '--P'])
@@ -309,8 +304,6 @@ def main(args: list = sys.argv):
         movement_package.wait()
     if args.NN and not args.run:
         neural_network.wait()
-    if args.SM and not args.run:
-        state_machine.wait()
     if args.CP and not args.run:
         camera_package.wait()
 
@@ -322,7 +315,6 @@ if __name__ == "__main__":
     args.add_argument("--HI", help="Run the Hardware Interface", action="store_true")
     args.add_argument("--MP", help="Run the Movement Package", action="store_true")
     args.add_argument("--NN", help="Run the Neural Network Package", action="store_true")
-    args.add_argument("--SM", help="Run the State Machine", action="store_true")
     args.add_argument("--CP", help="Run the Camera Package", action="store_true")
     args.add_argument("--P", help = "Use the pool IP address", action = "store_true")
     args.add_argument("--L", help = "Use the lab IP address", action = "store_true")
