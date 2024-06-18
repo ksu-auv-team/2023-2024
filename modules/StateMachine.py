@@ -1,3 +1,33 @@
+'''temp holding
+Idle_to_Quarter_Speed_Turn_Left = Idle.to(Quarter_Speed_Turn_Left)
+Quarter_Speed_Turn_Left_to_Quarter_Speed_Right = Quarter_Speed_Turn_Left.to(Quarter_Speed_Turn_Right)
+Quarter_Speed_Turn_Right_to_Quarter_Speed_Turn_Left = Quarter_Speed_Turn_Right.to(Quarter_Speed_Turn_Left)
+Quarter_Speed_Turn_Left_to_Idle = Quarter_Speed_Turn_Left.to(Idle)
+Idle_to_Half_Speed_Forward = Idle.to(Half_Speed_Forward)
+Half_Speed_Forward_to_Idle = Half_Speed_Forward.to(Idle)
+Idle_to_Scan = Idle.to(Scan)
+Scan_to_Quarter_Speed_Vertical_Up = Scan.to(Quarter_Speed_Vertical_Up)
+Quarter_Speed_Vertical_Up_to_Idle = Quarter_Speed_Vertical_Up.to(Idle)
+Idle_to_Quarter_Speed_Lateral_Right = Idle.to(Quarter_Speed_Lateral_Right)
+Quarter_Speed_Lateral_Right_to_Idle = Quarter_Speed_Lateral_Right.to(Idle)
+Idle_to_Quarter_Speed_Forward = Idle.to(Quarter_Speed_Forward)
+Quarter_Speed_Forward_to_Idle = Quarter_Speed_Forward.to(Idle)
+Idle_to_Scan = Idle.to(Scan)
+Scan_to_Idle = Scan.to(Idle)
+Idle_to_Quarter_Speed_Backward = Idle.to(Quarter_Speed_Backward)
+Quarter_Speed_Backward_to_Idle = Quarter_Speed_Backward.to(Idle)
+Idle_to_Quarter_Speed_Lateral_Left = Idle.to(Quarter_Speed_Lateral_Left)
+Quarter_Speed_Lateral_Left_to_Idle = Quarter_Speed_Lateral_Left.to(Idle)
+Idle_to_Quarter_Speed_Forward = Idle.to(Quarter_Speed_Forward)
+Quarter_Speed_Forward_to_Idle = Quarter_Speed_Forward.to(Idle)
+Idle_to_Half_Speed_Forward = Idle.to(Half_Speed_Forward)
+Half_Speed_Forward_to_Idle = Half_Speed_Forward.to(Idle)
+Idle_to_Quarter_Speed_Turn_Right = Idle.to(Quarter_Speed_Turn_Right)
+Quarter_Speed_Turn_Right_to_Idle = Quarter_Speed_Turn_Right.to(Idle)
+Idle_to_Quarter_Speed_Forward = Idle.to(Quarter_Speed_Forward)
+Quarter_Speed_Forward_to_Idle = Quarter_Speed_Forward.to(Idle)
+'''
+
 from statemachine import StateMachine, State
 from statemachine.contrib.diagram import DotGraphMachine
 
@@ -69,38 +99,17 @@ class AUVStateMachine(StateMachine):
     # Define the transitions between states
     Start_to_Idle = Start.to(Idle)
     
-    # Mission 1 Transitions
-    Idle_to_Quarter_Speed_Turn_Left = Idle.to(Quarter_Speed_Turn_Left)
-    Quarter_Speed_Turn_Left_to_Quarter_Speed_Right = Quarter_Speed_Turn_Left.to(Quarter_Speed_Turn_Right)
-    Quarter_Speed_Turn_Right_to_Quarter_Speed_Turn_Left = Quarter_Speed_Turn_Right.to(Quarter_Speed_Turn_Left)
-    Quarter_Speed_Turn_Left_to_Idle = Quarter_Speed_Turn_Left.to(Idle)
-    Idle_to_Half_Speed_Forward = Idle.to(Half_Speed_Forward)
-    Half_Speed_Forward_to_Idle = Half_Speed_Forward.to(Idle)
-    Idle_to_Scan = Idle.to(Scan)
-    Scan_to_Quarter_Speed_Vertical_Up = Scan.to(Quarter_Speed_Vertical_Up)
-    Quarter_Speed_Vertical_Up_to_Idle = Quarter_Speed_Vertical_Up.to(Idle)
-    Idle_to_Quarter_Speed_Lateral_Right = Idle.to(Quarter_Speed_Lateral_Right)
-    Quarter_Speed_Lateral_Right_to_Idle = Quarter_Speed_Lateral_Right.to(Idle)
-    Idle_to_Quarter_Speed_Forward = Idle.to(Quarter_Speed_Forward)
-    Quarter_Speed_Forward_to_Idle = Quarter_Speed_Forward.to(Idle)
-    Idle_to_Scan = Idle.to(Scan)
-    Scan_to_Idle = Scan.to(Idle)
-    Idle_to_Quarter_Speed_Backward = Idle.to(Quarter_Speed_Backward)
-    Quarter_Speed_Backward_to_Idle = Quarter_Speed_Backward.to(Idle)
-    Idle_to_Quarter_Speed_Lateral_Left = Idle.to(Quarter_Speed_Lateral_Left)
-    Quarter_Speed_Lateral_Left_to_Idle = Quarter_Speed_Lateral_Left.to(Idle)
-    Idle_to_Quarter_Speed_Forward = Idle.to(Quarter_Speed_Forward)
-    Quarter_Speed_Forward_to_Idle = Quarter_Speed_Forward.to(Idle)
-    Idle_to_Half_Speed_Forward = Idle.to(Half_Speed_Forward)
-    Half_Speed_Forward_to_Idle = Half_Speed_Forward.to(Idle)
-    Idle_to_Quarter_Speed_Turn_Right = Idle.to(Quarter_Speed_Turn_Right)
-    Quarter_Speed_Turn_Right_to_Idle = Quarter_Speed_Turn_Right.to(Idle)
-    Idle_to_Quarter_Speed_Forward = Idle.to(Quarter_Speed_Forward)
-    Quarter_Speed_Forward_to_Idle = Quarter_Speed_Forward.to(Idle)
+    # Mission 1 Transitions (Pass the Gate)
     
-    # Mission 2 Transitions
+    # Mission 2 Transitions (Find the path)
     
+    # Mission 3 Transitions (Circle the Bouy)
     
+    # Mission 4 Transitions (Marker in Bin)
+    
+    # Mission 5 Transitions (Torpedoes)
+    
+    # Mission 6 Transitions (Collect Samples)
 
 if __name__ == '__main__':
     m = AUVStateMachine()
