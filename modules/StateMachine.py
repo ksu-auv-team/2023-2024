@@ -14,4 +14,4 @@ if __name__ == '__main__':
     m = AUVStateMachine()
     graph = DotGraphMachine(m)
     dot = graph()
-    dot.write_png('static/docs/state_machine.png')
+    dot.write_png('static/docs/pngs/AUVStateMachine.png')
