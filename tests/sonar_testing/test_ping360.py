@@ -1,34 +1,66 @@
 from brping import Ping360
 from brping import definitions
 import logging
-import time
+import numpy as np
+"""
+Ping360 has an effective range of 60 meters (175 feet)
+Its range can be calculated using the equation:
+velocity_of_sound * sample_period * 12.5e-9 * number_of_samples
+
+Each sample will cover a distance calculated by:
+velocity_of_sound * sample_period * 12.5e-9
+
+Ping360 will return hex values which can be casted to a uint8
+array. The values in this array correspond to intensity of the 
+returning signal (0-255). The resulting array will have index 0
+refer to the distance 0 to sample distance, index 1 will cover
+the distance sample distance to 2*sample distance, so on and so forth.
+"""
 
 # Configure logging
 logging.basicConfig(filename='ping360_data.log', level=logging.INFO, format='%(asctime)s:%(levelname)s:%(message)s')
 
+def meters_per_sample(ping_message, v_sound=1480):
+    ##Calculates the distance that each sample covers.
+    ##the 12.5e-9 is the sample_period time divided by two
+    return v_sound * ping_message.sample_period * 12.5e-9
+
 def test_ping360():
     p = Ping360()
-    p.connect_serial("/dev/ttyUSB1", 115200)
-
-    print(p.initialize())
-    print(p.set_transmit_frequency(800))
-    print(p.set_sample_period(80))
-    print(p.set_number_of_samples(200))
-    print(p.set_gain_setting(399))
-    print(p.set_mode(0))
-    print(p.set_transmit_duration(32))
-    print(p.set_start_angle(0))
-    print(p.set_stop_angle(359))
-    print(p.set_number_of_steps(360))
-    print(p.set_delay(0))
+    p.connect_serial("/dev/ttyUSB1", 115200) ##Connects to sonar
+    p.initialize()##Initializes
+    p.set_transmit_frequency(750)##Sets frequency of tranmission, limited to 650 to 850 for practicallity
+    p.set_sample_period(1355)##Sets sample period (increase to increase range) (range is 80 to 40000)
+    p.set_number_of_samples(600)##Sets number of samples (increase to increase range). (range is 200 to 1200)
+    p.set_gain_setting(0)##Sets gain setting (0 = low, 1 = medium, 2 = high)
+    p.set_mode(1)##set as 1 for Ping360
+    p.set_transmit_duration(2)##Sets duration of transmission in microseconds
 
     # Get data
     while True:
         try:
-            for x in range(360):
-                d = p.transmitAngle(x)
-                # Log the data to a file after each for loop run
-                logging.info(f"Angle: {x}, Data: {d}")
+            for x in range(400):
+                d = p.transmitAngle(x) ##Fires pulse in a gradian direction
+                temp = meters_per_sample(d, 1480) ##Determines the distance of a single sample
+                data = np.frombuffer(d.data, dtype=np.uint8)##Converts data to uint8 array
+                
+                ##Sonar won't sense correctly in a radius of .75 meters around it, calculates the value to prevent measuring in that range
+                lower_limit = 0
+                while lower_limit > .75:
+                    lower_limit =+ temp
+                lower_limit = lower_limit/temp
+
+                ##Determines if return signal is strong enough to indicate obstacle
+                hold = -1
+                for y in range(lower_limit, d.number_of_samples, 1):
+                    if(data[y]>240): ##Stores values that return a strength over 240 (values range 0-255)
+                        if data[y] > hold:
+                            hold = y
+                if (data[hold] < 240): ##If signal intensity is too low then doesn't record values
+                    hold = -1
+                if (hold != -1):
+                    logging("Gradian: "+str(x)+ " Obstacle Detected ("+ str(data[hold])+") at "+ str(hold*temp)+ " meters.")
+            ##break ##uncomment break to allow for single 360 scan.
 
         except KeyboardInterrupt:
             break    
@@ -36,17 +68,3 @@ def test_ping360():
 if __name__ == "__main__":
     test_ping360()
 
-# --------------------------------------------------
-# ID: 2300 - device_data
-# Header: start_1: 66 start_2: 82 payload_length: 214 message_id: 2300 src_device_id: 2 dst_device_id: 0
-# Payload:
-#   - mode: 0
-#   - gain_setting: 0
-#   - angle: 70
-#   - transmit_duration: 32
-#   - sample_period: 80
-#   - transmit_frequency: 800
-#   - number_of_samples: 200
-#   - data_length: 200
-#   - data: ['0x2e', '0x74', '0x9c', '0xc5', '0xd3', '0xec', '0xf7', '0xf6', '0xff', '0xff', '0xff', '0xff', '0xff', '0xff', '0xff', '0xff', '0xff', '0xff', '0xff', '0xff', '0xff', '0xfb', '0xf6', '0xf3', '0xed', '0xed', '0xec', '0xe9', '0xe7', '0xe6', '0xe5', '0xe4', '0xe4', '0xe3', '0xe6', '0xe7', '0xe7', '0xe7', '0xe9', '0xeb', '0xec', '0xeb', '0xe9', '0xe6', '0xdc', '0xd2', '0xd1', '0xd3', '0xd5', '0xd5', '0xd4', '0xd3', '0xd4', '0xd5', '0xd7', '0xd7', '0xd4', '0xcf', '0xcc', '0xc5', '0xbc', '0xb1', '0xab', '0xaa', '0xa7', '0xa3', '0xa5', '0xa9', '0xac', '0xac', '0xa9', '0xa4', '0x9e', '0x87', '0x83', '0x89', '0x8c', '0x8d', '0x8f', '0x8f', '0x8d', '0x8a', '0x85', '0x83', '0x84', '0x85', '0x84', '0x80', '0x7f', '0x7e', '0x7d', '0x7d', '0x80', '0x82', '0x85', '0x89', '0x8e', '0x91', '0x90', '0x8b', '0x83', '0x7c', '0x77', '0x75', '0x78', '0x79', '0x76', '0x73', '0x6c', '0x6a', '0x70', '0x76', '0x7a', '0x7d', '0x7e', '0x7c', '0x78', '0x71', '0x6b', '0x5f', '0x5d', '0x61', '0x63', '0x66', '0x64', '0x61', '0x63', '0x67', '0x69', '0x68', '0x67', '0x66', '0x5d', '0x5a', '0x5b', '0x5a', '0x58', '0x4c', '0x45', '0x42', '0x3f', '0x3e', '0x44', '0x47', '0x50', '0x54', '0x59', '0x5c', '0x5b', '0x5c', '0x5a', '0x59', '0x58', '0x5b', '0x5f', '0x61', '0x64', '0x6a', '0x6e', '0x70', '0x6f', '0x6d', '0x66', '0x64', '0x62', '0x66', '0x6b', '0x72', '0x77', '0x7e', '0x85', '0x8d', '0x93', '0x98', '0x99', '0x99', '0x98', '0x92', '0x94', '0x98', '0xa0', '0xa9', '0xb2', '0xb9', '0xbe', '0xc1', '0xc1', '0xc2', '0xc4', '0xc6', '0xc6', '0xc5', '0xc5', '0xc7', '0xca', '0xce', '0xd3', '0xd8', '0xdb', '0xdd']
-# Checksum: 33075 check: 33075 pass: True
