@@ -1,3 +1,4 @@
+#Routes.py
 from flask import Blueprint, Response, request
 from services.WebCamService import WebCam
 import cv2
@@ -9,8 +10,9 @@ def get_blueprint():
     """Return the blueprint for the main app module"""
     return REQUEST_API
 
-def gen(webcam, index):
-    capture = cv2.VideoCapture(index)
+
+def gen(webcam):
+    capture = cv2.VideoCapture(0)
     if not capture:
         raise Exception("Error accessing the WebCam")
 
@@ -21,19 +23,24 @@ def gen(webcam, index):
             b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n\r\n'
         )
 
-@REQUEST_API.route('/stream1')
+def gen_ip(webcam, url):
+    capture = cv2.VideoCapture(url)
+    if not capture.isOpened():
+        raise Exception("Error accessing the WebCam")
+
+    while True:
+        frame = webcam.get_frame(capture)
+        yield (
+            b'--frame\r\n'
+            b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n\r\n'
+        )
+
+
+
+@REQUEST_API.route('/stream')
 def monitoring():
     try:
         webcam = WebCam()
-        return Response(gen(webcam, 0), mimetype='multipart/x-mixed-replace; boundary=frame')
+        return Response(gen(webcam), mimetype='multipart/x-mixed-replace; boundary=frame')
     except Exception as err:
         return Response(f'Error {err}')
-
-@REQUEST_API.route('/stream2')
-def monitoring2():
-    try:
-        webcam = WebCam()
-        return Response(gen(webcam, 2), mimetype='multipart/x-mixed-replace: boundary=frame')
-    except Exception as err:
-        return Response(f'Error {err}')
-
