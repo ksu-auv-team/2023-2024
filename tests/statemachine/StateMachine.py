@@ -182,3 +182,5 @@ if __name__ == '__main__':
     graph = DotGraphMachine(m)
     dot = graph()
     dot.write_png('static/docs/pngs/AUVStateMachine.png')
+
+
