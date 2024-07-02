@@ -36,10 +36,12 @@ def Sonar360():
         p.set_mode(1)##set as 1 for Ping360
         p.set_transmit_duration(40)##Sets duration of transmission in microseconds
 
+        continueObject = False ##Used to deal with objects that are below intensity sensing threshold
         # Get data
         while True:
                 try:
                     for gradian in range(400):
+                        highestIndex = 0
                         d = p.transmitAngle(gradian) ##Fires pulse in a gradian direction
                         distperSample = meters_per_sample(d, 1480) ##Determines the distance of a single sample
                         data = np.frombuffer(d.data, dtype=np.uint8)##Converts data to uint8 array
@@ -50,18 +52,40 @@ def Sonar360():
                                         lower_limit = lower_limit + distperSample
                                 lower_limit = lower_limit/distperSample
                                 lower_limit = int(lower_limit)
-                        ##Determines if return signal is strong enough to indicate obstacle
+
                         hold = -1
+
+                        ##checks if object sensed from lower intensity continues at other gradian.
+                        ##if intensity of next gradian is not within expected bounds then turns
+                        ##off detection of object continuing
+                        if continueObject:
+                                continueObject = False
+                                for sample in range(lower_limit, d.number_of_samples, 1):
+                                         if sample == continueObjectIndex or sample == continueObjectIndex -1 or sample == continueObjectIndex + 1:
+                                                if(data[sample] > pastData[continueObjectIndex]-10 or data[sample] < pastData[continueObjectIndex]+10):
+                                                       highestIndex = sample
+                                                       continueObjectIndex = sample
+                                                       continueObject = True
+                                                       break
+
                         for sample in range(lower_limit, d.number_of_samples, 1):
                                 if(data[sample]>126): ##Stores values that return a strength over 126 (values range 0-255)
                                         if data[sample] > highestIndex: ##Should the signal intensity be higher than previously recorded one then replace
                                                 highestIndex = sample
-                                if(data[sample] > pastData[sample] + 80):
-                                        if data[sample] > highestIndex:
-                                                highestIndex = sample
+                                
+                                                
+                                if gradian != 0:
+                                        if(data[sample] > pastData[sample] + 80):
+                                                if data[sample] > highestIndex:
+                                                        highestIndex = sample
+                                                continueObject = True ##Used to handle sensing an object over multiple gradians despite intensity being below 126
+                                                continueObjectIndex = sample
+                                                                       
+                                               
+                                               
                                                 
                         pastData = data
-                        if (data[highestIndex] < 120): ##If signal intensity is too low then doesn't record values
+                        if (data[highestIndex] < 127): ##If signal intensity is too low then doesn't record values
                             hold = -1
                         if (hold != -1):
                             print("Gradian: "+str(gradian)+ " Obstacle Detected ("+ str(data[highestIndex])+") at "+ str(highestIndex*distperSample)+ " meters.")
