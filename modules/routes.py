@@ -1,5 +1,5 @@
 from flask import Blueprint, Response, request
-from WebCamService import WebCam
+from modules.WebCamService import WebCam
 import cv2
 
 REQUEST_API = Blueprint('request_api', __name__)
