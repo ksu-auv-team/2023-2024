@@ -1,6 +1,6 @@
 from flask import Flask, render_template, Response, Blueprint
-from controllers import routes
-from services.WebCamService import WebCam
+import routes
+from WebCamService import WebCam
 import cv2
 
 zedcam_blueprint = Blueprint('zedcam_blueprint', __name__)
