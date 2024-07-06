@@ -3,8 +3,8 @@ import cv2
 
 
 class WebCam:
-    
-    #giving attributes so each camera has a number and ip making it easier to call across different files
+    '''webcam class has ip and camera number attributes so the cameras can exist
+    across multiple files'''
     def __init__(self, ip=None, camera_number=None):
         self.ip = ip
         self.camera_number = camera_number

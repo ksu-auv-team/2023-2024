@@ -12,7 +12,7 @@ def get_blueprint():
 
 
 def gen(webcam):
-    capture = cv2.VideoCapture(0)
+    capture = cv2.VideoCapture(webcam.camera_number)
     if not capture:
         raise Exception("Error accessing the WebCam")
 
@@ -22,19 +22,6 @@ def gen(webcam):
             b'--frame\r\n'
             b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n\r\n'
         )
-
-def gen_ip(webcam, url):
-    capture = cv2.VideoCapture(url)
-    if not capture.isOpened():
-        raise Exception("Error accessing the WebCam")
-
-    while True:
-        frame = webcam.get_frame(capture)
-        yield (
-            b'--frame\r\n'
-            b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n\r\n'
-        )
-
 
 
 @REQUEST_API.route('/stream')
