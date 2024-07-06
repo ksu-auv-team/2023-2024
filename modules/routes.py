@@ -1,4 +1,3 @@
-#Routes.py
 from flask import Blueprint, Response, request
 from WebCamService import WebCam
 import cv2

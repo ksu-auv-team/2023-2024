@@ -21,7 +21,7 @@ import argparse
 import time
 import sys
 import os
-from modules import routes
+from modules import WebCamService, routes
 from modules.zedcam import zedcam_blueprint
 from modules.anchor_camera import anchor_blueprint
 
