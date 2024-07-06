@@ -1,6 +1,6 @@
 #Routes.py
 from flask import Blueprint, Response, request
-from services.WebCamService import WebCam
+from WebCamService import WebCam
 import cv2
 
 REQUEST_API = Blueprint('request_api', __name__)
