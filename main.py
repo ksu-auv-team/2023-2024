@@ -14,13 +14,16 @@
 """
 
 # Importing the necessary libraries
-from flask import Flask, request, jsonify, render_template, send_from_directory
+from flask import Flask, request, jsonify, render_template, send_from_directory, Blueprint, url_for
 from flask_sqlalchemy import SQLAlchemy
 import subprocess
 import argparse
 import time
 import sys
 import os
+from modules import routes
+from modules.zedcam import zedcam_blueprint
+from modules.anchor_camera import anchor_blueprint
 
 # Creating the custom logger
 import logging
@@ -241,9 +244,30 @@ def upload():
             file.save(filepath)
     return 'Images uploaded', 200
 
-@app.route('/images/<filename>')
-def images(filename):
-    return send_from_directory(app.config['UPLOAD_FOLDER'], filename)
+app.register_blueprint(routes.get_blueprint())
+app.register_blueprint(zedcam_blueprint)
+app.register_blueprint(anchor_blueprint)
+
+#Opening cameras through flask regardless of parameters or configuration
+@app.route('/video_0')
+def video_0():
+    video_url = url_for('zedcam_blueprint.video_0')
+    
+    # Make a request to the video_0 endpoint
+    response = app.test_client().get(video_url)
+    
+    # Return the response to the client
+    return response.data
+
+@app.route('/video_1')
+def video_1():
+    video_url = url_for('anchor_blueprint.video1')
+    
+    # Make a request to the video_0 endpoint
+    response = app.test_client().get(video_url)
+    
+    # Return the response to the client
+    return response.data
 
 @app.route('/')
 def index():
