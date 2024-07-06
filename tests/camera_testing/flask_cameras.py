@@ -2,7 +2,7 @@ from flask import Flask, render_template, Response, url_for
 from controllers import routes
 from services.WebCamService import WebCam
 import cv2
-#from camera_2 import camera2_blueprint
+#from anchor_camera import anchor_blueprint
 from zedcam import zedcam_blueprint
 
 app = Flask(__name__)

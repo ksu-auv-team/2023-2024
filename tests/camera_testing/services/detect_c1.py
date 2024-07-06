@@ -3,7 +3,7 @@ import cv2
 import numpy as np
 from services.WebCamService import WebCam
 
-
+#commented out as this is work in progress and leaving as is causes errors
 '''def frames(cNum):  
     while True:
         if cNum == 0:
