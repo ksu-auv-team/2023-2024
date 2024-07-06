@@ -11,7 +11,7 @@ anchor_blueprint = Blueprint('anchor_blueprint', __name__)
 @anchor_blueprint.route('/video_1')
 def video_1():
     try:
-        anchor_camera = WebCam(camera_number=1)
+        anchor_camera = WebCam(camera_number=2)
         return Response(routes.gen(anchor_camera), mimetype='multipart/x-mixed-replace; boundary=frame')
     except Exception as err:
         return Response(f'Error {err}')
