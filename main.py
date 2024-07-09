@@ -283,12 +283,12 @@ def main(args: list = sys.argv):
             hardware_interface = subprocess.Popen(["python3", "modules/HardwareInterface.py", '--P'])
             movement_package = subprocess.Popen(["python3", "modules/MovementPackage.py", '--P'])
             neural_network = subprocess.Popen(["python3", "modules/NeuralNetwork.py", '--P'])
-            state_machine = subprocess.Popen(["python3", "modules/StateMachine.py", '-PL'])
+            #state_machine = subprocess.Popen(["python3", "modules/StateMachine.py", '-PL'])
             camera_package = subprocess.Popen(["python3", "modules/CameraPackage.py", '--P'])
         hardware_interface = subprocess.Popen(["python3", "modules/HardwareInterface.py", '--L'])
         movement_package = subprocess.Popen(["python3", "modules/MovementPackage.py", '--L'])
         neural_network = subprocess.Popen(["python3", "modules/NeuralNetwork.py", '--L'])
-        state_machine = subprocess.Popen(["python3", "modules/StateMachine.py", '--L'])
+        #state_machine = subprocess.Popen(["python3", "modules/StateMachine.py", '--L'])
         camera_package = subprocess.Popen(["python3", "modules/CameraPackage.py", '--L'])
     if args.HI and not args.run:
         if args.P:
@@ -306,11 +306,11 @@ def main(args: list = sys.argv):
         if args.P:
             camera_package = subprocess.Popen(["python3", "modules/CameraPackage.py", '--P'])
         camera_package = subprocess.Popen(["python3", "modules/CameraPackage.py", '--L'])
-    if not args.run and not args.HI and not args.MP and not args.NN and not args.SM and not (args.P or args.L):
+    '''if not args.run and not args.HI and not args.MP and not args.NN and not args.SM and not (args.P or args.L):
         print("No arguments provided. Please provide an argument to run the main script.")
         print("Use the -h flag for more information.")
         print("Exiting...")
-        exit(1)
+        exit(1)'''
 
     with app.app_context():
         create_tables()
@@ -320,7 +320,7 @@ def main(args: list = sys.argv):
         hardware_interface.wait()
         movement_package.wait()
         neural_network.wait()
-        state_machine.wait()
+        #state_machine.wait()
         camera_package.wait()
     if args.HI and not args.run:
         hardware_interface.wait()
