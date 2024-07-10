@@ -235,15 +235,6 @@ def get_object_data():
     else:
         return jsonify({'message': 'No data found'}), 404
 
-@app.route('/upload', methods=['POST'])
-def upload():
-    for filename in request.files:
-        file = request.files[filename]
-        if file:
-            filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
-            file.save(filepath)
-    return 'Images uploaded', 200
-
 app.register_blueprint(routes.get_blueprint())
 app.register_blueprint(zedcam_blueprint)
 app.register_blueprint(anchor_blueprint)
