@@ -408,7 +408,7 @@ class HardwareInterface:
         Returns:
             str: Server response as a string.
         """
-        response = requests.post(f"{self.base_url}/{data_type}", json=data)
+        response = requests.post(f"{self.baseurl}/{data_type}", json=data)
         if response.status_code == 201:
             return "Data added successfully"
         else:
