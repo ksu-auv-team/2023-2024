@@ -474,7 +474,7 @@ class HardwareInterface:
             }
 
             # Post sensor data to the server
-            self.post_data("sensors", sensor_data)
+            # self.post_data("sensors", sensor_data)
 
             # Get output data from the server
             output_data = self.get_data("output")
