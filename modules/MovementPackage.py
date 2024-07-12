@@ -452,7 +452,7 @@ if __name__ == "__main__":
     #     base_url = config["poolUrl"]
     # else:
     #     base_url = config["labUrl"]
-    base_url = "http://192.168.1.246:5000"
+    base_url = "http://192.168.0.107:5000"
     movement_package = MovementPackage(movement_logger, base_url)
     movement_package.run()
     # movement_package.test_run()

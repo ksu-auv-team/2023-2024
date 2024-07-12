@@ -46,7 +46,7 @@ class CM:
         self.out_data = {"Arm": 0, "X": 0.0, "Y": 0.0, "Z": 0.0}
         self.mapping_choice = mapping_choice
 
-        orin_ip = '192.168.1.246'
+        orin_ip = '192.168.0.107'
         self.url = f"http://{orin_ip}:5000/input"
 
         # Configure logging
