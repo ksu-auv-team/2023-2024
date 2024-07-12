@@ -507,7 +507,7 @@ class HardwareInterface:
         delay = 0.01
         
         # # This is manual input for testing motor directions
-        esc_data = [0, 1, 127]
+        esc_data = [1, 1, 127]
         while True:
             # esc_data[0] = int(input("Enter the data 0 value: "))
             # esc_data[1] = int(input("Enter the data 1 value: "))
