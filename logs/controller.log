@@ -3096,3 +3096,1736 @@
 2024-07-12 19:01:49 - Error sending data: HTTPConnectionPool(host='192.168.0.107', port=5000): Max retries exceeded with url: /input (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x111562570>: Failed to establish a new connection: [Errno 61] Connection refused'))
 2024-07-12 19:01:49 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.2, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
 2024-07-12 19:01:49 - Error sending data: HTTPConnectionPool(host='192.168.0.107', port=5000): Max retries exceeded with url: /input (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x111561f40>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2024-07-12 19:08:50 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.2, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:08:50 - Failed to send data: Data added
+2024-07-12 19:08:50 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.2, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:08:50 - Failed to send data: Data added
+2024-07-12 19:08:50 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.2, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:08:51 - Failed to send data: Data added
+2024-07-12 19:08:51 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.2, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:08:51 - Failed to send data: Data added
+2024-07-12 19:08:51 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.2, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:08:51 - Failed to send data: Data added
+2024-07-12 19:08:51 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.2, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:08:51 - Failed to send data: Data added
+2024-07-12 19:08:51 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.2, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:08:51 - Failed to send data: Data added
+2024-07-12 19:08:51 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.2, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:08:51 - Failed to send data: Data added
+2024-07-12 19:08:51 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.2, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:08:51 - Failed to send data: Data added
+2024-07-12 19:08:51 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.2, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:08:51 - Failed to send data: Data added
+2024-07-12 19:08:51 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.2, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:08:51 - Failed to send data: Data added
+2024-07-12 19:08:51 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.2, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:08:51 - Failed to send data: Data added
+2024-07-12 19:08:51 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.2, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:08:51 - Failed to send data: Data added
+2024-07-12 19:08:51 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.2, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:08:51 - Failed to send data: Data added
+2024-07-12 19:08:51 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.2, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:08:51 - Failed to send data: Data added
+2024-07-12 19:08:51 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.2, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:08:51 - Failed to send data: Data added
+2024-07-12 19:08:51 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.2, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:08:51 - Failed to send data: Data added
+2024-07-12 19:08:51 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.2, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:08:51 - Failed to send data: Data added
+2024-07-12 19:08:51 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.2, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:08:51 - Failed to send data: Data added
+2024-07-12 19:08:51 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.2, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:08:51 - Failed to send data: Data added
+2024-07-12 19:08:51 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.2, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:08:51 - Failed to send data: Data added
+2024-07-12 19:08:51 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.2, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:08:51 - Failed to send data: Data added
+2024-07-12 19:08:51 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.2, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:08:51 - Failed to send data: Data added
+2024-07-12 19:08:51 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.2, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:08:52 - Failed to send data: Data added
+2024-07-12 19:08:52 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.2, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:08:52 - Failed to send data: Data added
+2024-07-12 19:08:52 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.2, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:08:52 - Failed to send data: Data added
+2024-07-12 19:08:52 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.2, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:08:52 - Failed to send data: Data added
+2024-07-12 19:08:52 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.2, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:08:52 - Failed to send data: Data added
+2024-07-12 19:08:52 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.2, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:08:52 - Failed to send data: Data added
+2024-07-12 19:08:52 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.2, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:08:52 - Failed to send data: Data added
+2024-07-12 19:08:52 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.2, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:08:52 - Failed to send data: Data added
+2024-07-12 19:08:52 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.2, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:08:52 - Failed to send data: Data added
+2024-07-12 19:08:52 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.2, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:08:52 - Failed to send data: Data added
+2024-07-12 19:08:52 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.2, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:08:52 - Failed to send data: Data added
+2024-07-12 19:08:52 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.2, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:08:52 - Failed to send data: Data added
+2024-07-12 19:08:52 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.2, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:08:52 - Failed to send data: Data added
+2024-07-12 19:08:52 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.2, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:08:52 - Failed to send data: Data added
+2024-07-12 19:08:52 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.2, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:08:52 - Failed to send data: Data added
+2024-07-12 19:08:52 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.2, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:08:52 - Failed to send data: Data added
+2024-07-12 19:08:52 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.2, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:08:52 - Failed to send data: Data added
+2024-07-12 19:08:52 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.2, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:08:52 - Failed to send data: Data added
+2024-07-12 19:08:52 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.2, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:08:52 - Failed to send data: Data added
+2024-07-12 19:08:52 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.2, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:08:52 - Failed to send data: Data added
+2024-07-12 19:08:52 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.2, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:08:52 - Failed to send data: Data added
+2024-07-12 19:08:53 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.2, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:08:53 - Failed to send data: Data added
+2024-07-12 19:08:53 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.2, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:08:53 - Failed to send data: Data added
+2024-07-12 19:08:53 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.2, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:08:53 - Failed to send data: Data added
+2024-07-12 19:08:53 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.2, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:08:53 - Failed to send data: Data added
+2024-07-12 19:08:53 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.2, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:08:53 - Failed to send data: Data added
+2024-07-12 19:08:53 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.2, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:08:53 - Failed to send data: Data added
+2024-07-12 19:08:53 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.2, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:08:53 - Failed to send data: Data added
+2024-07-12 19:08:53 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.07, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:08:53 - Failed to send data: Data added
+2024-07-12 19:08:53 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': 0.12, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:08:53 - Failed to send data: Data added
+2024-07-12 19:08:53 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': 0.18, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:08:53 - Failed to send data: Data added
+2024-07-12 19:08:53 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': 0.18, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:08:53 - Failed to send data: Data added
+2024-07-12 19:08:53 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': 0.22, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:08:53 - Failed to send data: Data added
+2024-07-12 19:08:53 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': 0.27, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:08:53 - Failed to send data: Data added
+2024-07-12 19:08:53 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': 0.38, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:08:53 - Failed to send data: Data added
+2024-07-12 19:08:53 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': 0.41, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:08:54 - Failed to send data: Data added
+2024-07-12 19:08:54 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': 0.46, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:08:54 - Failed to send data: Data added
+2024-07-12 19:08:54 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': 0.5, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:08:54 - Failed to send data: Data added
+2024-07-12 19:08:54 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': 0.53, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:08:54 - Failed to send data: Data added
+2024-07-12 19:08:54 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': 0.54, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:08:54 - Failed to send data: Data added
+2024-07-12 19:08:54 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': 0.54, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:08:54 - Failed to send data: Data added
+2024-07-12 19:08:54 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': 0.54, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:08:54 - Failed to send data: Data added
+2024-07-12 19:08:54 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': 0.54, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:08:54 - Failed to send data: Data added
+2024-07-12 19:08:54 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': 0.54, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:08:54 - Failed to send data: Data added
+2024-07-12 19:08:54 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': 0.54, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:08:54 - Failed to send data: Data added
+2024-07-12 19:08:54 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': 0.54, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:08:54 - Failed to send data: Data added
+2024-07-12 19:08:54 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': 0.54, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:08:54 - Failed to send data: Data added
+2024-07-12 19:08:54 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': 0.54, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:08:54 - Failed to send data: Data added
+2024-07-12 19:08:54 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': 0.54, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:08:54 - Failed to send data: Data added
+2024-07-12 19:08:54 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': 0.54, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:08:54 - Failed to send data: Data added
+2024-07-12 19:08:54 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': 0.54, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:08:54 - Failed to send data: Data added
+2024-07-12 19:08:54 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': 0.54, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:08:54 - Failed to send data: Data added
+2024-07-12 19:08:54 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': 0.54, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:08:54 - Failed to send data: Data added
+2024-07-12 19:08:54 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': 0.54, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:08:54 - Failed to send data: Data added
+2024-07-12 19:08:54 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': 0.54, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:08:54 - Failed to send data: Data added
+2024-07-12 19:08:54 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': 0.54, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:08:54 - Failed to send data: Data added
+2024-07-12 19:08:54 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': 0.54, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:08:54 - Failed to send data: Data added
+2024-07-12 19:08:54 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': 0.54, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:08:54 - Failed to send data: Data added
+2024-07-12 19:08:54 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': 0.54, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:08:54 - Failed to send data: Data added
+2024-07-12 19:08:55 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': 0.54, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:08:55 - Failed to send data: Data added
+2024-07-12 19:08:55 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': 0.54, 'Yaw': 0.09, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:08:55 - Failed to send data: Data added
+2024-07-12 19:08:55 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': 0.54, 'Yaw': 0.1, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:08:55 - Failed to send data: Data added
+2024-07-12 19:08:55 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': 0.55, 'Yaw': 0.1, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:08:55 - Failed to send data: Data added
+2024-07-12 19:08:55 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': 0.55, 'Yaw': 0.1, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:08:55 - Failed to send data: Data added
+2024-07-12 19:08:55 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': 0.55, 'Yaw': 0.1, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:08:55 - Failed to send data: Data added
+2024-07-12 19:08:55 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': 0.55, 'Yaw': 0.09, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:08:55 - Failed to send data: Data added
+2024-07-12 19:08:55 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': 0.55, 'Yaw': 0.07, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:08:55 - Failed to send data: Data added
+2024-07-12 19:08:55 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': 0.55, 'Yaw': 0.07, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:08:55 - Failed to send data: Data added
+2024-07-12 19:08:55 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': 0.55, 'Yaw': 0.07, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:08:55 - Failed to send data: Data added
+2024-07-12 19:08:55 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': 0.55, 'Yaw': 0.07, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:08:55 - Failed to send data: Data added
+2024-07-12 19:08:55 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': 0.55, 'Yaw': 0.07, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:08:55 - Failed to send data: Data added
+2024-07-12 19:08:55 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': 0.55, 'Yaw': 0.07, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:08:55 - Failed to send data: Data added
+2024-07-12 19:08:55 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': 0.55, 'Yaw': 0.07, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:08:55 - Failed to send data: Data added
+2024-07-12 19:08:55 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': 0.55, 'Yaw': 0.07, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:08:55 - Failed to send data: Data added
+2024-07-12 19:08:55 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': 0.55, 'Yaw': 0.07, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:08:55 - Failed to send data: Data added
+2024-07-12 19:08:55 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': 0.55, 'Yaw': 0.07, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:08:55 - Failed to send data: Data added
+2024-07-12 19:08:55 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': 0.55, 'Yaw': 0.07, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:08:55 - Failed to send data: Data added
+2024-07-12 19:08:55 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': 0.55, 'Yaw': 0.07, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:08:55 - Failed to send data: Data added
+2024-07-12 19:08:55 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': 0.55, 'Yaw': 0.07, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:08:55 - Failed to send data: Data added
+2024-07-12 19:08:55 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': 0.55, 'Yaw': 0.07, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:08:55 - Failed to send data: Data added
+2024-07-12 19:08:55 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': 0.54, 'Yaw': 0.07, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:08:56 - Failed to send data: Data added
+2024-07-12 19:08:56 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': 0.54, 'Yaw': 0.07, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:08:56 - Failed to send data: Data added
+2024-07-12 19:08:56 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': 0.55, 'Yaw': 0.07, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:08:56 - Failed to send data: Data added
+2024-07-12 19:08:56 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': 0.55, 'Yaw': 0.07, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:08:56 - Failed to send data: Data added
+2024-07-12 19:08:56 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': 0.55, 'Yaw': 0.07, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:08:56 - Failed to send data: Data added
+2024-07-12 19:08:56 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': 0.55, 'Yaw': 0.07, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:08:56 - Failed to send data: Data added
+2024-07-12 19:08:56 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': 0.55, 'Yaw': 0.07, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:08:56 - Failed to send data: Data added
+2024-07-12 19:08:56 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': 0.55, 'Yaw': 0.07, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:08:56 - Failed to send data: Data added
+2024-07-12 19:08:56 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': 0.54, 'Yaw': 0.07, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:08:56 - Failed to send data: Data added
+2024-07-12 19:08:56 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': 0.55, 'Yaw': 0.07, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:08:56 - Failed to send data: Data added
+2024-07-12 19:08:56 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': 0.54, 'Yaw': 0.07, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:08:56 - Failed to send data: Data added
+2024-07-12 19:08:56 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': 0.54, 'Yaw': 0.07, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:08:56 - Failed to send data: Data added
+2024-07-12 19:08:56 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': 0.54, 'Yaw': 0.07, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:08:56 - Failed to send data: Data added
+2024-07-12 19:08:56 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': 0.54, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:08:56 - Failed to send data: Data added
+2024-07-12 19:08:56 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': 0.51, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:08:56 - Failed to send data: Data added
+2024-07-12 19:08:56 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': 0.51, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:08:56 - Failed to send data: Data added
+2024-07-12 19:08:56 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': 0.51, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:08:56 - Failed to send data: Data added
+2024-07-12 19:08:56 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': 0.49, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:08:56 - Failed to send data: Data added
+2024-07-12 19:08:56 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': 0.47, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:08:56 - Failed to send data: Data added
+2024-07-12 19:08:56 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': 0.43, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:08:56 - Failed to send data: Data added
+2024-07-12 19:08:56 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': 0.37, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:08:57 - Failed to send data: Data added
+2024-07-12 19:08:57 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': 0.28, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:08:57 - Failed to send data: Data added
+2024-07-12 19:08:57 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': 0.16, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:08:57 - Failed to send data: Data added
+2024-07-12 19:08:57 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:08:57 - Failed to send data: Data added
+2024-07-12 19:08:57 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.08, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:08:57 - Failed to send data: Data added
+2024-07-12 19:08:57 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.11, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:08:57 - Failed to send data: Data added
+2024-07-12 19:08:57 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.22, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:08:57 - Failed to send data: Data added
+2024-07-12 19:08:57 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.25, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:08:57 - Failed to send data: Data added
+2024-07-12 19:08:57 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.26, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:08:57 - Failed to send data: Data added
+2024-07-12 19:08:57 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.37, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:08:57 - Failed to send data: Data added
+2024-07-12 19:08:57 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.42, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:08:57 - Failed to send data: Data added
+2024-07-12 19:08:57 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.48, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:08:57 - Failed to send data: Data added
+2024-07-12 19:08:57 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.54, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:08:57 - Failed to send data: Data added
+2024-07-12 19:08:57 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.61, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:08:57 - Failed to send data: Data added
+2024-07-12 19:08:57 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.75, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:08:57 - Failed to send data: Data added
+2024-07-12 19:08:57 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.8, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:08:57 - Failed to send data: Data added
+2024-07-12 19:08:57 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.81, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:08:57 - Failed to send data: Data added
+2024-07-12 19:08:57 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.82, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:08:57 - Failed to send data: Data added
+2024-07-12 19:08:57 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.82, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:08:57 - Failed to send data: Data added
+2024-07-12 19:08:57 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.82, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:08:57 - Failed to send data: Data added
+2024-07-12 19:08:57 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.82, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:08:57 - Failed to send data: Data added
+2024-07-12 19:08:57 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.82, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:08:58 - Failed to send data: Data added
+2024-07-12 19:08:58 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.82, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:08:58 - Failed to send data: Data added
+2024-07-12 19:08:58 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.82, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:08:58 - Failed to send data: Data added
+2024-07-12 19:08:58 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.82, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:08:58 - Failed to send data: Data added
+2024-07-12 19:08:58 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.82, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:08:58 - Failed to send data: Data added
+2024-07-12 19:08:58 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.82, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:08:58 - Failed to send data: Data added
+2024-07-12 19:08:58 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.82, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:08:58 - Failed to send data: Data added
+2024-07-12 19:08:58 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.82, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:08:58 - Failed to send data: Data added
+2024-07-12 19:08:58 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.82, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:08:58 - Failed to send data: Data added
+2024-07-12 19:08:58 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.45, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:08:58 - Failed to send data: Data added
+2024-07-12 19:08:58 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.32, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:08:58 - Failed to send data: Data added
+2024-07-12 19:08:58 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.24, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:08:58 - Failed to send data: Data added
+2024-07-12 19:08:58 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.2, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:08:58 - Failed to send data: Data added
+2024-07-12 19:08:58 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.18, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:08:58 - Failed to send data: Data added
+2024-07-12 19:08:58 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.14, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:08:58 - Failed to send data: Data added
+2024-07-12 19:08:58 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.05, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:08:59 - Failed to send data: Data added
+2024-07-12 19:08:59 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.01, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:08:59 - Failed to send data: Data added
+2024-07-12 19:08:59 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.01, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:08:59 - Failed to send data: Data added
+2024-07-12 19:08:59 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.01, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:08:59 - Failed to send data: Data added
+2024-07-12 19:08:59 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.01, 'Yaw': 0.05, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:08:59 - Failed to send data: Data added
+2024-07-12 19:08:59 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.01, 'Yaw': 0.01, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:08:59 - Failed to send data: Data added
+2024-07-12 19:08:59 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.01, 'Yaw': -0.03, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:08:59 - Failed to send data: Data added
+2024-07-12 19:08:59 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.01, 'Yaw': -0.07, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:08:59 - Failed to send data: Data added
+2024-07-12 19:08:59 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.01, 'Yaw': -0.08, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:08:59 - Failed to send data: Data added
+2024-07-12 19:08:59 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.01, 'Yaw': -0.12, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:08:59 - Failed to send data: Data added
+2024-07-12 19:08:59 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.01, 'Yaw': -0.22, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:08:59 - Failed to send data: Data added
+2024-07-12 19:08:59 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.01, 'Yaw': -0.29, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:08:59 - Failed to send data: Data added
+2024-07-12 19:08:59 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.01, 'Yaw': -0.33, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:08:59 - Failed to send data: Data added
+2024-07-12 19:08:59 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.01, 'Yaw': -0.38, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:08:59 - Failed to send data: Data added
+2024-07-12 19:08:59 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.01, 'Yaw': -0.38, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:08:59 - Failed to send data: Data added
+2024-07-12 19:08:59 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.01, 'Yaw': -0.4, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:08:59 - Failed to send data: Data added
+2024-07-12 19:08:59 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.01, 'Yaw': -0.42, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:08:59 - Failed to send data: Data added
+2024-07-12 19:08:59 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.01, 'Yaw': -0.44, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:00 - Failed to send data: Data added
+2024-07-12 19:09:00 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.01, 'Yaw': -0.49, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:00 - Failed to send data: Data added
+2024-07-12 19:09:00 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.01, 'Yaw': -0.49, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:00 - Failed to send data: Data added
+2024-07-12 19:09:00 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.01, 'Yaw': -0.5, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:00 - Failed to send data: Data added
+2024-07-12 19:09:00 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.01, 'Yaw': -0.49, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:00 - Failed to send data: Data added
+2024-07-12 19:09:00 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.01, 'Yaw': -0.48, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:00 - Failed to send data: Data added
+2024-07-12 19:09:00 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.05, 'Yaw': -0.24, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:00 - Failed to send data: Data added
+2024-07-12 19:09:00 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.06, 'Yaw': -0.03, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:00 - Failed to send data: Data added
+2024-07-12 19:09:00 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.06, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:00 - Failed to send data: Data added
+2024-07-12 19:09:00 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.06, 'Yaw': 0.07, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:00 - Failed to send data: Data added
+2024-07-12 19:09:00 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.06, 'Yaw': 0.11, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:00 - Failed to send data: Data added
+2024-07-12 19:09:00 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.06, 'Yaw': 0.16, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:00 - Failed to send data: Data added
+2024-07-12 19:09:00 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.06, 'Yaw': 0.19, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:00 - Failed to send data: Data added
+2024-07-12 19:09:00 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.06, 'Yaw': 0.25, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:00 - Failed to send data: Data added
+2024-07-12 19:09:00 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.06, 'Yaw': 0.3, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:01 - Failed to send data: Data added
+2024-07-12 19:09:01 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.06, 'Yaw': 0.35, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:01 - Failed to send data: Data added
+2024-07-12 19:09:01 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.06, 'Yaw': 0.39, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:01 - Failed to send data: Data added
+2024-07-12 19:09:01 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.06, 'Yaw': 0.45, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:01 - Failed to send data: Data added
+2024-07-12 19:09:01 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.06, 'Yaw': 0.53, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:01 - Failed to send data: Data added
+2024-07-12 19:09:01 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.06, 'Yaw': 0.58, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:01 - Failed to send data: Data added
+2024-07-12 19:09:01 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.06, 'Yaw': 0.66, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:01 - Failed to send data: Data added
+2024-07-12 19:09:01 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.06, 'Yaw': 0.68, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:01 - Failed to send data: Data added
+2024-07-12 19:09:01 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.06, 'Yaw': 0.69, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:01 - Failed to send data: Data added
+2024-07-12 19:09:01 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.06, 'Yaw': 0.69, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:01 - Failed to send data: Data added
+2024-07-12 19:09:01 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.06, 'Yaw': 0.69, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:01 - Failed to send data: Data added
+2024-07-12 19:09:01 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.06, 'Yaw': 0.69, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:01 - Failed to send data: Data added
+2024-07-12 19:09:01 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.06, 'Yaw': 0.69, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:01 - Failed to send data: Data added
+2024-07-12 19:09:01 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.06, 'Yaw': 0.69, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:01 - Failed to send data: Data added
+2024-07-12 19:09:01 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.06, 'Yaw': 0.69, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:01 - Failed to send data: Data added
+2024-07-12 19:09:01 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.06, 'Yaw': 0.69, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:01 - Failed to send data: Data added
+2024-07-12 19:09:01 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.06, 'Yaw': 0.69, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:01 - Failed to send data: Data added
+2024-07-12 19:09:01 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.06, 'Yaw': 0.54, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:01 - Failed to send data: Data added
+2024-07-12 19:09:01 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.06, 'Yaw': 0.48, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:01 - Failed to send data: Data added
+2024-07-12 19:09:01 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.06, 'Yaw': 0.37, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:01 - Failed to send data: Data added
+2024-07-12 19:09:01 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.06, 'Yaw': 0.19, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:01 - Failed to send data: Data added
+2024-07-12 19:09:01 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.06, 'Yaw': 0.1, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:01 - Failed to send data: Data added
+2024-07-12 19:09:01 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.06, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:02 - Failed to send data: Data added
+2024-07-12 19:09:02 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.05, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:02 - Failed to send data: Data added
+2024-07-12 19:09:02 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.04, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:02 - Failed to send data: Data added
+2024-07-12 19:09:02 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:02 - Failed to send data: Data added
+2024-07-12 19:09:02 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:02 - Failed to send data: Data added
+2024-07-12 19:09:02 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:02 - Failed to send data: Data added
+2024-07-12 19:09:02 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:02 - Failed to send data: Data added
+2024-07-12 19:09:02 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:02 - Failed to send data: Data added
+2024-07-12 19:09:02 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:02 - Failed to send data: Data added
+2024-07-12 19:09:02 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:02 - Failed to send data: Data added
+2024-07-12 19:09:02 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:02 - Failed to send data: Data added
+2024-07-12 19:09:02 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:02 - Failed to send data: Data added
+2024-07-12 19:09:02 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:02 - Failed to send data: Data added
+2024-07-12 19:09:02 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:02 - Failed to send data: Data added
+2024-07-12 19:09:02 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:02 - Failed to send data: Data added
+2024-07-12 19:09:02 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:02 - Failed to send data: Data added
+2024-07-12 19:09:02 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:02 - Failed to send data: Data added
+2024-07-12 19:09:02 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:02 - Failed to send data: Data added
+2024-07-12 19:09:02 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:02 - Failed to send data: Data added
+2024-07-12 19:09:02 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:02 - Failed to send data: Data added
+2024-07-12 19:09:02 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:02 - Failed to send data: Data added
+2024-07-12 19:09:02 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:02 - Failed to send data: Data added
+2024-07-12 19:09:02 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:03 - Failed to send data: Data added
+2024-07-12 19:09:03 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:03 - Failed to send data: Data added
+2024-07-12 19:09:03 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:03 - Failed to send data: Data added
+2024-07-12 19:09:03 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:03 - Failed to send data: Data added
+2024-07-12 19:09:03 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:03 - Failed to send data: Data added
+2024-07-12 19:09:03 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:03 - Failed to send data: Data added
+2024-07-12 19:09:03 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:03 - Failed to send data: Data added
+2024-07-12 19:09:03 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:03 - Failed to send data: Data added
+2024-07-12 19:09:03 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:03 - Failed to send data: Data added
+2024-07-12 19:09:03 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:03 - Failed to send data: Data added
+2024-07-12 19:09:03 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:03 - Failed to send data: Data added
+2024-07-12 19:09:03 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:03 - Failed to send data: Data added
+2024-07-12 19:09:03 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:03 - Failed to send data: Data added
+2024-07-12 19:09:03 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:03 - Failed to send data: Data added
+2024-07-12 19:09:03 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:03 - Failed to send data: Data added
+2024-07-12 19:09:03 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:03 - Failed to send data: Data added
+2024-07-12 19:09:03 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:03 - Failed to send data: Data added
+2024-07-12 19:09:03 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:03 - Failed to send data: Data added
+2024-07-12 19:09:03 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:03 - Failed to send data: Data added
+2024-07-12 19:09:03 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:03 - Failed to send data: Data added
+2024-07-12 19:09:03 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:04 - Failed to send data: Data added
+2024-07-12 19:09:04 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:04 - Failed to send data: Data added
+2024-07-12 19:09:04 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:04 - Failed to send data: Data added
+2024-07-12 19:09:04 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:04 - Failed to send data: Data added
+2024-07-12 19:09:04 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:04 - Failed to send data: Data added
+2024-07-12 19:09:04 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:04 - Failed to send data: Data added
+2024-07-12 19:09:04 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:04 - Failed to send data: Data added
+2024-07-12 19:09:04 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:04 - Failed to send data: Data added
+2024-07-12 19:09:04 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:04 - Failed to send data: Data added
+2024-07-12 19:09:04 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:04 - Failed to send data: Data added
+2024-07-12 19:09:04 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:04 - Failed to send data: Data added
+2024-07-12 19:09:04 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:04 - Failed to send data: Data added
+2024-07-12 19:09:04 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:04 - Failed to send data: Data added
+2024-07-12 19:09:04 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:04 - Failed to send data: Data added
+2024-07-12 19:09:04 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:04 - Failed to send data: Data added
+2024-07-12 19:09:04 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:04 - Failed to send data: Data added
+2024-07-12 19:09:04 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:04 - Failed to send data: Data added
+2024-07-12 19:09:04 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:05 - Failed to send data: Data added
+2024-07-12 19:09:05 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:05 - Failed to send data: Data added
+2024-07-12 19:09:05 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:05 - Failed to send data: Data added
+2024-07-12 19:09:05 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:05 - Failed to send data: Data added
+2024-07-12 19:09:05 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:05 - Failed to send data: Data added
+2024-07-12 19:09:05 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:05 - Failed to send data: Data added
+2024-07-12 19:09:05 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:05 - Failed to send data: Data added
+2024-07-12 19:09:05 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:05 - Failed to send data: Data added
+2024-07-12 19:09:05 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:05 - Failed to send data: Data added
+2024-07-12 19:09:05 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:05 - Failed to send data: Data added
+2024-07-12 19:09:05 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:05 - Failed to send data: Data added
+2024-07-12 19:09:05 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:05 - Failed to send data: Data added
+2024-07-12 19:09:05 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:05 - Failed to send data: Data added
+2024-07-12 19:09:05 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:05 - Failed to send data: Data added
+2024-07-12 19:09:05 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:05 - Failed to send data: Data added
+2024-07-12 19:09:05 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:05 - Failed to send data: Data added
+2024-07-12 19:09:05 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:05 - Failed to send data: Data added
+2024-07-12 19:09:05 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:05 - Failed to send data: Data added
+2024-07-12 19:09:05 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:05 - Failed to send data: Data added
+2024-07-12 19:09:05 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:05 - Failed to send data: Data added
+2024-07-12 19:09:05 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:06 - Failed to send data: Data added
+2024-07-12 19:09:06 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:06 - Failed to send data: Data added
+2024-07-12 19:09:06 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:06 - Failed to send data: Data added
+2024-07-12 19:09:06 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:06 - Failed to send data: Data added
+2024-07-12 19:09:06 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:06 - Failed to send data: Data added
+2024-07-12 19:09:06 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:06 - Failed to send data: Data added
+2024-07-12 19:09:06 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:06 - Failed to send data: Data added
+2024-07-12 19:09:06 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:06 - Failed to send data: Data added
+2024-07-12 19:09:06 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:06 - Failed to send data: Data added
+2024-07-12 19:09:06 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:06 - Failed to send data: Data added
+2024-07-12 19:09:06 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:06 - Failed to send data: Data added
+2024-07-12 19:09:06 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:06 - Failed to send data: Data added
+2024-07-12 19:09:06 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:06 - Failed to send data: Data added
+2024-07-12 19:09:06 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:06 - Failed to send data: Data added
+2024-07-12 19:09:06 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:06 - Failed to send data: Data added
+2024-07-12 19:09:06 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:06 - Failed to send data: Data added
+2024-07-12 19:09:06 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:06 - Failed to send data: Data added
+2024-07-12 19:09:06 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:06 - Failed to send data: Data added
+2024-07-12 19:09:06 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:07 - Failed to send data: Data added
+2024-07-12 19:09:07 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:07 - Failed to send data: Data added
+2024-07-12 19:09:07 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:07 - Failed to send data: Data added
+2024-07-12 19:09:07 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:07 - Failed to send data: Data added
+2024-07-12 19:09:07 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:07 - Failed to send data: Data added
+2024-07-12 19:09:07 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:07 - Failed to send data: Data added
+2024-07-12 19:09:07 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:07 - Failed to send data: Data added
+2024-07-12 19:09:07 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:07 - Failed to send data: Data added
+2024-07-12 19:09:07 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:07 - Failed to send data: Data added
+2024-07-12 19:09:07 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:07 - Failed to send data: Data added
+2024-07-12 19:09:07 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:08 - Failed to send data: Data added
+2024-07-12 19:09:08 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:08 - Failed to send data: Data added
+2024-07-12 19:09:08 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:08 - Failed to send data: Data added
+2024-07-12 19:09:08 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:08 - Failed to send data: Data added
+2024-07-12 19:09:08 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:08 - Failed to send data: Data added
+2024-07-12 19:09:08 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:08 - Failed to send data: Data added
+2024-07-12 19:09:08 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:08 - Failed to send data: Data added
+2024-07-12 19:09:08 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:08 - Failed to send data: Data added
+2024-07-12 19:09:08 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:08 - Failed to send data: Data added
+2024-07-12 19:09:08 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:08 - Failed to send data: Data added
+2024-07-12 19:09:08 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:08 - Failed to send data: Data added
+2024-07-12 19:09:08 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:08 - Failed to send data: Data added
+2024-07-12 19:09:08 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:08 - Failed to send data: Data added
+2024-07-12 19:09:08 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:08 - Failed to send data: Data added
+2024-07-12 19:09:08 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:08 - Failed to send data: Data added
+2024-07-12 19:09:08 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:08 - Failed to send data: Data added
+2024-07-12 19:09:08 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:08 - Failed to send data: Data added
+2024-07-12 19:09:08 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:08 - Failed to send data: Data added
+2024-07-12 19:09:08 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:08 - Failed to send data: Data added
+2024-07-12 19:09:08 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:08 - Failed to send data: Data added
+2024-07-12 19:09:09 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:09 - Failed to send data: Data added
+2024-07-12 19:09:09 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:09 - Failed to send data: Data added
+2024-07-12 19:09:09 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:09 - Failed to send data: Data added
+2024-07-12 19:09:09 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:09 - Failed to send data: Data added
+2024-07-12 19:09:09 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:09 - Failed to send data: Data added
+2024-07-12 19:09:09 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:09 - Failed to send data: Data added
+2024-07-12 19:09:09 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:09 - Failed to send data: Data added
+2024-07-12 19:09:09 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:09 - Failed to send data: Data added
+2024-07-12 19:09:09 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:09 - Failed to send data: Data added
+2024-07-12 19:09:09 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:09 - Failed to send data: Data added
+2024-07-12 19:09:09 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:09 - Failed to send data: Data added
+2024-07-12 19:09:09 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:09 - Failed to send data: Data added
+2024-07-12 19:09:09 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:09 - Failed to send data: Data added
+2024-07-12 19:09:09 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:09 - Failed to send data: Data added
+2024-07-12 19:09:09 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:09 - Failed to send data: Data added
+2024-07-12 19:09:09 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:09 - Failed to send data: Data added
+2024-07-12 19:09:09 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:09 - Failed to send data: Data added
+2024-07-12 19:09:09 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:09 - Failed to send data: Data added
+2024-07-12 19:09:09 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:09 - Failed to send data: Data added
+2024-07-12 19:09:09 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:09 - Failed to send data: Data added
+2024-07-12 19:09:09 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:09 - Failed to send data: Data added
+2024-07-12 19:09:09 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:09 - Failed to send data: Data added
+2024-07-12 19:09:09 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:09 - Failed to send data: Data added
+2024-07-12 19:09:09 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:10 - Failed to send data: Data added
+2024-07-12 19:09:10 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:10 - Failed to send data: Data added
+2024-07-12 19:09:10 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:10 - Failed to send data: Data added
+2024-07-12 19:09:10 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:10 - Failed to send data: Data added
+2024-07-12 19:09:10 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:10 - Failed to send data: Data added
+2024-07-12 19:09:10 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:10 - Failed to send data: Data added
+2024-07-12 19:09:10 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:10 - Failed to send data: Data added
+2024-07-12 19:09:10 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:10 - Failed to send data: Data added
+2024-07-12 19:09:10 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:10 - Failed to send data: Data added
+2024-07-12 19:09:10 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:10 - Failed to send data: Data added
+2024-07-12 19:09:10 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:10 - Failed to send data: Data added
+2024-07-12 19:09:10 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:10 - Failed to send data: Data added
+2024-07-12 19:09:10 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:10 - Failed to send data: Data added
+2024-07-12 19:09:10 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:10 - Failed to send data: Data added
+2024-07-12 19:09:10 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:10 - Failed to send data: Data added
+2024-07-12 19:09:10 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:10 - Failed to send data: Data added
+2024-07-12 19:09:10 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:10 - Failed to send data: Data added
+2024-07-12 19:09:10 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:10 - Failed to send data: Data added
+2024-07-12 19:09:10 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:10 - Failed to send data: Data added
+2024-07-12 19:09:10 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:10 - Failed to send data: Data added
+2024-07-12 19:09:10 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:10 - Failed to send data: Data added
+2024-07-12 19:09:10 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:10 - Failed to send data: Data added
+2024-07-12 19:09:10 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:10 - Failed to send data: Data added
+2024-07-12 19:09:10 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:11 - Failed to send data: Data added
+2024-07-12 19:09:11 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:11 - Failed to send data: Data added
+2024-07-12 19:09:11 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:11 - Failed to send data: Data added
+2024-07-12 19:09:11 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:11 - Failed to send data: Data added
+2024-07-12 19:09:11 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:11 - Failed to send data: Data added
+2024-07-12 19:09:11 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:11 - Failed to send data: Data added
+2024-07-12 19:09:11 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:11 - Failed to send data: Data added
+2024-07-12 19:09:11 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:11 - Failed to send data: Data added
+2024-07-12 19:09:11 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:11 - Failed to send data: Data added
+2024-07-12 19:09:11 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:11 - Failed to send data: Data added
+2024-07-12 19:09:11 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:11 - Failed to send data: Data added
+2024-07-12 19:09:11 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:11 - Failed to send data: Data added
+2024-07-12 19:09:11 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:11 - Failed to send data: Data added
+2024-07-12 19:09:11 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:11 - Failed to send data: Data added
+2024-07-12 19:09:11 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:11 - Failed to send data: Data added
+2024-07-12 19:09:11 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:11 - Failed to send data: Data added
+2024-07-12 19:09:11 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:11 - Failed to send data: Data added
+2024-07-12 19:09:11 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:11 - Failed to send data: Data added
+2024-07-12 19:09:11 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:12 - Failed to send data: Data added
+2024-07-12 19:09:12 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:12 - Failed to send data: Data added
+2024-07-12 19:09:12 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:12 - Failed to send data: Data added
+2024-07-12 19:09:12 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:12 - Failed to send data: Data added
+2024-07-12 19:09:12 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:12 - Failed to send data: Data added
+2024-07-12 19:09:12 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:12 - Failed to send data: Data added
+2024-07-12 19:09:12 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:12 - Failed to send data: Data added
+2024-07-12 19:09:12 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.05, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:12 - Failed to send data: Data added
+2024-07-12 19:09:12 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:12 - Failed to send data: Data added
+2024-07-12 19:09:12 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:12 - Failed to send data: Data added
+2024-07-12 19:09:12 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:12 - Failed to send data: Data added
+2024-07-12 19:09:12 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:12 - Failed to send data: Data added
+2024-07-12 19:09:12 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:12 - Failed to send data: Data added
+2024-07-12 19:09:12 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:12 - Failed to send data: Data added
+2024-07-12 19:09:12 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:12 - Failed to send data: Data added
+2024-07-12 19:09:12 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:12 - Failed to send data: Data added
+2024-07-12 19:09:12 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:12 - Failed to send data: Data added
+2024-07-12 19:09:12 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:12 - Failed to send data: Data added
+2024-07-12 19:09:12 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:12 - Failed to send data: Data added
+2024-07-12 19:09:12 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:12 - Failed to send data: Data added
+2024-07-12 19:09:12 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:13 - Failed to send data: Data added
+2024-07-12 19:09:13 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:13 - Failed to send data: Data added
+2024-07-12 19:09:13 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:13 - Failed to send data: Data added
+2024-07-12 19:09:13 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:13 - Failed to send data: Data added
+2024-07-12 19:09:13 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:13 - Failed to send data: Data added
+2024-07-12 19:09:13 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:13 - Failed to send data: Data added
+2024-07-12 19:09:13 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:13 - Failed to send data: Data added
+2024-07-12 19:09:13 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:13 - Failed to send data: Data added
+2024-07-12 19:09:13 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:13 - Failed to send data: Data added
+2024-07-12 19:09:13 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:13 - Failed to send data: Data added
+2024-07-12 19:09:13 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:13 - Failed to send data: Data added
+2024-07-12 19:09:13 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:13 - Failed to send data: Data added
+2024-07-12 19:09:13 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:13 - Failed to send data: Data added
+2024-07-12 19:09:13 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:13 - Failed to send data: Data added
+2024-07-12 19:09:13 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:13 - Failed to send data: Data added
+2024-07-12 19:09:13 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:13 - Failed to send data: Data added
+2024-07-12 19:09:13 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:13 - Failed to send data: Data added
+2024-07-12 19:09:13 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:13 - Failed to send data: Data added
+2024-07-12 19:09:13 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:13 - Failed to send data: Data added
+2024-07-12 19:09:13 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:13 - Failed to send data: Data added
+2024-07-12 19:09:13 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:14 - Failed to send data: Data added
+2024-07-12 19:09:14 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:14 - Failed to send data: Data added
+2024-07-12 19:09:14 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:14 - Failed to send data: Data added
+2024-07-12 19:09:14 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:14 - Failed to send data: Data added
+2024-07-12 19:09:14 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:14 - Failed to send data: Data added
+2024-07-12 19:09:14 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:14 - Failed to send data: Data added
+2024-07-12 19:09:14 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:14 - Failed to send data: Data added
+2024-07-12 19:09:14 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:14 - Failed to send data: Data added
+2024-07-12 19:09:14 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:14 - Failed to send data: Data added
+2024-07-12 19:09:14 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:14 - Failed to send data: Data added
+2024-07-12 19:09:14 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:15 - Failed to send data: Data added
+2024-07-12 19:09:15 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:15 - Failed to send data: Data added
+2024-07-12 19:09:15 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:15 - Failed to send data: Data added
+2024-07-12 19:09:15 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:15 - Failed to send data: Data added
+2024-07-12 19:09:15 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:15 - Failed to send data: Data added
+2024-07-12 19:09:15 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:15 - Failed to send data: Data added
+2024-07-12 19:09:15 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:16 - Failed to send data: Data added
+2024-07-12 19:09:16 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:16 - Failed to send data: Data added
+2024-07-12 19:09:16 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:17 - Failed to send data: Data added
+2024-07-12 19:09:17 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:17 - Failed to send data: Data added
+2024-07-12 19:09:17 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:17 - Failed to send data: Data added
+2024-07-12 19:09:17 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:17 - Failed to send data: Data added
+2024-07-12 19:09:17 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:17 - Failed to send data: Data added
+2024-07-12 19:09:17 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:17 - Failed to send data: Data added
+2024-07-12 19:09:17 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:17 - Failed to send data: Data added
+2024-07-12 19:09:17 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:18 - Failed to send data: Data added
+2024-07-12 19:09:18 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:18 - Failed to send data: Data added
+2024-07-12 19:09:18 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:19 - Failed to send data: Data added
+2024-07-12 19:09:19 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:19 - Failed to send data: Data added
+2024-07-12 19:09:19 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:19 - Failed to send data: Data added
+2024-07-12 19:09:19 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 1}
+2024-07-12 19:09:20 - Failed to send data: Data added
+2024-07-12 19:09:20 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 1}
+2024-07-12 19:09:20 - Failed to send data: Data added
+2024-07-12 19:09:20 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 1}
+2024-07-12 19:09:20 - Failed to send data: Data added
+2024-07-12 19:09:20 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 1}
+2024-07-12 19:09:20 - Failed to send data: Data added
+2024-07-12 19:09:20 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 1}
+2024-07-12 19:09:20 - Failed to send data: Data added
+2024-07-12 19:09:20 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 1}
+2024-07-12 19:09:20 - Failed to send data: Data added
+2024-07-12 19:09:20 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 1}
+2024-07-12 19:09:21 - Failed to send data: Data added
+2024-07-12 19:09:21 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 1}
+2024-07-12 19:09:21 - Failed to send data: Data added
+2024-07-12 19:09:21 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 1}
+2024-07-12 19:09:21 - Failed to send data: Data added
+2024-07-12 19:09:21 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:21 - Failed to send data: Data added
+2024-07-12 19:09:21 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:21 - Failed to send data: Data added
+2024-07-12 19:09:21 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:22 - Failed to send data: Data added
+2024-07-12 19:09:22 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:22 - Failed to send data: Data added
+2024-07-12 19:09:22 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:22 - Failed to send data: Data added
+2024-07-12 19:09:22 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:22 - Failed to send data: Data added
+2024-07-12 19:09:22 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:23 - Failed to send data: Data added
+2024-07-12 19:09:23 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:23 - Failed to send data: Data added
+2024-07-12 19:09:23 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:23 - Failed to send data: Data added
+2024-07-12 19:09:23 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:23 - Failed to send data: Data added
+2024-07-12 19:09:23 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:24 - Failed to send data: Data added
+2024-07-12 19:09:24 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:24 - Failed to send data: Data added
+2024-07-12 19:09:24 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 1}
+2024-07-12 19:09:24 - Failed to send data: Data added
+2024-07-12 19:09:24 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 1}
+2024-07-12 19:09:24 - Failed to send data: Data added
+2024-07-12 19:09:24 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 1}
+2024-07-12 19:09:25 - Failed to send data: Data added
+2024-07-12 19:09:25 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 1}
+2024-07-12 19:09:25 - Failed to send data: Data added
+2024-07-12 19:09:25 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 1}
+2024-07-12 19:09:25 - Failed to send data: Data added
+2024-07-12 19:09:25 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 1}
+2024-07-12 19:09:25 - Failed to send data: Data added
+2024-07-12 19:09:25 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 1}
+2024-07-12 19:09:25 - Failed to send data: Data added
+2024-07-12 19:09:25 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 1}
+2024-07-12 19:09:25 - Failed to send data: Data added
+2024-07-12 19:09:25 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 1}
+2024-07-12 19:09:25 - Failed to send data: Data added
+2024-07-12 19:09:25 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 1}
+2024-07-12 19:09:25 - Failed to send data: Data added
+2024-07-12 19:09:25 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 1}
+2024-07-12 19:09:25 - Failed to send data: Data added
+2024-07-12 19:09:25 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 1}
+2024-07-12 19:09:25 - Failed to send data: Data added
+2024-07-12 19:09:25 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 1}
+2024-07-12 19:09:25 - Failed to send data: Data added
+2024-07-12 19:09:25 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:25 - Failed to send data: Data added
+2024-07-12 19:09:25 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:25 - Failed to send data: Data added
+2024-07-12 19:09:25 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:25 - Failed to send data: Data added
+2024-07-12 19:09:25 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:25 - Failed to send data: Data added
+2024-07-12 19:09:25 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:26 - Failed to send data: Data added
+2024-07-12 19:09:26 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:26 - Failed to send data: Data added
+2024-07-12 19:09:26 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:26 - Failed to send data: Data added
+2024-07-12 19:09:26 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:26 - Failed to send data: Data added
+2024-07-12 19:09:26 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:26 - Failed to send data: Data added
+2024-07-12 19:09:26 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:26 - Failed to send data: Data added
+2024-07-12 19:09:26 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:26 - Failed to send data: Data added
+2024-07-12 19:09:26 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:26 - Failed to send data: Data added
+2024-07-12 19:09:26 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:26 - Failed to send data: Data added
+2024-07-12 19:09:26 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:26 - Failed to send data: Data added
+2024-07-12 19:09:26 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:26 - Failed to send data: Data added
+2024-07-12 19:09:26 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:26 - Failed to send data: Data added
+2024-07-12 19:09:26 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:26 - Failed to send data: Data added
+2024-07-12 19:09:26 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:26 - Failed to send data: Data added
+2024-07-12 19:09:26 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:26 - Failed to send data: Data added
+2024-07-12 19:09:26 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:26 - Failed to send data: Data added
+2024-07-12 19:09:26 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:26 - Failed to send data: Data added
+2024-07-12 19:09:26 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:26 - Failed to send data: Data added
+2024-07-12 19:09:26 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:26 - Failed to send data: Data added
+2024-07-12 19:09:26 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:26 - Failed to send data: Data added
+2024-07-12 19:09:26 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:27 - Failed to send data: Data added
+2024-07-12 19:09:27 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:27 - Failed to send data: Data added
+2024-07-12 19:09:27 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:27 - Failed to send data: Data added
+2024-07-12 19:09:27 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:27 - Failed to send data: Data added
+2024-07-12 19:09:27 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:27 - Failed to send data: Data added
+2024-07-12 19:09:27 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:27 - Failed to send data: Data added
+2024-07-12 19:09:27 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:27 - Failed to send data: Data added
+2024-07-12 19:09:27 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:27 - Failed to send data: Data added
+2024-07-12 19:09:27 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:27 - Failed to send data: Data added
+2024-07-12 19:09:27 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:27 - Failed to send data: Data added
+2024-07-12 19:09:27 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:27 - Failed to send data: Data added
+2024-07-12 19:09:27 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:27 - Failed to send data: Data added
+2024-07-12 19:09:27 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:27 - Failed to send data: Data added
+2024-07-12 19:09:27 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:27 - Failed to send data: Data added
+2024-07-12 19:09:27 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:27 - Failed to send data: Data added
+2024-07-12 19:09:27 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:27 - Failed to send data: Data added
+2024-07-12 19:09:27 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:27 - Failed to send data: Data added
+2024-07-12 19:09:27 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:28 - Failed to send data: Data added
+2024-07-12 19:09:28 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:28 - Failed to send data: Data added
+2024-07-12 19:09:28 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:28 - Failed to send data: Data added
+2024-07-12 19:09:28 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:28 - Failed to send data: Data added
+2024-07-12 19:09:28 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:28 - Failed to send data: Data added
+2024-07-12 19:09:28 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:28 - Failed to send data: Data added
+2024-07-12 19:09:28 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:28 - Failed to send data: Data added
+2024-07-12 19:09:28 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:28 - Failed to send data: Data added
+2024-07-12 19:09:28 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:28 - Failed to send data: Data added
+2024-07-12 19:09:28 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:28 - Failed to send data: Data added
+2024-07-12 19:09:28 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:28 - Failed to send data: Data added
+2024-07-12 19:09:28 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:28 - Failed to send data: Data added
+2024-07-12 19:09:28 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:29 - Failed to send data: Data added
+2024-07-12 19:09:29 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:29 - Failed to send data: Data added
+2024-07-12 19:09:29 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:29 - Failed to send data: Data added
+2024-07-12 19:09:29 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:29 - Failed to send data: Data added
+2024-07-12 19:09:29 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:29 - Failed to send data: Data added
+2024-07-12 19:09:29 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:29 - Failed to send data: Data added
+2024-07-12 19:09:29 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:29 - Failed to send data: Data added
+2024-07-12 19:09:29 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:29 - Failed to send data: Data added
+2024-07-12 19:09:29 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:29 - Failed to send data: Data added
+2024-07-12 19:09:29 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:29 - Failed to send data: Data added
+2024-07-12 19:09:29 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:29 - Failed to send data: Data added
+2024-07-12 19:09:29 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:29 - Failed to send data: Data added
+2024-07-12 19:09:29 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:29 - Failed to send data: Data added
+2024-07-12 19:09:29 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:29 - Failed to send data: Data added
+2024-07-12 19:09:29 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:29 - Failed to send data: Data added
+2024-07-12 19:09:29 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:29 - Failed to send data: Data added
+2024-07-12 19:09:29 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:29 - Failed to send data: Data added
+2024-07-12 19:09:29 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:29 - Failed to send data: Data added
+2024-07-12 19:09:29 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:29 - Failed to send data: Data added
+2024-07-12 19:09:29 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:30 - Failed to send data: Data added
+2024-07-12 19:09:30 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:30 - Failed to send data: Data added
+2024-07-12 19:09:30 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:30 - Failed to send data: Data added
+2024-07-12 19:09:30 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:30 - Failed to send data: Data added
+2024-07-12 19:09:30 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:30 - Failed to send data: Data added
+2024-07-12 19:09:30 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:30 - Failed to send data: Data added
+2024-07-12 19:09:30 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:30 - Failed to send data: Data added
+2024-07-12 19:09:30 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:30 - Failed to send data: Data added
+2024-07-12 19:09:30 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:30 - Failed to send data: Data added
+2024-07-12 19:09:30 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:30 - Failed to send data: Data added
+2024-07-12 19:09:30 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:30 - Failed to send data: Data added
+2024-07-12 19:09:30 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:30 - Failed to send data: Data added
+2024-07-12 19:09:30 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:30 - Failed to send data: Data added
+2024-07-12 19:09:30 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:30 - Failed to send data: Data added
+2024-07-12 19:09:30 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:30 - Failed to send data: Data added
+2024-07-12 19:09:30 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:30 - Failed to send data: Data added
+2024-07-12 19:09:30 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:30 - Failed to send data: Data added
+2024-07-12 19:09:30 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:30 - Failed to send data: Data added
+2024-07-12 19:09:30 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:30 - Failed to send data: Data added
+2024-07-12 19:09:30 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:30 - Failed to send data: Data added
+2024-07-12 19:09:30 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:30 - Failed to send data: Data added
+2024-07-12 19:09:30 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:30 - Failed to send data: Data added
+2024-07-12 19:09:30 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:30 - Failed to send data: Data added
+2024-07-12 19:09:30 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:30 - Failed to send data: Data added
+2024-07-12 19:09:30 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:31 - Failed to send data: Data added
+2024-07-12 19:09:31 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:31 - Failed to send data: Data added
+2024-07-12 19:09:31 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:31 - Failed to send data: Data added
+2024-07-12 19:09:31 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:31 - Failed to send data: Data added
+2024-07-12 19:09:31 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:31 - Failed to send data: Data added
+2024-07-12 19:09:31 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:31 - Failed to send data: Data added
+2024-07-12 19:09:31 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:31 - Failed to send data: Data added
+2024-07-12 19:09:31 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:31 - Failed to send data: Data added
+2024-07-12 19:09:31 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:31 - Failed to send data: Data added
+2024-07-12 19:09:31 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:31 - Failed to send data: Data added
+2024-07-12 19:09:31 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:31 - Failed to send data: Data added
+2024-07-12 19:09:31 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:31 - Failed to send data: Data added
+2024-07-12 19:09:31 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:31 - Failed to send data: Data added
+2024-07-12 19:09:31 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:31 - Failed to send data: Data added
+2024-07-12 19:09:31 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:31 - Failed to send data: Data added
+2024-07-12 19:09:31 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:31 - Failed to send data: Data added
+2024-07-12 19:09:31 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:31 - Failed to send data: Data added
+2024-07-12 19:09:31 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:31 - Failed to send data: Data added
+2024-07-12 19:09:31 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:31 - Failed to send data: Data added
+2024-07-12 19:09:31 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:31 - Failed to send data: Data added
+2024-07-12 19:09:31 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:31 - Failed to send data: Data added
+2024-07-12 19:09:31 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:31 - Failed to send data: Data added
+2024-07-12 19:09:31 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:31 - Failed to send data: Data added
+2024-07-12 19:09:31 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:31 - Failed to send data: Data added
+2024-07-12 19:09:31 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:31 - Failed to send data: Data added
+2024-07-12 19:09:31 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:32 - Failed to send data: Data added
+2024-07-12 19:09:32 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:32 - Failed to send data: Data added
+2024-07-12 19:09:32 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:32 - Failed to send data: Data added
+2024-07-12 19:09:32 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:32 - Failed to send data: Data added
+2024-07-12 19:09:32 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:32 - Failed to send data: Data added
+2024-07-12 19:09:32 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:32 - Failed to send data: Data added
+2024-07-12 19:09:32 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:32 - Failed to send data: Data added
+2024-07-12 19:09:32 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:32 - Failed to send data: Data added
+2024-07-12 19:09:32 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:32 - Failed to send data: Data added
+2024-07-12 19:09:32 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:32 - Failed to send data: Data added
+2024-07-12 19:09:32 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:32 - Failed to send data: Data added
+2024-07-12 19:09:32 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:32 - Failed to send data: Data added
+2024-07-12 19:09:32 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:32 - Failed to send data: Data added
+2024-07-12 19:09:32 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:32 - Failed to send data: Data added
+2024-07-12 19:09:32 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:32 - Failed to send data: Data added
+2024-07-12 19:09:32 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:32 - Failed to send data: Data added
+2024-07-12 19:09:32 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:32 - Failed to send data: Data added
+2024-07-12 19:09:32 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:32 - Failed to send data: Data added
+2024-07-12 19:09:32 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:32 - Failed to send data: Data added
+2024-07-12 19:09:32 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:32 - Failed to send data: Data added
+2024-07-12 19:09:32 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:32 - Failed to send data: Data added
+2024-07-12 19:09:32 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:32 - Failed to send data: Data added
+2024-07-12 19:09:32 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:32 - Failed to send data: Data added
+2024-07-12 19:09:32 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:32 - Failed to send data: Data added
+2024-07-12 19:09:32 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:33 - Failed to send data: Data added
+2024-07-12 19:09:33 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:33 - Failed to send data: Data added
+2024-07-12 19:09:33 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:33 - Failed to send data: Data added
+2024-07-12 19:09:33 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 1, 'Torpedo_2': 0}
+2024-07-12 19:09:33 - Failed to send data: Data added
+2024-07-12 19:09:33 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:33 - Failed to send data: Data added
+2024-07-12 19:09:33 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:33 - Failed to send data: Data added
+2024-07-12 19:09:33 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:33 - Failed to send data: Data added
+2024-07-12 19:09:33 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:33 - Failed to send data: Data added
+2024-07-12 19:09:33 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:33 - Failed to send data: Data added
+2024-07-12 19:09:33 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:33 - Failed to send data: Data added
+2024-07-12 19:09:33 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:33 - Failed to send data: Data added
+2024-07-12 19:09:33 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:33 - Failed to send data: Data added
+2024-07-12 19:09:33 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:33 - Failed to send data: Data added
+2024-07-12 19:09:33 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:33 - Failed to send data: Data added
+2024-07-12 19:09:33 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:33 - Failed to send data: Data added
+2024-07-12 19:09:33 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:33 - Failed to send data: Data added
+2024-07-12 19:09:33 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:33 - Failed to send data: Data added
+2024-07-12 19:09:33 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:33 - Failed to send data: Data added
+2024-07-12 19:09:33 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:34 - Failed to send data: Data added
+2024-07-12 19:09:34 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:34 - Failed to send data: Data added
+2024-07-12 19:09:34 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:34 - Failed to send data: Data added
+2024-07-12 19:09:34 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:34 - Failed to send data: Data added
+2024-07-12 19:09:34 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:34 - Failed to send data: Data added
+2024-07-12 19:09:34 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:34 - Failed to send data: Data added
+2024-07-12 19:09:34 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:34 - Failed to send data: Data added
+2024-07-12 19:09:34 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:34 - Failed to send data: Data added
+2024-07-12 19:09:34 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:34 - Failed to send data: Data added
+2024-07-12 19:09:34 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:34 - Failed to send data: Data added
+2024-07-12 19:09:34 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:34 - Failed to send data: Data added
+2024-07-12 19:09:34 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:34 - Failed to send data: Data added
+2024-07-12 19:09:34 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:34 - Failed to send data: Data added
+2024-07-12 19:09:34 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:34 - Failed to send data: Data added
+2024-07-12 19:09:34 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:34 - Failed to send data: Data added
+2024-07-12 19:09:34 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:35 - Failed to send data: Data added
+2024-07-12 19:09:35 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:35 - Failed to send data: Data added
+2024-07-12 19:09:35 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:35 - Failed to send data: Data added
+2024-07-12 19:09:35 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:35 - Failed to send data: Data added
+2024-07-12 19:09:35 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:35 - Failed to send data: Data added
+2024-07-12 19:09:35 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:35 - Failed to send data: Data added
+2024-07-12 19:09:35 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:35 - Failed to send data: Data added
+2024-07-12 19:09:35 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:35 - Failed to send data: Data added
+2024-07-12 19:09:35 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:35 - Failed to send data: Data added
+2024-07-12 19:09:35 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:35 - Failed to send data: Data added
+2024-07-12 19:09:35 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:35 - Failed to send data: Data added
+2024-07-12 19:09:35 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:35 - Failed to send data: Data added
+2024-07-12 19:09:35 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:35 - Failed to send data: Data added
+2024-07-12 19:09:35 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:35 - Failed to send data: Data added
+2024-07-12 19:09:35 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:35 - Failed to send data: Data added
+2024-07-12 19:09:35 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:35 - Failed to send data: Data added
+2024-07-12 19:09:35 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:35 - Failed to send data: Data added
+2024-07-12 19:09:35 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:35 - Failed to send data: Data added
+2024-07-12 19:09:35 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:35 - Failed to send data: Data added
+2024-07-12 19:09:35 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:35 - Failed to send data: Data added
+2024-07-12 19:09:35 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:36 - Failed to send data: Data added
+2024-07-12 19:09:36 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:36 - Failed to send data: Data added
+2024-07-12 19:09:36 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:36 - Failed to send data: Data added
+2024-07-12 19:09:36 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:36 - Failed to send data: Data added
+2024-07-12 19:09:36 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:36 - Failed to send data: Data added
+2024-07-12 19:09:36 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:36 - Failed to send data: Data added
+2024-07-12 19:09:36 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:36 - Failed to send data: Data added
+2024-07-12 19:09:36 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:36 - Failed to send data: Data added
+2024-07-12 19:09:36 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:36 - Failed to send data: Data added
+2024-07-12 19:09:36 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:36 - Failed to send data: Data added
+2024-07-12 19:09:36 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:36 - Failed to send data: Data added
+2024-07-12 19:09:36 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:36 - Failed to send data: Data added
+2024-07-12 19:09:36 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:36 - Failed to send data: Data added
+2024-07-12 19:09:36 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:37 - Failed to send data: Data added
+2024-07-12 19:09:37 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:37 - Failed to send data: Data added
+2024-07-12 19:09:37 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:37 - Failed to send data: Data added
+2024-07-12 19:09:37 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:37 - Failed to send data: Data added
+2024-07-12 19:09:37 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:37 - Failed to send data: Data added
+2024-07-12 19:09:37 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:37 - Failed to send data: Data added
+2024-07-12 19:09:37 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:37 - Failed to send data: Data added
+2024-07-12 19:09:37 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:37 - Failed to send data: Data added
+2024-07-12 19:09:37 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:37 - Failed to send data: Data added
+2024-07-12 19:09:37 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:37 - Failed to send data: Data added
+2024-07-12 19:09:37 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:37 - Failed to send data: Data added
+2024-07-12 19:09:37 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:37 - Failed to send data: Data added
+2024-07-12 19:09:37 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:37 - Failed to send data: Data added
+2024-07-12 19:09:37 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:37 - Failed to send data: Data added
+2024-07-12 19:09:37 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:37 - Failed to send data: Data added
+2024-07-12 19:09:37 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:37 - Failed to send data: Data added
+2024-07-12 19:09:37 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:37 - Failed to send data: Data added
+2024-07-12 19:09:37 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:37 - Failed to send data: Data added
+2024-07-12 19:09:37 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:37 - Failed to send data: Data added
+2024-07-12 19:09:37 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:37 - Failed to send data: Data added
+2024-07-12 19:09:37 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:37 - Failed to send data: Data added
+2024-07-12 19:09:37 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:37 - Failed to send data: Data added
+2024-07-12 19:09:37 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:37 - Failed to send data: Data added
+2024-07-12 19:09:37 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:37 - Failed to send data: Data added
+2024-07-12 19:09:38 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:38 - Failed to send data: Data added
+2024-07-12 19:09:38 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:38 - Failed to send data: Data added
+2024-07-12 19:09:38 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:38 - Failed to send data: Data added
+2024-07-12 19:09:38 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:38 - Failed to send data: Data added
+2024-07-12 19:09:38 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:38 - Failed to send data: Data added
+2024-07-12 19:09:38 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:38 - Failed to send data: Data added
+2024-07-12 19:09:38 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:38 - Failed to send data: Data added
+2024-07-12 19:09:38 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:38 - Failed to send data: Data added
+2024-07-12 19:09:38 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:38 - Failed to send data: Data added
+2024-07-12 19:09:38 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:38 - Failed to send data: Data added
+2024-07-12 19:09:38 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:38 - Failed to send data: Data added
+2024-07-12 19:09:38 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:38 - Failed to send data: Data added
+2024-07-12 19:09:38 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:38 - Failed to send data: Data added
+2024-07-12 19:09:38 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:38 - Failed to send data: Data added
+2024-07-12 19:09:38 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:38 - Failed to send data: Data added
+2024-07-12 19:09:38 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:38 - Failed to send data: Data added
+2024-07-12 19:09:38 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:38 - Failed to send data: Data added
+2024-07-12 19:09:38 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:38 - Failed to send data: Data added
+2024-07-12 19:09:38 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:38 - Failed to send data: Data added
+2024-07-12 19:09:38 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:39 - Failed to send data: Data added
+2024-07-12 19:09:39 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:39 - Failed to send data: Data added
+2024-07-12 19:09:39 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:39 - Failed to send data: Data added
+2024-07-12 19:09:39 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:39 - Failed to send data: Data added
+2024-07-12 19:09:39 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:39 - Failed to send data: Data added
+2024-07-12 19:09:39 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:39 - Failed to send data: Data added
+2024-07-12 19:09:39 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:39 - Failed to send data: Data added
+2024-07-12 19:09:39 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:39 - Failed to send data: Data added
+2024-07-12 19:09:39 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:39 - Failed to send data: Data added
+2024-07-12 19:09:39 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:39 - Failed to send data: Data added
+2024-07-12 19:09:39 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:39 - Failed to send data: Data added
+2024-07-12 19:09:39 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:39 - Failed to send data: Data added
+2024-07-12 19:09:39 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:39 - Failed to send data: Data added
+2024-07-12 19:09:39 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:39 - Failed to send data: Data added
+2024-07-12 19:09:39 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:39 - Failed to send data: Data added
+2024-07-12 19:09:39 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:39 - Failed to send data: Data added
+2024-07-12 19:09:39 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:39 - Failed to send data: Data added
+2024-07-12 19:09:39 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:39 - Failed to send data: Data added
+2024-07-12 19:09:39 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:39 - Failed to send data: Data added
+2024-07-12 19:09:39 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:39 - Failed to send data: Data added
+2024-07-12 19:09:39 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:39 - Failed to send data: Data added
+2024-07-12 19:09:39 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:40 - Failed to send data: Data added
+2024-07-12 19:09:40 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:40 - Failed to send data: Data added
+2024-07-12 19:09:40 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:40 - Failed to send data: Data added
+2024-07-12 19:09:40 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:40 - Failed to send data: Data added
+2024-07-12 19:09:40 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:40 - Failed to send data: Data added
+2024-07-12 19:09:40 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:40 - Failed to send data: Data added
+2024-07-12 19:09:40 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:40 - Failed to send data: Data added
+2024-07-12 19:09:40 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:40 - Failed to send data: Data added
+2024-07-12 19:09:40 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:40 - Failed to send data: Data added
+2024-07-12 19:09:40 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:40 - Failed to send data: Data added
+2024-07-12 19:09:40 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:40 - Failed to send data: Data added
+2024-07-12 19:09:40 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:40 - Failed to send data: Data added
+2024-07-12 19:09:40 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:40 - Failed to send data: Data added
+2024-07-12 19:09:40 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:40 - Failed to send data: Data added
+2024-07-12 19:09:40 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:40 - Failed to send data: Data added
+2024-07-12 19:09:40 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:40 - Failed to send data: Data added
+2024-07-12 19:09:40 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:40 - Failed to send data: Data added
+2024-07-12 19:09:40 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:40 - Failed to send data: Data added
+2024-07-12 19:09:40 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:40 - Failed to send data: Data added
+2024-07-12 19:09:40 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:40 - Failed to send data: Data added
+2024-07-12 19:09:40 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:40 - Failed to send data: Data added
+2024-07-12 19:09:40 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:41 - Failed to send data: Data added
+2024-07-12 19:09:41 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:41 - Failed to send data: Data added
+2024-07-12 19:09:41 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:41 - Failed to send data: Data added
+2024-07-12 19:09:41 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:41 - Failed to send data: Data added
+2024-07-12 19:09:41 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:41 - Failed to send data: Data added
+2024-07-12 19:09:41 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:41 - Failed to send data: Data added
+2024-07-12 19:09:41 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:41 - Failed to send data: Data added
+2024-07-12 19:09:41 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:41 - Failed to send data: Data added
+2024-07-12 19:09:41 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:41 - Failed to send data: Data added
+2024-07-12 19:09:41 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:41 - Failed to send data: Data added
+2024-07-12 19:09:41 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:41 - Failed to send data: Data added
+2024-07-12 19:09:41 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:41 - Failed to send data: Data added
+2024-07-12 19:09:41 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:41 - Failed to send data: Data added
+2024-07-12 19:09:41 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:42 - Failed to send data: Data added
+2024-07-12 19:09:42 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:42 - Failed to send data: Data added
+2024-07-12 19:09:42 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:42 - Failed to send data: Data added
+2024-07-12 19:09:42 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:42 - Failed to send data: Data added
+2024-07-12 19:09:42 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:42 - Failed to send data: Data added
+2024-07-12 19:09:42 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:42 - Failed to send data: Data added
+2024-07-12 19:09:42 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:42 - Failed to send data: Data added
+2024-07-12 19:09:42 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:42 - Failed to send data: Data added
+2024-07-12 19:09:42 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:42 - Failed to send data: Data added
+2024-07-12 19:09:42 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:42 - Failed to send data: Data added
+2024-07-12 19:09:42 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:42 - Failed to send data: Data added
+2024-07-12 19:09:42 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:42 - Failed to send data: Data added
+2024-07-12 19:09:42 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:42 - Failed to send data: Data added
+2024-07-12 19:09:42 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:42 - Failed to send data: Data added
+2024-07-12 19:09:42 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:42 - Failed to send data: Data added
+2024-07-12 19:09:42 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:42 - Failed to send data: Data added
+2024-07-12 19:09:42 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:42 - Failed to send data: Data added
+2024-07-12 19:09:42 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:42 - Failed to send data: Data added
+2024-07-12 19:09:42 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:42 - Failed to send data: Data added
+2024-07-12 19:09:43 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:43 - Failed to send data: Data added
+2024-07-12 19:09:43 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:43 - Failed to send data: Data added
+2024-07-12 19:09:43 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:43 - Failed to send data: Data added
+2024-07-12 19:09:43 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:43 - Failed to send data: Data added
+2024-07-12 19:09:43 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:43 - Failed to send data: Data added
+2024-07-12 19:09:43 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:43 - Failed to send data: Data added
+2024-07-12 19:09:43 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:43 - Failed to send data: Data added
+2024-07-12 19:09:43 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:43 - Failed to send data: Data added
+2024-07-12 19:09:43 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:43 - Failed to send data: Data added
+2024-07-12 19:09:43 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:43 - Failed to send data: Data added
+2024-07-12 19:09:43 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:43 - Failed to send data: Data added
+2024-07-12 19:09:43 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:43 - Failed to send data: Data added
+2024-07-12 19:09:43 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:43 - Failed to send data: Data added
+2024-07-12 19:09:43 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:43 - Failed to send data: Data added
+2024-07-12 19:09:43 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:43 - Failed to send data: Data added
+2024-07-12 19:09:44 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:44 - Failed to send data: Data added
+2024-07-12 19:09:44 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:44 - Failed to send data: Data added
+2024-07-12 19:09:44 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:44 - Failed to send data: Data added
+2024-07-12 19:09:44 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:44 - Failed to send data: Data added
+2024-07-12 19:09:44 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:44 - Failed to send data: Data added
+2024-07-12 19:09:44 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:44 - Failed to send data: Data added
+2024-07-12 19:09:44 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:44 - Failed to send data: Data added
+2024-07-12 19:09:44 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:44 - Failed to send data: Data added
+2024-07-12 19:09:44 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:44 - Failed to send data: Data added
+2024-07-12 19:09:44 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:44 - Failed to send data: Data added
+2024-07-12 19:09:44 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:44 - Failed to send data: Data added
+2024-07-12 19:09:44 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:44 - Failed to send data: Data added
+2024-07-12 19:09:44 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:44 - Failed to send data: Data added
+2024-07-12 19:09:44 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:44 - Failed to send data: Data added
+2024-07-12 19:09:44 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:44 - Failed to send data: Data added
+2024-07-12 19:09:44 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
+2024-07-12 19:09:44 - Failed to send data: Data added
+2024-07-12 19:09:44 - Mapped data: {'Arm': 0, 'X': -0.0, 'Y': 0.02, 'Z': -0.03, 'Yaw': 0.06, 'Pitch': -0.02, 'Roll': -0.0, 'Claw': -0.58, 'Torpedo_1': 0, 'Torpedo_2': 0}
