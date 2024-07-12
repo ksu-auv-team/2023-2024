@@ -45,6 +45,10 @@ db = SQLAlchemy(app)
 # Set the upload folder relative to the current script's directory
 app.config['UPLOAD_FOLDER'] = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'uploads')
 
+app.register_blueprint(routes.get_blueprint())
+app.register_blueprint(zedcam_blueprint)
+app.register_blueprint(anchor_blueprint)
+
 # Ensure the upload directory exists
 os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
 
@@ -234,10 +238,6 @@ def get_object_data():
         return jsonify(data_dict)
     else:
         return jsonify({'message': 'No data found'}), 404
-
-app.register_blueprint(routes.get_blueprint())
-app.register_blueprint(zedcam_blueprint)
-app.register_blueprint(anchor_blueprint)
 
 #Opening cameras through flask regardless of parameters or configuration
 @app.route('/video_0')
