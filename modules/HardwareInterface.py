@@ -506,15 +506,24 @@ class HardwareInterface:
     def test_run(self):
         delay = 0.01
         
-        # # This is manual input for testing motor directions
-        esc_data = [1, 0, 127]
+        # # This is manual input for testing arm and torpedoes directions
+        # esc_data = [1, 0, 127]
+        # while True:
+        #     # esc_data[0] = int(input("Enter the data 0 value: "))
+        #     # esc_data[1] = int(input("Enter the data 1 value: "))
+        #     # esc_data[2] = int(input("Enter the data 2 value: "))
+        #     self.write_BatteryMonitor(esc_data)
+        #     print(esc_data)
+        #     # print(1)
+        #     time.sleep(delay)
+        
+        esc_data = [127, 127, 127, 127, 127, 127, 127, 127]
         while True:
-            # esc_data[0] = int(input("Enter the data 0 value: "))
-            # esc_data[1] = int(input("Enter the data 1 value: "))
-            # esc_data[2] = int(input("Enter the data 2 value: "))
-            self.write_BatteryMonitor(esc_data)
+            motor = int(input("Enter the motor number (1-8): "))
+            value = int(input("Enter the value (0-255): "))
+            esc_data[motor - 1] = value
+            self.write_ESCs(esc_data)
             print(esc_data)
-            # print(1)
             time.sleep(delay)
             
         # # This is IMU testing code
