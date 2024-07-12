@@ -287,7 +287,7 @@ class HardwareInterface:
             print("Error writing I2C data:", str(e))
 
     def read_BatteryMonitor(self):
-        device_address = 0x22
+        device_address = 0x09
         try:
             data =self.bus.read_i2c_block_data(device_address, 0, 7)
             data[6] = bin(data[6])
