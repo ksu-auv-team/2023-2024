@@ -300,7 +300,7 @@ class HardwareInterface:
             d[5] = (data[11] / 100) + data[10]
             d[6] = data[12]
             print("Message received:", d)
-            return data
+            return d
         except Exception as e:
             print("Error reading I2C data:", str(e))
             return [0, 0, 0, 0, 0, 0, 0]
@@ -503,61 +503,57 @@ class HardwareInterface:
 
             time.sleep(delay)
 
-    def test_run(self, data):
+    def test_run(self):
         delay = 0.01
         
-        # No movement package for testing purposes
-        # esc_data = data
-        # self.write_ESCs(esc_data)
-        
         # This is manual input for testing motor directions
-        # esc_data = [127, 127, 127, 127, 127, 127, 127, 127]
-        # while True:
-            # self.write_ESCs()
-            # # print(1)
-            # time.sleep(delay)
-            # motor_choice = input("Enter motor number (1 - 8): ")
-            # motor_value = input("Enter motor value (64 - 191): ")
-            # esc_data[int(motor_choice) - 1] = int(motor_value)
-        
-        # This is IMU testing code
+        esc_data = [0, 0, 127]
         while True:
-            try:
-                # if self.IMU is None:
-                #     print("IMU not initialized")
-                #     time.sleep(delay)
-                #     print("Retrying...")
-                #     self.IMU = MPU6050(0x69)
-                #     time.sleep(delay)
-                #     continue
-                # IMU_data = self.read_IMU()
-                battery_data = self.read_BatteryMonitor()
-                # temp_humi_data = self.read_Temp_Humi()
-                sensor_data = {
-                    "voltage1": battery_data[0],
-                    "voltage2": battery_data[2],
-                    "voltage3": battery_data[4],
-                    "current1": battery_data[1],
-                    "current2": battery_data[3],
-                    "current3": battery_data[5],
-                    "error": battery_data[6],
-                    # "depth": 0,
-                    # "X": IMU_data["accel_x"],
-                    # "Y": IMU_data["accel_y"],
-                    # "Z": IMU_data["accel_z"],
-                    # "pitch": IMU_data["gyro_x"],
-                    # "roll": IMU_data["gyro_y"],
-                    # "yaw": IMU_data["gyro_z"],
-                    # "temperature": 0,
-                    # "orin_temp": 0,
-                    # "humidity": 0,
-                    # "heading": 0
-                }
-                # self.print_data(sensor_data)
-                time.sleep(delay)
-            except OSError as e:        
-                time.sleep(delay)
-                continue
+            esc_data[0] = int(input("Enter the data 0 value: "))
+            esc_data[1] = int(input("Enter the data 1 value: "))
+            esc_data[2] = int(input("Enter the data 2 value: "))
+            self.write_BatteryMonitor(esc_data)
+            # print(1)
+            time.sleep(delay)
+            
+        # # This is IMU testing code
+        # while True:
+        #     try:
+        #         # if self.IMU is None:
+        #         #     print("IMU not initialized")
+        #         #     time.sleep(delay)
+        #         #     print("Retrying...")
+        #         #     self.IMU = MPU6050(0x69)
+        #         #     time.sleep(delay)
+        #         #     continue
+        #         # IMU_data = self.read_IMU()
+        #         battery_data = self.read_BatteryMonitor()
+        #         # temp_humi_data = self.read_Temp_Humi()
+        #         sensor_data = {
+        #             "voltage1": battery_data[0],
+        #             "voltage2": battery_data[2],
+        #             "voltage3": battery_data[4],
+        #             "current1": battery_data[1],
+        #             "current2": battery_data[3],
+        #             "current3": battery_data[5],
+        #             "error": battery_data[6],
+        #             # "depth": 0,
+        #             # "X": IMU_data["accel_x"],
+        #             # "Y": IMU_data["accel_y"],
+        #             # "Z": IMU_data["accel_z"],
+        #             # "pitch": IMU_data["gyro_x"],
+        #             # "roll": IMU_data["gyro_y"],
+        #             # "yaw": IMU_data["gyro_z"],
+        #             # "temperature": 0,
+        #             # "orin_temp": 0,
+        #             # "humidity": 0,
+        #             # "heading": 0
+        #         }
+        #         # self.print_data(sensor_data)
+        #         time.sleep(delay)
+        #     except OSError as e:        
+        #         time.sleep(delay)
+        #         continue
 
 if __name__ == '__main__':
     args = argparse.ArgumentParser()
@@ -566,4 +562,4 @@ if __name__ == '__main__':
     args = args.parse_args()
     HI = HardwareInterface(args=args)
     # HI.run()
-    HI.test_run([127, 127, 127, 127, 127, 127, 127, 127])
+    HI.test_run()
