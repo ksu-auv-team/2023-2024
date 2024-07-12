@@ -299,7 +299,7 @@ class HardwareInterface:
             d[4] = (data[9] / 100) + data[8]
             d[5] = (data[11] / 100) + data[10]
             d[6] = data[12]
-            print("Message received:", data)
+            print("Message received:", d)
             return data
         except Exception as e:
             print("Error reading I2C data:", str(e))
