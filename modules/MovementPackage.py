@@ -404,7 +404,7 @@ class MovementPackage:
         time.sleep(10)
         while True:
             data = self.get_data()
-            data = [data["X"], data["Y"], data["Z"], data["Pitch"], data["Roll"], data["Yaw"], data["Claw"], data["Torpedo_1"], data["Torpedo_2"]]
+            data = [data["X"], data["Y"], data["Z"], data["pitch"], data["roll"], data["yaw"], data["claw"], data["torp1"], data["torp2"]]
             self.convert_to_motor_values(data)
             self.save_data()
             time.sleep(0.01)
@@ -422,11 +422,11 @@ class MovementPackage:
                     data[1] = input_value
                 elif input_axis == "Z":
                     data[2] = input_value
-                elif input_axis == "Pitch":
+                elif input_axis == "pitch":
                     data[3] = input_value
-                elif input_axis == "Roll":
+                elif input_axis == "roll":
                     data[4] = input_value
-                elif input_axis == "Yaw":
+                elif input_axis == "yaw":
                     data[5] = input_value
                 else:
                     print("Invalid axis")
