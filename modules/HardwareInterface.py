@@ -430,7 +430,7 @@ class HardwareInterface:
         """
         s = ""
         for key, value in data.items():
-            s += f"{key}: {value: .2f}     "
+            s += f"{key}: {value}     "
         s += "\r"
         print(s)
 
