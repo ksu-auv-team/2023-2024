@@ -289,8 +289,16 @@ class HardwareInterface:
     def read_BatteryMonitor(self):
         device_address = 0x09
         try:
+            d = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0]
             data =self.bus.read_i2c_block_data(device_address, 0, 13)
             data[len(data)-1] = bin(data[len(data) - 1])
+            d[0] = (data[1] / 100) + data[0]
+            d[1] = (data[3] / 100) + data[2]
+            d[2] = (data[5] / 100) + data[4]
+            d[3] = (data[7] / 100) + data[6]
+            d[4] = (data[9] / 100) + data[8]
+            d[5] = (data[11] / 100) + data[10]
+            d[6] = data[12]
             print("Message received:", data)
             return data
         except Exception as e:
@@ -545,7 +553,7 @@ class HardwareInterface:
                     # "humidity": 0,
                     # "heading": 0
                 }
-                self.print_data(sensor_data)
+                # self.print_data(sensor_data)
                 time.sleep(delay)
             except OSError as e:        
                 time.sleep(delay)
