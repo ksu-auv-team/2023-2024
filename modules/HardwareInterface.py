@@ -279,7 +279,7 @@ class HardwareInterface:
             print("Error writing I2C data:", str(e))
 
     def write_BatteryMonitor(self, data = [0, 0, 127]):
-        device_address = 0x0A
+        device_address = 0x0a
         try:
             self.bus.write_i2c_block_data(device_address, 0, data)
             # print("Message sent:", data)
