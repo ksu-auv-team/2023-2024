@@ -507,11 +507,11 @@ class HardwareInterface:
         delay = 0.01
         
         # # This is manual input for testing motor directions
-        esc_data = [0, 0, 127]
+        esc_data = [1, 0, 127]
         while True:
-            esc_data[0] = int(input("Enter the data 0 value: "))
-            esc_data[1] = int(input("Enter the data 1 value: "))
-            esc_data[2] = int(input("Enter the data 2 value: "))
+            # esc_data[0] = int(input("Enter the data 0 value: "))
+            # esc_data[1] = int(input("Enter the data 1 value: "))
+            # esc_data[2] = int(input("Enter the data 2 value: "))
             self.write_BatteryMonitor(esc_data)
             print(esc_data)
             # print(1)
