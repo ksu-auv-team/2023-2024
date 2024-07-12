@@ -423,7 +423,7 @@ class HardwareInterface:
         Returns:
             dict: The retrieved data as a dictionary.
         """
-        response = requests.get(f"{self.base_url}/{data_type}")
+        response = requests.get(f"{self.baseurl}/{data_type}")
         if response.status_code == 200:
             return response.json()
         else:
