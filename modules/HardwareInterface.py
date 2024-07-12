@@ -278,8 +278,8 @@ class HardwareInterface:
         except Exception as e:
             print("Error writing I2C data:", str(e))
 
-    def write_BatteryMonitor(self, data = [127, 0, 0]):
-        device_address = 0x22
+    def write_BatteryMonitor(self, data = [0, 0, 127]):
+        device_address = 0x0A
         try:
             self.bus.write_i2c_block_data(device_address, 0, data)
             # print("Message sent:", data)
@@ -291,7 +291,7 @@ class HardwareInterface:
         try:
             data =self.bus.read_i2c_block_data(device_address, 0, 7)
             data[6] = bin(data[6])
-            # print("Message received:", data)
+            print("Message received:", data)
             return data
         except Exception as e:
             print("Error reading I2C data:", str(e))
@@ -441,17 +441,17 @@ class HardwareInterface:
         time.sleep(10)  # Wait for the server to start
 
         while True:
-            # battery_monitor_data = self.read_BatteryMonitor()
+            battery_monitor_data = self.read_BatteryMonitor()
             IMU_data = self.read_IMU()
             # temp_humi_data = self.read_Temp_Humi()
             sensor_data = {
-                "voltage1": 0,
-                "voltage2": 0,
-                "voltage3": 0,
-                "current1": 0,
-                "current2": 0,
-                "current3": 0,
-                "error": 0,
+                "voltage1": battery_monitor_data[0],
+                "voltage2": battery_monitor_data[2],
+                "voltage3": battery_monitor_data[4],
+                "current1": battery_monitor_data[1],
+                "current2": battery_monitor_data[3],
+                "current3": battery_monitor_data[5],
+                "error": battery_monitor_data[6],
                 "depth": 0,
                 "X": IMU_data["accel_x"],
                 "Y": IMU_data["accel_y"],
