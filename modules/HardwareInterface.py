@@ -291,7 +291,7 @@ class HardwareInterface:
         try:
             data =self.bus.read_i2c_block_data(device_address, 0, 13)
             data[6] = bin(data[6])
-            # print("Message received:", data)
+            print("Message received:", data)
             return data
         except Exception as e:
             print("Error reading I2C data:", str(e))
