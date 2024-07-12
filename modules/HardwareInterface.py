@@ -278,7 +278,7 @@ class HardwareInterface:
         except Exception as e:
             print("Error writing I2C data:", str(e))
 
-    def write_BatteryMonitor(self, data = [0, 0, 127]):
+    def write_BatteryMonitor(self, data = [0, 0, 0, 0, 127]):
         device_address = 7
         try:
             self.bus.write_i2c_block_data(device_address, 0, data)
@@ -489,13 +489,13 @@ class HardwareInterface:
                 # esc_values = [output_data["M1"], output_data["M2"], output_data["M3"], output_data["M4"], 
                 #               output_data["M5"], output_data["M6"], output_data["M7"], output_data["M8"]]
                 esc_values = [output_data[key] for key in required_keys[:8]]
-                claw_torp_values = [output_data["Torp1"], output_data["Torp2"], output_data["Claw"]]
+                claw_torp_values = [output_data["Torp1"], output_data["Torp2"], 0, 0, output_data["Claw"]]
             else:
                 # Log an error and use default values if some data is missing
                 print("Error: Not all required output data keys received, using default values")
                 print(output_data.keys())
                 esc_values = [default_esc_value] * 8
-                claw_torp_values = [0, 0, 0]
+                claw_torp_values = [0, 0, 0, 0, 0]
 
             # Send data to ESCs and battery monitor
             self.write_ESCs(esc_values)
