@@ -515,30 +515,31 @@ class HardwareInterface:
         # This is IMU testing code
         while True:
             try:
-                if self.IMU is None:
-                    print("IMU not initialized")
-                    time.sleep(delay)
-                    print("Retrying...")
-                    self.IMU = MPU6050(0x69)
-                    time.sleep(delay)
-                    continue
-                IMU_data = self.read_IMU()
+                # if self.IMU is None:
+                #     print("IMU not initialized")
+                #     time.sleep(delay)
+                #     print("Retrying...")
+                #     self.IMU = MPU6050(0x69)
+                #     time.sleep(delay)
+                #     continue
+                # IMU_data = self.read_IMU()
+                battery_data = self.read_BatteryMonitor()
                 # temp_humi_data = self.read_Temp_Humi()
                 sensor_data = {
-                    # "voltage1": 0,
-                    # "voltage2": 0,
-                    # "voltage3": 0,
-                    # "current1": 0,
-                    # "current2": 0,
-                    # "current3": 0,
-                    # "error": 0,
+                    "voltage1": battery_data[0],
+                    "voltage2": battery_data[2],
+                    "voltage3": battery_data[4],
+                    "current1": battery_data[1],
+                    "current2": battery_data[3],
+                    "current3": battery_data[5],
+                    "error": battery_data[6],
                     # "depth": 0,
-                    "X": IMU_data["accel_x"],
-                    "Y": IMU_data["accel_y"],
-                    "Z": IMU_data["accel_z"],
-                    "pitch": IMU_data["gyro_x"],
-                    "roll": IMU_data["gyro_y"],
-                    "yaw": IMU_data["gyro_z"],
+                    # "X": IMU_data["accel_x"],
+                    # "Y": IMU_data["accel_y"],
+                    # "Z": IMU_data["accel_z"],
+                    # "pitch": IMU_data["gyro_x"],
+                    # "roll": IMU_data["gyro_y"],
+                    # "yaw": IMU_data["gyro_z"],
                     # "temperature": 0,
                     # "orin_temp": 0,
                     # "humidity": 0,
