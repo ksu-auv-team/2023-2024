@@ -255,13 +255,13 @@ class HardwareInterface:
 
         with open('./configs/hardware_interface.json') as f:
             self.config = json.load(f)
-                    
-        # if args.P:
-        #     self.baseurl = self.config['poolUrl']
-        # else:
-        #     self.baseurl = self.config['labUrl']
+
+        if args.P:
+            self.baseurl = self.config['poolUrl']
+        else:
+            self.baseurl = self.config['labUrl']
         
-        self.baseurl = "http://192.168.0.107:5000"
+        # self.baseurl = "http://192.168.0.107:5000"
         
         try:
             self.IMU = MPU6050(0x69)
@@ -522,17 +522,17 @@ class HardwareInterface:
         delay = 0.01
         
         # This is manual input for testing arm and torpedoes directions
-        # esc_data = [0, 0, 0, 0, 127]
-        # while True:
-        #     esc_data[0] = int(input("Enter the data 0 value: "))
-        #     esc_data[1] = int(input("Enter the data 1 value: "))
-        #     esc_data[2] = int(input("Enter the data 2 value: "))
-        #     esc_data[3] = int(input("Enter the data 3 value: "))
-        #     esc_data[4] = int(input("Enter the data 4 value: "))
-        #     self.write_BatteryMonitor(esc_data)
-        #     print(esc_data)
-        #     # print(1)
-        #     time.sleep(delay)
+        esc_data = [0, 0, 0, 0, 127]
+        while True:
+            esc_data[0] = int(input("Enter the data 0 value: "))
+            esc_data[1] = int(input("Enter the data 1 value: "))
+            esc_data[2] = int(input("Enter the data 2 value: "))
+            esc_data[3] = int(input("Enter the data 3 value: "))
+            esc_data[4] = int(input("Enter the data 4 value: "))
+            self.write_BatteryMonitor(esc_data)
+            print(esc_data)
+            # print(1)
+            time.sleep(delay)
         
         # esc_data = [127, 127, 127, 127, 127, 127, 127, 127]
         # while True:
@@ -543,44 +543,44 @@ class HardwareInterface:
         #     print(esc_data)
         #     time.sleep(delay)
             
-        # This is IMU testing code
-        while True:
-            try:
-        #         # if self.IMU is None:
-        #         #     print("IMU not initialized")
-        #         #     time.sleep(delay)
-        #         #     print("Retrying...")
-        #         #     self.IMU = MPU6050(0x69)
-        #         #     time.sleep(delay)
-        #         #     continue
-                IMU_data = self.read_IMU()
-                # battery_data = self.read_BatteryMonitor()
-        #         # temp_humi_data = self.read_Temp_Humi()
-                sensor_data = {
-                    # "voltage1": battery_data[0],
-                    # "voltage2": battery_data[2],
-                    # "voltage3": battery_data[4],
-                    # "current1": battery_data[1],
-                    # "current2": battery_data[3],
-                    # "current3": battery_data[5],
-                    # "error": battery_data[6],
-                    # "depth": 0,
-                    "X": IMU_data["accel_x"],
-                    "Y": IMU_data["accel_y"],
-                    "Z": IMU_data["accel_z"],
-                    "pitch": IMU_data["gyro_x"],
-                    "roll": IMU_data["gyro_y"],
-                    "yaw": IMU_data["gyro_z"],
-                    # "temperature": 0,
-                    # "orin_temp": 0,
-                    # "humidity": 0,
-                    # "heading": 0
-                }
-                self.print_data(sensor_data)
-                time.sleep(delay)
-            except OSError as e:        
-                time.sleep(delay)
-                continue
+        # # This is IMU testing code
+        # while True:
+        #     try:
+        # #         # if self.IMU is None:
+        # #         #     print("IMU not initialized")
+        # #         #     time.sleep(delay)
+        # #         #     print("Retrying...")
+        # #         #     self.IMU = MPU6050(0x69)
+        # #         #     time.sleep(delay)
+        # #         #     continue
+        #         IMU_data = self.read_IMU()
+        #         # battery_data = self.read_BatteryMonitor()
+        # #         # temp_humi_data = self.read_Temp_Humi()
+        #         sensor_data = {
+        #             # "voltage1": battery_data[0],
+        #             # "voltage2": battery_data[2],
+        #             # "voltage3": battery_data[4],
+        #             # "current1": battery_data[1],
+        #             # "current2": battery_data[3],
+        #             # "current3": battery_data[5],
+        #             # "error": battery_data[6],
+        #             # "depth": 0,
+        #             "X": IMU_data["accel_x"],
+        #             "Y": IMU_data["accel_y"],
+        #             "Z": IMU_data["accel_z"],
+        #             "pitch": IMU_data["gyro_x"],
+        #             "roll": IMU_data["gyro_y"],
+        #             "yaw": IMU_data["gyro_z"],
+        #             # "temperature": 0,
+        #             # "orin_temp": 0,
+        #             # "humidity": 0,
+        #             # "heading": 0
+        #         }
+        #         self.print_data(sensor_data)
+        #         time.sleep(delay)
+        #     except OSError as e:        
+        #         time.sleep(delay)
+        #         continue
 
 if __name__ == '__main__':
     args = argparse.ArgumentParser()
@@ -588,5 +588,5 @@ if __name__ == '__main__':
     args.add_argument("--L", help = "Use the lab IP address", action = "store_true")
     args = args.parse_args()
     HI = HardwareInterface(args=args)
-    HI.run()
-    # HI.test_run()
+    # HI.run()
+    HI.test_run()

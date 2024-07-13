@@ -454,11 +454,11 @@ if __name__ == "__main__":
     args = args.parse_args()
     with open('./configs/movement_package.json') as f:
             config = json.load(f)
-    # if args.P:
-    #     base_url = config["poolUrl"]
-    # else:
-    #     base_url = config["labUrl"]
-    base_url = "http://192.168.0.107:5000"
+    if args.P:
+        base_url = config["poolUrl"]
+    else:
+        base_url = config["labUrl"]
+    # base_url = "http://192.168.0.107:5000"
     movement_package = MovementPackage(movement_logger, base_url)
     movement_package.run()
     # movement_package.test_run()
