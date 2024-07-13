@@ -276,7 +276,7 @@ class HardwareInterface:
             self.bus.write_i2c_block_data(device_address, 0, data)
             # print("Message sent:", data)
         except Exception as e:
-            print("Error writing I2C data:", str(e))
+            print("Error writing I2C data (ESCs):", str(e))
 
     def write_BatteryMonitor(self, data = [0, 0, 0, 0, 127]):
         device_address = 7
@@ -284,7 +284,7 @@ class HardwareInterface:
             self.bus.write_i2c_block_data(device_address, 0, data)
             # print("Message sent:", data)
         except Exception as e:
-            print("Error writing I2C data:", str(e))
+            print("Error writing I2C data (Arm Controller):", str(e))
 
     def read_BatteryMonitor(self):
         device_address = 0x09
@@ -302,7 +302,7 @@ class HardwareInterface:
             # print("Message received:", d)
             return d
         except Exception as e:
-            print("Error reading I2C data:", str(e))
+            print("Error reading I2C data (Battery Monitor):", str(e))
             return [0, 0, 0, 0, 0, 0, 0]
 
     def read_i2c_word(self, register):
@@ -323,9 +323,11 @@ class HardwareInterface:
             return value
 
     def read_IMU(self):
-        accel_data = self.IMU.get_accel_data()
-        gyro_data = self.IMU.get_gyro_data()
-        
+        try:
+            accel_data = self.IMU.get_accel_data()
+            gyro_data = self.IMU.get_gyro_data()
+        except:
+            print("Error reading IMU data")
         # convert the data to single dictionary
         data = {
             "accel_x": round(accel_data['x'], 2),
