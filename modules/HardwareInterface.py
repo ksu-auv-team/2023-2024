@@ -527,9 +527,9 @@ class HardwareInterface:
         
         esc_data = [127, 127, 127, 127, 127, 127, 127, 127]
         while True:
-            motor = int(input("Enter the motor number (1-8): "))
-            value = int(input("Enter the value (0-255): "))
-            esc_data[motor - 1] = value
+            # motor = int(input("Enter the motor number (1-8): "))
+            # value = int(input("Enter the value (0-255): "))
+            # esc_data[motor - 1] = value
             self.write_ESCs(esc_data)
             print(esc_data)
             time.sleep(delay)
