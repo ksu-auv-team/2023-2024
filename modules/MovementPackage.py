@@ -296,6 +296,7 @@ class MovementPackage:
         self.out_max = 191
         
         self.Thruster_Values = [127, 127, 127, 127, 127, 127, 127, 127]
+        self.Claw_Torp_Values = [0, 0, 0, 0, 127]
         
     def get_sensors_data(self):
         response = requests.get(f"{self.base_url}/sensors")
@@ -366,6 +367,11 @@ class MovementPackage:
         else:
             for i in range(4, 8):
                 self.Thruster_Values[i] = 127
+        
+        self.Claw_Torp_Values[4] = int(self.mapping(data[6]))
+        self.Claw_Torp_Values[0] = int(data[7])
+        self.Claw_Torp_Values[1] = int(data[8])
+        
                 
     def newConversion(self, input_data):
         motor_mapping = np.array([
@@ -378,7 +384,7 @@ class MovementPackage:
         
         desired_translation_yaw = input_data[:3]
         desired_roll_pitch_z = input_data[3:]
-        
+    
     def save_data(self):
         output_data = {
             "M1": self.Thruster_Values[0],
@@ -389,9 +395,9 @@ class MovementPackage:
             "M6": self.Thruster_Values[5],
             "M7": self.Thruster_Values[6],
             "M8": self.Thruster_Values[7],
-            "Claw": 127,
-            "Torp1": 0,
-            "Torp2": 0
+            "Claw": self.Claw_Torp_Values[4],
+            "Torp1": self.Claw_Torp_Values[0],
+            "Torp2": self.Claw_Torp_Values[1]
         }
         response = requests.post(f"{self.base_url}/output", json=output_data)
         if response.status_code != 201:
