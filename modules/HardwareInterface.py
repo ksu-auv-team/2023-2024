@@ -271,7 +271,7 @@ class HardwareInterface:
         self.TEMP_CALIBRATION_OFFSET = -5.75
 
     def write_ESCs(self, data = [127, 127, 127, 127, 127, 127, 127, 127]):
-        device_address = 8
+        device_address = 6
         try:
             self.bus.write_i2c_block_data(device_address, 0, data)
             # print("Message sent:", data)
