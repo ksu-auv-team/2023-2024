@@ -301,6 +301,7 @@ def run_hardware_interface():
 
 @app.route('/stop_hardware_interface', methods=['POST'])
 def stop_hardware_interface():
+    pass
 
 @app.route('/')
 def index():
