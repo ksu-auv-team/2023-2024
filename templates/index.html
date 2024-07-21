@@ -1,14 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="refresh" content="5"> <!-- Refresh every 5 seconds -->
-    <title>Camera Feed</title>
-</head>
-<body>
-    <h1>ZED Camera Image</h1>
-    <img src="/images/zed.jpg" alt="ZED Camera Feed">
-    <h1>Webcam Image</h1>
-    <img src="/images/webcam.jpg" alt="Webcam Feed">
-</body>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="refresh" content="5"> <!-- Refresh every 5 seconds -->
+        <title>KSU AUV</title>
+    </head>
+    <body>
+        <div class="camera-feeds">
+            <div class="camera-feed">    
+                <h1>Front Camera Feed</h1>
+                <img src="http://192.168.0.106:5000/video_0" alt="Front Camera Feed" width="640" height="480">
+            </div>
+            <div class="camera-feed">
+                <h1>Bottom Camera Feed</h1>
+                <img src="http://192.168.0.106:5000/video_1" alt="Bottom Camera Feed" width="640" height="480">
+            </div>
+        </div>
+        <div class="controls">
+            <h1>Controls</h1>
+            <div class="third-division">
+            
+            </div>
+            <div class="third-division">
+
+            </div>
+            <div class="third-division">
+
+            </div>
+        </div>
+    </body>
 </html>
