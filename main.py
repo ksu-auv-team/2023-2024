@@ -49,8 +49,41 @@ app.register_blueprint(routes.get_blueprint())
 app.register_blueprint(zedcam_blueprint)
 app.register_blueprint(anchor_blueprint)
 
-# Ensure the upload directory exists
-os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
+class SubprocessHandler:
+    def __init__(self, command):
+        self.command = command
+        self.process = None
+
+    def start(self):
+        if self.process is None:
+            self.process = subprocess.Popen(self.command)
+            print(f"Started subprocess with PID: {self.process.pid}")
+        else:
+            print("Process is already running.")
+
+    def stop(self):
+        if self.process is not None:
+            self.process.terminate()  # Graceful termination
+            self.process.wait()  # Wait for the process to terminate
+            print(f"Terminated subprocess with PID: {self.process.pid}")
+            self.process = None
+        else:
+            print("Process is not running.")
+            
+commands = [
+    ["python3", "modules/HardwareInterface.py", "--R"], # Runs the hardware interface normally
+    ["python3", "modules/HardwareInterface.py", "--T"], # Runs the hardware interface in test mode
+    ["python3", "modules/MovementPackage.py", "--R"], # Runs the movement package normally
+    ["python3", "modules/MovementPackage.py", "--T"], # Runs the movement package in test mode
+    ["python3", "modules/NeuralNetwork.py", "--R"], # Runs the neural network normally
+    ["python3", "modules/NeuralNetwork.py", "--T"], # Runs the neural network in test mode
+    ["python3", "modules/StateMachine.py", "--R"], # Runs the state machine normally
+    ["python3", "modules/StateMachine.py", "--T"], # Runs the state machine in test mode
+    ["python3", "modules/CameraPackage.py", "--R"] # Runs the camera package normally
+    ["python3", "modules/CameraPackage.py", "--T"] # Runs the camera package in test mode
+]
+
+subprocesses = [SubprocessHandler(command) for command in commands]
 
 class Sensors(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -260,6 +293,15 @@ def video_1():
     # Return the response to the client
     return response.data
 
+# Create the Hardware Interface routes
+@app.route('/run_hardware_interface', methods=['POST'])
+def run_hardware_interface():
+    run_hardware_interface = subprocess.Popen(["python3", "modules/HardwareInterface.py", "--R"])
+    return 'Hardware Interface Running', 201
+
+@app.route('/stop_hardware_interface', methods=['POST'])
+def stop_hardware_interface():
+
 @app.route('/')
 def index():
     return render_template('index.html')
@@ -267,68 +309,74 @@ def index():
 def create_tables():
     db.create_all()
 
-# Main function
-def main(args: list = sys.argv):
-    if args.run:
-        # if args.P:
-        #     hardware_interface = subprocess.Popen(["python3", "modules/HardwareInterface.py", '--P'])
-        #     movement_package = subprocess.Popen(["python3", "modules/MovementPackage.py", '--P'])
-        #     neural_network = subprocess.Popen(["python3", "modules/NeuralNetwork.py", '--P'])
-        #     #state_machine = subprocess.Popen(["python3", "modules/StateMachine.py", '-PL'])
-        #     camera_package = subprocess.Popen(["python3", "modules/CameraPackage.py", '--P'])
-        hardware_interface = subprocess.Popen(["python3", "modules/HardwareInterface.py", '--L'])
-        movement_package = subprocess.Popen(["python3", "modules/MovementPackage.py", '--L'])
-        neural_network = subprocess.Popen(["python3", "modules/NeuralNetwork.py", '--L'])
-        #state_machine = subprocess.Popen(["python3", "modules/StateMachine.py", '--L'])
-        camera_package = subprocess.Popen(["python3", "modules/CameraPackage.py", '--L'])
-    if args.HI and not args.run:
-        # if args.P:
-        #     hardware_interface = subprocess.Popen(["python3", "modules/HardwareInterface.py", '--P'])
-        hardware_interface = subprocess.Popen(["python3", "modules/HardwareInterface.py", '--L'])
-    if args.MP and not args.run:
-        # if args.P:
-        #     movement_package = subprocess.Popen(["python3", "modules/MovementPackage.py", '--P'])
-        movement_package = subprocess.Popen(["python3", "modules/MovementPackage.py", '--L'])
-    if args.NN and not args.run:
-        # if args.P: 
-        #     neural_network = subprocess.Popen(["python3", "modules/NeuralNetwork.py", '--P'])
-        neural_network = subprocess.Popen(["python3", "modules/NeuralNetwork.py", '--L'])
-    if args.CP and not args.run:
-        # if args.P:
-        #     camera_package = subprocess.Popen(["python3", "modules/CameraPackage.py", '--P'])
-        camera_package = subprocess.Popen(["python3", "modules/CameraPackage.py", '--L'])
-
+def main(ip : str = "192.168.0.106"):
     with app.app_context():
         create_tables()
-    app.run(debug=True, host="0.0.0.0", port=5000)
+    
+    app.run(debug=True, host=ip, port=5000)
 
-    if args.run:
-        hardware_interface.wait()
-        movement_package.wait()
-        neural_network.wait()
-        #state_machine.wait()
-        camera_package.wait()
-    if args.HI and not args.run:
-        hardware_interface.wait()
-    if args.MP and not args.run:
-        movement_package.wait()
-    if args.NN and not args.run:
-        neural_network.wait()
-    if args.CP and not args.run:
-        camera_package.wait()
+# # Main function
+# def main(args: list = sys.argv):
+#     if args.run:
+#         # if args.P:
+#         #     hardware_interface = subprocess.Popen(["python3", "modules/HardwareInterface.py", '--P'])
+#         #     movement_package = subprocess.Popen(["python3", "modules/MovementPackage.py", '--P'])
+#         #     neural_network = subprocess.Popen(["python3", "modules/NeuralNetwork.py", '--P'])
+#         #     #state_machine = subprocess.Popen(["python3", "modules/StateMachine.py", '-PL'])
+#         #     camera_package = subprocess.Popen(["python3", "modules/CameraPackage.py", '--P'])
+#         hardware_interface = subprocess.Popen(["python3", "modules/HardwareInterface.py", '--L'])
+#         movement_package = subprocess.Popen(["python3", "modules/MovementPackage.py", '--L'])
+#         neural_network = subprocess.Popen(["python3", "modules/NeuralNetwork.py", '--L'])
+#         #state_machine = subprocess.Popen(["python3", "modules/StateMachine.py", '--L'])
+#         camera_package = subprocess.Popen(["python3", "modules/CameraPackage.py", '--L'])
+#     if args.HI and not args.run:
+#         # if args.P:
+#         #     hardware_interface = subprocess.Popen(["python3", "modules/HardwareInterface.py", '--P'])
+#         hardware_interface = subprocess.Popen(["python3", "modules/HardwareInterface.py", '--L'])
+#     if args.MP and not args.run:
+#         # if args.P:
+#         #     movement_package = subprocess.Popen(["python3", "modules/MovementPackage.py", '--P'])
+#         movement_package = subprocess.Popen(["python3", "modules/MovementPackage.py", '--L'])
+#     if args.NN and not args.run:
+#         # if args.P: 
+#         #     neural_network = subprocess.Popen(["python3", "modules/NeuralNetwork.py", '--P'])
+#         neural_network = subprocess.Popen(["python3", "modules/NeuralNetwork.py", '--L'])
+#     if args.CP and not args.run:
+#         # if args.P:
+#         #     camera_package = subprocess.Popen(["python3", "modules/CameraPackage.py", '--P'])
+#         camera_package = subprocess.Popen(["python3", "modules/CameraPackage.py", '--L'])
 
-# Running the main function
-if __name__ == "__main__":
-    args = argparse.ArgumentParser()
+#     with app.app_context():
+#         create_tables()
+#     app.run(debug=True, host="0.0.0.0", port=5000)
 
-    args.add_argument("--run", help="Run all the main script", action="store_true")
-    args.add_argument("--HI", help="Run the Hardware Interface", action="store_true")
-    args.add_argument("--MP", help="Run the Movement Package", action="store_true")
-    args.add_argument("--NN", help="Run the Neural Network Package", action="store_true")
-    args.add_argument("--CP", help="Run the Camera Package", action="store_true")
-    args.add_argument("--P", help = "Use the pool IP address", action = "store_true")
-    args.add_argument("--L", help = "Use the lab IP address", action = "store_true")
+#     if args.run:
+#         hardware_interface.wait()
+#         movement_package.wait()
+#         neural_network.wait()
+#         #state_machine.wait()
+#         camera_package.wait()
+#     if args.HI and not args.run:
+#         hardware_interface.wait()
+#     if args.MP and not args.run:
+#         movement_package.wait()
+#     if args.NN and not args.run:
+#         neural_network.wait()
+#     if args.CP and not args.run:
+#         camera_package.wait()
 
-    args = args.parse_args()
+# # Running the main function
+# if __name__ == "__main__":
+#     args = argparse.ArgumentParser()
 
-    main(args)
+#     args.add_argument("--run", help="Run all the main script", action="store_true")
+#     args.add_argument("--HI", help="Run the Hardware Interface", action="store_true")
+#     args.add_argument("--MP", help="Run the Movement Package", action="store_true")
+#     args.add_argument("--NN", help="Run the Neural Network Package", action="store_true")
+#     args.add_argument("--CP", help="Run the Camera Package", action="store_true")
+#     args.add_argument("--P", help = "Use the pool IP address", action = "store_true")
+#     args.add_argument("--L", help = "Use the lab IP address", action = "store_true")
+
+#     args = args.parse_args()
+
+#     main(args)
