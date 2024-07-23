@@ -27,7 +27,7 @@ def meters_per_sample(ping_message, v_sound=1480):
 
 def Sonar360():
         p = Ping360()
-        p.connect_serial("COM3", 115200) ##Connects to sonar
+        p.connect_serial("/dev/ttyUSB0", 115200) ##Connects to sonar
         p.initialize()##Initializes
         p.set_transmit_frequency(750)##Sets frequency of tranmission, limited to 650 to 850 for practicallity
         p.set_sample_period(1355)##Sets sample period (increase to increase range) (range is 80 to 40000)
@@ -36,10 +36,6 @@ def Sonar360():
         p.set_mode(1)##set as 1 for Ping360
         p.set_transmit_duration(40)##Sets duration of transmission in microseconds
 
-        """
-        d = p.transmitAngle(0) ##Fires pulse in a gradian direction
-        print(meters_per_sample(d, 1480) * 600)
-        """
         # Get data
         while True:
                 try:
@@ -73,10 +69,16 @@ def Sonar360():
                             ##logging.info(f'Object not Detected at {float(.9*gradian)} degrees.')
                         if (hold != -1):
                             print("Gradian: "+str(gradian)+ " Obstacle Detected ("+ str(highestValue)+") at "+ str(highestIndex*distperSample)+ " meters.")
-                            logData = {'angle':float(.9*gradian), 'distance': float(highestIndex*distperSample)}
+                            
+                            ##Variables for JSON storing
+                            outputAngle = float(.9*gradian)
+                            outputDistance = float(highestIndex*distperSample)
+
+                            ##Dictionay for JSON
+                            logData = {'angle': outputAngle, 'distance': outputDistance}
                             ##logging.info(f'Object Detected at {float(.9*gradian)} degrees, {float(highestIndex*distperSample)} meters.')
 
-                    break ##uncomment break to allow for single 360 scan.
+                    ##break ##uncomment break to allow for single 360 scan.
 
                 except KeyboardInterrupt:
                     break    
