@@ -21,6 +21,7 @@ class CameraPackage:
         self.zed_image = sl.Mat(self.resolution.width, self.resolution.height, sl.MAT_TYPE.U8_C4)
         self.zed_depth_image = sl.Mat(self.resolution.width, self.resolution.height, sl.MAT_TYPE.U8_C4)
 
+
     def get_frame(self):
         if self.zed.grab() == sl.ERROR_CODE.SUCCESS:
             # ret, frame = self.cam.read()
