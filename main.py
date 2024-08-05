@@ -127,6 +127,14 @@ class Objects(db.Model):
 
     def __repr__(self):
         return f'<{self.id}, {self.object}, {self.distance}, {self.angle}>'
+    
+class Sonar(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    distance = db.Column(db.Float, nullable=False)
+    angle = db.Column(db.Float, nullable=False)
+
+    def __repr__(self):
+        return f'<{self.id}, {self.distance}, {self.angle}>'
 
 # Creating the flask routes to handle the data
 @app.route('/sensors', methods=['POST'])
@@ -234,6 +242,29 @@ def get_object_data():
             'object': object_data.object, 
             'distance': object_data.distance, 
             'angle': object_data.angle
+        }
+        return jsonify(data_dict)
+    else:
+        return jsonify({'message': 'No data found'}), 404
+    
+@app.route('/sonar', methods=['POST'])
+def add_sonar_data():
+    data = request.get_json()
+
+    new_sonar_data = Sonar(distance=data['distance'], angle=data['angle'])
+
+    db.session.add(new_sonar_data)
+    db.session.commit()
+
+    return 'Data added', 201
+
+@app.route('/sonar', methods=['GET'])
+def get_sonar_data():
+    sonar_data = Sonar.query.order_by(Sonar.id.desc()).first()
+    if sonar_data:
+        data_dict = {
+            'distance': sonar_data.distance, 
+            'angle': sonar_data.angle
         }
         return jsonify(data_dict)
     else:
