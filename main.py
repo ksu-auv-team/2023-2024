@@ -310,12 +310,14 @@ def main(args: list = sys.argv):
         hardware_interface = subprocess.Popen(["python3", "modules/HardwareInterface.py", '--L'])
         movement_package = subprocess.Popen(["python3", "modules/MovementPackage.py", '--L'])
         neural_network = subprocess.Popen(["python3", "modules/NeuralNetwork.py", '--L'])
+        sonar_package = subprocess.Popen(["python3", "modules/SonarPackage.py", '--L'])
         #state_machine = subprocess.Popen(["python3", "modules/StateMachine.py", '--L'])
         camera_package = subprocess.Popen(["python3", "modules/CameraPackage.py", '--L'])
     if args.HI and not args.run:
         # if args.P:
         #     hardware_interface = subprocess.Popen(["python3", "modules/HardwareInterface.py", '--P'])
         hardware_interface = subprocess.Popen(["python3", "modules/HardwareInterface.py", '--L'])
+        sonar_package = subprocess.Popen(["python3", "modules/SonarPackage.py", '--L'])
     if args.MP and not args.run:
         # if args.P:
         #     movement_package = subprocess.Popen(["python3", "modules/MovementPackage.py", '--P'])
@@ -339,8 +341,10 @@ def main(args: list = sys.argv):
         neural_network.wait()
         #state_machine.wait()
         camera_package.wait()
+        sonar_package.wait()
     if args.HI and not args.run:
         hardware_interface.wait()
+        sonar_package.wait()
     if args.MP and not args.run:
         movement_package.wait()
     if args.NN and not args.run:
