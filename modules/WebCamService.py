@@ -21,7 +21,7 @@ class WebCam:
             
             return jpeg.tobytes()
 
-    def crop_frame(frame):
+    def crop_frame(self, frame):
         # Get the dimensions of the frame
         height, width, _ = frame.shape
 
