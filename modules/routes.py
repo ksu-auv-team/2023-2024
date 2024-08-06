@@ -17,20 +17,11 @@ def gen(webcam):
 
     while True:
         frame = webcam.get_frame(capture)
-        cropped = crop_frame(frame)
         yield (
             b'--frame\r\n'
             b'Content-Type: image/jpeg\r\n\r\n' + cropped + b'\r\n\r\n'
         )
 
-def crop_frame(frame):
-        # Get the dimensions of the frame
-        height, width, _ = frame.shape
-
-        # Crop the right half of the frame
-        cropped_frame = frame[:, width // 2:]
-        
-        return cropped_frame
 
 @REQUEST_API.route('/stream')
 def monitoring():

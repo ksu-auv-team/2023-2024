@@ -12,10 +12,20 @@ class WebCam:
     def get_frame(self, capture):
         while True:
             hasFrame, frame = capture.read()
-
+            if (self.camera_number == 0):
+                frame = self.crop_frame(frame)
             if not hasFrame:
                 raise Exception("Camera frame not obtained")
 
             _, jpeg = cv2.imencode('.jpg', frame)
             
             return jpeg.tobytes()
+
+    def crop_frame(frame):
+        # Get the dimensions of the frame
+        height, width, _ = frame.shape
+
+        # Crop the right half of the frame
+        cropped_frame = frame[:, width // 2:]
+        
+        return cropped_frame
