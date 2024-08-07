@@ -547,12 +547,15 @@ class HardwareInterface:
             self.write_ESCs(esc_data_stage_1)
             print(esc_data_stage_1)
             time.sleep(delay * 5)
-            self.write_ESCs(esc_data_stage_1)
+            self.write_ESCs(esc_data_stage_2)
             print(esc_data_stage_2)
             time.sleep(delay)
-            self.write_ESCs(esc_data_stage_1)
+            self.write_ESCs(esc_data_stage_3)
             print(esc_data_stage_3)
             time.sleep(delay)
+            # self.write_ESCs(esc_data_stage_1)
+            # print(esc_data_stage_3)
+            # time.sleep(delay)
 
     def test_read(self):
         delay = 0.01
