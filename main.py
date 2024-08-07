@@ -301,35 +301,23 @@ def create_tables():
 # Main function
 def main(args: list = sys.argv):
     if args.run:
-        # if args.P:
-        #     hardware_interface = subprocess.Popen(["python3", "modules/HardwareInterface.py", '--P'])
-        #     movement_package = subprocess.Popen(["python3", "modules/MovementPackage.py", '--P'])
-        #     neural_network = subprocess.Popen(["python3", "modules/NeuralNetwork.py", '--P'])
-        #     #state_machine = subprocess.Popen(["python3", "modules/StateMachine.py", '-PL'])
-        #     camera_package = subprocess.Popen(["python3", "modules/CameraPackage.py", '--P'])
-        # hardware_interface = subprocess.Popen(["python3", "modules/HardwareInterface.py", '--L'])
+        hardware_interface = subprocess.Popen(["python3", "modules/HardwareInterface.py", '--L'])
         movement_package = subprocess.Popen(["python3", "modules/MovementPackage.py", '--L'])
         # neural_network = subprocess.Popen(["python3", "modules/NeuralNetwork.py", '--L'])
         # sonar_package = subprocess.Popen(["python3", "modules/SonarPackage.py", '--L'])
         #state_machine = subprocess.Popen(["python3", "modules/StateMachine.py", '--L'])
-        camera0_package = subprocess.Popen(["python3", "modules/CameraPackage.py", '--camera_id 0'])
-        camera1_package = subprocess.Popen(["python3", "modules/CameraPackage.py", '--camera_id 1'])
+        camera0_package = subprocess.Popen(["python3", "modules/CameraPackage.py", '--camera_id', '0'])
+        camera1_package = subprocess.Popen(["python3", "modules/CameraPackage.py", '--camera_id', '1'])
     if args.HI and not args.run:
-        # if args.P:
-        #     hardware_interface = subprocess.Popen(["python3", "modules/HardwareInterface.py", '--P'])
         hardware_interface = subprocess.Popen(["python3", "modules/HardwareInterface.py", '--L'])
         sonar_package = subprocess.Popen(["python3", "modules/SonarPackage.py", '--L'])
     if args.MP and not args.run:
-        # if args.P:
-        #     movement_package = subprocess.Popen(["python3", "modules/MovementPackage.py", '--P'])
         movement_package = subprocess.Popen(["python3", "modules/MovementPackage.py", '--L'])
     if args.NN and not args.run:
-        # if args.P: 
-        #     neural_network = subprocess.Popen(["python3", "modules/NeuralNetwork.py", '--P'])
         neural_network = subprocess.Popen(["python3", "modules/NeuralNetwork.py", '--L'])
     if args.CP and not args.run:
-        camera0_package = subprocess.Popen(["python3", "modules/CameraPackage.py", '--camera_id 0'])
-        camera1_package = subprocess.Popen(["python3", "modules/CameraPackage.py", '--camera_id 1'])
+        camera0_package = subprocess.Popen(["python3", "modules/CameraPackage.py", '--camera_id', '0'])
+        camera1_package = subprocess.Popen(["python3", "modules/CameraPackage.py", '--camera_id', '1'])
 
     with app.app_context():
         create_tables()
