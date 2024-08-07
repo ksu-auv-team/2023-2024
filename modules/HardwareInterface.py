@@ -538,8 +538,8 @@ class HardwareInterface:
         delay = 1
         
         esc_data_stage_1 = [127, 127, 127, 127, 127, 127, 127, 127]
-        esc_data_stage_2 = [140, 140, 140, 140, 140, 140, 140, 140]
-        esc_data_stage_3 = [100, 100, 100, 100, 100, 100, 100, 100]
+        esc_data_stage_2 = [150, 150, 150, 150, 150, 150, 150, 150]
+        esc_data_stage_3 = [90, 90, 90, 90, 90, 90, 90, 90]
         while True:
             # motor = int(input("Enter the motor number (1-8): "))
             # value = int(input("Enter the value (0-255): "))
