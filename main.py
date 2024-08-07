@@ -310,7 +310,7 @@ def main(args: list = sys.argv):
         camera1_package = subprocess.Popen(["python3", "modules/CameraPackage.py", '--camera_id', '1'])
     if args.HI and not args.run:
         hardware_interface = subprocess.Popen(["python3", "modules/HardwareInterface.py", '--L'])
-        sonar_package = subprocess.Popen(["python3", "modules/SonarPackage.py", '--L'])
+        # sonar_package = subprocess.Popen(["python3", "modules/SonarPackage.py", '--L'])
     if args.MP and not args.run:
         movement_package = subprocess.Popen(["python3", "modules/MovementPackage.py", '--L'])
     if args.NN and not args.run:
