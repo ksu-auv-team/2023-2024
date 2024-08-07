@@ -312,7 +312,8 @@ def main(args: list = sys.argv):
         neural_network = subprocess.Popen(["python3", "modules/NeuralNetwork.py", '--L'])
         sonar_package = subprocess.Popen(["python3", "modules/SonarPackage.py", '--L'])
         #state_machine = subprocess.Popen(["python3", "modules/StateMachine.py", '--L'])
-        camera_package = subprocess.Popen(["python3", "modules/CameraPackage.py", '--L'])
+        camera0_package = subprocess.Popen(["python3", "modules/CameraPackage.py", '0'])
+        camera1_package = subprocess.Popen(["python3", "modules/CameraPackage.py", '1'])
     if args.HI and not args.run:
         # if args.P:
         #     hardware_interface = subprocess.Popen(["python3", "modules/HardwareInterface.py", '--P'])
@@ -327,9 +328,8 @@ def main(args: list = sys.argv):
         #     neural_network = subprocess.Popen(["python3", "modules/NeuralNetwork.py", '--P'])
         neural_network = subprocess.Popen(["python3", "modules/NeuralNetwork.py", '--L'])
     if args.CP and not args.run:
-        # if args.P:
-        #     camera_package = subprocess.Popen(["python3", "modules/CameraPackage.py", '--P'])
-        camera_package = subprocess.Popen(["python3", "modules/CameraPackage.py", '--L'])
+        camera0_package = subprocess.Popen(["python3", "modules/CameraPackage.py", '0'])
+        camera1_package = subprocess.Popen(["python3", "modules/CameraPackage.py", '1'])
 
     with app.app_context():
         create_tables()
@@ -340,7 +340,8 @@ def main(args: list = sys.argv):
         movement_package.wait()
         neural_network.wait()
         #state_machine.wait()
-        camera_package.wait()
+        camera0_package.wait()
+        camera1_package.wait()
         sonar_package.wait()
     if args.HI and not args.run:
         hardware_interface.wait()
@@ -350,7 +351,8 @@ def main(args: list = sys.argv):
     if args.NN and not args.run:
         neural_network.wait()
     if args.CP and not args.run:
-        camera_package.wait()
+        camera0_package.wait()
+        camera1_package.wait()
 
 # Running the main function
 if __name__ == "__main__":
