@@ -546,7 +546,7 @@ class HardwareInterface:
             # esc_data[motor - 1] = value
             self.write_ESCs(esc_data_stage_1)
             print(esc_data_stage_1)
-            time.sleep(delay)
+            time.sleep(delay * 5)
             self.write_ESCs(esc_data_stage_1)
             print(esc_data_stage_2)
             time.sleep(delay)
