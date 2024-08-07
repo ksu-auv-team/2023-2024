@@ -535,15 +535,23 @@ class HardwareInterface:
             time.sleep(delay)
 
     def test_motors(self):
-        delay = 0.01
+        delay = 1
         
-        esc_data = [127, 127, 127, 127, 127, 127, 127, 127]
+        esc_data_stage_1 = [127, 127, 127, 127, 127, 127, 127, 127]
+        esc_data_stage_2 = [140, 140, 140, 140, 140, 140, 140, 140]
+        esc_data_stage_3 = [100, 100, 100, 100, 100, 100, 100, 100]
         while True:
-            motor = int(input("Enter the motor number (1-8): "))
-            value = int(input("Enter the value (0-255): "))
-            esc_data[motor - 1] = value
-            self.write_ESCs(esc_data)
-            print(esc_data)
+            # motor = int(input("Enter the motor number (1-8): "))
+            # value = int(input("Enter the value (0-255): "))
+            # esc_data[motor - 1] = value
+            self.write_ESCs(esc_data_stage_1)
+            print(esc_data_stage_1)
+            time.sleep(delay)
+            self.write_ESCs(esc_data_stage_1)
+            print(esc_data_stage_2)
+            time.sleep(delay)
+            self.write_ESCs(esc_data_stage_1)
+            print(esc_data_stage_3)
             time.sleep(delay)
 
     def test_read(self):
