@@ -4,7 +4,7 @@ import numpy as np
 from services.WebCamService import WebCam
 
 #commented out as this is work in progress and leaving as is causes errors
-'''def frames(cNum):  
+def frames(cNum):  
     while True:
         if cNum == 0:
             success, frame = camera_0.read()
@@ -68,4 +68,4 @@ def adjust_camera(center_x, center_y, frame_center_x, frame_center_y):
 
 model = YOLO("yolov8n.pt")
 camera_0 = cv2.VideoCapture("http://10.0.0.233:5000/stream")
-frames(0)'''
+frames(0)
