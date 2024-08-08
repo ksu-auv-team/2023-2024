@@ -309,7 +309,7 @@ def main(args: list = sys.argv):
         camera0_package = subprocess.Popen(["python3", "modules/CameraPackage.py", '--camera_id', '0'])
         camera1_package = subprocess.Popen(["python3", "modules/CameraPackage.py", '--camera_id', '1'])
         recorder0 = subprocess.Popen(["python3", "modules/recorder.py", '--camera_id', '0'])
-        recorder1 = subprocess.Popen(["python3", "modules/recorder.py", '--camera_id', '1'])
+        recorder1 = subprocess.Popen(["python3", "modules/recorder.py", '--camera_id', '2'])
 
     if args.HI and not args.run:
         hardware_interface = subprocess.Popen(["python3", "modules/HardwareInterface.py", '--L'])
@@ -323,7 +323,7 @@ def main(args: list = sys.argv):
         camera1_package = subprocess.Popen(["python3", "modules/CameraPackage.py", '--camera_id', '1'])
     if args.R and not args.run:
         recorder0 = subprocess.Popen(["python3", "modules/recorder.py", '--camera_id', '0'])
-        recorder1 = subprocess.Popen(["python3", "modules/recorder.py", '--camera_id', '1'])
+        recorder1 = subprocess.Popen(["python3", "modules/recorder.py", '--camera_id', '2'])
     with app.app_context():
         create_tables()
     app.run(debug=True, host="0.0.0.0", port=5000)
