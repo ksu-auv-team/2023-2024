@@ -305,7 +305,7 @@ def main(args: list = sys.argv):
         movement_package = subprocess.Popen(["python3", "modules/MovementPackage.py", '--L'])
         # neural_network = subprocess.Popen(["python3", "modules/NeuralNetwork.py", '--L'])
         # sonar_package = subprocess.Popen(["python3", "modules/SonarPackage.py", '--L'])
-        #state_machine = subprocess.Popen(["python3", "modules/StateMachine.py", '--L'])
+        # state_machine = subprocess.Popen(["python3", "modules/StateMachine.py", '--L'])
         camera0_package = subprocess.Popen(["python3", "modules/CameraPackage.py", '--camera_id', '0'])
         camera1_package = subprocess.Popen(["python3", "modules/CameraPackage.py", '--camera_id', '1'])
         recorder0 = subprocess.Popen(["python3", "modules/recorder.py", '--camera_id', '0'])
@@ -337,10 +337,10 @@ def main(args: list = sys.argv):
         camera1_package.wait()
         recorder0.wait()
         recorder1.wait()
-        sonar_package.wait()
+        # sonar_package.wait()
     if args.HI and not args.run:
         hardware_interface.wait()
-        sonar_package.wait()
+        # sonar_package.wait()
     if args.MP and not args.run:
         movement_package.wait()
     if args.NN and not args.run:

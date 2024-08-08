@@ -425,13 +425,17 @@ class HardwareInterface:
         Returns:
             dict: The retrieved data as a dictionary.
         """
-        response = requests.get(f"{self.baseurl}/{data_type}")
-        if response.status_code == 200:
-            return response.json()
-        else:
-            print(f"Failed to get data, status code: {response.status_code}")
+        try:
+            response = requests.get(f"{self.baseurl}/{data_type}")
+            if response.status_code == 200:
+                return response.json()
+            else:
+                print(f"Failed to get data, status code: {response.status_code}")
+                return {}
+        except requests.exceptions.RequestException as e:
+            print(f"Error getting data: {str(e)}")
             return {}
-
+        
     def print_data(self, data):
         """Prints the data in a human-readable format.
 
