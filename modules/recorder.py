@@ -17,6 +17,7 @@ class recorder:
                          cv2.VideoWriter_fourcc(*'MJPG'), 
                          30, size) 
     def run(self):
+        time.sleep(10)
         while(True): 
             ret, frame = self.cam.read() 
         
