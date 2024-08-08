@@ -327,10 +327,10 @@ class MovementPackage:
         Yaw = data[5]
         
         deadzone = 0.1
-        motor_mapping = np.array([[-1, 1, 1, -1], # Forward
+        motor_mapping = np.array([[1, 1, 1, 1], # Forward
                                   [-1, -1, 1, 1], # Strafe
                                   [-1, 1, -1, 1], # Yaw
-                                  [-1, 1, 1, -1]]) # Vertical
+                                  [1, 1, -1, -1]]) # Vertical
         
         # Horizontal Motor Mapping
         if abs(X) >= deadzone:
@@ -458,7 +458,7 @@ if __name__ == "__main__":
         base_url = config["poolUrl"]
     else:
         base_url = config["labUrl"]
-    base_url = "http://10.42.0.203:5000"
+    base_url = "http://localhost:5000"
     ##base_url = "http://192.168.137.113:5000"
     movement_package = MovementPackage(movement_logger, base_url)
     movement_package.run()

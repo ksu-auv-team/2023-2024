@@ -261,7 +261,7 @@ class HardwareInterface:
         else:
             self.baseurl = self.config['labUrl']
         
-        self.baseurl = "http://10.42.0.203:5000"
+        self.baseurl = "http://localhost:5000"
         
         try:
             self.IMU = MPU6050(0x69)
