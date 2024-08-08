@@ -5,7 +5,7 @@ import argparse
 class recorder:
     def __init__(self, camera_id):
         self.camera_id = camera_id
-        self.cam = cv2.VideoCapture(f"http://localhost:5000/video_{str(self.camera_id)}")
+        self.cam = cv2.VideoCapture(f"http://10.42.0.203:5000/video_{str(self.camera_id)}")
 
     def setup(self):
         frame_width = int(self.cam.get(3)) 
@@ -14,7 +14,7 @@ class recorder:
         size = (frame_width, frame_height) 
 
         self.result = cv2.VideoWriter(f'path/media/user/7000-8000/AUV/{str(time.time())}-recording{str(self.camera_id)}.mp4',  
-                         cv2.VideoWriter_fourcc(*'MJPG'), 
+                         cv2.cv.CV_FOURCC(*'H264'), 
                          30, size) 
     def run(self):
         time.sleep(10)
