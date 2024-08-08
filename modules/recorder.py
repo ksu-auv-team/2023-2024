@@ -1,10 +1,11 @@
 import cv2
+import time
 import argparse
 
 class recorder:
     def __init__(self, camera_id):
         self.camera_id = camera_id
-        self.cam = cv2.VideoCapture(f"http://localhost:5000/video_{str(self.camera_id)}".format(camera_id=camera_id))
+        self.cam = cv2.VideoCapture(f"http://localhost:5000/video_{str(self.camera_id)}")
 
     def setup(self):
         frame_width = int(self.cam.get(3)) 
@@ -12,7 +13,7 @@ class recorder:
    
         size = (frame_width, frame_height) 
 
-        self.result = cv2.VideoWriter(f'path/media/user/7000-8000/AUV/recording{str(self.camera_id)}.mp4',  
+        self.result = cv2.VideoWriter(f'path/media/user/7000-8000/AUV/{str(time.time())}-recording{str(self.camera_id)}.mp4',  
                          cv2.VideoWriter_fourcc(*'MJPG'), 
                          30, size) 
     def run(self):
@@ -28,9 +29,9 @@ class recorder:
                 # Display the frame 
                 # saved in the file  
         
-                # Press S on keyboard  
+                # Press Q on keyboard  
                 # to stop the process 
-                if cv2.waitKey(1) & 0xFF == ord('s'): 
+                if cv2.waitKey(1) & 0xFF == ord('Q'): 
                     break
         
             # Break the loop 
