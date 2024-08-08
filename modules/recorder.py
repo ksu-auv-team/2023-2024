@@ -13,7 +13,7 @@ class recorder:
    
         size = (frame_width, frame_height) 
 
-        self.result = cv2.VideoWriter(f'path/media/user/7000-8000/AUV/{str(time.time())}-recording{str(self.camera_id)}.mp4',  
+        self.result = cv2.VideoWriter(f'path/media/user/7000-8000/AUV/{str(time.time())}-recording{str(self.camera_id)}.avi',  
                          cv2.VideoWriter_fourcc(*'XVID'), 
                          30, size) 
     def run(self):
