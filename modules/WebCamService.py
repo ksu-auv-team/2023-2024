@@ -23,9 +23,13 @@ class WebCam:
 
     def crop_frame(self, frame):
         # Get the dimensions of the frame
-        height, width, _ = frame.shape
-
-        # Crop the right half of the frame
-        cropped_frame = frame[:, width // 2:]
+        try:
+            height, width, _ = frame.shape
+            # Crop the right half of the frame
+            cropped_frame = frame[:, width // 2:]
+            
+            return cropped_frame
+        except AttributeError as e:
+            print('None frame')
+            return None
         
-        return cropped_frame
