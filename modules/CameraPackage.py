@@ -23,7 +23,7 @@ class CameraPackage:
         while True:
             frame = self.get_frame()
             results = self.detect_objects(frame)
-            print(results)
+            # print(results)
             if cv2.waitKey(1) & 0xFF == ord('q'):
                 break
     
