@@ -25,14 +25,14 @@ class recorder:
                 # file 'filename.avi' 
                 self.result.write(frame) 
         
-                # Display the frame 
-                # saved in the file 
-                cv2.imshow('Frame', frame) 
+                # # Display the frame 
+                # # saved in the file 
+                # cv2.imshow('Frame', frame) 
         
-                # Press S on keyboard  
-                # to stop the process 
-                if cv2.waitKey(1) & 0xFF == ord('s'): 
-                    break
+                # # Press S on keyboard  
+                # # to stop the process 
+                # if cv2.waitKey(1) & 0xFF == ord('s'): 
+                #     break
         
             # Break the loop 
             else: 
