@@ -327,10 +327,10 @@ class MovementPackage:
         Yaw = data[5]
         
         deadzone = 0.1
-        motor_mapping = np.array([[-1, 1, 1, -1], # Forward
+        motor_mapping = np.array([[1, 1, 1, 1], # Forward
                                   [-1, -1, 1, 1], # Strafe
                                   [-1, 1, -1, 1], # Yaw
-                                  [-1, 1, 1, -1]]) # Vertical
+                                  [1, 1, -1, -1]]) # Vertical
         
         # Horizontal Motor Mapping
         if abs(X) >= deadzone:
