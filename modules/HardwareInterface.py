@@ -261,7 +261,7 @@ class HardwareInterface:
         else:
             self.baseurl = self.config['labUrl']
         
-        self.baseurl = "http://10.42.0.203:5000"
+        self.baseurl = "http://localhost:5000"
         
         try:
             self.IMU = MPU6050(0x69)
@@ -425,13 +425,17 @@ class HardwareInterface:
         Returns:
             dict: The retrieved data as a dictionary.
         """
-        response = requests.get(f"{self.baseurl}/{data_type}")
-        if response.status_code == 200:
-            return response.json()
-        else:
-            print(f"Failed to get data, status code: {response.status_code}")
+        try:
+            response = requests.get(f"{self.baseurl}/{data_type}")
+            if response.status_code == 200:
+                return response.json()
+            else:
+                print(f"Failed to get data, status code: {response.status_code}")
+                return {}
+        except requests.exceptions.RequestException as e:
+            print(f"Error getting data: {str(e)}")
             return {}
-
+        
     def print_data(self, data):
         """Prints the data in a human-readable format.
 
