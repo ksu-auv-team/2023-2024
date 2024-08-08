@@ -5,7 +5,7 @@ import argparse
 class CameraPackage:
     def __init__(self, camera_id):
         self.camera_id = camera_id
-        self.cam = cv2.VideoCapture("http://192.168.1.246:5000/video_{camera_id}".format(camera_id=camera_id))
+        self.cam = cv2.VideoCapture("http://localhost:5000/video_{camera_id}".format(camera_id=camera_id))
         self.model = YOLO("yolov8n.pt")
     
     def get_frame(self):
