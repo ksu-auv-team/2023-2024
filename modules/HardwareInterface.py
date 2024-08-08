@@ -428,6 +428,7 @@ class HardwareInterface:
         try:
             response = requests.get(f"{self.baseurl}/{data_type}")
             if response.status_code == 200:
+                print(response.json())
                 return response.json()
             else:
                 print(f"Failed to get data, status code: {response.status_code}")
