@@ -79,7 +79,7 @@ class StateMachine:
             if objects['object_name'] == 'Gate':
                 x, y = objects['object_center']
                 cam_x, cam_y = sonar['camera_center']
-                if (x + 100) <= cam_x <= (x - 100) and (y + 100) <= cam_y <= (y - 100):
+                if (x + 20) <= cam_x <= (x - 20) and (y - 20) <= cam_y <= (y + 20):
                     self.send_data(self.movements['forward'])
                 else:
                     if x < cam_x:
@@ -127,6 +127,17 @@ class StateMachine:
                         self.send_data(self.movements['down'])
             else:
                 bouy_done = True
+                
+    def bin(self):
+        """
+        Process to drop bin
+        """
+        start = time.time()
+        while start - time.time() >= 10:
+            self.send_data(self.movements('down'))
+        start = time.time()
+        while start - time.time() >= 10:
+            self.send_data(self.movements['claw_open'])
     
     def run(self):
         self.get_data()
