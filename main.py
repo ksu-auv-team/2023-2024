@@ -121,12 +121,12 @@ class Input(db.Model):
                   
 class Objects(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    object = db.Column(db.String(50), nullable=False)
-    distance = db.Column(db.Float, nullable=False)
-    angle = db.Column(db.Float, nullable=False)
+    object_name = db.Column(db.String(50), nullable=False)
+    object_center = db.Column(db.Float, nullable=False)
+    camera_center = db.Column(db.Float, nullable=False)
 
     def __repr__(self):
-        return f'<{self.id}, {self.object}, {self.distance}, {self.angle}>'
+        return f'<{self.id}, {self.object_name}, {self.object_center}, {self.camera_center}>'
     
 class Sonar(db.Model):
     id = db.Column(db.Integer, primary_key=True)

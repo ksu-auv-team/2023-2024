@@ -1,5 +1,6 @@
 from brping import Ping360
 from brping import definitions
+import requests
 import logging
 import numpy as np
 """
@@ -30,11 +31,23 @@ class Sonar:
         self.p.set_gain_setting(0)##Sets gain setting (0 = low, 1 = medium, 2 = high)
         self.p.set_mode(1)##set as 1 for Ping360
         self.p.set_transmit_duration(40)##Sets duration of transmission in microseconds
+        
+        self.url = 'http://localhost:5000/sonar'
 
     def meters_per_sample(ping_message, v_sound=1480):
         ##Calculates the distance that each sample covers.
         ##the 12.5e-9 is the sample_period time divided by two
         return v_sound * ping_message.sample_period * 12.5e-9
+
+    def send_data(self):
+        try:
+            response = requests.post(self.url, json=self.logData)
+            if response.status_code == 200:
+                logging.info("Data successfully sent to the server.")
+            else:
+                logging.error(f"Failed to send data: {response.text}")
+        except requests.exceptions.RequestException as e:
+            logging.error(f"Error sending data: {str(e)}")
 
     def run(self):
         # Get data
@@ -76,7 +89,7 @@ class Sonar:
                         outputDistance = float(highestIndex*distperSample)
 
                         ##Dictionay for JSON
-                        logData = {'angle': outputAngle, 'distance': outputDistance}
+                        self.logData = {'angle': outputAngle, 'distance': outputDistance}
                         ##logging.info(f'Object Detected at {float(.9*gradian)} degrees, {float(highestIndex*distperSample)} meters.')
 
                 ##break ##uncomment break to allow for single 360 scan.
