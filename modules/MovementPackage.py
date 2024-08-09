@@ -326,7 +326,7 @@ class MovementPackage:
         Roll = data[4]
         Yaw = data[5]
         
-        deadzone = 0.1
+        deadzone = 0.2
         motor_mapping = np.array([[1, 1, 1, 1], # Forward
                                   [-1, -1, 1, 1], # Strafe
                                   [-1, 1, -1, 1], # Yaw
@@ -354,16 +354,6 @@ class MovementPackage:
             df = Z
             for i in range(4, 8):
                 self.Thruster_Values[i] = int(self.mapping(df * motor_mapping[3][i-4]))
-        elif abs(Pitch) >= deadzone:
-            df = Pitch
-            for i in range(4, 8):
-                self.Thruster_Values[i] = int(self.mapping(df))
-        elif abs(Roll) >= deadzone:
-            df = Roll
-            self.Thruster_Values[4] = int(self.mapping(df))
-            self.Thruster_Values[5] = int(self.mapping(df * -1))
-            self.Thruster_Values[6] = int(self.mapping(df))
-            self.Thruster_Values[7] = int(self.mapping(df * -1))
         else:
             for i in range(4, 8):
                 self.Thruster_Values[i] = 127
@@ -375,15 +365,40 @@ class MovementPackage:
                 
     def newConversion(self, input_data):
         motor_mapping = np.array([
-            [-1, 1, 1, -1], # Forward
+            [1, 1, 1, 1], # Forward
             [-1, -1, 1, 1], # Strafe
             [-1, 1, -1, 1], # Yaw
-            [-1, 1, 1, -1] # Vertical
+            [1, 1, -1, -1] # Vertical
         ])
+        
         deadzone = 0.2
         
         desired_translation_yaw = input_data[:3]
         desired_roll_pitch_z = input_data[3:]
+        
+        if abs(desired_translation_yaw[0]) >= deadzone:
+            df = desired_translation_yaw[0]
+            for i in range(0, 4):
+                self.Thruster_Values[i] = int(self.mapping(df * motor_mapping[0][i]))
+        elif abs(desired_translation_yaw[1]) >= deadzone:
+            df = desired_translation_yaw[1]
+            for i in range(0, 4):
+                self.Thruster_Values[i] = int(self.mapping(df * motor_mapping[1][i]))
+        elif abs(desired_translation_yaw[2]) >= deadzone:
+            df = desired_translation_yaw[2]
+            for i in range(0, 4):
+                self.Thruster_Values[i] = int(self.mapping(df * motor_mapping[2][i]))
+        else:
+            for i in range(4):
+                self.Thruster_Values[i] = 127
+                
+        if abs(desired_roll_pitch_z[0]) >= deadzone:
+            df = desired_roll_pitch_z[0]
+            for i in range(4, 8):
+                self.Thruster_Values[i] = int(self.mapping(df * motor_mapping[3][i-4]))
+        else:
+            for i in range(4, 8):
+                self.Thruster_Values[i] = 127
     
     def save_data(self):
         output_data = {
