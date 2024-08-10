@@ -151,6 +151,8 @@ class StateMachine:
         start = time.time()
         while start - time.time() >= 1000:
             self.send_data(self.movements['forward'])
+        self.send_data(self.movements['claw_open'])
+        time.sleep(5)
         start = time.time()
         while start - time.time() >= 1000:
             self.send_data(self.movements['yaw_left'])
