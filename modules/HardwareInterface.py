@@ -621,5 +621,5 @@ if __name__ == '__main__':
     args.add_argument("--L", help = "Use the lab IP address", action = "store_true")
     args = args.parse_args()
     HI = HardwareInterface(args=args)
-    # HI.run()
-    HI.qualify()
+    HI.run()
+    # HI.qualify()
