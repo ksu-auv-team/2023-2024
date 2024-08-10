@@ -609,6 +609,11 @@ class HardwareInterface:
         self.test_motors()
         # self.test_read()
         
+    def qualify(self):
+        start = time.time()
+        while time.time() - start < 180:
+            self.write_ESCs([255, 255, 255, 255, 127, 127, 127, 127])
+        
 
 if __name__ == '__main__':
     args = argparse.ArgumentParser()
