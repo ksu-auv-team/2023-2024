@@ -43,7 +43,7 @@ class CameraPackage:
             else:
                 #will have 2nd ip after testing 2nd camera
                 #success, frame = camera_1.read()
-                print("2nd Webcam:")
+                print("Anker Camera:")
             if not success:
                 break
             else:
@@ -67,10 +67,6 @@ class CameraPackage:
                 center_y = (top + bottom) // 2
         return center_x, center_y
 
-
-
-    
-    
     def __del__(self):
         self.cam.release()
     
@@ -78,9 +74,12 @@ class CameraPackage:
         while True:
             #continously gets the camera frames, performs object detection on them
             #prints the results of the object detection
-            frame = self.frames()
-            results = self.detect_objects(frame)
-            # print(results)
+            frame0 = self.frames(self, 0)
+            results = self.detect_objects(frame0)
+            print(results)
+            frame1 = self.frames(self, 1)
+            results = self.detect_objects(frame1)
+            print(results)
             if cv2.waitKey(1) & 0xFF == ord('q'):
                 break
     
