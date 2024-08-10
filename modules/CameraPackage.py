@@ -1,19 +1,23 @@
 import cv2
 from ultralytics import YOLO
 import argparse
+import inference
 
 class CameraPackage:
     def __init__(self, camera_id):
         self.camera_id = camera_id
         self.cam = cv2.VideoCapture("http://localhost:5000/video_{camera_id}".format(camera_id=camera_id))
         self.model = YOLO("yolov8n.pt")
+        
+        
+        self.model = inference.get_model("robosub2024-2deem/1")
     
     def get_frame(self):
         _, frame = self.cam.read()
         return frame
     
     def detect_objects(self, frame):
-        results = self.model(frame)
+        results = self.model.infer(image=frame)
         return results
     
     def __del__(self):

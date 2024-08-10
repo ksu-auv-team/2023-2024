@@ -146,3 +146,8 @@ class StateMachine:
         self.bouy()
         self.gate()
         time.sleep(10)
+        
+
+if __name__ == "__main__":
+    sm = StateMachine()
+    sm.run()
