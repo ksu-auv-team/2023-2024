@@ -306,10 +306,10 @@ def main(args: list = sys.argv):
         # neural_network = subprocess.Popen(["python3", "modules/NeuralNetwork.py", '--L'])
         # sonar_package = subprocess.Popen(["python3", "modules/SonarPackage.py", '--L'])
         state_machine = subprocess.Popen(["python3", "modules/StateMachine.py", '--L'])
-        camera0_package = subprocess.Popen(["python3", "modules/CameraPackage.py", '--camera_id', '0'])
-        camera1_package = subprocess.Popen(["python3", "modules/CameraPackage.py", '--camera_id', '1'])
-        recorder0 = subprocess.Popen(["python3", "modules/recorder.py", '--camera_id', '0'])
-        recorder1 = subprocess.Popen(["python3", "modules/recorder.py", '--camera_id', '1'])
+        # camera0_package = subprocess.Popen(["python3", "modules/CameraPackage.py", '--camera_id', '0'])
+        # camera1_package = subprocess.Popen(["python3", "modules/CameraPackage.py", '--camera_id', '1'])
+        # recorder0 = subprocess.Popen(["python3", "modules/recorder.py", '--camera_id', '0'])
+        # recorder1 = subprocess.Popen(["python3", "modules/recorder.py", '--camera_id', '1'])
 
     if args.HI and not args.run:
         hardware_interface = subprocess.Popen(["python3", "modules/HardwareInterface.py", '--L'])
