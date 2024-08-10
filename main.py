@@ -361,6 +361,7 @@ if __name__ == "__main__":
     args.add_argument("--MP", help="Run the Movement Package", action="store_true")
     args.add_argument("--NN", help="Run the Neural Network Package", action="store_true")
     args.add_argument("--CP", help="Run the Camera Package", action="store_true")
+    args.add_argument("--SM", help="RUn the state machine", action="store_true")
     args.add_argument("--P", help = "Use the pool IP address", action = "store_true")
     args.add_argument("--L", help = "Use the lab IP address", action = "store_true")
     args.add_argument("--R", help = "Runs the recorder", action = "store_true")
