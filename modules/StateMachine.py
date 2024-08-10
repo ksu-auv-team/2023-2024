@@ -146,8 +146,17 @@ class StateMachine:
         self.bouy()
         self.gate()
         time.sleep(10)
-        
+    
+    def run2(self):
+        start = time.time()
+        while start - time.time() >= 1000:
+            self.send_data(self.movements['forward'])
+        start = time.time()
+        while start - time.time() >= 1000:
+            self.send_data(self.movements['yaw_left'])
+
 
 if __name__ == "__main__":
     sm = StateMachine()
-    sm.run()
+    # sm.run()
+    sm.run2()
