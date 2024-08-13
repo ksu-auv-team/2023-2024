@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, render_template
 from flask_sqlalchemy import SQLAlchemy
 import argparse
 import logging
@@ -239,6 +239,22 @@ def handle_sensors():
             'Pressure': latest_sensor.Pressure,
             'Depth': latest_sensor.Depth
         }), 200
+        
+@app.route('/logs', methods=['GET'])
+def get_logs():
+    with open(log_file, 'r') as f:
+        logs = f.read()
+    return logs
+
+@app.route('/logs/clear', methods=['GET'])
+def clear_logs():
+    with open(log_file, 'w') as f:
+        f.write('')
+    return 'Logs cleared'
+
+@app.route('/')
+def index():
+    return render_template('index.html')
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Start the Flask server')
