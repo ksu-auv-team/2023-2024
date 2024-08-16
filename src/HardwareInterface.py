@@ -1,4 +1,5 @@
-from HardwareInterfaceSupport.MPU6050 import MPU6050
+from modules.HardwareInterfaceSupport.MPU6050 import MPU6050
+from modules.SupportAll.DebugHandler import DebugHandler
 
 import smbus2
 import json
@@ -108,6 +109,15 @@ class HardwareInterface:
         
         self.mpu = MPU6050(self.bus, self.addresses['MPU6050'])
         
+        self.debugger = DebugHandler('HardwareInterface', ip, port)
+    
+    def print_data(self, data, data_type):
+        message = f'{data_type}: {data}'
+        self.debugger.set_data(MessageType="LOG", Message=message)
+    
+    def handle_error(self, error):
+        self.debugger.set_data(MessageType="ERROR", Message=error)
+    
     def get_data(self):
         """Retrieves data from the specified data type endpoint.
 
@@ -120,13 +130,13 @@ class HardwareInterface:
         try:
             response = requests.get(f"{self.ip}:{self.port}/Sensors")
             if response.status_code == 200:
-                print(response.json())
+                self.print_data(MessageType='Returned Data', Message=response.json())
                 return response.json()
             else:
                 print(f"Failed to get data, status code: {response.status_code}")
                 return {}
         except requests.exceptions.RequestException as e:
-            print(f"Error getting data: {str(e)}")
+            self.debugger.set_data(MessageType="ERROR", Message=str(e))
             return {}
     
     def send_data(self, data):

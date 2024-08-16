@@ -104,11 +104,12 @@ class Sensors(db.Model):
 
 class Debug(db.Model):
     id = db.Column(db.Integer, primary_key=True)
+    Package = db.Column(db.String(100), nullable=False)
     ErrorType = db.Column(db.String(100), nullable=False)
     Message = db.Column(db.String(300), nullable=False)
     
     def __repr__(self):
-        return f"Debug('{self.ErrorType}', '{self.Message}')"
+        return f"Debug('{self.Package}', '{self.ErrorType}', '{self.Message}')"
 
 # API Endpoints for Inputs
 @app.route('/inputs', methods=['GET', 'POST'])
@@ -253,7 +254,7 @@ def handle_sensors():
 def handle_debug():
     if request.method == 'POST':
         data = request.get_json()
-        new_debug = Debug(ErrorType=data['ErrorType'], Message=data['Message'])
+        new_debug = Debug(Package=data['Package'], ErrorType=data['ErrorType'], Message=data['Message'])
         db.session.add(new_debug)
         db.session.commit()
         return jsonify({'message': 'New debug message added'}), 201
@@ -261,6 +262,7 @@ def handle_debug():
     if request.method == 'GET':
         latest_debug = Debug.query.order_by(Debug.id.desc()).first()
         return jsonify({
+            'Package': latest_debug.Package,
             'ErrorType': latest_debug.ErrorType,
             'Message': latest_debug.Message
         }), 200

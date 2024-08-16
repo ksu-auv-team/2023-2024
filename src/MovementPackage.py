@@ -1,4 +1,5 @@
-from MovementPackageSupport import PID
+from modules.MovementPackageSupport.PID import PID
+from modules.SupportAll.DebugHandler import DebugHandler
 
 import requests
 import numpy as np
@@ -80,6 +81,8 @@ class MovementPackage:
         
         self.deadzone = 0.2
         
+        self.debugger = DebugHandler(Package="MovementPackage", ip=self.ip, port=self.port)
+        
     def get_data(self):
         request = requests.get(f'http://{self.ip}:{self.port}/inputs')
         self.input_data = request.json()
@@ -144,10 +147,14 @@ class MovementPackage:
         }
         response = requests.post(f"{self.base_url}/outputs", json=self.output_data)
         if response.status_code != 201:
-            self.movement_logger.error("Failed to post output data")
+            self.handle_error(response.text)
     
     def print_data(self):
-        print(f'Input data: {self.input_data}| Motors: {self.output_data}')
+        message = f'{self.input_data}, {self.horizontalInputs}, {self.verticalInputs}, {self.output_data}'
+        self.debugger.set_data(MessageType="LOG", Message=message)
+    
+    def handle_error(self, error):
+        self.debugger.set_data(MessageType="ERROR", Message=error)
     
     def test_get_inputs(self):
         self.get_data()
