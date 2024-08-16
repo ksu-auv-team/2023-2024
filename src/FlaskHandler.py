@@ -102,6 +102,14 @@ class Sensors(db.Model):
     def __repr__(self):
         return f"Sensors('{self.Temp}', '{self.Humidity}', '{self.Pressure}', '{self.Depth}', '{self.Heading}')"
 
+class Debug(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    ErrorType = db.Column(db.String(100), nullable=False)
+    Message = db.Column(db.String(300), nullable=False)
+    
+    def __repr__(self):
+        return f"Debug('{self.ErrorType}', '{self.Message}')"
+
 # API Endpoints for Inputs
 @app.route('/inputs', methods=['GET', 'POST'])
 def handle_inputs():
@@ -240,17 +248,22 @@ def handle_sensors():
             'Depth': latest_sensor.Depth
         }), 200
         
-@app.route('/logs', methods=['GET'])
-def get_logs():
-    with open(log_file, 'r') as f:
-        logs = f.read()
-    return logs
-
-@app.route('/logs/clear', methods=['GET'])
-def clear_logs():
-    with open(log_file, 'w') as f:
-        f.write('')
-    return 'Logs cleared'
+# API Endpoints for Debug
+@app.route('/debug', methods=['GET', 'POST'])
+def handle_debug():
+    if request.method == 'POST':
+        data = request.get_json()
+        new_debug = Debug(ErrorType=data['ErrorType'], Message=data['Message'])
+        db.session.add(new_debug)
+        db.session.commit()
+        return jsonify({'message': 'New debug message added'}), 201
+    
+    if request.method == 'GET':
+        latest_debug = Debug.query.order_by(Debug.id.desc()).first()
+        return jsonify({
+            'ErrorType': latest_debug.ErrorType,
+            'Message': latest_debug.Message
+        }), 200
 
 @app.route('/')
 def home():
