@@ -22,47 +22,58 @@ commands = [
     ['python3', 'src/SonarPackage.py', '--ip', str(args.ip), '--port', str(args.port)]
 ]
 
+processes = []
+
 if args.all:
     print('Running all packages')
     if args.debug:
         for i in range(0, len(commands)):
-            subprocess.Popen(commands[i] + ['--debug'])
+            processes.append(subprocess.Popen(commands[i] + ['--debug']))
     else:
         for i in range(0, len(commands)):
-            subprocess.Popen(commands[i])
+            processes.append(subprocess.Popen(commands[i]))
 elif args.HI:
     print('Running Hardware Interface')
     if args.debug:
-        subprocess.Popen(commands[1] + ['--debug'])
+        processes.append(subprocess.Popen(commands[1] + ['--debug']))
     else:
-        subprocess.Popen(commands[1])
+        processes.append(subprocess.Popen(commands[1]))
 elif args.MP:
     print('Running Movement Package')
     if args.debug:
-        subprocess.Popen(commands[2] + ['--debug'])
+        processes.append(subprocess.Popen(commands[2] + ['--debug']))
     else:
-        subprocess.Popen(commands[2])
+        processes.append(subprocess.Popen(commands[2]))
 elif args.CP:
     print('Running Camera Package')
     if args.debug:
-        subprocess.Popen(commands[3] + ['--debug'])
+        processes.append(subprocess.Popen(commands[3] + ['--debug']))
     else:
-        subprocess.Popen(commands[3])
+        processes.append(subprocess.Popen(commands[3]))
 elif args.AI:
     print('Running AI Package')
     if args.debug:
-        subprocess.Popen(commands[4] + ['--debug'])
+        processes.append(subprocess.Popen(commands[4] + ['--debug']))
     else:
-        subprocess.Popen(commands[4])
+        processes.append(subprocess.Popen(commands[4]))
 elif args.SP:
     print('Running Sonar Package')
     if args.debug:
-        subprocess.Popen(commands[5] + ['--debug'])
+        processes.append(subprocess.Popen(commands[5] + ['--debug']))
     else:
-        subprocess.Popen(commands[5])
+        processes.append(subprocess.Popen(commands[5]))
 if not args.all:
     print('Running Flask Server')
     if args.debug:
-        subprocess.Popen(commands[0] + ['--debug'])
+        processes.append(subprocess.Popen(commands[0] + ['--debug']))
     else:
-        subprocess.Popen(commands[0])
+        processes.append(subprocess.Popen(commands[0]))
+
+while True:
+    try:
+        for process in processes:
+            process.wait()
+    except KeyboardInterrupt:
+        for process in processes:
+            process.kill()
+        break
