@@ -1,10 +1,13 @@
 import subprocess
 import argparse
 
+from src.modules.SupportAll.PackageInstaller import PackageInstaller
+
 parser = argparse.ArgumentParser(description='Start the application')
 parser.add_argument('--ip', type=str, default='localhost', help='IP to run the application on')
 parser.add_argument('--port', type=int, default=5000, help='Port to run the application on')
 parser.add_argument('--debug', action='store_true', help='Run the application in debug mode')
+parser.add_argument('--install', action='store_true', help='Install the required packages')
 parser.add_argument('--HI', action='store_true', help='Run the application with the Hardware Interface')
 parser.add_argument('--MP', action='store_true', help='Run the application with the Movement Package')
 parser.add_argument('--CP', action='store_true', help='Run the application with the Camera Package')
@@ -12,6 +15,12 @@ parser.add_argument('--AI', action='store_true', help='Run the application with 
 parser.add_argument('--SP', action='store_true', help='Run the application with the Sonar Package')
 parser.add_argument('--all', action='store_true', help='Run the application with all packages')
 args = parser.parse_args()
+
+# Install the required packages
+if args.install:
+    installer = PackageInstaller(install=True, debug=args.debug)
+else:
+    pass
 
 commands = [
     ['python3', 'src/FlaskServer.py', '--ip', str(args.ip), '--port', str(args.port)],
